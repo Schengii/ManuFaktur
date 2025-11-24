@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | ManuFaktur</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <h1 class="headline"><i class="fa fa-paw"></i> Manufaktur</h1>
+      <ul>
+        <li><a href="Home.html"><i class="fa fa-home"></i> Start</a></li>
+        <li><a href="UeberMich.html"><i class="fa fa-vcard-o"></i> Über mich</a></li>
+        <li><a href="Leistungen.html"><i class="fa fa-euro"></i> Leistungen</a></li>
+        <li><a href="Bildergalerie.html"><i class="fa fa-photo"></i> Bildergalerie</a></li>
+        <li class="active"><a href="Kontakt.html"><i class="fa fa-user-circle"></i> Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Kontakt aufnehmen</h2>
+    <p>Haben Sie Fragen zu einem Bild oder möchten Sie eine individuelles Beratungsgespräch anfragen?</p>
+    <br>
+    <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+      <div class="contact-info">
+        <h3>Meine Daten</h3>
+        <p>
+          <strong>Manuela Schenk</strong><br>
+          Rüdesheimer Straße 14<br>
+          53175 Bonn
+        </p>
+        <p><i class="fa- fa-phone"></i> +49 163 2662435</p>
+        <p><i class="fa- fa-envelope"></i> manufaktur-malerei@web.de</p>
+      </div>
+
+      <div class="contact-form-container">
+        <h3>Hier können Sie Kontakt mit mir aufnehmen</h3>
+        <form class="contact-form" action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Max Mustermann">
+          </div>
+          <div class="form-group">
+            <label for="email">Ihre E-Mail:</label>
+            <input type="email" id="email" name="email" required placeholder="email@beispiel.de">
+          </div>
+          <div class="form-group">
+            <label for="message">Ihre Nachricht:</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Ihre Nachricht..."></textarea>
+          </div>
+          <button type="submit"><i class="fa fa-paper-plane"></i>Nachricht senden</button>
+        </form>
+      </div>
+    </div>
+   
+  </main>
+
+
+<footer>
+    <div class="footer-section">
+      <p>Manufaktur &bull; Individuelle Malerei</p>
+    </div>
+
+    <div class="footer-section">
+      <p>Manuela Schenk &bull; 53175 Bonn</p>
+      <div class="social-icons">
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-whatsapp"></i>
+        <i class="fa fa-linkedin"></i>
+      </div>
+    </div> 
+
+    <div class="footer-section">
+      <p>&copy; 2025 Manufaktur Schenk</p>
+    </div>
+  </footer>
+    
+</body>
+<script src="Home.js"></script>
+</html>
