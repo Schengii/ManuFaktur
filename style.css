@@ -1,5 +1,8 @@
 /* style.css - Optimiert */
 
+
+
+
 /* --- Zusatz für Home.html ---*/
 /* Box für Neuigkeiten */
 .news-box {
@@ -135,6 +138,7 @@ section {
 }
 
 
+
 /* Grundeinstellungen & Reset */
 * {
     margin: 0;
@@ -195,6 +199,7 @@ nav ul li.active a {
     border-bottom: 2px solid #fff; /* Zeigt an, auf welcher Seite man ist */
 }
 
+
 /* --- Hauptinhalt --- */
 main {
     flex: 1;
@@ -210,6 +215,7 @@ h2 {
     border-bottom: 2px solid #ddd;
     padding-bottom: 0.5rem;
 }
+
 
 /* --- Bildergalerie (aus Bildgalerie.css integriert) --- */
 .gallery-grid {
@@ -237,6 +243,22 @@ h2 {
     object-fit: cover; /* Bild wird zugeschnitten, nicht verzerrt */
     display: block;
 }
+
+
+/* Responsive Anpassung für Handys und Tablets */
+@media (max-width: 900px) {
+    .gallery-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-grid {
+        column-count: 1;
+    }
+}
+
+
 
 /* --- Kontaktformular Styling --- */
 .contact-form {
@@ -278,6 +300,8 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #34495e;
 }
+
+
 
 /* --- Footer --- */
 footer {
