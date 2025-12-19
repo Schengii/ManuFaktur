@@ -5,6 +5,15 @@
 
 /* --- Zusatz für Home.html ---*/
 /* Box für Neuigkeiten */
+<<<<<<< HEAD
+=======
+.logo img {
+ height: 50px;
+ width: 240px;
+ 
+}
+
+>>>>>>> bee00d2 (update Projekt Manufaktur)
 .news-box {
     background-color: #eef2f3;
     border-left: 5px solid #2c3e50;
@@ -115,7 +124,11 @@ section {
 
 .info-card h3 {
     margin-bottom: 10px;
+<<<<<<< HEAD
     color: #2c3e50;
+=======
+    color: #273442;
+>>>>>>> bee00d2 (update Projekt Manufaktur)
 }
 
 .info-card ul {
