@@ -1,19 +1,13 @@
 /* style.css - Optimiert */
 
-
-
-
 /* --- Zusatz für Home.html ---*/
 /* Box für Neuigkeiten */
-<<<<<<< HEAD
-=======
 .logo img {
  height: 50px;
  width: 240px;
  
 }
 
->>>>>>> bee00d2 (update Projekt Manufaktur)
 .news-box {
     background-color: #eef2f3;
     border-left: 5px solid #2c3e50;
@@ -47,7 +41,6 @@
 section {
     margin-bottom: 3rem;
 }
-
 
 
 /* --- Zusatz für Leistungen.html ---*/
@@ -124,11 +117,7 @@ section {
 
 .info-card h3 {
     margin-bottom: 10px;
-<<<<<<< HEAD
-    color: #2c3e50;
-=======
     color: #273442;
->>>>>>> bee00d2 (update Projekt Manufaktur)
 }
 
 .info-card ul {
@@ -255,6 +244,80 @@ h2 {
     height: 200px; /* Einheitliche Höhe für Vorschau */
     object-fit: cover; /* Bild wird zugeschnitten, nicht verzerrt */
     display: block;
+}
+
+/* --- Lightbox Styling --- */
+
+/* Der Hintergrund (dunkel und bildschirmfüllend) */
+.lightbox {
+  display: none; /* Standardmäßig versteckt */
+  position: fixed; 
+  z-index: 1000; /* Ganz weit vorne */
+  padding-top: 60px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.9); /* Schwarz mit 90% Deckkraft */
+}
+
+/* Das Bild in der Lightbox */
+.lightbox-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 900px; /* Nicht breiter als 900px */
+  max-height: 80vh; /* Damit es auf den Bildschirm passt */
+  object-fit: contain;
+  border: 5px solid white;
+  border-radius: 4px;
+  animation-name: zoom;
+  animation-duration: 0.4s;
+}
+
+/* Animation für sanftes Aufploppen */
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* Der Schließen-Button (X) */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Bildbeschriftung (optional) */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  font-size: 1.2rem;
+}
+
+/* Anpassung für Handys */
+@media only screen and (max-width: 700px){
+  .lightbox-content {
+    width: 100%;
+  }
 }
 
 
