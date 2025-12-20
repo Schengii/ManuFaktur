@@ -27,100 +27,107 @@
   <main>
     <h2>Bildergalerie | Meine Werke</h2>
     <p>Hier finden Sie eine Auswahl meiner aktuellen Arbeiten.<br>
-      Klicken Sie auf ein Bild, um es zu vergrößern.
-    </p>
+      Klicken Sie auf ein Bild, um es zu vergrößern. Die Buttons sind zum Filtern der Kategorien gedacht.
+    </p><br><hr>
+    <br>
+
+    <div id="filter-container">
+      <button class="filter-btn active" onclick="filterSelection('alle')"> Alle</button>
+      <button class="filter-btn" onclick="filterSelection('tiere')"> Tiere</button>
+      <button class="filter-btn" onclick="filterSelection('landschaften')"> Landschaften</button>
+      <button class="filter-btn" onclick="filterSelection('pflanzen')"> Pflanzen</button>
+      <button class="filter-btn" onclick="filterSelection('sonstiges')"> Sonstiges</button>
+    </div>
     
 
     <div class="gallery-grid">
 
-      <div class="gallery-item">
-        <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild1-Pyramiden.jpg">
+      <div class="gallery-item" data-kategorie="landschaften">
+        <a href="./Bilder ManuFaktur/ManuFaktur-Bild1-Pyramiden.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild1-Pyramiden.jpg" alt="Pyramiden Landschaft"> 
         </a>
       </div>
 
-      <div class="gallery-item">
-        <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild5-Leuchtturm.jpg">
+      <div class="gallery-item" data-kategorie="sonstiges">
+        <a href="./Bilder ManuFaktur/ManuFaktur-Bild5-Leuchtturm.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild5-Leuchtturm.jpg" alt="Leuchtturm von Texel"> 
         </a>
     </div>
 
-    <div class="gallery-item">
-      <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild3-Schiff.jpg">
+    <div class="gallery-item" data-kategorie="sontiges">
+      <a href="./Bilder ManuFaktur/ManuFaktur-Bild3-Schiff.jpg">
         <img src="./Bilder ManuFaktur/ManuFaktur-Bild3-Schiff.jpg" alt="Schiff auf Meer">
       </a>
     </div>
 
-
-
-    <div class="gallery-item">
-      <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild13-Hahn.jpg">
+    <div class="gallery-item" data-kategorie="tiere">
+      <a href="./Bilder ManuFaktur/ManuFaktur-Bild13-Hahn.jpg">
         <img src="./Bilder ManuFaktur/ManuFaktur-Bild13-Hahn.jpg" alt="Hahn">
       </a>
     </div>
 
-    <div class="gallery-item">
-      <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg">
+    <div class="gallery-item" data-kategorie="landschaften">
+      <a href="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg">
         <img src="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg" alt="Godesberg Stadtansicht">
       </a>
     </div>
 
-    <div class="gallery-item">
-      <a target="_blank" href="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg">
+    <div class="gallery-item" data-kategorie="tiere">
+      <a href="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg">
         <img src="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg" alt="2 Eulen auf einem Ast">
       </a>
     </div>
 
-    <div class="gallery-item">
-      <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild19-Rheinaue.jpg">
+    <div class="gallery-item" data-kategorie="landschaften">
+      <a href="./Bilder ManuFaktur/ManuFaktur-Bild19-Rheinaue.jpg">
         <img src="./Bilder ManuFaktur/ManuFaktur-Bild19-Rheinaue.jpg" alt="Rheinaue Landschaft">
       </a>
     </div>
 
-    <div class="gallery-item">
-      <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild7-Muschel.jpg">
+    <div class="gallery-item" data-kategorie="sonstiges">
+      <a href="./Bilder ManuFaktur/ManuFaktur-Bild7-Muschel.jpg">
         <img src="./Bilder ManuFaktur/ManuFaktur-Bild7-Muschel.jpg" alt="Muschel am Strand">
       </a>
     </div>
 
-    <div class="gallery-item">
-      <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild15-Blumen.jpg">
+    <div class="gallery-item" data-kategorie="pflanzen">
+      <a href="./Bilder ManuFaktur/ManuFaktur-Bild15-Blumen.jpg">
         <img src="./Bilder ManuFaktur/ManuFaktur-Bild15-Blumen.jpg" alt="Schöne Blumen">
       </a>
     </div>
 
-      <div class="gallery-item">
-        <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild17-Rosen.jpg">
+      <div class="gallery-item" data-kategorie="pflanzen">
+        <a href="./Bilder ManuFaktur/ManuFaktur-Bild17-Rosen.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild17-Rosen.jpg" alt="Viele kleine Rosen">
         </a>
       </div>
 
-      <div class="gallery-item">
-        <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild20-Kuchen.jpg">
+      <div class="gallery-item" data-kategorie="sontiges">
+        <a href="./Bilder ManuFaktur/ManuFaktur-Bild20-Kuchen.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild20-Kuchen.jpg" alt="Ein Stück Kuchen">
         </a>
       </div>
     
-      <div class="gallery-item">
-        <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg">
+      <div class="gallery-item" data-kategorie="landschaften">
+        <a href="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg" alt="Feldweg im Urlaub">
         </a>
       </div>
 
-      <div class="gallery-item">
-        <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg">
+      <div class="gallery-item" data-kategorie="landschaften">
+        <a href="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg" alt="Bild vom Rhein">
         </a>
       </div>
 
-      <div class="gallery-item">
-        <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild14-Hahn.jpg">
+      <div class="gallery-item" data-kategorie="tiere">
+        <a href="./Bilder ManuFaktur/ManuFaktur-Bild14-Hahn.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild14-Hahn.jpg" alt="Portrait Hahn">
         </a>
       </div>
 
-      <div class="gallery-item">
-        <a target="_blank" href="./Bilder ManuFaktur/ManuFaktur-Bild4-Rosen.jpg">
+      <div class="gallery-item" data-kategorie="pflanzen">
+        <a href="./Bilder ManuFaktur/ManuFaktur-Bild4-Rosen.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild4-Rosen.jpg" alt="2 Rosen am Ast">
         </a>
       </div>

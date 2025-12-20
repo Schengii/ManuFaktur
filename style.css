@@ -219,6 +219,8 @@ h2 {
 }
 
 
+
+
 /* --- Bildergalerie (aus Bildgalerie.css integriert) --- */
 .gallery-grid {
     display: grid;
@@ -248,77 +250,107 @@ h2 {
 
 /* --- Lightbox Styling --- */
 
-/* Der Hintergrund (dunkel und bildschirmfüllend) */
+/* --- Lightbox Styling (Optimiert) --- */
+
 .lightbox {
-  display: none; /* Standardmäßig versteckt */
+  display: none; /* Standardmäßig aus */
   position: fixed; 
-  z-index: 1000; /* Ganz weit vorne */
-  padding-top: 60px; 
+  z-index: 1000; 
   left: 0;
   top: 0;
   width: 100%; 
   height: 100%; 
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.9); /* Schwarz mit 90% Deckkraft */
+  overflow: hidden; /* Kein Scrollbalken im Hintergrund */
+  background-color: rgba(0,0,0,0.9); 
+  
+  /* NEU: Flexbox zum perfekten Zentrieren */
+  display: flex;            /* Aktivieren von Flexbox */
+  justify-content: center; /* Horizontal mittig */
+  align-items: center;     /* Vertikal mittig */
+  flex-direction: column;  /* Bild und Text untereinander */
+
+  padding: 0; /* Kein zusätzlicher Abstand */
 }
 
-/* Das Bild in der Lightbox */
 .lightbox-content {
-  margin: auto;
   display: block;
-  width: 80%;
-  max-width: 900px; /* Nicht breiter als 900px */
-  max-height: 80vh; /* Damit es auf den Bildschirm passt */
-  object-fit: contain;
+  /* NEU: Das Bild bestimmt die Größe, nicht der Container */
+  width: auto;
+  height: auto;
+  
+  /* Grenzen setzen: */
+  max-width: 90vw; /* Maximal 90% der Bildschirmbreite */
+  max-height: 80vh; /* Maximal 80% der Bildschirmhöhe */
+  
   border: 5px solid white;
   border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Leichter Schatten für Tiefe */
+  
   animation-name: zoom;
   animation-duration: 0.4s;
 }
 
-/* Animation für sanftes Aufploppen */
+/* Animation */
 @keyframes zoom {
-  from {transform:scale(0)} 
-  to {transform:scale(1)}
+  from {transform:scale(0.8); opacity: 0;} 
+  to {transform:scale(1); opacity: 1;}
 }
 
-/* Der Schließen-Button (X) */
+/* Der Schließen-Button */
 .close {
   position: absolute;
-  top: 15px;
-  right: 35px;
+  top: 20px;
+  right: 30px;
   color: #f1f1f1;
   font-size: 40px;
   font-weight: bold;
-  transition: 0.3s;
   cursor: pointer;
+  z-index: 1001;
 }
 
-.close:hover,
-.close:focus {
+.close:hover {
   color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
 }
 
-/* Bildbeschriftung (optional) */
+/* Bildbeschriftung */
 #caption {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
+  margin-top: 15px;
   text-align: center;
   color: #ccc;
-  padding: 10px 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  width: 100%;
 }
 
-/* Anpassung für Handys */
-@media only screen and (max-width: 700px){
-  .lightbox-content {
-    width: 100%;
-  }
+
+/* --- Filter Buttons --- */
+#filter-container {
+  text-align: center;
+  margin-bottom: 20px;
 }
+
+.filter-btn {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+/* Hover-Effekt (Maus drüber) */
+.filter-btn:hover {
+  background-color: #ddd;
+}
+
+/* Der aktive Button (dunkler) */
+.filter-btn.active {
+  background-color: #666;
+  color: white;
+}
+
 
 
 /* Responsive Anpassung für Handys und Tablets */
