@@ -176,9 +176,13 @@
 
   <!-- Lightbox HTML -->
   <div id="lightbox" class="lightbox">
-    <span class="close">&times;</span>
-      <img class="lightbox-content" id="lightbox-img">
-    <div id="caption"></div>
+  <span class="close">&times;</span>
+  
+  <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+  <a class="next" onclick="changeSlide(1)">&#10095;</a>
+
+  <img class="lightbox-content" id="lightbox-img">
+  <div id="caption"></div>
 </div>
     
 
