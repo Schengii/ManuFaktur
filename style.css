@@ -222,33 +222,65 @@ h2 {
 
 
 /* --- Bildergalerie (aus Bildgalerie.css integriert) --- */
+/* --- Galerie Hover & Beschriftung --- */
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 15px;
+    padding: 20px 0;
 }
 
 .gallery-item {
-    border: 1px solid #ccc;
-    background: white;
-    padding: 5px;
-    transition: transform 0.2s;
+  position: relative; /* Wichtig, damit die Beschriftung weiß, wo sie hingehört */
+  height: 250px;  /* Feste Höhe für alle Bilder */
+  overflow: hidden;   /* Damit das Bild beim Zoomen nicht über den Rahmen hinausgeht */
+  border-radius: 5px; /* Abgerundete Ecken sehen edel aus */
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1)
 }
 
-.gallery-item:hover {
-    transform: scale(1.02); /* Leichter Zoom-Effekt beim Drüberfahren */
-    border-color: #777;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
+/* Das Bild selbst */
 .gallery-item img {
-    width: 100%;
-    height: 200px; /* Einheitliche Höhe für Vorschau */
-    object-fit: cover; /* Bild wird zugeschnitten, nicht verzerrt */
-    display: block;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Bild wird zugeschnitten, um den Container zu füllen */
+  transition: transform 0.5s ease; /* Sanfter Zoom über 0.5 Sekunden */
 }
 
-/* --- Lightbox Styling --- */
+/* Hover-Effekt: Bild wird 10% größer */
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Die Beschriftung (Standardmäßig unsichtbar) */
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Schwarz, leicht durchsichtig */
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translate(20px);
+  transition: all 0.3s ease;
+  
+  /* Animation für das Einblenden */
+  opacity: 0; 
+  transform: translateY(20px); /* Leicht nach unten verschoben */
+  transition: all 0.3s ease;
+}
+
+/* Wenn man über das Item fährt -> Beschriftung anzeigen */
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
+  transform: translateY(0); /* Fährt an die richtige Stelle */
+}
+
 
 /* --- Lightbox Styling (Optimiert) --- */
 
@@ -263,8 +295,7 @@ h2 {
   overflow: hidden; /* Kein Scrollbalken im Hintergrund */
   background-color: rgba(0,0,0,0.9); 
   
-  /* NEU: Flexbox zum perfekten Zentrieren */
-  display: flex;            /* Aktivieren von Flexbox */
+  /* Flexbox zum perfekten Zentrieren */
   justify-content: center; /* Horizontal mittig */
   align-items: center;     /* Vertikal mittig */
   flex-direction: column;  /* Bild und Text untereinander */
