@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="de">
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Kontakt | ManuFaktur</title>
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
   </head>
+
 <body>
 
   <header>
@@ -25,42 +29,70 @@
     </nav>
   </header>
 
+
   <main>
+
     <h2>Kontakt aufnehmen</h2>
     <p>Haben Sie Fragen zu einem Bild oder möchten Sie eine individuelles Beratungsgespräch anfragen?</p>
     <br>
-    <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+
+    <div class="contact-container">
+
       <div class="contact-info">
-        <h3>Meine Daten</h3>
-        <p>
-          <strong>Manuela Schenk</strong><br>
-          Rüdesheimer Straße 14<br>
-          53175 Bonn
+        <h3>Manuela Schenk</h3>
+        <p><i class="fa fa-map-marker"></i> 53175 Bonn</p>
+
+        <p class="contact-highlight">
+          <i class="fa fa-phone"></i>
+          <a href="tel:+491632662435"> +49 163 2662435</a>
         </p>
-        <p><i class="fa fa-phone"></i> <a href="tel:+491632662435"> +49 163 2662435</a></p>
-        <p><i class="fa fa-envelope"></i> <a href="mailto:manufaktur-malerei@web.de"> manufaktur-malerei@web.de</a></p>
+        
+        <p class="contact-highlight">
+          <i class="fa fa-envelope"></i>
+          <a href="mailto:manufaktur-malerei@web.de"> manufaktur-malerei@web.de</a>
+        </p>
+        <hr>
+
+        <div class="social-links-big">
+          <a href="#"><i class="fa fa-instagram"></i> Instagram</a>
+          <a href="#"><i class="fa fa-whatsapp"></i> WhatsApp</a>
+          <a href="#"><i class="fa fa-linkedin"></i> LinkedIn</a>
+        </div>
       </div>
 
-      <div class="contact-form-container">
-        <h3>Hier können Sie Kontakt mit mir aufnehmen</h3>
-        <form class="contact-form" action="#" method="POST">
+
+      <form class="contact-form" action="https://formspree.io/f/DEINE_FORMSPREE_ID" method="POST">
+
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required placeholder="Max Mustermann">
+            <label for="name">Ihr Name</label>
+            <input type="text" id="name" name="name" placeholder="Wie dürfen wir Sie ansprechen?" required>
           </div>
+
           <div class="form-group">
-            <label for="email">Ihre E-Mail:</label>
-            <input type="email" id="email" name="email" required placeholder="email@beispiel.de">
+            <label for="email">Ihre E-Mai-Adresse</label>
+            <input type="email" id="email" name="email" placeholder="email@beispiel.de" required>
           </div>
+
+          <div class="form-group">
+            <label for="subject">Betreff</label>
+            <select id="subject" name="subject">
+              <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+              <option value="Auftragsarbeit Tierportrait">Auftrag: Tierportrait</option>
+              <option value="Auftragsarbeit Landschaft">Auftrag: Landschaft</option>
+              <option value="Kaufinteresse">Kaufinteresse an einem Bild</option>
+            </select>
+          </div>
+
           <div class="form-group">
             <label for="message">Ihre Nachricht:</label>
             <textarea id="message" name="message" rows="5" required placeholder="Ihre Nachricht..."></textarea>
           </div>
-          <button type="submit"><i class="fa fa-paper-plane"></i> Nachricht senden</button>
+
+          <button type="submit" class="submit-btn"><i class="fa fa-paper-plane"></i> Nachricht senden</button>
+
         </form>
       </div>
     </div>
-   
   </main>
 
 
@@ -72,11 +104,6 @@
 
     <div class="footer-section">
       <p>Manuela Schenk &bull; 53175 Bonn</p>
-      <div class="social-icons">
-        <i class="fa fa-instagram"></i>
-        <i class="fa fa-whatsapp"></i>
-        <i class="fa fa-linkedin"></i>
-      </div>
     </div> 
 
     <div class="footer-section">
@@ -89,6 +116,6 @@
 
   </footer>
     
+  <script src="Home.js"></script>
 </body>
-<script src="Home.js"></script>
 </html>

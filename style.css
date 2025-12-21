@@ -479,46 +479,122 @@ h2 {
 
 
 /* --- Kontaktformular Styling --- */
-.contact-form {
+/* --- Kontaktseite Layout --- */
+
+.contact-container {
+    display: flex;
+    flex-wrap: wrap; /* Umbruch auf Handys */
+    gap: 40px;
+    margin-top: 30px;
     background: white;
-    padding: 20px;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Linke Spalte (Infos) */
+.contact-info {
+    flex: 1;
+    min-width: 250px;
+}
+
+.contact-info h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.contact-highlight {
+    font-size: 1.1rem;
+    margin: 15px 0;
+}
+
+.contact-highlight a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-highlight i {
+    color: #2c3e50;
+    width: 25px;
+    text-align: center;
+}
+
+/* Social Buttons groß */
+.social-links-big {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-links-big a {
+    display: inline-block;
+    background-color: #f4f4f4;
+    padding: 10px 15px;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    max-width: 600px;
+    text-decoration: none;
+    color: #333;
+    transition: 0.3s;
+    width: fit-content;
+}
+
+.social-links-big a:hover {
+    background-color: #2c3e50;
+    color: white;
+}
+
+/* Rechte Spalte (Formular) */
+.contact-form {
+    flex: 2; /* Formular ist breiter als Infos */
+    min-width: 300px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
 }
 
 .form-group input, 
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-family: inherit;
+    font-family: 'Lato', sans-serif; /* Gleiche Schrift wie Rest */
+    font-size: 1rem;
+    background-color: #fcfcfc;
 }
 
-button[type="submit"] {
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: #2c3e50;
+    outline: none;
+    background-color: #fff;
+}
+
+.submit-btn {
     background-color: #2c3e50;
     color: white;
     border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+    padding: 12px 25px;
     font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+    width: 100%; /* Button über ganze Breite */
 }
 
-button[type="submit"]:hover {
-    background-color: #34495e;
+.submit-btn:hover {
+    background-color: #1a252f;
 }
-
 
 
 /* --- Footer --- */
