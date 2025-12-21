@@ -6,6 +6,9 @@
     <meta name="description" content="Individuelle Tierportraits, Hundebilder und Landschaftsmalerei in Acryl und Öl von Manuela Schenk aus Bonn. Echte Handarbeit für Ihr Lieblingsmotiv.">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 
@@ -68,23 +71,34 @@
       </div>
     </section>
 
+
     <section class="latest-work">
       <h2>Aktuelle Werke Heighlights:</h2>
       <p>Dies sind meine schönsten Bilder</p>
 
       <div class="gallery-grid">
+
         <div class="gallery-item">
-          <img src="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg" alt="Zwei Eulen" loading="lazy">
+            <a href="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg">
+                <img src="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg" alt="Zwei Eulen" loading="lazy">
+            </a>
         </div>
          <div class="gallery-item">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg" alt="Godesburg Stadtansicht" loading="lazy">
+            <a href="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg">
+                <img src="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg" alt="Godesburg Stadtansicht" loading="lazy">
+            </a>
         </div>
          <div class="gallery-item">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg" alt="Rheinaue Bonn" loading="lazy">
+            <a href="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg">
+                <img src="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg" alt="Rheinaue Bonn" loading="lazy">
+            </a> 
         </div>
         <div class="gallery-item">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg" alt="Feld im Urlaub" loading="lazy">
+            <a href="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg">
+                <img src="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg" alt="Feld im Urlaub" loading="lazy">
+            </a>
         </div>
+
       </div>
     </section>
 
@@ -96,6 +110,7 @@
   </main>
 
   <footer>
+
     <div class="footer-section">
       <p>Manufaktur &bull; Individuelle Malerei</p>
       <p><i class="fa fa-phone"></i> <a href="tel:+491632662435"> +49 163 2662435</a></p>
@@ -112,6 +127,14 @@
     </div> 
 
 
+    <!-- Lightbox für die Bilder -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        <img class="lightbox-content" id="lightbox-img">
+            <div id="caption"></div>
+    </div>
 
 
     <div class="footer-section">
@@ -119,11 +142,12 @@
       <p style="font-size: 0.9rem; margin-top: 5px;">
         <a href="Impressum.html" style="color: white; text-decoration: none;">Impressum</a> | 
         <a href="Datenschutz.html" style="color: white; text-decoration: none;">Datenschutz</a>
-
       </p>
     </div>
+
   </footer>
     
+
+  <script src="Home.js"></script> 
 </body>
-<!-- <script src="Home.js"></script> -->
 </html>

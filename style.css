@@ -148,57 +148,105 @@ section {
     box-sizing: border-box;
 }
 
+/* --- SCHRIFTARTEN & TYPOGRAFIE --- */
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Lato', sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9; 
     color: #333;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Damit der Footer immer unten ist */
+    min-height: 100vh;
 }
 
-/* --- Header & Navigation --- */
+/* Der Titel "Manufaktur" oben links */
+/* --- Header & Navigation (Neu & Edel) --- */
 header {
-    background-color: #2c3e50;
+    background-color: #2c3e50; /* Dunkles Blau */
     color: white;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem; /* Oben/Unten etwas weniger, damit es nicht zu wuchtig ist */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Leichter Schatten nach unten */
+    position: sticky; /* Menü bleibt beim Scrollen oben haften (optional) */
+    top: 0;
+    z-index: 2000; /* Immer ganz oben */
 }
 
 nav {
     display: flex;
-    justify-content: space-between; /* Schiebt Logo nach links, Menü nach rechts */
-    align-items: center;
-    flex-wrap: wrap; /* Erlaubt Umbruch auf kleinen Handys */
+    justify-content: space-between; /* Logo links, Menü rechts */
+    align-items: center; /* WICHTIG: Zentriert alles vertikal */
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-nav h1 {
-    font-size: 1.8rem;
+/* Der Titel "Manufaktur" */
+.headline {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem; /* Deutlich größer, damit es wie ein Logo wirkt */
+    margin: 0;
+    padding: 5px 0;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Leichter Schatten für Lesbarkeit */
 }
 
+/* Das Menü (Liste) */
 nav ul {
     list-style: none;
     display: flex;
-    gap: 1.5rem; /* Eleganter Abstand statt fester Pixel */
+    gap: 30px; /* Mehr Luft zwischen den Punkten */
     padding: 0;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    display: flex;
+    margin: 0;
     align-items: center;
-    gap: 5px; /* Abstand zwischen Icon und Text */
 }
 
+/* Die Links im Menü */
+nav ul li a {
+    color: rgba(255, 255, 255, 0.85); /* Leichtes Weiß (nicht so hart) */
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400; /* Nicht zu fett */
+    font-size: 0.9rem; /* Etwas kleiner wirkt feiner */
+    text-transform: uppercase; /* GROSSBUCHSTABEN */
+    letter-spacing: 2px; /* A b s t a n d zwischen Buchstaben = Edel */
+    transition: all 0.3s ease;
+    padding-bottom: 5px; /* Platz für den Strich unten */
+    border-bottom: 2px solid transparent; /* Unsichtbarer Strich */
+}
+
+/* Hover-Effekt (Maus drüber) */
 nav ul li a:hover {
-    text-decoration: underline;
-    color: #ddd;
+    color: #fff; /* Wird ganz weiß */
+    border-bottom: 2px solid #fff; /* Weißer Strich erscheint */
 }
 
+/* Der aktive Menüpunkt */
 nav ul li.active a {
-    border-bottom: 2px solid #fff; /* Zeigt an, auf welcher Seite man ist */
+    color: #fff;
+    border-bottom: 2px solid #fff;
+}
+
+/* Icons im Menü etwas anpassen */
+nav ul li a i {
+    margin-right: 5px;
+    font-size: 1.1em;
+}
+
+/* Handy-Ansicht: Menü untereinander */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
 }
 
 

@@ -12,12 +12,19 @@ function filterSelection(kategorie) {
   if (kategorie == "alle") kategorie = "";
   
   for (i = 0; i < x.length; i++) {
+
+    var dataKat = x[i].getAttribute("data-kategorie");
+
+    if (!dataKat) {
+        x[i].style.display = "block";
+        continue;
+    }
     // Zuerst ausblenden
     x[i].style.display = "none";
     
     // Prüfen ob Kategorie passt
-    if (x[i].getAttribute("data-kategorie").indexOf(kategorie) > -1) {
-      x[i].style.display = "block"; // Hier war vorher "block", bei Grid layouts passt sich das aber an
+    if (dataKat.indexOf(kategorie) > -1) {
+      x[i].style.display = "block"; 
     }
   }
 }
