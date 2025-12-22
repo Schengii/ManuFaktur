@@ -672,3 +672,33 @@ footer {
     margin: 0 5px;
     cursor: pointer;
 }
+
+
+/* --- Datenschutzseite Styling --- */
+/* Spezielles Styling für Textseiten, damit sie besser lesbar sind */
+
+        .text-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .text-content h3 {
+            margin-top: 30px;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .text-content h4 {
+            margin-top: 20px;
+            color: #555;
+        }
+        
+        /* Warn-Box für den Platzhalter-Hinweis */
+        .alert-box {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
