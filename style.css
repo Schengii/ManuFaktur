@@ -702,3 +702,24 @@ footer {
             border-radius: 5px;
             margin-bottom: 30px;
         }
+
+
+
+        
+        /* Styling für Impressumseite */
+        .text-content {
+            max-width: 800px; /* Begrenzt die Breite für angenehmes Lesen */
+            margin: 40px auto; /* Zentriert den Block */
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+        .text-content h3 {
+            margin-top: 30px;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .text-content p {
+            margin-bottom: 15px;
+            color: #555;
+        }
