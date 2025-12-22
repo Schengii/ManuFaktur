@@ -650,6 +650,58 @@ h2 {
     background-color: #1a252f;
 }
 
+.dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Das versteckte Menü (erscheint beim Hover) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #ffffff;
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1000;
+        border-radius: 4px;
+        top: 100%; /* Positioniert es direkt unter dem Link */
+        left: 0;
+      }
+
+      /* Links im Dropdown */
+      .dropdown-content a {
+        color: #333 !important; /* Dunkle Schrift */
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        border-bottom: 1px solid #f1f1f1;
+        font-size: 0.95rem;
+      }
+
+      /* Hover-Effekt im Dropdown */
+      .dropdown-content a:hover {
+        background-color: #f9f9f9;
+        color: #000 !important;
+      }
+
+      /* Anzeigen des Menüs bei Hover */
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+      
+      /* Kleiner Pfeil nach unten */
+      .fa-caret-down {
+        margin-left: 5px;
+      }
+
+      /* Anpassung für mobile Ansicht (falls nötig, damit das Logo nicht zu groß ist) */
+      .nav-logo {
+        height: 70px;
+        margin: 10px;
+        vertical-align: middle;
+      }
+
 
 /* --- Footer --- */
 footer {
@@ -705,7 +757,7 @@ footer {
 
 
 
-        
+
         /* Styling für Impressumseite */
         .text-content {
             max-width: 800px; /* Begrenzt die Breite für angenehmes Lesen */
