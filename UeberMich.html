@@ -11,13 +11,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-</head>
+  </head>
+
+    
 
 <body>
 
   <header>
     <nav>
-      <h1 class="headline"><i class="fa fa-paw"></i> Manufaktur</h1>
+      <a href="Home.html" style="text-decoration: none;">
+         <h1 class="headline"><i class="fa fa-paw"></i> Manufaktur</h1>
+      </a>
       <ul>
         <li><a href="Home.html"><i class="fa fa-home"></i> Start</a></li>
         <li class="active"><a href="UeberMich.html"><i class="fa fa-vcard-o"></i> Über mich</a></li>
@@ -93,10 +97,36 @@
         <img src="./Vorlage Manufaktur PP/Flyer-Seite2.png" alt="Vorschau Flyer" class="flyer-image">
         <img src="./Vorlage Manufaktur PP/Flyer-Seite3.png" alt="Vorschau Flyer" class="flyer-image">
         <br>
+
         <a href="Mein-Flyer.pdf" class="btn" target="_blank" download>
-          <i class="fa fa-download"></i> Flyer herunterladen
+          <i class="fa fa-download"></i> Flyer kostenlos herunterladen
         </a>
     </div>
+
+
+    <div style="text-align:center; margin-top:40px; margin-bottom:10px; color:#0c0c0c;">
+        <h2>Meine digitale Visitenkarte</h2>
+    </div>
+    
+    <div class="business-card-container">
+        
+        <div class="business-card front">
+            <img src="./Bilder ManuFaktur/Manuela1.png" alt="Manufaktur Logo">
+        </div>
+
+        <div class="business-card back">
+            <h2>Manuela Schenk</h2>
+            <span class="title">Künstlerin & Inhaberin</span>
+
+            <ul class="contact-info">
+                <li><i class="fa fa-phone"></i> +49 163 2662435</li>
+                <li><i class="fa fa-envelope"></i> manufaktur-malerei@web.de</li>
+                <li><i class="fa fa-map-marker"></i> Rüdesheimer Straße 14, 53175 Bonn</li>
+                <li class="website-link"><i class="fa fa-globe"></i> www.manufaktur-schenk.de</li>
+            </ul>
+        </div>
+    </div>
+    <div style="margin-bottom: 60px;"></div>
 
   </main>
 
@@ -128,5 +158,6 @@
 
   </footer>
 
+  <script src="Home.js"></script>
 </body>
 </html>

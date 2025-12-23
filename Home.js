@@ -86,13 +86,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Klick-Events für Bilder ---
     galleryLinks.forEach(function(link, index) {
         link.addEventListener('click', function(event) {
-            event.preventDefault(); // Kein neuer Tab
-            openLightbox(index);    // Öffne Lightbox
+            event.preventDefault(); 
+            openLightbox(index);    
         });
     });
 
-    // --- Weiter / Zurück Logik ---
-    // Wir hängen die Funktion an "window", damit sie im HTML gefunden wird
+   
     window.changeSlide = function(n) {
         currentIndex += n;
 
@@ -103,9 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentIndex < 0) {
             currentIndex = galleryLinks.length - 1;
         }
-
-        // Trick: Wenn das nächste Bild durch den Filter ausgeblendet ist, überspringen
-        // Das ist etwas fortgeschritten, aber wir lassen es erstmal simpel:
         openLightbox(currentIndex);
     };
 
@@ -133,3 +129,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 }); 
+
+
+    /* =========================================
+    3. Uebermich Flyer
+    ========================================= */
+   function showModal(element) {
+          var modal = document.getElementById("flyerModal");
+          var modalImg = document.getElementById("modalImg");
+          
+          modal.style.display = "flex"; 
+          modalImg.src = element.src;   
+      }
+
+      function closeModal() {
+          document.getElementById("flyerModal").style.display = "none";
+      }
