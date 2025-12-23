@@ -141,3 +141,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
+
+
+/* =========================================
+   4. NACH OBEN BUTTON (Logik)
+   ========================================= */
+
+// Den Button holen
+var mybutton = document.getElementById("myBtn");
+
+// Wenn man 20px scrollt, Button zeigen
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  // Sicherheitscheck, falls Button auf einer Seite fehlt
+  var mybutton = document.getElementById("myBtn");
+  if (!mybutton) return;
+
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// Beim Klicken nach oben scrollen
+function topFunction() {
+  // Sanftes Scrollen
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
