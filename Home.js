@@ -1,74 +1,90 @@
 /* =========================================
-   1. FILTER FUNKTION (Muss außerhalb stehen)
+   1. FILTER FUNKTION
    ========================================= */
 
-// Standardmäßig alle zeigen
+   // Standardmäßig alle zeigen
 filterSelection("alle");
 
 function filterSelection(kategorie) {
-  var x, i;
-  x = document.getElementsByClassName("gallery-item");
-  
+  var x = document.getElementsByClassName("gallery-item");
   if (kategorie == "alle") kategorie = "";
   
-  for (i = 0; i < x.length; i++) {
-
+  for (var i = 0; i < x.length; i++) {
     var dataKat = x[i].getAttribute("data-kategorie");
-
     if (!dataKat) {
         x[i].style.display = "block";
         continue;
     }
-    // Zuerst ausblenden
+
     x[i].style.display = "none";
-    
-    // Prüfen ob Kategorie passt
     if (dataKat.indexOf(kategorie) > -1) {
       x[i].style.display = "block"; 
     }
   }
 }
 
-// Button "Active" Status Logik
-var btnContainer = document.getElementById("filter-container");
-if (btnContainer) {
-    var btns = btnContainer.getElementsByClassName("filter-btn");
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].addEventListener("click", function(){
-        var current = document.getElementsByClassName("active");
-        if (current.length > 0) { 
-          current[0].className = current[0].className.replace(" active", "");
+document.addEventListener('DOMContentLoaded', function() {
+    var btnContainer = document.getElementById("filter-container");
+    if (btnContainer) {
+        var btns = btnContainer.getElementsByClassName("filter-btn");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].addEventListener("click", function(){
+            var current = document.getElementsByClassName("active");
+            if (current.length > 0) { 
+              current[0].className = current[0].className.replace(" active", "");
+            }
+            this.className += " active";
+          });
         }
-        this.className += " active";
-      });
+    }
+});
+
+
+/* =========================================
+   2. FLYER MODAL FUNKTIONEN (Global)
+   ========================================= */
+function openFlyerModal(element) {
+    var modal = document.getElementById("flyerModal");
+    var modalImg = document.getElementById("modalImg");
+    
+    if (modal && modalImg) {
+        modal.style.display = "flex"; 
+        modalImg.src = element.src;   
+    }
+}
+
+function closeFlyerModal() {
+    var modal = document.getElementById("flyerModal");
+    if (modal) {
+        modal.style.display = "none";
     }
 }
 
 
 /* =========================================
-   2. LIGHTBOX & SLIDESHOW (Wartet auf Laden)
+   3. LIGHTBOX & SLIDESHOW (Galerie)
    ========================================= */
-
 document.addEventListener('DOMContentLoaded', function() {
-
     
     var lightbox = document.getElementById('lightbox');
     var lightboxImg = document.getElementById('lightbox-img');
     var captionText = document.getElementById('caption');
-    var closeBtn = document.getElementsByClassName("close")[0];
-    
-    
+    var closeBtn = document.querySelector('#lightbox .close');
     var galleryLinks = Array.from(document.querySelectorAll('.gallery-item a'));
     var currentIndex = 0; 
 
+
     // --- Funktion: Lightbox öffnen ---
     function openLightbox(index) {
+        if (!lightbox) return; 
+
         currentIndex = index;
         var link = galleryLinks[currentIndex];
         
         lightbox.style.display = "flex"; 
         lightboxImg.src = link.href;     
         
+
         // Bildunterschrift setzen
         var imgInside = link.querySelector('img');
         if (imgInside) {
@@ -81,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+
+
     // --- Klick-Events für Bilder ---
     galleryLinks.forEach(function(link, index) {
         link.addEventListener('click', function(event) {
@@ -89,19 +107,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-   
+
+
+    // --- Vor / Zurück ---
     window.changeSlide = function(n) {
         currentIndex += n;
-
-        // Endlos-Schleife (Loop)
-        if (currentIndex >= galleryLinks.length) {
-            currentIndex = 0;
-        }
-        if (currentIndex < 0) {
-            currentIndex = galleryLinks.length - 1;
-        }
+        if (currentIndex >= galleryLinks.length) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = galleryLinks.length - 1;
         openLightbox(currentIndex);
     };
+
+
 
     // --- Schließen (X) ---
     if (closeBtn) {
@@ -110,21 +126,26 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+
+
     // --- Schließen (Hintergrundklick) ---
-    lightbox.addEventListener('click', function(event) {
-        if (event.target === lightbox) {
-            lightbox.style.display = "none";
-        }
-    });
+    if (lightbox) {
+        lightbox.addEventListener('click', function(event) {
+            if (event.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        });
+    }
+
+    
 
     // --- Tastatursteuerung ---
     document.addEventListener('keydown', function(event) {
-        if (lightbox.style.display === "flex") {
+        if (lightbox && lightbox.style.display === "flex") {
             if (event.key === "ArrowLeft") changeSlide(-1);
             if (event.key === "ArrowRight") changeSlide(1);
             if (event.key === "Escape") lightbox.style.display = "none";
         }
     });
 
-}); 
-
+});

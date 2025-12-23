@@ -41,7 +41,6 @@
   <main>
 
     <h2>Was ich anbiete</h2>
-    <p>Jedes Bild ist ein Unikat. Hier sehen Sie eine Übersicht meiner Schwerpunkte:</p><br>
 
     <div class="service-grid">
 
@@ -88,22 +87,6 @@
       </div>
     </div>
 
-    
-
-    <div class="flyer-section">
-      <h3><i class="fa fa-file-text-o"></i> Aktueller Flyer</h3>
-      <p>
-        Alle Informationen zu meinen Leistungen und Preisen findest Du auch in meinem aktuellen Flyer zum herunterladen.
-      </p>
-
-      <div class="flyer-container">
-        <img src="./Vorlage Manufaktur PP/Flyer-Seite1.png" alt="Vorschau Flyer Seite 1" class="flyer-image">
-
-        <a href="./Vorlage Manufaktur PP/Flyer Manu DIGITAL.pdf" class="btn" target="_blank" download>
-          <i class="fa fa-download"></i> (PDF) Flyer herunterladen 
-        </a>
-      </div>
-    </div>
 
     <div style="text-align: center; margin-top: 40px;">
       <p><strong>Haben Sie eine andere Idee oder eine Frage?</strong></p>
@@ -138,6 +121,24 @@
     </div>
   </footer>
     
+
+
+  <!-- Flyer Modal Ansicht JS Code -->
+  <script>
+      function openFlyerModal(element) {
+          var modal = document.getElementById("flyerModal");
+          var modalImg = document.getElementById("modalImg");
+          
+          modal.style.display = "flex"; 
+          modalImg.src = element.src;   
+      }
+
+      function closeFlyerModal() {
+          document.getElementById("flyerModal").style.display = "none";
+      }
+  </script>
+  
+
 </body>
-<!-- <script src="Home.js"></script> -->
+
 </html>
