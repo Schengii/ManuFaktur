@@ -51,14 +51,13 @@ if (btnContainer) {
 
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- Variablen holen ---
+    
     var lightbox = document.getElementById('lightbox');
     var lightboxImg = document.getElementById('lightbox-img');
     var captionText = document.getElementById('caption');
     var closeBtn = document.getElementsByClassName("close")[0];
     
-    // Alle Links der Galerie sammeln (nur die sichtbaren wären besser, aber so gehts auch)
-    // Wir nutzen Array.from, damit wir später mit Index arbeiten können
+    
     var galleryLinks = Array.from(document.querySelectorAll('.gallery-item a'));
     var currentIndex = 0; 
 
@@ -67,13 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
         currentIndex = index;
         var link = galleryLinks[currentIndex];
         
-        lightbox.style.display = "flex"; // Flexbox für Zentrierung
-        lightboxImg.src = link.href;     // Bild-Quelle setzen
+        lightbox.style.display = "flex"; 
+        lightboxImg.src = link.href;     
         
         // Bildunterschrift setzen
         var imgInside = link.querySelector('img');
         if (imgInside) {
-             // Wenn du die div-Beschriftung nutzt, nimm diese Zeile:
              var captionDiv = link.querySelector('.gallery-caption');
              if(captionDiv) {
                  captionText.innerHTML = captionDiv.innerText;
@@ -130,18 +128,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 }); 
 
-
-    /* =========================================
-    3. Uebermich Flyer
-    ========================================= */
-   function showModal(element) {
-          var modal = document.getElementById("flyerModal");
-          var modalImg = document.getElementById("modalImg");
-          
-          modal.style.display = "flex"; 
-          modalImg.src = element.src;   
-      }
-
-      function closeModal() {
-          document.getElementById("flyerModal").style.display = "none";
-      }

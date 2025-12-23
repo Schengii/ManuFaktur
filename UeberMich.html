@@ -11,9 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-  </head>
-
-    
+</head>
 
 <body>
 
@@ -79,7 +77,6 @@
         </p>
         <br>
     
-
         <p>
           Gerne male ich auch für Sie! Schauen Sie sich meine <a href="Leistungen.html">Leistungen</a> an 
           oder stöbern Sie durch die <a href="Bildergalerie.html">Galerie</a>.
@@ -90,28 +87,30 @@
 
     <div class="flyer-section">
         <h3>Mehr erfahren?</h3>
-        <p>Laden Sie sich gerne meine Kurzübersicht als PDF herunter.</p>
+        <p>Klicken Sie auf eine Seite für die Großansicht oder laden Sie das PDF herunter.</p>
         <br><hr><br>
         
-        <img src="./Vorlage Manufaktur PP/Flyer-Seite1.png" alt="Vorschau Flyer" class="flyer-image">
-        <img src="./Vorlage Manufaktur PP/Flyer-Seite2.png" alt="Vorschau Flyer" class="flyer-image">
-        <img src="./Vorlage Manufaktur PP/Flyer-Seite3.png" alt="Vorschau Flyer" class="flyer-image">
-        <br>
+        <div class="flyer-row">
+            <img src="./Vorlage Manufaktur PP/Flyer-Seite1.png" alt="Vorschau Flyer Seite 1" class="flyer-image" onclick="openFlyerModal(this)">
+            <img src="./Vorlage Manufaktur PP/Flyer-Seite2.png" alt="Vorschau Flyer Seite 2" class="flyer-image" onclick="openFlyerModal(this)">
+            <img src="./Vorlage Manufaktur PP/Flyer-Seite3.png" alt="Vorschau Flyer Seite 3" class="flyer-image" onclick="openFlyerModal(this)">
+        </div>
 
+        <br>
         <a href="Mein-Flyer.pdf" class="btn" target="_blank" download>
-          <i class="fa fa-download"></i> Flyer kostenlos herunterladen
+          <i class="fa fa-download"></i> Flyer herunterladen
         </a>
     </div>
 
 
     <div style="text-align:center; margin-top:40px; margin-bottom:10px; color:#0c0c0c;">
         <h2>Meine digitale Visitenkarte</h2>
+        <p>Zum Abspeichern oder Weiterleiten</p>
     </div>
     
     <div class="business-card-container">
-        
         <div class="business-card front">
-            <img src="./Bilder ManuFaktur/Manuela1.png" alt="Manufaktur Logo">
+            <img src="./Bilder ManuFaktur/Logo1.png" alt="Manufaktur Logo">
         </div>
 
         <div class="business-card back">
@@ -158,6 +157,27 @@
 
   </footer>
 
-  <script src="Home.js"></script>
+  <div id="flyerModal" class="modal" onclick="closeFlyerModal()">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modalImg">
+      <div id="caption"></div>
+  </div>
+
+
+
+  <script>
+      function openFlyerModal(element) {
+          var modal = document.getElementById("flyerModal");
+          var modalImg = document.getElementById("modalImg");
+          
+          modal.style.display = "flex"; 
+          modalImg.src = element.src;   
+      }
+
+      function closeFlyerModal() {
+          document.getElementById("flyerModal").style.display = "none";
+      }
+  </script>
+
 </body>
 </html>
