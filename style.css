@@ -37,19 +37,20 @@ a {
 /* Allgemeine Buttons */
 .btn {
     display: inline-block;
-    background-color: #04AA6D;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 4px;
     margin-top: 16px;
-    /*transition: background 0.3s;*/
+    transition: transform 0.2s, background-color 0.3s;
     cursor: pointer;
     border: none;
 }
 
 .btn:hover {
-    background-color: #34495e;
+    transform: scale(1.05);
+    background-color: var(--secondary-color);
     text-decoration: underline;
 }
 
@@ -1085,4 +1086,77 @@ footer {
     border-radius: 4px;
     pointer-events: none;
     font-weight: bold;
+}
+
+
+
+/* =========================================
+   TOAST NACHRICHT (Rechtsklick-Schutz)
+   ========================================= */
+#toast {
+    visibility: hidden; 
+    min-width: 280px;
+    background-color: #333; 
+    color: #fff;            
+    text-align: center;
+    border-radius: 50px;    
+    padding: 16px;
+    position: fixed;        
+    z-index: 10001;         
+    left: 50%;
+    bottom: 30px;           
+    transform: translateX(-50%); 
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s; 
+}
+
+/* Animationen für den Toast */
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+
+
+
+/* =========================================
+   3D-SCHATTEN FÜR BILDER 
+   ========================================= */
+.gallery-item {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+    border: 4px solid #fff; 
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px) scale(1.02); 
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    z-index: 5; 
+}
+
+
+
+/* =========================================
+   Scroll-Reveal Effekt
+   ========================================= */
+.reveal {
+  position: relative;
+  transform: translateY(150px); /* Startposition: 150px tiefer */
+  opacity: 0;                   /* Startzustand: Unsichtbar */
+  transition: all 2s ease;      /* Dauer der Animation */
+}
+
+.reveal.active {
+  transform: translateY(0px);   /* Endposition: Originalstelle */
+  opacity: 1;                   /* Endzustand: Sichtbar */
 }

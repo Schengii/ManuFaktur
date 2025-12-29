@@ -6,6 +6,10 @@
     <meta name="description" content="Manufaktur Schenk - Individuelle Malerei, Tierportraits und Landschaften in Acryl und Öl. Handgemalte Unikate aus Bonn.">
     <title>Startseite | Manufaktur</title>
 
+    <meta property="og:title" content="Manufaktur Schenk - Individuelle Malerei">
+    <meta property="og:description" content="Handgemalte Tierportraits und Landschaften aus Bonn.">
+    <meta property="og:image" content="https://deine-url.de/img/vorschau.jpg">
+
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -44,7 +48,7 @@
   <main>
     
     <section class="welcome">
-      <h2 class="typing-effect">Willkommen in der Manufaktur</h2>
+      <h2 class="typing-effect reveal">Willkommen in der Manufaktur</h2>
       <p>
         Hier entsteht Handwerkskunst mit Leidenschaft. Meine Manufaktur steht für Qualität, Individualität,
         und echte Handarbeit. Ob Tierportraits oder Landschaften - ich bringe deine Lieblingsmotive auf
@@ -52,10 +56,10 @@
       </p>
     </section>
 
-    <section class="news">
+    <section class="news reveal">
       <h2><i class="fa fa-bell-o"></i> Neuigkeiten</h2>
 
-      <div class="news-box">
+      <div class="news-box reveal">
         <span class="news-date">01. Dezember 2025</span>
         <h3>Adventszeit</h3>
         <p> Ab sofort male ich auch individuelle Motive für den Advent.
@@ -63,7 +67,7 @@
         </p>
       </div>
 
-      <div class="news-box">
+      <div class="news-box reveal">
         <span class="news-date">22. November 2025</span>
         <h3>Weihnachtskarten jetzt verfügbar!</h3>
         <p> Ab sofort male ich auch individuelle Motive für Weihnachtskarten.
@@ -71,7 +75,7 @@
         </p>
       </div>
 
-      <div class="news-box">
+      <div class="news-box reveal">
         <span class="news-date">10. Oktober 2025</span>
         <h3>Neue Tierportraits in der Galerie</h3>
         <p> Meine Bildergalerie wurde um viele neue Werke erweitert.
@@ -86,22 +90,22 @@
 
       <div class="gallery-grid">
 
-        <div class="gallery-item">
+        <div class="gallery-item reveal">
             <a href="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg">
                 <img src="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg" alt="Zwei Eulen" loading="lazy">
             </a>
         </div>
-         <div class="gallery-item">
+         <div class="gallery-item reveal">
             <a href="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg">
                 <img src="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg" alt="Godesburg Stadtansicht" loading="lazy">
             </a>
         </div>
-         <div class="gallery-item">
+         <div class="gallery-item reveal">
             <a href="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg">
                 <img src="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg" alt="Rheinaue Bonn" loading="lazy">
             </a> 
         </div>
-        <div class="gallery-item">
+        <div class="gallery-item reveal">
             <a href="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg">
                 <img src="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg" alt="Feld im Urlaub" loading="lazy">
             </a>
@@ -110,7 +114,7 @@
       </div>
     </section>
 
-    <section class="bilderButton">
+    <section class="bilderButton reveal">
       <h2>Für weitere Bilder-Beispiele: </h2>
       <a href="Bildergalerie.html" class="btn"><i class="fa fa-photo"></i>  Zur Galerie</a>
       <a href="UeberMich.html" class="btn"><i class="fa fa-vcard-o"></i> Nächste Seite</a>
@@ -162,11 +166,22 @@
     <i class="fa fa-angle-up"></i>
   </button>
     
+<div id="toast">
+    <i class="fa fa-info-circle"></i> Urheberrechtlich geschützt &copy; Manuela Schenk
+</div>
+
 <script>
-    // Verhindert das Kontextmenü (Rechtsklick) auf Bildern
+    function showToast() {
+        var x = document.getElementById("toast");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    // Rechtsklick abfangen
     document.addEventListener('contextmenu', function(e) {
         if (e.target.tagName === 'IMG') {
-            e.preventDefault();
+            e.preventDefault(); 
+            showToast();        
         }
     });
 </script>

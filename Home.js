@@ -152,3 +152,21 @@ function closeFlyerModal() {
         modal.style.display = "none";
     }
 }
+
+
+
+// Scroll-Reveal Effekt //
+window.addEventListener('scroll', reveal);
+
+window.addEventListener('load', reveal);
+
+function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var revealTop = reveals[i].getBoundingClientRect().top;
+        if (revealTop < windowHeight - 150) {
+            reveals[i].classList.add("active");
+        }
+    }
+}
