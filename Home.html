@@ -162,6 +162,16 @@
     <i class="fa fa-angle-up"></i>
   </button>
     
+<script>
+    // Verhindert das Kontextmenü (Rechtsklick) auf Bildern
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+            // Optional: Eine kleine Meldung anzeigen
+            // alert("Diese Bilder sind urheberrechtlich geschützt.");
+        }
+    });
+</script>
 
   <script src="Home.js"></script> 
 </body>
