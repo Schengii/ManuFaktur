@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function openLightbox(index) {
         if (!lightbox) return; 
 
+        // Verhindert Scrollen im Hintergrund
+        document.body.style.overflow = 'hidden';
         currentIndex = index;
         var link = galleryLinks[currentIndex];
         
@@ -91,6 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (closeBtn) {
         closeBtn.onclick = function() {
             lightbox.style.display = "none";
+            // Scrollen wieder erlauben
+            document.body.style.overflow = 'auto';
         };
     }
 
@@ -98,6 +102,8 @@ document.addEventListener('DOMContentLoaded', function() {
         lightbox.addEventListener('click', function(event) {
             if (event.target === lightbox) {
                 lightbox.style.display = "none";
+                // Scrollen wieder erlauben
+                document.body.style.overflow = 'auto';
             }
         });
     }

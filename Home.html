@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Manufaktur Schenk - Individuelle Malerei, Tierportraits und Landschaften in Acryl und Öl. Handgemalte Unikate aus Bonn.">
     <title>Startseite | Manufaktur</title>
 
     <link rel="icon" type="image/png" href="favicon.png">
@@ -19,7 +19,7 @@
   <header>
 
     <nav>
-      <h1 class="headline"><i class="fa fa-paw"></i> Manufaktur</h1>
+      <h1 class="headline"><i class="fa fa-paw"></i> Manufaktur</h1>      
       <ul>
         <li class="active"><a href="Home.html"><i class="fa fa-home"></i> Start</a></li>
         <li><a href="UeberMich.html"><i class="fa fa-vcard-o"></i> Über mich</a></li>
@@ -44,7 +44,7 @@
   <main>
     
     <section class="welcome">
-      <h2>Willkommen in der Manufaktur</h2>
+      <h2 class="typing-effect">Willkommen in der Manufaktur</h2>
       <p>
         Hier entsteht Handwerkskunst mit Leidenschaft. Meine Manufaktur steht für Qualität, Individualität,
         und echte Handarbeit. Ob Tierportraits oder Landschaften - ich bringe deine Lieblingsmotive auf
@@ -82,8 +82,7 @@
 
 
     <section class="latest-work">
-      <h2>Aktuelle Werke Highlights:</h2>
-      <p>Dies sind meine schönsten Bilder</p>
+      <h2>Aktuelle Werke Highlights: <strong>2025</strong></h2>
 
       <div class="gallery-grid">
 
@@ -114,6 +113,7 @@
     <section class="bilderButton">
       <h2>Für weitere Bilder-Beispiele: </h2>
       <a href="Bildergalerie.html" class="btn"><i class="fa fa-photo"></i>  Zur Galerie</a>
+      <a href="UeberMich.html" class="btn"><i class="fa fa-vcard-o"></i> Nächste Seite</a>
     </section>
     
   </main>
@@ -167,8 +167,6 @@
     document.addEventListener('contextmenu', function(e) {
         if (e.target.tagName === 'IMG') {
             e.preventDefault();
-            // Optional: Eine kleine Meldung anzeigen
-            // alert("Diese Bilder sind urheberrechtlich geschützt.");
         }
     });
 </script>
