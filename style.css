@@ -277,6 +277,17 @@ h2 {
 }
 
 
+.accordion-item { border-bottom: 1px solid #ddd; }
+.accordion-header {
+    width: 100%; padding: 15px; text-align: left;
+    background: none; border: none; cursor: pointer;
+    font-size: 1.1rem; font-weight: bold; color: var(--secondary-color);
+    display: flex; justify-content: space-between;
+}
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #f1f1f1; }
+.accordion-content p { padding: 15px; }
+
+
 
 /* --- Über Mich: Layout & Info Card --- */
 .about-container {
