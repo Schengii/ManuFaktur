@@ -238,6 +238,76 @@ h2 {
 }
 
 
+/* =========================================
+   KUNDENSTIMMEN (Testimonials)
+   ========================================= */
+.testimonials {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Sanfter Schatten */
+    border: 1px solid #eee;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px); /* Kleiner Hover-Effekt wie bei den Bildern */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.stars {
+    color: #f1c40f; /* Gold für die Sterne */
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+blockquote {
+    font-style: italic;
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+/* Anführungszeichen als Deko */
+blockquote::before {
+    content: "\f10d"; 
+    font-family: FontAwesome;
+    color: var(--primary-color);
+    opacity: 0.2;
+    font-size: 2rem;
+    position: absolute;
+    top: -20px;
+    left: -10px;
+}
+
+cite {
+    font-weight: bold;
+    color: var(--secondary-color);
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+}
+
+
 
 /* --- Leistungen: Grid & Cards --- */
 .services-grid {
