@@ -223,7 +223,7 @@ h2 {
 /* --- Home: News Boxen --- */
 .news-box {
     background-color: #eef2f3;
-    border-left: 5px solid #2c3e50;
+    border-left: 8px solid #5fa1c8;
     padding: 20px;
     margin-bottom: 2rem; 
     border-radius: 4px;
@@ -271,7 +271,7 @@ h2 {
 }
 
 .stars {
-    color: #f1c40f; /* Gold für die Sterne */
+    color: #f1c40f; 
     margin-bottom: 15px;
     font-size: 1.1rem;
 }
@@ -391,19 +391,20 @@ cite {
 }
 
 .about-content {
-    border: 1px solid #0a0a0a;
+    background-color: #eef2f3;
+    border-left: 8px solid #5fa1c8;
     padding: 16px;
-    background-color: #eae7e7;
     border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .info-card {
-    background: lightgray;
+    background-color: #eef2f3;
+    border-left: 8px solid #5fa1c8;
     padding: 20px;
     margin-bottom: 20px;
-    border-left: 8px solid #2c3e50;
     border-radius: 0 8px 8px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .info-card ul {
@@ -440,10 +441,10 @@ cite {
 .flyer-row {
     display: flex; 
     justify-content: center; 
-    gap: 20px; 
+    gap: 24px; 
     flex-wrap: wrap; 
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .flyer-image {
@@ -458,8 +459,8 @@ cite {
 }
 
 .flyer-image:hover {
-    transform: scale(1.05); 
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    transform: scale(1.25); 
+    box-shadow: 0 8px 16px rgba(0,0,0,0.8);
 }
 
 
@@ -469,7 +470,7 @@ cite {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 24px;
     margin-top: 20px;
 }
 
@@ -698,6 +699,7 @@ cite {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 15px;
     padding: 20px 0;
+    background-color: #eef2f3;
 }
 
 .gallery-item {
