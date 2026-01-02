@@ -257,7 +257,7 @@ h2 {
     background-color: #fff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Sanfter Schatten */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
     border: 1px solid #eee;
     transition: transform 0.3s ease;
     display: flex;
@@ -266,7 +266,7 @@ h2 {
 }
 
 .testimonial-card:hover {
-    transform: translateY(-5px); /* Kleiner Hover-Effekt wie bei den Bildern */
+    transform: translateY(-5px); 
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
