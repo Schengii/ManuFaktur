@@ -428,40 +428,58 @@ cite {
 }
 
 
-/* --- Flyer Bereich (Flexbox) --- */
-.flyer-section {
+
+/* 1. Das Layout (Nebeneinander & Größe) */
+.media-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.media-item {
     text-align: center;
-    margin: 60px auto 20px auto;
-    padding: 40px 20px;
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    max-width: 1000px; 
+    border: 1px solid #5fa1c8;
 }
 
-.flyer-row {
-    display: flex; 
-    justify-content: center; 
-    gap: 24px; 
-    flex-wrap: wrap; 
-    margin-top: 20px;
+.media-item h3 {
     margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #2c3e50;
 }
 
-.flyer-image {
-    width: 30%; 
-    min-width: 200px;
-    height: auto;
+.media-row .hover-3d {
+    width: 380px;   
     display: block;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 4px;
-    cursor: pointer; 
-    transition: transform 0.3s ease;
+    margin: 0 auto;
 }
 
-.flyer-image:hover {
-    transform: scale(1.25); 
-    box-shadow: 0 8px 16px rgba(0,0,0,0.8);
+
+/* 2. Der Effekt (Schatten & 3D) - Das ist dein Code von oben */
+.hover-3d {
+    display: inline-block;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
 }
+
+.hover-3d img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.4s ease;
+}
+
+.hover-3d:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    z-index: 5;
+}
+
 
 
 
@@ -1242,4 +1260,61 @@ footer {
 .reveal.active {
   transform: translateY(0px);   /* Endposition: Originalstelle */
   opacity: 1;                   /* Endzustand: Sichtbar */
+}
+
+
+
+/* =========================================
+   SPEZIAL-ANPASSUNG: Visitenkarte im Flyer-Bereich
+   (Damit sie klein und lesbar neben den Flyern steht)
+   ========================================= */
+
+/* 1. Größe und Layout für Flyer & Karte angleichen */
+.media-row .hover-3d, 
+.media-row .business-card {
+    width: 380px !important;  
+    height: 220px !important; 
+    margin: 0 auto;
+}
+
+/* Spezialregeln nur für die Visitenkarte in dieser Reihe */
+.media-row .business-card {
+    display: flex;     
+    min-width: 0;       
+}
+
+/* 2. Schriftgrößen und Abstände verkleinern (nur Rückseite) */
+.media-row .business-card.back {
+    padding: 15px !important;
+}
+
+/* Den Balken links schmaler machen */
+.media-row .business-card.back::before {
+    width: 6px; 
+}
+
+.media-row .business-card h2 {
+    font-size: 1.5rem;     
+}
+
+.media-row .business-card .title {
+    font-size: 0.75rem;    
+}
+
+.media-row .contact-info li {
+    font-size: 0.9rem;     
+    margin-bottom: 4px;
+    line-height: 1.2;
+    padding-left: 16px;
+    padding-top: 8px;
+}
+
+.media-row .contact-info i {
+    width: 20px;           
+    font-size: 0.8rem;
+}
+
+.media-row .website-link {
+    margin-top: 10px;
+    font-size: 0.7rem;
 }
