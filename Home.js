@@ -169,3 +169,25 @@ window.addEventListener('load', reveal);
 
 // Start-Filter setzen
 filterSelection("alle");
+
+
+
+/* =========================================
+   4. FLYER MODAL (Global)
+   ========================================= */
+function openFlyerModal(element) {
+    var modal = document.getElementById("flyerModal");
+    var modalImg = document.getElementById("modalImg");
+    // Sicherheitscheck, ob das Modal auf der Seite existiert
+    if (modal && modalImg) {
+        modal.style.display = "flex"; 
+        modalImg.src = element.src;   
+    }
+}
+
+function closeFlyerModal() {
+    var modal = document.getElementById("flyerModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
