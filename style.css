@@ -346,6 +346,14 @@ cite {
     color: #2c3e50;
 }
 
+.headline-faq {
+    margin-left: 18px;
+}
+
+.faq-section {
+    background-color: #eef2f3;
+    border-left: 8px solid #5fa1c8;
+}
 
 .accordion-item { border-bottom: 1px solid #ddd; }
 .accordion-header {
@@ -882,10 +890,10 @@ cite {
     flex-wrap: wrap;
     gap: 40px;
     margin-top: 30px;
-    background: white;
+    background-color: #eef2f3;
+    border-left: 8px solid #5fa1c8;
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .contact-info { flex: 1; min-width: 250px; }
