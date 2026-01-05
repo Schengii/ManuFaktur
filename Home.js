@@ -1,29 +1,27 @@
 /* =========================================
-   1. FILTER FUNKTION (Galerie)
+   1. GALERIE: FILTER & DATEN
    ========================================= */
+var visibleGalleryLinks = [];
+var currentIndex = 0;
+
 function filterSelection(kategorie) {
     var x = document.getElementsByClassName("gallery-item");
     if (kategorie == "alle") kategorie = "";
     
     for (var i = 0; i < x.length; i++) {
         var dataKat = x[i].getAttribute("data-kategorie");
+        // Wenn kein Attribut da ist, zeige es sicherheitshalber an (oder ausblenden, je nach Wunsch)
         if (!dataKat) {
             x[i].style.display = "block";
             continue;
         }
         x[i].style.display = "none";
-        // Suche nach der Kategorie im Attribut
         if (dataKat.indexOf(kategorie) > -1) {
             x[i].style.display = "block"; 
         }
     }
     updateGalleryLinks();
 }
-
-
-// Diese Variable hält die aktuell sichtbaren Bilder für die Lightbox
-var visibleGalleryLinks = [];
-var currentIndex = 0;
 
 function updateGalleryLinks() {
     visibleGalleryLinks = Array.from(document.querySelectorAll('.gallery-item'))
@@ -34,11 +32,11 @@ function updateGalleryLinks() {
 
 
 /* =========================================
-   2. DOM-LOGIK (Wartet bis Seite geladen ist)
+   2. DOM READY (Initialisierung)
    ========================================= */
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- A. Filter-Buttons Aktiv-Status ---
+    // --- A. Filter Buttons (nur wenn auf der Seite vorhanden) ---
     var btnContainer = document.getElementById("filter-container");
     if (btnContainer) {
         var btns = btnContainer.getElementsByClassName("filter-btn");
@@ -52,10 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-
+    // Initiale Liste erstellen
     updateGalleryLinks();
 
-    
+
     // --- B. Lightbox & Slideshow ---
     var lightbox = document.getElementById('lightbox');
     var lightboxImg = document.getElementById('lightbox-img');
@@ -67,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = 'hidden'; 
         currentIndex = index;
         
-        // Sicherstellen, dass der Index im Rahmen bleibt
+        // Grenzen prüfen
         if (currentIndex >= visibleGalleryLinks.length) currentIndex = 0;
         if (currentIndex < 0) currentIndex = visibleGalleryLinks.length - 1;
 
@@ -81,8 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-
-    // Event-Delegation für Klicks auf Galerie-Bilder (funktioniert auch nach Filtern)
+    // Klicks auf Galerie-Bilder abfangen
     document.addEventListener('click', function(e) {
         var link = e.target.closest('.gallery-item a');
         if (link && document.querySelector('.gallery-grid').contains(link)) {
@@ -92,21 +89,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Globale Funktion für die Pfeile
+    // Pfeil-Navigation global verfügbar machen
     window.changeSlide = function(n) {
         openLightbox(currentIndex + n);
     };
 
-    // Schließen-Logik
-    var closeBtn = document.querySelector('#lightbox .close');
-    if (closeBtn) {
-        closeBtn.onclick = function() {
-            lightbox.style.display = "none";
-            document.body.style.overflow = 'auto';
-        };
-    }
-
+    // Schließen
     if (lightbox) {
+        var closeBtn = lightbox.querySelector('.close');
+        if (closeBtn) {
+            closeBtn.onclick = function() {
+                lightbox.style.display = "none";
+                document.body.style.overflow = 'auto';
+            };
+        }
+        // Schließen bei Klick neben das Bild
         lightbox.addEventListener('click', function(event) {
             if (event.target === lightbox) {
                 lightbox.style.display = "none";
@@ -115,13 +112,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+
+
     // --- C. FAQ Akkordeon ---
     var accHeaders = document.querySelectorAll('.accordion-header');
     accHeaders.forEach(header => {
         header.addEventListener('click', function() {
-            // Icon rotieren (CSS Klasse umschalten)
             this.classList.toggle('active');
-            
             var content = this.nextElementSibling;
             if (content.style.maxHeight) {
                 content.style.maxHeight = null;
@@ -142,17 +139,33 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     };
-});
+
+
+    // --- E. Rechtsklick Schutz (Toast) ---
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault(); 
+            showToast();        
+        }
+    });
+
+    reveal();
+
+}); // Ende DOMContentLoaded
+
 
 
 
 /* =========================================
    3. GLOBALE HILFSFUNKTIONEN
    ========================================= */
+
+// Nach oben scrollen
 function topFunction() {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
+// Reveal Animation beim Scrollen
 function reveal() {
     var reveals = document.querySelectorAll(".reveal");
     for (var i = 0; i < reveals.length; i++) {
@@ -163,22 +176,12 @@ function reveal() {
         }
     }
 }
-
 window.addEventListener('scroll', reveal);
-window.addEventListener('load', reveal);
 
-// Start-Filter setzen
-filterSelection("alle");
-
-
-
-/* =========================================
-   4. FLYER MODAL (Global)
-   ========================================= */
+// Flyer Modal (wird per onclick im HTML aufgerufen)
 function openFlyerModal(element) {
     var modal = document.getElementById("flyerModal");
     var modalImg = document.getElementById("modalImg");
-    // Sicherheitscheck, ob das Modal auf der Seite existiert
     if (modal && modalImg) {
         modal.style.display = "flex"; 
         modalImg.src = element.src;   
@@ -191,3 +194,15 @@ function closeFlyerModal() {
         modal.style.display = "none";
     }
 }
+
+// Toast Nachricht anzeigen
+function showToast() {
+    var x = document.getElementById("toast");
+    if (x) {
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+}
+
+// Start-Filter setzen
+filterSelection("alle");
