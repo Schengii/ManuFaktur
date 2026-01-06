@@ -1,42 +1,25 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-      <title>Bildergalerie | ManuFAKTUR</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://kit.fontawesome.com" crossorigin="anonymous"></script>
+    <title>Bildergalerie | ManuFAKTUR</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-  <script src="Home.js"></script>
-  </head>
-
+</head>
 <body>
-
  <header>
     <nav>
-      <a href="Home.html" style="text-decoration: none;">
-         <h1 class="headline"><i class="fa fa-paw"></i> ManuFAKTUR</h1>
-      </a>
+      <a href="Home.html" style="text-decoration: none;"><h1 class="headline"><i class="fa fa-paw"></i> ManuFAKTUR</h1></a>
       <ul>
         <li><a href="Home.html"><i class="fa fa-home"></i> Start</a></li>
         <li><a href="UeberMich.html"><i class="fa fa-vcard-o"></i> Über mich</a></li>
         <li><a href="Leistungen.html"><i class="fa fa-palette"></i> Leistungen</a></li>
         <li class="active"><a href="Bildergalerie.html"><i class="fa fa-images"></i> Bildergalerie</a></li>
-          <li class="dropdown">
-             <a href="Kontakt.html" style="cursor: pointer;">
-                <i class="fa fa-envelope-o"></i> Kontakt <i class="fa fa-caret-down"></i>
-            </a>
-            <div class="dropdown-content">
-                <a href="Kontakt.html"><i class="fa fa-envelope-o"></i> Kontaktformular</a>
-                <a href="Impressum.html"><i class="fa fa-paragraph"></i> Impressum</a>
-                <a href="Datenschutz.html"><i class="fa fa-shield"></i> Datenschutz</a>
-            </div>
+          <li class="dropdown"><a href="Kontakt.html" style="cursor: pointer;"><i class="fa fa-envelope"></i> Kontakt <i class="fa fa-caret-down"></i></a>
+            <div class="dropdown-content"><a href="Kontakt.html"><i class="fa fa-envelope"></i> Kontaktformular</a><a href="Impressum.html"><i class="fa fa-paragraph"></i> Impressum</a><a href="Datenschutz.html"><i class="fa fa-shield"></i> Datenschutz</a></div>
           </li>
       </ul>
     </nav>
@@ -44,11 +27,7 @@
 
   <main>
     <h2>Bildergalerie | Meine Werke <i class="fa fa-images"></i></h2>
-    <p>Hier findest Du eine Auswahl meiner aktuellen Arbeiten.<br>
-      Klicke auf ein Bild, um es zu vergrößern. Die Buttons sind zum Filtern der Kategorien gedacht.
-    </p><br><hr>
-
-    <br>
+    <p>Hier findest Du eine Auswahl meiner aktuellen Arbeiten. Klicke auf ein Bild zum Vergrößern.</p><br><hr><br>
 
     <div id="filter-container">
       <button class="filter-btn active" onclick="filterSelection('alle')"> Alle</button>
@@ -58,178 +37,43 @@
       <button class="filter-btn" onclick="filterSelection('sonstiges')"> Sonstiges</button>
     </div>
     
-
     <div class="gallery-grid reveal">
-      <div class="gallery-item reveal" data-kategorie="landschaften">
+      <div class="gallery-item" data-kategorie="landschaften">
         <a href="./Bilder ManuFaktur/ManuFaktur-Bild1-Pyramiden.jpg">
           <img src="./Bilder ManuFaktur/ManuFaktur-Bild1-Pyramiden.jpg" alt="Pyramiden Landschaft" loading="lazy"> 
           <div class="gallery-caption">Pyramiden (Acryl auf Leinwand)</div>
         </a>
       </div>
-
-      <div class="gallery-item reveal" data-kategorie="sonstiges">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild5-Leuchtturm.jpg">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild5-Leuchtturm.jpg" alt="Leuchtturm von Texel" loading="lazy"> 
-          <div class="gallery-caption">Leuchtturm von Texel (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="sonstiges">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild3-Schiff.jpg">
-            <img src="./Bilder ManuFaktur/ManuFaktur-Bild3-Schiff.jpg" alt="Schiff auf Meer" loading="lazy">
-            <div class="gallery-caption">Schiff auf Meer (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="tiere">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild13-Hahn.jpg">
-            <img src="./Bilder ManuFaktur/ManuFaktur-Bild13-Hahn.jpg" alt="Hahn" loading="lazy">
-            <div class="gallery-caption">Hahn (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="landschaften">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg">
-            <img src="./Bilder ManuFaktur/ManuFaktur-Bild16-Godesburg.jpg" alt="Godesberg Stadtansicht" loading="lazy">
-            <div class="gallery-caption">Godesberg Stadtansicht (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="tiere">
+      <div class="gallery-item" data-kategorie="tiere">
         <a href="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg">
-            <img src="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg" alt="2 Eulen auf einem Ast" loading="lazy">
-            <div class="gallery-caption">2 Eulen auf einem Ast (Acryl auf Leinwand)</div>
+            <img src="./Bilder ManuFaktur/Manufaktur-Bild18-Eulen.jpg" alt="2 Eulen" loading="lazy">
+            <div class="gallery-caption">2 Eulen auf einem Ast</div>
         </a>
       </div>
-
-      <div class="gallery-item reveal" data-kategorie="landschaften">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild19-Rheinaue.jpg">
-            <img src="./Bilder ManuFaktur/ManuFaktur-Bild19-Rheinaue.jpg" alt="Rheinaue Landschaft" loading="lazy">
-            <div class="gallery-caption">Rheinaue Landschaft (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="sonstiges">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild7-Muschel.jpg">
-            <img src="./Bilder ManuFaktur/ManuFaktur-Bild7-Muschel.jpg" alt="Muschel am Strand" loading="lazy">
-            <div class="gallery-caption">Muschel am Strand (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="pflanzen">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild15-Blumen.jpg">
-            <img src="./Bilder ManuFaktur/ManuFaktur-Bild15-Blumen.jpg" alt="Schöne Blumen" loading="lazy">
-            <div class="gallery-caption">Blumen (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="pflanzen">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild17-Rosen.jpg">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild17-Rosen.jpg" alt="Viele kleine Rosen" loading="lazy">
-          <div class="gallery-caption">Viele kleine Rosen (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="sonstiges">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild20-Kuchen.jpg">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild20-Kuchen.jpg" alt="Ein Stück Kuchen" loading="lazy">
-          <div class="gallery-caption">Ein Stück Kuchen (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-    
-      <div class="gallery-item reveal" data-kategorie="landschaften">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild9-Feld.jpg" alt="Feldweg im Urlaub" loading="lazy">
-          <div class="gallery-caption">Feldweg im Urlaub (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="landschaften">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild8-Rheinaue.jpg" alt="Bild vom Rhein" loading="lazy">
-          <div class="gallery-caption">Bild am Rhein (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="tiere">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild14-Hahn.jpg">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild14-Hahn.jpg" alt="Portrait Hahn" loading="lazy">
-          <div class="gallery-caption">Portrait Hahn (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-      <div class="gallery-item reveal" data-kategorie="pflanzen">
-        <a href="./Bilder ManuFaktur/ManuFaktur-Bild4-Rosen.jpg">
-          <img src="./Bilder ManuFaktur/ManuFaktur-Bild4-Rosen.jpg" alt="2 Rosen am Ast" loading="lazy">
-          <div class="gallery-caption">2 Rosen am Ast (Acryl auf Leinwand)</div>
-        </a>
-      </div>
-
-   </div>
-
-   <div class="flyer-section">
-        <h3><i class="fa-regular fa-file-pdf"></i> Mehr erfahren?</h3>
-        <p>Klicken Sie auf eine Seite für die Großansicht oder laden Sie das PDF herunter.</p>
-        <br><hr><br>
-        
-        <div class="flyer-row">
-            <img src="./Vorlage Manufaktur PP/Flyer-Seite1.png" alt="Vorschau Flyer Seite 1" class="flyer-image reveal" onclick="openFlyerModal(this)">
-            <img src="./Vorlage Manufaktur PP/Flyer-Seite2.png" alt="Vorschau Flyer Seite 2" class="flyer-image reveal" onclick="openFlyerModal(this)">
-        </div>
-
-        <br>
-        <a href="Mein-Flyer.pdf" class="btn" target="_blank" download>
-          <i class="fa fa-download"></i> Flyer herunterladen <i class="fa-regular fa-file-pdf"></i>
-        </a>
     </div>
 
+   <div class="flyer-section reveal">
+        <h3><i class="fa-regular fa-file-pdf"></i> Mehr erfahren?</h3>
+        <p>Klicken Sie auf eine Seite für die Großansicht oder laden Sie das PDF herunter.</p><br><hr><br>
+        <div class="flyer-row">
+            <img src="./Vorlage ManuFAKTUR PP/Flyer-Seite1.png" alt="Flyer 1" class="flyer-image" onclick="openFlyerModal(this)">
+            <img src="./Vorlage ManuFAKTUR PP/Flyer-Seite2.png" alt="Flyer 2" class="flyer-image" onclick="openFlyerModal(this)">
+        </div>
+        <br>
+        <a href="Mein-Flyer.pdf" class="btn" target="_blank" download><i class="fa fa-download"></i> Flyer herunterladen</a>
+    </div>
   </main>
 
   <footer>
-    <div class="footer-section">
-      <p>ManuFAKTUR &bull; Individuelle Malerei</p>
-      <p><i class="fa fa-phone"></i> Auf Anfrage Möglich!</p>
-    </div>
-
-    <div class="footer-section">
-      <p>Manuela Schenk &bull; 53175 Bonn</p>
-      <div class="social-icons">
-         <a href="https://www.instagram.com/hundewelt21/?igsh=eGNwM3M2cHJhbGgy#" target="_blank"><i class="fa fa-instagram"></i></a>
-        <i class="fa fa-whatsapp"></i>
-        <i class="fa fa-linkedin"></i>
-      </div>
-    </div> 
-
-    <div class="footer-section">
-      <p>&copy; 2026 ManuFAKTUR Schenk</p>
-      <p style="font-size: 0.9rem; margin-top: 5px;">
-        <a href="Impressum.html" style="color: white; text-decoration: none;">Impressum</a> | 
-        <a href="Datenschutz.html" style="color: white; text-decoration: none;">Datenschutz</a>
-      </p>
-    </div>
+    <div class="footer-section"><p>ManuFAKTUR &bull; Individuelle Malerei</p><p><i class="fa fa-phone"></i> Auf Anfrage Möglich!</p></div>
+    <div class="footer-section"><p>Manuela Schenk &bull; 53175 Bonn</p><div class="social-icons"><a href="https://www.instagram.com/hundewelt21/?igsh=eGNwM3M2cHJhbGgy#" target="_blank"><i class="fa fa-instagram"></i></a><i class="fa fa-whatsapp"></i><i class="fa fa-linkedin"></i></div></div> 
+    <div class="footer-section"><p>&copy; 2026 ManuFAKTUR Schenk</p><p style="font-size: 0.9rem;"><a href="Impressum.html">Impressum</a> | <a href="Datenschutz.html">Datenschutz</a></p></div>
   </footer>
-
-
   
-  <div id="lightbox" class="lightbox reveal">
-      <span class="close">&times;</span>
-      <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
-      <a class="next" onclick="changeSlide(1)">&#10095;</a>
-      <img class="lightbox-content" id="lightbox-img">
-      <div id="caption"></div>
-  </div>
-    
-  <div id="flyerModal" class="modal reveal" onclick="closeFlyerModal()">
-      <span class="close">&times;</span>
-      <img class="modal-content" id="modalImg">
-  </div>
-
-
-  <button onclick="topFunction()" id="myBtn" title="Nach oben">
-    <i class="fa fa-angle-up"></i>
-  </button>
-
-  
-
+  <div id="lightbox" class="lightbox"><span class="close">&times;</span><a class="prev" onclick="changeSlide(-1)">&#10094;</a><a class="next" onclick="changeSlide(1)">&#10095;</a><img class="lightbox-content" id="lightbox-img"><div id="caption"></div></div>
+  <div id="flyerModal" class="modal" onclick="closeFlyerModal()"><span class="close">&times;</span><img class="modal-content" id="modalImg"></div>
+  <button onclick="topFunction()" id="myBtn" title="Nach oben"><i class="fa fa-angle-up"></i></button>
+  <div id="toast"><i class="fa fa-info-circle"></i> Urheberrechtlich geschützt &copy; Manuela Schenk</div>
+  <script src="Home.js"></script>
 </body>
 </html>
