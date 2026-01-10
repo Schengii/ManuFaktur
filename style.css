@@ -268,7 +268,7 @@ h2 {
 
 /* News Boxen */
 .news-box {
-    background-color: #fff;
+    background-color: #eef2f3;
     border-left: 6px solid var(--primary-color);
     padding: 25px;
     margin-bottom: 2rem; 
@@ -294,7 +294,7 @@ h2 {
     margin-top: 30px;
 }
 .testimonial-card {
-    background-color: #fff;
+    background-color: #eef2f3;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
@@ -380,18 +380,18 @@ cite {
 }
 .about-image img {
     width: 100%; height: auto; display: block;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
 }
 .about-content {
     flex-basis: 100%; margin-top: 20px;
-    background-color: #fff; padding: 30px;
+    background-color: #eef2f3; padding: 30px;
     border-radius: 8px; border-left: 6px solid var(--primary-color); 
     box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
 }
 .info-card {
     flex: 1 1 300px; max-width: 600px;      
-    background-color: #fff;
-    border-left: 6px solid var(--accent-color);
+    background-color: #eef2f3;
+    border-left: 6px solid var(--primary-color);
     padding: 25px; border-radius: 4px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
@@ -434,7 +434,7 @@ cite {
 /* Visitenkarten Styles */
 .business-card {
     width: 400px; height: 250px;
-    background-color: white;
+    background-color: #eef2f3;
     box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     position: relative; overflow: hidden;
     display: flex; border-radius: 8px;
