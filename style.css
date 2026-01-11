@@ -609,6 +609,29 @@ cite {
     pointer-events: none;
 }
 
+/* =========================================
+   TEXT ZENTRIERUNG (Flyer & Visitenkarte)
+   ========================================= */
+
+/* Zentriert den Flyer-Text */
+.flyer-section {
+    text-align: center;      /* Alles mittig */
+    margin-bottom: 40px;     /* Etwas Luft nach unten */
+    margin-top: 40px;        /* Luft nach oben */
+}
+
+/* Zentriert den Visitenkarten-Titel */
+.section-header-center {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+/* Optional: Falls du auch den Text IN der Visitenkarte mittig willst */
+/* .media-row .business-card.back { align-items: center; text-align: center; } */
+/* .media-row .contact-info li { justify-content: center; } */
+
 /* Flyer Row */
 .flyer-row { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 20px 0; }
 .flyer-image {
