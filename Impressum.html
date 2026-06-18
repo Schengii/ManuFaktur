@@ -3,45 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-
     <meta name="description" content="Impressum von ManuFAKTUR – rechtliche Informationen zu Betreiber und Haftung.">
-<title>Impressum | ManuFAKTUR</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Removed outdated Font Awesome 4.6 CSS -->
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- Removed outdated Font Awesome 4.7 CSS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-  </head>
-
-<body>
-
-<header>
-    <nav role="navigation" aria-label="Hauptmenü">
-      <h1 class="headline"><i class="fa fa-paw"></i> ManuFAKTUR</h1>
-      <ul>
-        <li><a href="Home.html"><i class="fa fa-home"></i> Start</a></li>
-        <li><a href="UeberMich.html"><i class="fa fa-vcard-o"></i> Über mich</a></li>
-        <li><a href="Leistungen.html"><i class="fa fa-euro"></i> Leistungen</a></li>
-        <li><a href="Bildergalerie.html"><i class="fa fa-images"></i> Bildergalerie</a></li>
-          <li class="dropdown active">
-            <a href="Kontakt.html" style="cursor: pointer;">
-                <i class="fa fa-envelope-o"></i> Kontakt <i class="fa fa-caret-down"></i>
-            </a>
-            <div class="dropdown-content">
-                <a href="Kontakt.html"><i class="fa fa-envelope-o"></i> Kontaktformular</a>
-                <a href="Impressum.html"><i class="fa fa-paragraph"></i> Impressum</a>
-                <a href="Datenschutz.html"><i class="fa fa-shield"></i> Datenschutz</a>
-            </div>
-          </li>
-=======
-    <meta name="description" content="Impressum von ManuFAKTUR Schenk, künstlerin Manuela Schenk aus Bonn. Rechtliche Angaben gem. § 5 TMG.">
     <title>Impressum | ManuFAKTUR</title>
     <!-- Lokales Font Awesome für DSGVO-Konformität -->
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -62,7 +32,7 @@
         <li><a href="Leistungen.html"><i class="fa fa-palette" aria-hidden="true"></i> Leistungen</a></li>
         <li><a href="Bildergalerie.html"><i class="fa fa-images" aria-hidden="true"></i> Galerie</a></li>
         <li class="dropdown active">
-          <a href="Kontakt.html" style="cursor: pointer;">
+          <a href="Kontakt.html" class="cursor-pointer">
               <i class="fa-solid fa-envelope" aria-hidden="true"></i> Kontakt <i class="fa fa-caret-down" aria-hidden="true"></i>
           </a>
           <div class="dropdown-content">
@@ -71,14 +41,13 @@
               <a href="Datenschutz.html"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Datenschutz</a>
           </div>
         </li>
->>>>>>> 7812fb628ece03a5f5cc2c9dc837d9975a1ae663
       </ul>
     </nav>
   </header>
 
   <main>
     <div class="text-content">
-        <h1 class="page-title" style="text-align: left; margin-bottom: 2rem;">Impressum</h1>
+        <h1 class="page-title page-title--left">Impressum</h1>
         
         <h2>Angaben gemäß § 5 TMG</h2>
         <p>
@@ -100,7 +69,7 @@
             <div id="map-container" class="map-placeholder">
                 <div class="map-placeholder-content">
                     <h4><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Google Maps laden</h4>
-                    <p>Um die interaktive Karte anzuzeigen, klicken Sie bitte auf "Karte laden". Dadurch stimmen Sie der Übertragung Ihrer IP-Adresse an Google und der Verarbeitung von Cookies gemäß der Datenschutzrichtlinien von Google zu. (Details in unserer <a href="Datenschutz.html" target="_blank">Datenschutzerklärung</a>)</p>
+                    <p>Um die interaktive Karte anzuzeigen, klicken Sie bitte auf "Karte laden". Dadurch stimmen Sie der Übertragung Ihrer IP-Adresse an Google und der Verarbeitung von Cookies gemäß der Datenschutzrichtlinien von Google zu. (Details in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>)</p>
                     <button onclick="loadGoogleMap()" class="btn"><i class="fa-solid fa-map" aria-hidden="true"></i> Karte laden</button>
                 </div>
             </div>
@@ -136,7 +105,7 @@
     </div>
 
     <section class="visitenkarte-section reveal">
-        <h2 style="justify-content: center;"><i class="fa-solid fa-address-card" aria-hidden="true"></i> Digitale Visitenkarte</h2>
+        <h2 class="h2--centered"><i class="fa-solid fa-address-card" aria-hidden="true"></i> Digitale Visitenkarte</h2>
         <p class="intro-text">Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.</p>
         
         <div class="media-row">
@@ -177,7 +146,7 @@
       <h4>Manuela Schenk</h4>
       <p>53175 Bonn &bull; Deutschland</p>
       <div class="social-icons">
-        <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" class="instagram" aria-label="Folge uns auf Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" rel="noopener" class="instagram" aria-label="Folge uns auf Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
         <a href="#" class="whatsapp" aria-label="Kontaktiere uns auf WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
         <a href="#" class="linkedin" aria-label="Verbinde uns auf LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
       </div>
@@ -186,20 +155,15 @@
     <div class="footer-section">
       <h4>Rechtliches</h4>
       <p>&copy; 2026 ManuFAKTUR Schenk</p>
-      <p style="font-size: 0.9rem;">
+      <p class="font-size-09rem">
         <a href="Impressum.html">Impressum</a> | 
         <a href="Datenschutz.html">Datenschutz</a>
       </p>
     </div>
   </footer>
 
-<<<<<<< HEAD
   <button onclick="topFunction()" class="back-to-top" title="Nach oben">
-    <i class="fa fa-angle-up"></i>
-=======
-  <button onclick="topFunction()" id="myBtn" title="Nach oben scrollen" aria-label="Zum Anfang der Seite scrollen">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
->>>>>>> 7812fb628ece03a5f5cc2c9dc837d9975a1ae663
   </button>
     
   <script src="Home.js"></script>

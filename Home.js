@@ -186,13 +186,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // --- E. Nach oben Button ---
-    var mybutton = document.getElementById("myBtn");
+    var backToTopButton = document.querySelector('.back-to-top');
     window.onscroll = function() {
-        if (mybutton) {
+        if (backToTopButton) {
             if (document.body.scrollTop > 150 || document.documentElement.scrollTop > 150) {
-                mybutton.style.display = "block";
+                backToTopButton.style.display = "flex"; // use flex to align icon
             } else {
-                mybutton.style.display = "none";
+                backToTopButton.style.display = "none";
             }
         }
     };
