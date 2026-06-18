@@ -1938,3 +1938,12 @@ footer {
     font-size: 1.1rem;
     margin-bottom: 10px;
 }
+
+/* CTA button row */
+.cta-btn-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
