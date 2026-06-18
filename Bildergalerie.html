@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bildergalerie von ManuFAKTUR – Eine Auswahl meiner Kunstwerke mit Filter und Lightbox.">
     <title>Bildergalerie | ManuFAKTUR</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -11,7 +12,7 @@
 </head>
 <body>
  <header>
-    <nav>
+    <nav role="navigation" aria-label="Hauptmenü">
       <a href="Home.html" style="text-decoration: none;"><h1 class="headline"></i> ManuFAKTUR</h1></a>
       <ul>
         <li><a href="Home.html"><i class="fa fa-home"></i> Start</a></li>
@@ -169,7 +170,7 @@
   
   <div id="lightbox" class="lightbox"><span class="close">&times;</span><a class="prev" onclick="changeSlide(-1)">&#10094;</a><a class="next" onclick="changeSlide(1)">&#10095;</a><img class="lightbox-content" id="lightbox-img"><div id="caption"></div></div>
   <div id="flyerModal" class="modal" onclick="closeFlyerModal()"><span class="close">&times;</span><img class="modal-content" id="modalImg"></div>
-  <button onclick="topFunction()" id="myBtn" title="Nach oben"><i class="fa fa-angle-up"></i></button>
+  <button onclick="topFunction()" class="back-to-top" title="Nach oben"><i class="fa fa-angle-up"></i></button>
   <div id="toast"><i class="fa fa-info-circle"></i> Urheberrechtlich geschützt &copy; Manuela Schenk</div>
   <script src="Home.js"></script>
 </body>
