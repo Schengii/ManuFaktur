@@ -1,71 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="de">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Bisherige Leistungen | ManuFAKTUR</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="description" content="Entdecke die Leistungen von ManuFAKTUR Schenk. Tierportraits, Hundeportraits und Landschaftsbilder auf Anfrage.">
+    <title>Leistungen | ManuFAKTUR</title>
+    <!-- Lokales Font Awesome für DSGVO-Konformität -->
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <header>
     <nav>
-      <h1 class="headline"><i class="fa fa-paw"></i> ManuFAKTUR</h1>
-      <ul>
-        <li><a href="Home.html"><i class="fa fa-home"></i> Start</a></li>
-        <li><a href="UeberMich.html"><i class="fa fa-vcard-o"></i> Über mich</a></li>
-        <li class="active"><a href="Leistungen.html"><i class="fa fa-palette"></i> Leistungen</a></li>
-        <li><a href="Bildergalerie.html"><i class="fa fa-images"></i> Bildergalerie</a></li>
-          <li class="dropdown">
-            <a href="Kontakt.html" style="cursor: pointer;">
-                <i class="fa fa-envelope-o"></i> Kontakt <i class="fa fa-caret-down"></i>
-            </a>
-            <div class="dropdown-content">
-                <a href="Kontakt.html"><i class="fa fa-envelope-o"></i> Kontaktformular</a>
-                <a href="Impressum.html"><i class="fa fa-paragraph"></i> Impressum</a>
-                <a href="Datenschutz.html"><i class="fa fa-shield"></i> Datenschutz</a>
-            </div>
-          </li>
+      <div class="nav-brand">
+        <a href="Home.html" class="headline" aria-label="ManuFAKTUR Startseite">
+          <i class="fa fa-paw" aria-hidden="true"></i> ManuFAKTUR
+        </a>
+      </div>
+      <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="Home.html"><i class="fa fa-home" aria-hidden="true"></i> Start</a></li>
+        <li><a href="UeberMich.html"><i class="fa-solid fa-address-card" aria-hidden="true"></i> Über mich</a></li>
+        <li class="active"><a href="Leistungen.html"><i class="fa fa-palette" aria-hidden="true"></i> Leistungen</a></li>
+        <li><a href="Bildergalerie.html"><i class="fa fa-images" aria-hidden="true"></i> Galerie</a></li>
+        <li class="dropdown">
+          <a href="Kontakt.html" style="cursor: pointer;">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i> Kontakt <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-content">
+              <a href="Kontakt.html"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Kontaktformular</a>
+              <a href="Impressum.html"><i class="fa-solid fa-paragraph" aria-hidden="true"></i> Impressum</a>
+              <a href="Datenschutz.html"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Datenschutz</a>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>
 
-
   <main>
+    <h1 class="page-title">Leistungen</h1>
+    <p class="intro-text">Individuelle Kunstwerke, ganz nach deinen Vorstellungen gestaltet.</p>
 
-    <h2>Was ich anbiete <i class="fa fa-palette"></i><i class="fa-solid fa-paintbrush"></i></h2>
-
-    <div class="service-grid">
-      <div class="service-card reveal"><i class="fa fa-dog service-icon"></i><i class="fa fa-paw service-icon"></i><h3>Dein Hund auf Leinwand</h3><p>Du hast Dir schon immer mal ein einzigartiges Portrait Deines treuen Begleiters gewünscht? Egal ob weißer Malteser oder schwarzer Labrador - jeder Hund ist ein besonderes Motiv.</p></div>
-      <div class="service-card reveal"><i class="fa fa-cat service-icon"></i><i class="fa fa-crow service-icon"></i><h3>Weitere tierische Freunde</h3><p>Natürlich male ich nicht nur Hunde! Auch andere tierische Familienmitglieder, wie Papageien, Katzen oder auch Wildtiere, sind wunderbare Motive.</p></div>
-      <div class="service-card reveal"><i class="fa fa-camera-retro service-icon"></i><h3>Deine Lieblingsorte</h3><p>Besondere Landschaften und Orte haben eine ganz eigene Magie. Wenn du solche Lieblingsorte hast, zaubere ich sie Dir als dauerhaftes Erinnerungsstück.</p></div>
-      <div class="service-card reveal"><i class="fa fa-object-group service-icon"></i><h3>Mögliche Formate</h3><p>Für Dein einzigartiges Kunstwerk biete ich verschiedene Formate an. Da alle Bilder mit viel Zeit und Liebe gemalt werden, gibt's keinen festen Preis. Auf Anfrage mache ich dir ein Angebot.</p></div>
-    </div>
-
-    <br>
-
-
-    <section class="faq-section reveal">
-      <h2 class="headline-faq"><i class="fa fa-comments"></i> Häufig gestellte Fragen (FAQ)</h2>
-      <div class="accordion">
-        <div class="accordion-item"><button class="accordion-header">Welche Qualität muss die Fotovorlage haben? <i class="fa fa-chevron-down"></i></button><div class="accordion-content"><p>Je schärfer das Foto, desto mehr Details kann ich malen. Ein klares Handyfoto bei Tageslicht reicht meistens.</p></div></div>
-        <div class="accordion-item"><button class="accordion-header">Wie lange dauert die Erstellung eines Bildes? <i class="fa fa-chevron-down"></i></button><div class="accordion-content"><p>Je nach Technik (Acryl trocknet schneller als Öl) und Auftragslage dauert es in der Regel 2 bis 4 Wochen.</p></div></div>
-        <div class="accordion-item"><button class="accordion-header">Wie lange dauert der Versand? <i class="fa fa-chevron-down"></i></button><div class="accordion-content"><p>Je nach Größe verschicke ich Dein Bild per DHL oder DPD <strong>versandkostenfrei</strong> innerhalb Deutschlands.</p></div></div>
+    <section class="services">
+      <h2><i class="fa fa-palette" aria-hidden="true"></i> Was ich anbiete</h2>
+      <div class="service-grid">
+        <div class="service-card reveal">
+          <div class="service-icon-container">
+            <i class="fa fa-dog service-icon" aria-hidden="true"></i>
+          </div>
+          <h3>Dein Hund auf Leinwand</h3>
+          <p>Du hast Dir schon immer mal ein einzigartiges Portrait Deines treuen Begleiters gewünscht? Egal ob weißer Malteser oder schwarzer Labrador - jeder Hund ist ein besonderes Motiv.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon-container">
+            <i class="fa fa-cat service-icon" aria-hidden="true"></i>
+          </div>
+          <h3>Weitere tierische Freunde</h3>
+          <p>Natürlich male ich nicht nur Hunde! Auch andere tierische Familienmitglieder wie Papageien, Katzen oder auch Wildtiere sind wunderbare Motive für ausdrucksstarke Gemälde.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon-container">
+            <i class="fa fa-camera-retro service-icon" aria-hidden="true"></i>
+          </div>
+          <h3>Deine Lieblingsorte</h3>
+          <p>Besondere Landschaften und Orte haben eine ganz eigene Magie. Wenn du solche Lieblingsorte hast, zaubere ich sie Dir als dauerhaftes Erinnerungsstück auf Leinwand.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon-container">
+            <i class="fa fa-object-group service-icon" aria-hidden="true"></i>
+          </div>
+          <h3>Mögliche Formate</h3>
+          <p>Für Dein einzigartiges Kunstwerk biete ich verschiedene Größen und Formate an. Da alle Bilder mit viel Zeit und Liebe gemalt werden, mache ich Dir auf Anfrage gerne ein individuelles Angebot.</p>
+        </div>
       </div>
     </section>
 
-    <div style="text-align: center;">
-      <p></i> <strong>Hast Du noch weitere Fragen?</strong></p>
-      <a href="Kontakt.html" class="btn"><i class="fa fa-pen-to-square"></i> Kontaktiere mich gerne!</a>
+    <section class="faq-section reveal">
+      <h2><i class="fa fa-comments" aria-hidden="true"></i> Häufig gestellte Fragen (FAQ)</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-header" id="faq-header-1" aria-controls="faq-content-1">
+            Welche Qualität muss die Fotovorlage haben? <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="accordion-content" id="faq-content-1" role="region" aria-labelledby="faq-header-1">
+            <p>Je schärfer das Foto, desto mehr Details kann ich malen. Ein klares Handyfoto bei Tageslicht, auf dem Augen und Fellstruktur gut zu erkennen sind, reicht meistens völlig aus.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" id="faq-header-2" aria-controls="faq-content-2">
+            Wie lange dauert die Erstellung eines Bildes? <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="accordion-content" id="faq-content-2" role="region" aria-labelledby="faq-header-2">
+            <p>Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel 2 bis 4 Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" id="faq-header-3" aria-controls="faq-content-3">
+            Wie lange dauert der Versand? <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="accordion-content" id="faq-content-3" role="region" aria-labelledby="faq-header-3">
+            <p>Nach Fertigstellung und Trocknung verschicke ich Dein Bild per DHL oder DPD gut gepolstert und <strong>versandkostenfrei</strong> innerhalb Deutschlands.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div style="text-align: center; margin-top: 40px;" class="reveal">
+      <p style="font-size: 1.1rem; margin-bottom: 10px;"><strong>Hast Du noch weitere Fragen oder eigene Wünsche?</strong></p>
+      <a href="Kontakt.html" class="btn"><i class="fa fa-pen-to-square" aria-hidden="true"></i> Kontaktiere mich gerne!</a>
     </div>
 
   </main>
 
+<<<<<<< HEAD
 <footer>
     <div class="footer-section"><p>ManuFAKTUR &bull; Individuelle Malerei</p><p><i class="fa fa-phone"></i> Auf Anfrage Möglich</p></div>
     <div class="footer-section"><p>Manuela Schenk &bull; 53175 Bonn</p><div class="social-icons"><a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank"><i class="fa fa-instagram"></i></a><i class="fa fa-whatsapp"></i><i class="fa fa-linkedin"></i></div></div> 
@@ -78,5 +129,41 @@
   
 <script src="Home.js"></script>
 </body>
+=======
+  <footer>
+    <div class="footer-section">
+      <h4>ManuFAKTUR</h4>
+      <p>Individuelle Malerei &amp; Kunsthandwerk</p>
+      <p><i class="fa fa-phone" aria-hidden="true"></i> Telefon: Auf Anfrage</p>
+    </div>
+>>>>>>> 7812fb628ece03a5f5cc2c9dc837d9975a1ae663
 
+    <div class="footer-section">
+      <h4>Manuela Schenk</h4>
+      <p>53175 Bonn &bull; Deutschland</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" class="instagram" aria-label="Folge uns auf Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a href="#" class="whatsapp" aria-label="Kontaktiere uns auf WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="#" class="linkedin" aria-label="Verbinde uns auf LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+      </div>
+    </div> 
+
+    <div class="footer-section">
+      <h4>Rechtliches</h4>
+      <p>&copy; 2026 ManuFAKTUR Schenk</p>
+      <p style="font-size: 0.9rem;">
+        <a href="Impressum.html">Impressum</a> | 
+        <a href="Datenschutz.html">Datenschutz</a>
+      </p>
+    </div>
+  </footer>
+
+  <button onclick="topFunction()" id="myBtn" title="Nach oben scrollen" aria-label="Zum Anfang der Seite scrollen">
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+  </button>
+  
+  <div id="toast" role="alert" aria-live="polite"><i class="fa fa-info-circle" aria-hidden="true"></i> Urheberrechtlich geschützt &copy; Manuela Schenk</div>
+    
+  <script src="Home.js"></script>
+</body>
 </html>

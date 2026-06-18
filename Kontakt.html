@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <meta name="description" content="Kontaktseite von ManuFAKTUR – Formular und Informationen, um ein individuelles Kunstwerk zu beauftragen.">
 
+=======
+    <meta name="description" content="Kontaktiere ManuFAKTUR Schenk für Auftragsmalerei, Tierportraits oder allgemeine Anfragen per Kontaktformular.">
+>>>>>>> 7812fb628ece03a5f5cc2c9dc837d9975a1ae663
     <title>Kontakt | ManuFAKTUR</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lokales Font Awesome für DSGVO-Konformität -->
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
+<<<<<<< HEAD
     <!-- Removed outdated Font Awesome 4.7 CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
   </head>
+=======
+</head>
+>>>>>>> 7812fb628ece03a5f5cc2c9dc837d9975a1ae663
 
 <body>
 
   <header>
+<<<<<<< HEAD
     <nav role="navigation" aria-label="Hauptmenü">
       <h1 class="headline"><i class="fa fa-paw"></i> ManuFAKTUR</h1>
       <ul>
@@ -34,88 +44,111 @@
                 <a href="Datenschutz.html"><i class="fa fa-shield"></i> Datenschutz</a>
             </div>
           </li>
+=======
+    <nav>
+      <div class="nav-brand">
+        <a href="Home.html" class="headline" aria-label="ManuFAKTUR Startseite">
+          <i class="fa fa-paw" aria-hidden="true"></i> ManuFAKTUR
+        </a>
+      </div>
+      <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="Home.html"><i class="fa fa-home" aria-hidden="true"></i> Start</a></li>
+        <li><a href="UeberMich.html"><i class="fa-solid fa-address-card" aria-hidden="true"></i> Über mich</a></li>
+        <li><a href="Leistungen.html"><i class="fa fa-palette" aria-hidden="true"></i> Leistungen</a></li>
+        <li><a href="Bildergalerie.html"><i class="fa fa-images" aria-hidden="true"></i> Galerie</a></li>
+        <li class="dropdown active">
+          <a href="Kontakt.html" style="cursor: pointer;">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i> Kontakt <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-content">
+              <a href="Kontakt.html"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Kontaktformular</a>
+              <a href="Impressum.html"><i class="fa-solid fa-paragraph" aria-hidden="true"></i> Impressum</a>
+              <a href="Datenschutz.html"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Datenschutz</a>
+          </div>
+        </li>
+>>>>>>> 7812fb628ece03a5f5cc2c9dc837d9975a1ae663
       </ul>
     </nav>
   </header>
 
-
   <main>
+    <h1 class="page-title">Kontakt</h1>
+    <p class="intro-text">Hast Du Fragen zu einem Bild oder möchtest Du eine Auftragsarbeit anfragen? Melde Dich gerne bei mir!</p>
 
-    <h2>Kontakt aufnehmen</h2>
-    <p>Hast du Fragen zu einem Bild oder möchtest du eine individuelles Beratungsgespräch anfragen?</p><br>
-    
-
-    <!-- Digitale Visitenkarte, Vorder- und Rückseite-->
-    <div class="media-row" style="justify-content: center;">
+    <section class="visitenkarte-section reveal">
+        <h2 style="justify-content: center;"><i class="fa-solid fa-address-card" aria-hidden="true"></i> Digitale Visitenkarte</h2>
+        <p class="intro-text">Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.</p>
         
-        <div class="media-item reveal">
-            <div class="business-card front hover-3d">
-                <img src="./Bilder ManuFaktur/Logo1.png" alt="Manufaktur Logo">
+        <div class="media-row">
+            <!-- Interaktive 3D Flipping Card -->
+            <div class="flip-card" tabindex="0" aria-label="Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
+                <div class="flip-card-inner">
+                    <!-- Vorderseite -->
+                    <div class="flip-card-front">
+                        <img src="assets/images/logos/logo.png" alt="Logo von ManuFAKTUR Schenk">
+                    </div>
+                    <!-- Rückseite -->
+                    <div class="flip-card-back">
+                        <h2>Manuela Schenk</h2>
+                        <span class="title">Künstlerin &amp; Inhaberin</span>
+                        
+                        <ul class="contact-info">
+                            <li><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+491632662435">+49 163 2662435</a></li>
+                            <li><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a></li>
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Bonn, Deutschland</li>
+                            <li class="website-link"><i class="fa fa-globe" aria-hidden="true"></i> www.manufaktur-schenk.de</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="media-item reveal">
-            <div class="business-card back hover-3d">
-                <h2>Manuela Schenk</h2>
-                <span class="title">Künstlerin & Inhaberin</span>
-
-                <ul class="contact-info reveal">
-                    <li><i class="fa fa-phone"></i> +49 163 2662435</li>
-                    <li><i class="fa fa-envelope"></i> manufaktur-malerei@web.de</li>
-                    <li class="website-link"><i class="fa fa-globe"></i> www.manufaktur-schenk.de</li>
-                </ul>
-            </div>
+        <div style="text-align: center; margin-top: 30px; margin-bottom: 50px;">
+            <a href="assets/documents/visitenkarte.vcf" class="btn" download>
+                <i class="fa fa-address-card" aria-hidden="true"></i> Kontakt speichern (.vcf)
+            </a>
         </div>
-    </div>
-
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="./Bilder ManuFaktur/Visitenkarte.vcf" class="btn" download>
-            <i class="fa fa-address-card"></i> Visitenkarte speichern
-        </a>
-    </div>
-
-    <div style="margin-bottom: 60px;"></div>
-
-
+    </section>
 
     <div class="contact-container reveal">
 
-      <div class="contact-info reveal">
+      <section class="contact-info reveal" style="margin-bottom: 0;">
         <h3>Manuela Schenk</h3>
-        <p><i class="fa fa-map-marker"></i> 53175 Bonn</p>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i> 53175 Bonn, Deutschland</p>
 
-        <p class="contact-highlight reveal">
-          <i class="fa fa-phone"></i>
-          <a href="tel:+491632662435"> +49 163 2662435</a>
+        <p class="contact-highlight">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <a href="tel:+491632662435">+49 163 2662435</a>
         </p>
         
-        <p class="contact-highlight reveal">
-          <i class="fa fa-envelope"></i>
-          <a href="mailto:manufaktur-malerei@web.de"> manufaktur-malerei@web.de</a>
+        <p class="contact-highlight">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>
         </p>
         <hr>
 
-        <div class="social-links-big reveal">
-          <a href="https://www.instagram.com/hundewelt21/?igsh=eGNwM3M2cHJhbGgy#" target="_blank"><i class="fa fa-instagram"></i> Instagram</a>
-          <a href="#"><i class="fa fa-whatsapp"></i> WhatsApp</a>
-          <a href="#"><i class="fa fa-linkedin"></i> LinkedIn</a>
+        <div class="social-links-big">
+          <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" aria-label="Folge mir auf Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram</a>
+          <a href="#" aria-label="Schreibe mir auf WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+          <a href="#" aria-label="Verbinde dich auf LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
         </div>
-      </div>
-
+      </section>
 
       <form class="contact-form reveal" action="https://formspree.io/f/DEINE_FORMSPREE_ID" method="POST">
-
-          <div class="form-group reveal">
+          <div class="form-group">
             <label for="name">Dein Name</label>
             <input type="text" id="name" name="name" placeholder="Wie dürfen wir dich ansprechen?" required>
           </div>
 
-          <div class="form-group reveal">
+          <div class="form-group">
             <label for="email">Deine E-Mail-Adresse</label>
             <input type="email" id="email" name="email" placeholder="email@beispiel.de" required>
           </div>
 
-          <div class="form-group reveal">
+          <div class="form-group">
             <label for="subject">Betreff</label>
             <select id="subject" name="subject">
               <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
@@ -125,48 +158,57 @@
             </select>
           </div>
 
-          <div class="form-group reveal">
+          <div class="form-group">
             <label for="message">Deine Nachricht:</label>
             <textarea id="message" name="message" rows="5" required placeholder="Deine Nachricht..."></textarea>
           </div>
 
-          <button type="submit" class="submit-btn"><i class="fa fa-paper-plane"></i> Nachricht senden</button>
+          <!-- DSGVO-konforme Datenschutzeinwilligung -->
+          <div class="form-checkbox">
+              <input type="checkbox" id="privacy" name="privacy" required>
+              <label for="privacy">Ich stimme zu, dass meine Angaben aus dem Kontaktformular zur Beantwortung meiner Anfrage erhoben und verarbeitet werden. Hinweis: Sie können Ihre Einwilligung jederzeit für die Zukunft per E-Mail widerrufen. Detaillierte Informationen findest Du in unserer <a href="Datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>
+          </div>
 
+          <button type="submit" class="submit-btn"><i class="fa fa-paper-plane" aria-hidden="true"></i> Nachricht senden</button>
         </form>
+        
       </div>
-    </div>
   </main>
 
-
-<footer>
+  <footer>
     <div class="footer-section">
-      <p>ManuFAKTUR &bull; Individuelle Malerei</p>
-      <p><i class="fa fa-phone"></i> Auf Anfrage Möglich!</p>
+      <h4>ManuFAKTUR</h4>
+      <p>Individuelle Malerei &amp; Kunsthandwerk</p>
+      <p><i class="fa fa-phone" aria-hidden="true"></i> Telefon: Auf Anfrage</p>
     </div>
 
     <div class="footer-section">
-      <p>Manuela Schenk &bull; 53175 Bonn</p>
-
+      <h4>Manuela Schenk</h4>
+      <p>53175 Bonn &bull; Deutschland</p>
       <div class="social-icons">
-         <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank"><i class="fa fa-instagram"></i></a>
-        <i class="fa fa-whatsapp"></i>
-        <i class="fa fa-linkedin"></i>
+        <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" class="instagram" aria-label="Folge uns auf Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a href="#" class="whatsapp" aria-label="Kontaktiere uns auf WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="#" class="linkedin" aria-label="Verbinde uns auf LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
       </div>
-      
     </div> 
 
     <div class="footer-section">
+      <h4>Rechtliches</h4>
       <p>&copy; 2026 ManuFAKTUR Schenk</p>
-      <p style="font-size: 0.9rem; margin-top: 5px;">
-        <a href="Impressum.html" style="color: white; text-decoration: none;"> Impressum</a> | 
-        <a href="Datenschutz.html" style="color: white; text-decoration: none;"> Datenschutz</a>
+      <p style="font-size: 0.9rem;">
+        <a href="Impressum.html">Impressum</a> | 
+        <a href="Datenschutz.html">Datenschutz</a>
       </p>
     </div>
-
   </footer>
 
+<<<<<<< HEAD
   <button onclick="topFunction()" class="back-to-top" title="Nach oben">
     <i class="fa fa-angle-up"></i>
+=======
+  <button onclick="topFunction()" id="myBtn" title="Nach oben scrollen" aria-label="Zum Anfang der Seite scrollen">
+    <i class="fa fa-angle-up" aria-hidden="true"></i>
+>>>>>>> 7812fb628ece03a5f5cc2c9dc837d9975a1ae663
   </button>
     
   <script src="Home.js"></script>
