@@ -13,11 +13,11 @@
  */
 function getNavHTML(activePage) {
     const links = [
-        { href: 'Home.html',        icon: 'fa fa-home',              label: 'Start' },
-        { href: 'UeberMich.html',   icon: 'fa-solid fa-address-card',label: 'Über mich' },
-        { href: 'Leistungen.html',  icon: 'fa fa-palette',           label: 'Leistungen' },
-        { href: 'Bildergalerie.html',icon:'fa fa-images',            label: 'Galerie' },
-        { href: 'Auftrag.html',     icon: 'fa fa-pen-ruler',         label: 'Auftrag', title: 'Auftrag konfigurieren' },
+        { href: 'Home.html', icon: 'fa fa-home', label: 'Start' },
+        { href: 'UeberMich.html', icon: 'fa-solid fa-address-card', label: 'Über mich' },
+        { href: 'Leistungen.html', icon: 'fa fa-palette', label: 'Leistungen' },
+        { href: 'Bildergalerie.html', icon: 'fa fa-images', label: 'Galerie' },
+        { href: 'Auftrag.html', icon: 'fa fa-pen-ruler', label: 'Auftrag', title: 'Auftrag konfigurieren' },
     ];
 
     const navItems = links.map(l => {
@@ -25,14 +25,14 @@ function getNavHTML(activePage) {
         return `<li${isActive ? ' class="active"' : ''}><a href="${l.href}"${l.title ? ` title="${l.title}"` : ''}><i class="${l.icon}" aria-hidden="true"></i> ${l.label}</a></li>`;
     }).join('\n            ');
 
-    const isKontaktActive = ['Kontakt.html','Impressum.html','Datenschutz.html'].includes(activePage);
+    const isKontaktActive = ['Kontakt.html', 'Impressum.html', 'Datenschutz.html'].includes(activePage);
 
     return `
   <header>
     <nav aria-label="Hauptmenü">
       <div class="nav-brand">
         <a href="Home.html" class="headline" aria-label="ManuFAKTUR Startseite" title="Startseite">
-          <i class="fa fa-paw" aria-hidden="true"></i> ManuFAKTUR
+          <img src="assets/images/logos/logo-transparent.png" alt="ManuFAKTUR Schenk Logo" class="nav-logo">
         </a>
       </div>
       <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Schließen
-    let closeLightboxFn = function () {};
+    let closeLightboxFn = function () { };
     if (lightbox) {
         const closeBtn = lightbox.querySelector('.close');
 
@@ -463,7 +463,7 @@ function initContactForm() {
         // Nur abfangen wenn echte Formspree-ID vorhanden
         if (!action || action.includes('DEINE_FORMSPREE_ID')) {
             e.preventDefault();
-            showFormFeedback('error', 'Das Formular ist noch nicht konfiguriert. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
+            showFormFeedback('error', '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Das Formular ist noch nicht konfiguriert. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
             return;
         }
 
@@ -486,10 +486,10 @@ function initContactForm() {
                 form.reset();
                 showFormFeedback('success', '<i class="fa fa-check-circle" aria-hidden="true"></i> Vielen Dank! Deine Nachricht wurde gesendet. Ich melde mich bald bei dir.');
             } else {
-                showFormFeedback('error', 'Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
+                showFormFeedback('error', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
             }
         } catch {
-            showFormFeedback('error', 'Verbindungsfehler. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
+            showFormFeedback('error', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Verbindungsfehler. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
         } finally {
             if (submitBtn) {
                 submitBtn.disabled = false;
