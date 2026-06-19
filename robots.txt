@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.manufaktur-schenk.de/sitemap.xml
+
+# Dokumente und Assets ausschließen
+Disallow: /assets/documents/
