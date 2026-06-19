@@ -64,7 +64,8 @@ function getFooterHTML() {
   <footer>
     <div class="footer-section">
       <h4>ManuFAKTUR</h4>
-      <p>Individuelle Malerei &amp; Kunsthandwerk</p>
+      <i class="fa fa-envelope" aria-hidden="true"></i>
+          <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>
       <p><i class="fa fa-phone" aria-hidden="true"></i> Telefon: Auf Anfrage</p>
     </div>
     <div class="footer-section">
