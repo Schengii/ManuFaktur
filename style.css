@@ -517,13 +517,25 @@ p.intro-text {
 /* Welcome Section */
 .welcome {
     text-align: center;
-    background-color: var(--card-bg);
-    padding: 50px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    background: linear-gradient(145deg, #ffffff 0%, #faf8f5 100%);
+    padding: 50px 40px;
+    border-radius: 20px;
+    box-shadow: 0 12px 35px rgba(26, 45, 82, 0.05);
     border: 1px solid var(--border-color);
     max-width: 900px;
     margin: 0 auto 4rem auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color), var(--secondary-color));
 }
 
 .welcome h2 {
@@ -552,6 +564,103 @@ p.intro-text {
     font-size: 1.15rem;
     line-height: 1.8;
     color: var(--text-color);
+}
+
+/* Trust Badges */
+.hero-trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    background: rgba(122, 90, 31, 0.06);
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 1px solid rgba(122, 90, 31, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.trust-badge:hover {
+    background: rgba(122, 90, 31, 0.12);
+    transform: translateY(-2px);
+}
+
+.trust-badge i {
+    color: var(--primary-color);
+}
+
+/* Search Counter Badge */
+.search-count-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--card-bg);
+    color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    margin-top: 12px;
+}
+
+.search-count-badge i {
+    color: var(--primary-color);
+}
+
+/* Category Badge for Gallery Items */
+.gallery-category-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: white;
+    background: var(--nav-bg);
+    border: 1px solid var(--primary-color);
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    pointer-events: none;
+    transition: var(--transition-smooth);
+}
+
+.gallery-item:hover .gallery-category-tag {
+    background: var(--primary-color);
+    border-color: white;
+}
+
+/* Utility Classes */
+.intro-text--subtle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.margin-bottom-2rem {
+    margin-bottom: 2rem !important;
+}
+
+.calc-price-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: var(--secondary-color);
 }
 
 /* News Boxen */
@@ -1105,7 +1214,6 @@ cite {
     margin-bottom: 40px;
     overflow-x: auto;
     white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
     padding-bottom: 6px;
 }
 
@@ -2055,6 +2163,22 @@ footer {
 /* =========================================
    UTILITY CLASSES (inline-style replacements)
    ========================================= */
+.display-none {
+    display: none !important;
+}
+
+.intro-text-sm {
+    font-size: 0.95rem;
+}
+
+.calc-label-header {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
 .text-decoration-none {
     text-decoration: none;
 }
@@ -2979,6 +3103,7 @@ footer {
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    -webkit-user-select: none;
     user-select: none;
     border: 4px solid var(--card-bg);
 }
@@ -3034,6 +3159,7 @@ footer {
     font-weight: 700;
     color: #fff;
     background: rgba(26, 37, 47, 0.85);
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     z-index: 4;
 }

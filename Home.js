@@ -150,6 +150,19 @@ function filterGallery() {
         noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
     }
 
+    const countBadge = document.getElementById('search-count-badge');
+    if (countBadge) {
+        const catMap = {
+            'alle': 'alle Kategorien',
+            'tiere': 'Tiere',
+            'landschaften': 'Landschaften',
+            'pflanzen': 'Pflanzen',
+            'sonstiges': 'Sonstiges'
+        };
+        const catLabel = catMap[activeCategory] || activeCategory;
+        countBadge.innerHTML = `<i class="fa-solid fa-images" aria-hidden="true"></i> Zeige ${visibleCount} von ${items.length} Kunstwerken (${catLabel})`;
+    }
+
     updateGalleryLinks();
 }
 
