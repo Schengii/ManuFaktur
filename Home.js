@@ -110,23 +110,46 @@ function getFooterHTML() {
 })();
 
 /* =========================================
-   2. GALERIE: FILTER & DATEN
+   2. GALERIE: FILTER, LIVE-SUCHE & DATEN
    ========================================= */
 let visibleGalleryLinks = [];
 let currentIndex = 0;
+let activeCategory = 'alle';
 
 function filterSelection(kategorie) {
+    activeCategory = kategorie || 'alle';
+    filterGallery();
+}
+
+function filterGallery() {
+    const searchInput = document.getElementById('gallery-search');
+    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
     const items = document.getElementsByClassName('gallery-item');
-    const filterKat = (kategorie === 'alle') ? '' : kategorie;
+    let visibleCount = 0;
 
     for (let i = 0; i < items.length; i++) {
-        const dataKat = items[i].getAttribute('data-kategorie');
-        if (!dataKat) {
+        const dataKat = items[i].getAttribute('data-kategorie') || '';
+        const imgEl = items[i].querySelector('img');
+        const captionEl = items[i].querySelector('.gallery-caption');
+        const itemText = (captionEl ? captionEl.innerText : '') + ' ' + (imgEl ? imgEl.alt : '');
+        
+        const matchesCategory = (activeCategory === 'alle' || dataKat.includes(activeCategory));
+        const matchesSearch = (!searchTerm || itemText.toLowerCase().includes(searchTerm));
+
+        if (matchesCategory && matchesSearch) {
             items[i].style.display = 'block';
-            continue;
+            visibleCount++;
+        } else {
+            items[i].style.display = 'none';
         }
-        items[i].style.display = (dataKat.indexOf(filterKat) > -1) ? 'block' : 'none';
     }
+
+    const noResults = document.getElementById('no-gallery-results');
+    if (noResults) {
+        noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
     updateGalleryLinks();
 }
 
@@ -227,7 +250,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const lightboxInquiryBtn = document.getElementById('lightbox-inquiry-btn');
     if (lightboxInquiryBtn) {
         lightboxInquiryBtn.addEventListener('click', function () {
-            if (lightbox) closeLightboxFn();
+            if (visibleGalleryLinks.length > 0 && visibleGalleryLinks[currentIndex]) {
+                const link = visibleGalleryLinks[currentIndex];
+                const img = link.querySelector('img');
+                const altText = img ? (img.alt || img.title || '') : '';
+                const item = link.closest('.gallery-item');
+                const kat = item ? (item.getAttribute('data-kategorie') || '') : '';
+                window.location.href = `Auftrag.html?ref=${encodeURIComponent(altText)}&kat=${encodeURIComponent(kat)}`;
+            } else {
+                window.location.href = 'Auftrag.html';
+            }
         });
     }
 
@@ -514,6 +546,187 @@ function showFormFeedback(type, message) {
 }
 
 /* =========================================
-   7. GALERIE-FILTER START
+   7. NEUE FEATURES INITIALISIERUNG
    ========================================= */
-filterSelection('alle');
+
+// Live-Suche in Galerie
+function initGallerySearch() {
+    const searchInput = document.getElementById('gallery-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            filterGallery();
+        });
+    }
+}
+
+// Lightbox Anfrage-Button
+function initLightboxInquiry() {
+    const inquiryBtn = document.getElementById('lightbox-inquiry-btn');
+    if (inquiryBtn) {
+        inquiryBtn.addEventListener('click', function () {
+            if (visibleGalleryLinks.length > 0 && visibleGalleryLinks[currentIndex]) {
+                const link = visibleGalleryLinks[currentIndex];
+                const img = link.querySelector('img');
+                const altText = img ? img.alt : '';
+                const item = link.closest('.gallery-item');
+                const kat = item ? item.getAttribute('data-kategorie') : '';
+                window.location.href = `Auftrag.html?ref=${encodeURIComponent(altText)}&kat=${encodeURIComponent(kat)}`;
+            }
+        });
+    }
+}
+
+// URL-Parameter für Auftrag.html verarbeiten
+function initUrlParamPrefill() {
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    const kat = params.get('kat');
+
+    if (ref || kat) {
+        const optionCards = document.querySelectorAll('.option-card');
+        if (optionCards.length > 0 && kat) {
+            const katLower = kat.toLowerCase();
+            optionCards.forEach(card => {
+                const val = (card.getAttribute('data-value') || '').toLowerCase();
+                const isMatch = (
+                    (katLower.includes('land') && val.includes('land')) ||
+                    (katLower.includes('tier') && val.includes('tier')) ||
+                    (katLower.includes('pflanz') && (val.includes('still') || val.includes('pflanz'))) ||
+                    (katLower.includes('sonstig') && val.includes('sonstig')) ||
+                    val.includes(katLower) || katLower.includes(val)
+                );
+                if (isMatch) {
+                    card.click();
+                }
+            });
+        }
+        
+        const hintEl = document.getElementById('hint-1');
+        if (hintEl && ref) {
+            hintEl.innerHTML = `<i class="fa fa-circle-info"></i> Ausgewählte Motiv-Referenz: <strong>${ref}</strong>`;
+            hintEl.style.display = 'block';
+            hintEl.style.color = 'var(--primary-color)';
+        }
+    }
+}
+
+// Preiskalkulator Widget
+function initPriceCalculator() {
+    const calcContainer = document.getElementById('calc-widget');
+    if (!calcContainer) return;
+
+    const selectMotiv = document.getElementById('calc-motiv');
+    const selectFormat = document.getElementById('calc-format');
+    const selectTechnik = document.getElementById('calc-technik');
+    const selectAnzahl = document.getElementById('calc-anzahl');
+    const priceDisplay = document.getElementById('calc-price');
+
+    function calculate() {
+        if (!selectFormat || !priceDisplay) return;
+        
+        const basePrice = parseInt(selectFormat.value) || 120;
+        const motivMult = parseFloat(selectMotiv ? selectMotiv.value : 1.0);
+        const technikMult = parseFloat(selectTechnik ? selectTechnik.value : 1.0);
+        const anzahlExtra = parseInt(selectAnzahl ? selectAnzahl.value : 0);
+
+        const total = Math.round((basePrice * motivMult * technikMult) + anzahlExtra);
+        const minPrice = Math.max(70, total - 15);
+        const maxPrice = total + 15;
+
+        priceDisplay.innerText = `ca. ${minPrice} € – ${maxPrice} €`;
+    }
+
+    [selectMotiv, selectFormat, selectTechnik, selectAnzahl].forEach(el => {
+        if (el) el.addEventListener('change', calculate);
+    });
+
+    calculate();
+}
+
+// Vorher / Nachher Vergleichsslider
+function initBeforeAfterSlider() {
+    const slider = document.getElementById('ba-handle-input');
+    const beforeLayer = document.getElementById('ba-before-layer');
+    const lineHandle = document.getElementById('ba-line-handle');
+
+    if (slider && beforeLayer && lineHandle) {
+        slider.addEventListener('input', function () {
+            const val = this.value;
+            beforeLayer.style.width = val + '%';
+            lineHandle.style.left = val + '%';
+        });
+    }
+}
+
+// Testimonials Karussell
+function initTestimonialsCarousel() {
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dots = document.querySelectorAll('.testimonial-dot');
+    const prevBtn = document.getElementById('testi-prev');
+    const nextBtn = document.getElementById('testi-next');
+
+    if (slides.length === 0) return;
+
+    let currentSlide = 0;
+    let timer = null;
+
+    function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+
+        currentSlide = (index + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); });
+
+    dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => { showSlide(idx); resetTimer(); });
+    });
+
+    function startTimer() {
+        timer = setInterval(nextSlide, 6000);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        startTimer();
+    }
+
+    showSlide(0);
+    startTimer();
+}
+
+function runOnDOMReady(fn) {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fn);
+    } else {
+        fn();
+    }
+}
+
+runOnDOMReady(function () {
+    initGallerySearch();
+    initLightboxInquiry();
+    initUrlParamPrefill();
+    initPriceCalculator();
+    initBeforeAfterSlider();
+    initTestimonialsCarousel();
+});
+
+/* =========================================
+   8. GALERIE-FILTER START
+   ========================================= */
+runOnDOMReady(function () {
+    filterSelection('alle');
+});

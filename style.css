@@ -2800,3 +2800,400 @@ footer {
     font-size: 1.2rem;
     flex-shrink: 0;
 }
+
+/* =========================================
+   12. NEUE FEATURES (SEARCH, CALC, SLIDER, TESTIMONIALS)
+   ========================================= */
+
+/* A. Galerie Live-Suchleiste */
+.gallery-search-container {
+    max-width: 550px;
+    margin: 0 auto 1.5rem auto;
+    position: relative;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input-wrapper i.search-icon {
+    position: absolute;
+    left: 18px;
+    color: var(--text-muted);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+#gallery-search {
+    width: 100%;
+    padding: 14px 20px 14px 48px;
+    border-radius: 30px;
+    border: 2px solid var(--border-color);
+    background-color: var(--card-bg);
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--text-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: var(--transition-smooth);
+}
+
+#gallery-search:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 6px 20px rgba(122, 90, 31, 0.18);
+}
+
+.no-results-msg {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    border: 1px dashed var(--border-color);
+    margin: 2rem 0;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.no-results-msg i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* B. Lightbox Anfrage-Button */
+.lightbox-actions {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#lightbox-inquiry-btn {
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: none;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(122, 90, 31, 0.35);
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#lightbox-inquiry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(122, 90, 31, 0.5);
+    background: linear-gradient(135deg, #8a6625, var(--primary-color));
+}
+
+/* C. Interaktiver Vorab-Preiskalkulator Widget */
+.calc-widget-container {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+    margin: 3rem 0;
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.calc-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.calc-group label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calc-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border-color);
+    background-color: var(--bg-color);
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.calc-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #fff;
+}
+
+.calc-result-box {
+    background: linear-gradient(135deg, rgba(14, 31, 69, 0.04), rgba(122, 90, 31, 0.08));
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid rgba(122, 90, 31, 0.2);
+}
+
+.calc-price-amount {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin: 10px 0;
+    font-family: 'Playfair Display', serif;
+}
+
+.calc-price-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* D. Interaktiver Vorher / Nachher Slider */
+.ba-section {
+    margin: 4rem 0;
+    text-align: center;
+}
+
+.ba-slider-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 480px;
+    margin: 2rem auto 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    user-select: none;
+    border: 4px solid var(--card-bg);
+}
+
+.ba-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.ba-layer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.ba-after-layer {
+    z-index: 1;
+}
+
+.ba-before-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+    z-index: 2;
+    border-right: 3px solid #ffffff;
+    box-shadow: 3px 0 15px rgba(0,0,0,0.3);
+}
+
+.ba-before-layer img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--wrapper-w, 800px);
+    height: 100%;
+    object-fit: cover;
+    max-width: none;
+}
+
+.ba-badge {
+    position: absolute;
+    top: 20px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(26, 37, 47, 0.85);
+    backdrop-filter: blur(4px);
+    z-index: 4;
+}
+
+.ba-before-layer .ba-badge {
+    left: 20px;
+}
+
+.ba-after-layer .ba-badge {
+    right: 20px;
+}
+
+.ba-handle-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 5;
+    cursor: ew-resize;
+    margin: 0;
+}
+
+.ba-line-handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: #ffffff;
+    z-index: 3;
+    transform: translateX(-50%);
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.ba-handle-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    font-size: 0.9rem;
+}
+
+/* E. Kundenstimmen Testimonial Carousel */
+.testimonials-section {
+    background: linear-gradient(135deg, rgba(14, 31, 69, 0.03), rgba(122, 90, 31, 0.06));
+    border-radius: 20px;
+    padding: 60px 40px;
+    margin: 4rem 0;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.testimonial-container {
+    position: relative;
+    max-width: 750px;
+    margin: 2rem auto 0 auto;
+    min-height: 200px;
+}
+
+.testimonial-slide {
+    display: none !important;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.testimonial-slide.active {
+    display: block !important;
+    opacity: 1 !important;
+}
+
+.testimonial-stars {
+    color: #f39c12;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.testimonial-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.testimonial-author {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--primary-color);
+}
+
+.testimonial-location {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.testimonial-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.testimonial-arrow {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    transition: var(--transition-smooth);
+}
+
+.testimonial-arrow:hover {
+    background: var(--secondary-color);
+    color: #ffffff;
+}
+
+.testimonial-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.testimonial-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-color);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.testimonial-dot.active {
+    background: var(--primary-color);
+    width: 24px;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .calc-widget-container, .testimonials-section {
+        padding: 30px 20px;
+    }
+    .ba-slider-wrapper {
+        height: 320px;
+    }
+}

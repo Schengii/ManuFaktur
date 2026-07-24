@@ -22,7 +22,28 @@
 
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css?v=2">
+
+  <!-- SEO Schema.org Strukturierte Daten -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ArtGallery",
+    "name": "ManuFAKTUR Schenk",
+    "image": "assets/images/logos/logo.png",
+    "description": "Atelier für individuelle Malerei, Tierportraits und Landschaften von Manuela Schenk in Bonn.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bonn",
+      "postalCode": "53175",
+      "addressCountry": "DE"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Manuela Schenk"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -103,49 +124,41 @@
       </div>
     </section>
 
-    <section class="testimonials reveal">
-      <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> Kundenstimmen</h2>
-      <div class="testimonial-grid">
-
-        <div class="testimonial-card">
-          <div class="stars" aria-label="5 von 5 Sternen">
-            <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-              class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-              class="fa fa-star" aria-hidden="true"></i>
-          </div>
-          <blockquote>
-            „Das Portrait von unserem Balou ist einfach fantastisch geworden. Manuela hat seinen Blick exakt
-            eingefangen. Wir sind überglücklich!"
-          </blockquote>
-          <cite>– Familie Schmidt</cite>
+    <section class="testimonials-section reveal" id="testimonials-carousel">
+      <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> Das sagen meine Kunden</h2>
+      <p class="intro-text" style="font-size: 0.95rem;">Echte Erfahrungen & Rückmeldungen von begeisterten Meistbestellern:</p>
+      
+      <div class="testimonial-container">
+        <div class="testimonial-slide active">
+          <div class="testimonial-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <blockquote class="testimonial-quote">„Das Portrait von unserem Schäferhund Balou ist einfach fantastisch geworden. Manuela hat seinen treuen Blick exakt eingefangen. Wir sind überglücklich!“</blockquote>
+          <div class="testimonial-author">– Dr. Stefanie & Familie Schmidt</div>
+          <div class="testimonial-location">Bonn-Bad Godesberg · Tierportrait in Acryl</div>
         </div>
 
-        <div class="testimonial-card">
-          <div class="stars" aria-label="5 von 5 Sternen">
-            <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-              class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-              class="fa fa-star" aria-hidden="true"></i>
-          </div>
-          <blockquote>
-            „Ich habe ein Landschaftsbild als Geschenk zur Hochzeit bestellt. Die Abstimmung war super unkompliziert und
-            das Brautpaar war zu Tränen gerührt."
-          </blockquote>
-          <cite>– Christiane M.</cite>
+        <div class="testimonial-slide">
+          <div class="testimonial-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <blockquote class="testimonial-quote">„Ich habe ein Landschaftsbild der Rheinaue als Geschenk zur Hochzeit bestellt. Die Abstimmung war super unkompliziert und das Brautpaar war zu Tränen gerührt.“</blockquote>
+          <div class="testimonial-author">– Christiane M.</div>
+          <div class="testimonial-location">Rhein-Sieg-Kreis · Landschaftsgemälde</div>
         </div>
 
-        <div class="testimonial-card">
-          <div class="stars" aria-label="5 von 5 Sternen">
-            <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-              class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
-              class="fa fa-star" aria-hidden="true"></i>
-          </div>
-          <blockquote>
-            „Wunderschöne Arbeit! Man merkt bei jedem Pinselstrich die Liebe zum Detail. Das Bild hat jetzt einen
-            Ehrenplatz in unserem Wohnzimmer."
-          </blockquote>
-          <cite>– Markus S.</cite>
+        <div class="testimonial-slide">
+          <div class="testimonial-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <blockquote class="testimonial-quote">„Wunderschöne Arbeit! Man merkt bei jedem Pinselstrich die Liebe zum Detail. Das Bild hat jetzt einen zentralen Ehrenplatz in unserem Wohnzimmer.“</blockquote>
+          <div class="testimonial-author">– Markus S.</div>
+          <div class="testimonial-location">Köln · Hundeportrait & Stillleben</div>
         </div>
+      </div>
 
+      <div class="testimonial-controls">
+        <button class="testimonial-arrow" id="testi-prev" aria-label="Vorherige Kundenstimme"><i class="fa fa-chevron-left"></i></button>
+        <div class="testimonial-dots">
+          <span class="testimonial-dot active"></span>
+          <span class="testimonial-dot"></span>
+          <span class="testimonial-dot"></span>
+        </div>
+        <button class="testimonial-arrow" id="testi-next" aria-label="Nächste Kundenstimme"><i class="fa fa-chevron-right"></i></button>
       </div>
     </section>
 

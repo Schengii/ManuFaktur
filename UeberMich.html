@@ -22,7 +22,28 @@
 
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css?v=2">
+
+  <!-- SEO Schema.org Strukturierte Daten -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Manuela Schenk",
+    "jobTitle": "Künstlerin & Malerin",
+    "image": "assets/images/manuela-balou.png",
+    "worksFor": {
+      "@type": "LocalBusiness",
+      "name": "ManuFAKTUR Schenk"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bonn",
+      "postalCode": "53175",
+      "addressCountry": "DE"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -130,6 +151,29 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- Interaktiver Vorher / Nachher Vergleichsslider -->
+    <section class="ba-section reveal">
+      <h2><i class="fa fa-sliders" aria-hidden="true"></i> Handgemalte Präzision: Vorher & Nachher</h2>
+      <p class="intro-text" style="font-size: 0.95rem;">Schiebe den Regler, um die Vorlage mit dem fertigen Acrylgemälde zu vergleichen:</p>
+
+      <div class="ba-slider-wrapper" id="ba-slider-wrapper">
+        <div class="ba-layer ba-after-layer">
+          <img src="assets/images/img/thumbs/DSC_6622a.webp" alt="Fertiges handgemaltes Gemälde">
+          <span class="ba-badge">Handgemaltes Gemälde</span>
+        </div>
+        <div class="ba-layer ba-before-layer" id="ba-before-layer">
+          <img src="assets/images/img/thumbs/DSC_6707a.webp" alt="Original Fotovorlage">
+          <span class="ba-badge">Original Fotovorlage</span>
+        </div>
+        <div class="ba-line-handle" id="ba-line-handle">
+          <div class="ba-handle-circle">
+            <i class="fa fa-left-right" aria-hidden="true"></i>
+          </div>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="ba-handle-input" id="ba-handle-input" aria-label="Vorher Nachher Vergleich Schieberegler">
       </div>
     </section>
 

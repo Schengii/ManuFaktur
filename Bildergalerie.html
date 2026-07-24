@@ -19,7 +19,28 @@
 
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style.css?v=2">
+
+  <!-- SEO Schema.org Strukturierte Daten -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Bildergalerie ManuFAKTUR Schenk",
+    "description": "Handgemalte Kunstwerke, Tierportraits, Landschaften und Stillleben von Manuela Schenk aus Bonn.",
+    "author": {
+      "@type": "Person",
+      "name": "Manuela Schenk",
+      "jobTitle": "Künstlerin",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bonn",
+        "postalCode": "53175",
+        "addressCountry": "DE"
+      }
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -30,12 +51,25 @@
     <h1 class="page-title">Bildergalerie</h1>
     <p class="intro-text">Stöbere durch eine Auswahl meiner handgemalten Werke. Klicke auf ein Bild, um es in voller Größe anzusehen.</p>
 
+    <div class="gallery-search-container">
+      <div class="search-input-wrapper">
+        <i class="fa fa-search search-icon" aria-hidden="true"></i>
+        <input type="search" id="gallery-search" placeholder="Galerie durchsuchen (z.B. Landschaften, Rosen, Tier, Acryl)..." aria-label="Bildergalerie durchsuchen">
+      </div>
+    </div>
+
     <div id="filter-container">
       <button class="filter-btn active" onclick="filterSelection('alle')">Alle</button>
       <button class="filter-btn" onclick="filterSelection('tiere')">Tiere</button>
       <button class="filter-btn" onclick="filterSelection('landschaften')">Landschaften</button>
       <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
       <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
+    </div>
+
+    <div id="no-gallery-results" class="no-results-msg" style="display:none;">
+      <i class="fa fa-magnifying-glass"></i>
+      <p>Keine passenden Gemälde gefunden.</p>
+      <small>Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.</small>
     </div>
 
     <div class="gallery-grid reveal">
@@ -438,6 +472,11 @@
     <a class="next" onclick="changeSlide(1)" aria-label="Nächstes Bild">&#10095;</a>
     <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
     <div id="caption"></div>
+    <div class="lightbox-actions">
+      <button id="lightbox-inquiry-btn" class="btn btn-primary cursor-pointer" aria-label="Dieses Motiv als Auftrag anfragen">
+        <i class="fa-solid fa-palette" aria-hidden="true"></i> Dieses Motiv als Auftrag anfragen
+      </button>
+    </div>
   </div>
 
   <!-- Modal für Flyer -->
