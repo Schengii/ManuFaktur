@@ -3196,4 +3196,86 @@ footer {
     .ba-slider-wrapper {
         height: 320px;
     }
-}
+}
+
+/* =========================================
+   13. MICRO-ANIMATIONS & RESPONSIVE POLISH
+   ========================================= */
+
+/* A. Button Shimmer & Hover Effect */
+.btn, .btn-primary, .btn-submit, .btn-next, #lightbox-inquiry-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before, .btn-primary::before, .btn-submit::before, .btn-next::before, #lightbox-inquiry-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.btn:hover::before, .btn-primary:hover::before, .btn-submit:hover::before, .btn-next:hover::before, #lightbox-inquiry-btn:hover::before {
+    left: 140%;
+}
+
+/* B. Card Hover Elevation & Smooth Curve Transitions */
+.service-card, .option-card, .format-card, .news-box, .info-card, .calc-widget-container, .testimonials-section, .flyer-section {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+}
+
+.service-card:hover, .option-card:hover, .format-card:hover, .news-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(122, 90, 31, 0.12);
+}
+
+/* C. Configurator Step Circle Pulsing Accent */
+@keyframes pulseSubtle {
+    0% { box-shadow: 0 0 0 0 rgba(122, 90, 31, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(122, 90, 31, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(122, 90, 31, 0); }
+}
+
+.progress-step.active .step-circle {
+    animation: pulseSubtle 2.5s infinite;
+}
+
+/* D. Fluid Responsive Typography */
+h1.page-title {
+    font-size: clamp(2rem, 4vw + 0.8rem, 3.2rem);
+}
+
+h2 {
+    font-size: clamp(1.5rem, 3vw + 0.5rem, 2.2rem);
+}
+
+/* E. Mobile Optimizations & Touch Target Sizes */
+@media (max-width: 600px) {
+    .filter-btn {
+        padding: 10px 18px;
+        font-size: 0.88rem;
+    }
+    
+    .calc-group select, #gallery-search {
+        font-size: 0.9rem;
+    }
+    
+    .ba-slider-wrapper {
+        height: 280px;
+    }
+    
+    .calc-price-amount {
+        font-size: 1.8rem;
+    }
+    
+    .testimonials-section {
+        padding: 40px 20px;
+    }
+}
+
