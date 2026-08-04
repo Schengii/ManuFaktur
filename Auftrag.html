@@ -17,6 +17,7 @@
   <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
   <link rel="icon" href="assets/images/logos/favicon.svg" type="image/svg+xml">
 
+  <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
   <!-- CSS: alle Konfigurator-Styles jetzt in style.css (Abschnitt 10) -->
@@ -73,6 +74,13 @@
       <section class="config-panel active" id="panel-1" aria-labelledby="step1-title">
         <h2 id="step1-title"><i class="fa fa-paw" aria-hidden="true"></i> Schritt 1: Wähle dein Motiv</h2>
         <span class="config-subtitle">Was soll auf deinem einzigartigen Kunstwerk zu sehen sein?</span>
+
+        <!-- Gemerkte Favoriten aus Galerie -->
+        <div id="config-saved-favorites" class="saved-favorites-container" style="display:none;">
+          <h3><i class="fa-solid fa-heart" style="color:#e74c3c;" aria-hidden="true"></i> Aus deinen gemerkten Favoriten wählen</h3>
+          <p><small>Klicke auf eines deiner gemerkten Lieblingswerke, um es als Motiv-Inspiration zu übernehmen:</small></p>
+          <div class="fav-cards-grid"></div>
+        </div>
 
         <div class="option-grid">
           <div class="option-card" data-value="Tierportrait" data-multiplier="1.0" onclick="selectOption(this, 'motiv')" tabindex="0" role="button" aria-pressed="false">
@@ -217,6 +225,20 @@
               <div class="price-note">* Endpreis nach individueller Absprache. Versand innerhalb DE kostenlos.</div>
             </div>
             <i class="fa fa-tag price-box-icon" aria-hidden="true"></i>
+          </div>
+
+          <!-- Photo Upload Preview Field -->
+          <div class="photo-upload-wrapper">
+            <h4><i class="fa fa-cloud-arrow-up" aria-hidden="true"></i> Eigenes Fotovorlage-Bild auswählen (Optional)</h4>
+            <p><small>Du kannst hier dein Haustier- oder Landschaftsfoto auswählen, um die Vorlage direkt zu prüfen:</small></p>
+            <input type="file" id="client-photo-input" accept="image/*" style="margin-top:10px;">
+            <div id="photo-preview-box" class="photo-preview-box">
+              <img id="photo-preview-img" class="photo-preview-img" alt="Fotovorlage Vorschau">
+              <div>
+                <strong id="photo-file-name">Fotovorlage geladen</strong>
+                <div style="color:var(--primary-color); font-size:0.85rem;"><i class="fa fa-check-circle" aria-hidden="true"></i> Bereit für die Anfrage</div>
+              </div>
+            </div>
           </div>
         </div>
 

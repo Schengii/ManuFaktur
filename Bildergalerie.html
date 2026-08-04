@@ -17,6 +17,7 @@
   <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
   <link rel="icon" href="assets/images/logos/favicon.svg" type="image/svg+xml">
 
+  <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="style.css?v=3">
@@ -55,8 +56,18 @@
       <div class="search-input-wrapper">
         <i class="fa fa-search search-icon" aria-hidden="true"></i>
         <input type="search" id="gallery-search" placeholder="Galerie durchsuchen (z.B. Landschaften, Rosen, Tier, Acryl)..." aria-label="Bildergalerie durchsuchen">
+        <button type="button" id="clear-search-btn" class="clear-search-btn" onclick="clearGallerySearch()" aria-label="Suche zurücksetzen"><i class="fa fa-times" aria-hidden="true"></i></button>
       </div>
-      <span id="search-count-badge" class="search-count-badge" aria-live="polite"><i class="fa-solid fa-images" aria-hidden="true"></i> Zeige 53 Kunstwerken</span>
+      <span id="search-count-badge" class="search-count-badge" aria-live="polite"><i class="fa-solid fa-images" aria-hidden="true"></i> Zeige 53 Kunstwerke</span>
+    </div>
+
+    <div class="gallery-tag-chips" aria-label="Schnellfilter-Tags">
+      <button class="tag-chip" data-tag="Tier"><i class="fa-solid fa-dog" aria-hidden="true"></i> #Tierportrait</button>
+      <button class="tag-chip" data-tag="Landschaft"><i class="fa-solid fa-mountain" aria-hidden="true"></i> #Landschaft</button>
+      <button class="tag-chip" data-tag="Pflanzen"><i class="fa-solid fa-leaf" aria-hidden="true"></i> #Pflanzen</button>
+      <button class="tag-chip" data-tag="Stillleben"><i class="fa-solid fa-apple-whole" aria-hidden="true"></i> #Stillleben</button>
+      <button class="tag-chip" data-tag="Acryl"><i class="fa-solid fa-palette" aria-hidden="true"></i> #Acryl</button>
+      <button class="tag-chip" data-tag="Bonn"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> #Bonn</button>
     </div>
 
     <div id="filter-container">
@@ -65,6 +76,7 @@
       <button class="filter-btn" onclick="filterSelection('landschaften')">Landschaften</button>
       <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
       <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
+      <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart" style="color:#e74c3c;" aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
     </div>
 
     <div id="no-gallery-results" class="no-results-msg" style="display:none;">
@@ -75,28 +87,31 @@
 
     <div class="gallery-grid reveal">
 
-      <div class="gallery-item" data-kategorie="landschaften">
+      <div class="gallery-item" data-kategorie="landschaften" id="DSC_6622a">
+        <span class="gallery-badge badge-unikat">Unikat</span>
         <a href="assets/images/img/lightbox/DSC_6622a.webp" aria-label="Großansicht: Malerische Landschaft #1 (Acryl auf Leinwand)">
           <img src="assets/images/img/thumbs/DSC_6622a.webp" alt="Handgemaltes Landschaftsbild - Acryl auf Leinwand von Manuela Schenk (DSC_6622a)" width="600" height="516" loading="lazy" decoding="async">
           <div class="gallery-caption">Malerische Landschaft #1 (Acryl auf Leinwand)</div>
         </a>
       </div>
 
-      <div class="gallery-item" data-kategorie="pflanzen">
+      <div class="gallery-item" data-kategorie="pflanzen" id="DSC_6624a">
+        <span class="gallery-badge badge-auftrag">Auftragsarbeit</span>
         <a href="assets/images/img/lightbox/DSC_6624a.webp" aria-label="Großansicht: Blumen- & Pflanzenmotiv #2 (Acryl auf Leinwand)">
           <img src="assets/images/img/thumbs/DSC_6624a.webp" alt="Handgemaltes Blumen- und Pflanzenmotiv von Manuela Schenk (DSC_6624a)" width="600" height="504" loading="lazy" decoding="async">
           <div class="gallery-caption">Blumen- & Pflanzenmotiv #2 (Acryl auf Leinwand)</div>
         </a>
       </div>
 
-      <div class="gallery-item" data-kategorie="tiere">
+      <div class="gallery-item" data-kategorie="tiere" id="DSC_6626a">
+        <span class="gallery-badge badge-unikat">Unikat</span>
         <a href="assets/images/img/lightbox/DSC_6626a.webp" aria-label="Großansicht: Tierportrait / Naturstudie #3 (Acryl auf Leinwand)">
           <img src="assets/images/img/thumbs/DSC_6626a.webp" alt="Handgemaltes Tierportrait - Unikat von Manuela Schenk (DSC_6626a)" width="600" height="478" loading="lazy" decoding="async">
           <div class="gallery-caption">Tierportrait / Naturstudie #3 (Acryl auf Leinwand)</div>
         </a>
       </div>
 
-      <div class="gallery-item" data-kategorie="sonstiges">
+      <div class="gallery-item" data-kategorie="sonstiges" id="DSC_6628a">
         <a href="assets/images/img/lightbox/DSC_6628a.webp" aria-label="Großansicht: Stillleben & Kunstobjekt #4 (Acryl auf Leinwand)">
           <img src="assets/images/img/thumbs/DSC_6628a.webp" alt="Handgemaltes Acrylbild - Stillleben von Manuela Schenk (DSC_6628a)" width="600" height="452" loading="lazy" decoding="async">
           <div class="gallery-caption">Stillleben & Kunstobjekt #4 (Acryl auf Leinwand)</div>
@@ -468,6 +483,7 @@
 
   <!-- Lightbox für Galeriebilder -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Bilder-Großansicht">
+    <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 53</div>
     <span class="close" tabindex="0" aria-label="Schließen">&times;</span>
     <a class="prev" onclick="changeSlide(-1)" aria-label="Vorheriges Bild">&#10094;</a>
     <a class="next" onclick="changeSlide(1)" aria-label="Nächstes Bild">&#10095;</a>
@@ -477,6 +493,15 @@
       <button id="lightbox-inquiry-btn" class="btn btn-primary cursor-pointer" aria-label="Dieses Motiv als Auftrag anfragen">
         <i class="fa-solid fa-palette" aria-hidden="true"></i> Dieses Motiv als Auftrag anfragen
       </button>
+      <button id="lightbox-fav-btn" class="btn cursor-pointer" aria-label="Zu Favoriten hinzufügen">
+        <i class="fa-regular fa-heart" aria-hidden="true"></i> Zu Favoriten
+      </button>
+      <button id="lightbox-share-btn" class="btn btn-share cursor-pointer" aria-label="Direktlink kopieren">
+        <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Link kopieren
+      </button>
+      <a id="lightbox-whatsapp-btn" class="btn btn-whatsapp cursor-pointer" target="_blank" rel="noopener" aria-label="Auf WhatsApp fragen">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Auf WhatsApp fragen
+      </a>
     </div>
   </div>
 

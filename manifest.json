@@ -1,0 +1,22 @@
+{
+  "name": "ManuFAKTUR Schenk – Kunst & Auftragsmalerei",
+  "short_name": "ManuFAKTUR",
+  "description": "Handgemalte Kunstwerke, Tierportraits, Landschaften und Stillleben von Manuela Schenk aus Bonn.",
+  "start_url": "Home.html",
+  "display": "standalone",
+  "background_color": "#faf8f5",
+  "theme_color": "#7a5a1f",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/images/logos/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/logos/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

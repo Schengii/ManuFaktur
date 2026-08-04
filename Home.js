@@ -110,11 +110,121 @@ function getFooterHTML() {
 })();
 
 /* =========================================
-   2. GALERIE: FILTER, LIVE-SUCHE & DATEN
+   2. GALERIE: FILTER, LIVE-SUCHE, FAVORITEN & DATEN
    ========================================= */
 let visibleGalleryLinks = [];
 let currentIndex = 0;
 let activeCategory = 'alle';
+
+function getFavorites() {
+    try {
+        const favs = localStorage.getItem('manufaktur_favorites');
+        return favs ? JSON.parse(favs) : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveFavorites(favs) {
+    try {
+        localStorage.setItem('manufaktur_favorites', JSON.stringify(favs));
+    } catch (e) {
+        console.error('Konnte Favoriten nicht speichern', e);
+    }
+}
+
+function toggleFavorite(itemId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    if (!itemId) return;
+
+    let favs = getFavorites();
+    const index = favs.indexOf(itemId);
+    let isAdded = false;
+
+    if (index > -1) {
+        favs.splice(index, 1);
+        isAdded = false;
+        showToast('Kunstwerk aus Favoriten entfernt.');
+    } else {
+        favs.push(itemId);
+        isAdded = true;
+        showToast('❤️ Kunstwerk zu Favoriten hinzugefügt!');
+    }
+
+    saveFavorites(favs);
+    updateFavButtonsUI(itemId, isAdded);
+    updateFavBadgeCount();
+
+    if (activeCategory === 'favoriten') {
+        filterGallery();
+    }
+}
+
+function updateFavButtonsUI(itemId, isAdded) {
+    const itemEl = document.getElementById(itemId);
+    if (itemEl) {
+        const btn = itemEl.querySelector('.fav-toggle-btn');
+        if (btn) {
+            btn.classList.toggle('active', isAdded);
+            btn.setAttribute('aria-label', isAdded ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.className = isAdded ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+            }
+        }
+    }
+
+    // Lightbox fav btn update
+    const lbFavBtn = document.getElementById('lightbox-fav-btn');
+    if (lbFavBtn && visibleGalleryLinks[currentIndex]) {
+        const currentItem = visibleGalleryLinks[currentIndex].closest('.gallery-item');
+        if (currentItem && currentItem.id === itemId) {
+            lbFavBtn.classList.toggle('active', isAdded);
+            lbFavBtn.innerHTML = isAdded ? '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Aus Favoriten entfernen' : '<i class="fa-regular fa-heart"></i> Zu Favoriten hinzufügen';
+        }
+    }
+}
+
+function updateFavBadgeCount() {
+    const favCountEl = document.getElementById('fav-count');
+    if (favCountEl) {
+        const favs = getFavorites();
+        favCountEl.innerText = favs.length;
+    }
+}
+
+function initFavButtonsUI() {
+    const favs = getFavorites();
+    const items = document.getElementsByClassName('gallery-item');
+    for (let i = 0; i < items.length; i++) {
+        const itemId = items[i].id;
+        if (itemId) {
+            const isFav = favs.includes(itemId);
+            let btn = items[i].querySelector('.fav-toggle-btn');
+            if (!btn) {
+                btn = document.createElement('button');
+                btn.className = 'fav-toggle-btn' + (isFav ? ' active' : '');
+                btn.setAttribute('aria-label', isFav ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+                btn.innerHTML = `<i class="${isFav ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}" aria-hidden="true"></i>`;
+                btn.onclick = function(e) { toggleFavorite(itemId, e); };
+                items[i].appendChild(btn);
+            }
+        }
+    }
+    updateFavBadgeCount();
+}
+
+function clearGallerySearch() {
+    const searchInput = document.getElementById('gallery-search');
+    if (searchInput) {
+        searchInput.value = '';
+        filterGallery();
+        searchInput.focus();
+    }
+}
 
 function filterSelection(kategorie) {
     activeCategory = kategorie || 'alle';
@@ -127,27 +237,43 @@ function filterGallery() {
 
     const items = document.getElementsByClassName('gallery-item');
     let visibleCount = 0;
+    const favs = getFavorites();
 
     for (let i = 0; i < items.length; i++) {
-        const dataKat = items[i].getAttribute('data-kategorie') || '';
-        const imgEl = items[i].querySelector('img');
-        const captionEl = items[i].querySelector('.gallery-caption');
+        const item = items[i];
+        const dataKat = item.getAttribute('data-kategorie') || '';
+        const itemId = item.getAttribute('id') || '';
+        const imgEl = item.querySelector('img');
+        const captionEl = item.querySelector('.gallery-caption');
         const itemText = (captionEl ? captionEl.innerText : '') + ' ' + (imgEl ? imgEl.alt : '');
         
-        const matchesCategory = (activeCategory === 'alle' || dataKat.includes(activeCategory));
+        let matchesCategory = false;
+        if (activeCategory === 'alle') {
+            matchesCategory = true;
+        } else if (activeCategory === 'favoriten') {
+            matchesCategory = favs.includes(itemId);
+        } else {
+            matchesCategory = dataKat.includes(activeCategory);
+        }
+
         const matchesSearch = (!searchTerm || itemText.toLowerCase().includes(searchTerm));
 
         if (matchesCategory && matchesSearch) {
-            items[i].style.display = 'block';
+            item.style.display = 'block';
             visibleCount++;
         } else {
-            items[i].style.display = 'none';
+            item.style.display = 'none';
         }
     }
 
     const noResults = document.getElementById('no-gallery-results');
     if (noResults) {
         noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
+    const clearBtn = document.getElementById('clear-search-btn');
+    if (clearBtn) {
+        clearBtn.style.display = searchTerm ? 'block' : 'none';
     }
 
     const countBadge = document.getElementById('search-count-badge');
@@ -157,12 +283,14 @@ function filterGallery() {
             'tiere': 'Tiere',
             'landschaften': 'Landschaften',
             'pflanzen': 'Pflanzen',
-            'sonstiges': 'Sonstiges'
+            'sonstiges': 'Sonstiges',
+            'favoriten': '❤️ Gemerkte Kunstwerke'
         };
         const catLabel = catMap[activeCategory] || activeCategory;
         countBadge.innerHTML = `<i class="fa-solid fa-images" aria-hidden="true"></i> Zeige ${visibleCount} von ${items.length} Kunstwerken (${catLabel})`;
     }
 
+    updateFavBadgeCount();
     updateGalleryLinks();
 }
 
@@ -192,7 +320,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Initiale Liste erstellen
+    // Favoriten UI & Links initialisieren
+    initFavButtonsUI();
     updateGalleryLinks();
 
     // --- B. Hamburger Menü (Mobil) ---
@@ -209,10 +338,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // --- C. Lightbox & Slideshow ---
+    // --- C. Lightbox & Slideshow & Gesten ---
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const captionText = document.getElementById('caption');
+    const lbCounter = document.getElementById('lightbox-counter');
+    const lbWhatsappBtn = document.getElementById('lightbox-whatsapp-btn');
+    const lbShareBtn = document.getElementById('lightbox-share-btn');
+    const lbFavBtn = document.getElementById('lightbox-fav-btn');
     let lastFocusedElement = null;
 
     function openLightbox(index) {
@@ -226,9 +359,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentIndex < 0) currentIndex = visibleGalleryLinks.length - 1;
 
         const link = visibleGalleryLinks[currentIndex];
+        const item = link.closest('.gallery-item');
+        const itemId = item ? item.id : '';
+        const imgInside = link.querySelector('img');
+        const captionDiv = link.querySelector('.gallery-caption');
+        const titleText = captionDiv ? captionDiv.innerText : (imgInside ? imgInside.alt : '');
+
         lightbox.style.display = 'flex';
 
-        // Ladeindikator anzeigen bis Bild geladen ist
+        // Ladeindikator
         if (lightboxImg) {
             lightboxImg.style.opacity = '0';
             lightboxImg.src = link.href;
@@ -238,14 +377,78 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         }
 
-        const imgInside = link.querySelector('img');
-        const captionDiv = link.querySelector('.gallery-caption');
         if (captionText) {
-            captionText.innerHTML = captionDiv ? captionDiv.innerText : (imgInside ? imgInside.alt : '');
+            captionText.innerHTML = titleText;
+        }
+
+        // Bildzähler
+        if (lbCounter) {
+            lbCounter.innerText = `Bild ${currentIndex + 1} von ${visibleGalleryLinks.length}`;
+        }
+
+        // WhatsApp Link
+        if (lbWhatsappBtn) {
+            const waMsg = `Hallo Manuela, ich habe Interesse am Kunstwerk "${titleText}" (${itemId || link.href}) aus deiner Galerie.`;
+            lbWhatsappBtn.href = `https://wa.me/491632662435?text=${encodeURIComponent(waMsg)}`;
+        }
+
+        // Share Link Button
+        if (lbShareBtn) {
+            lbShareBtn.onclick = function() {
+                const shareUrl = window.location.origin + window.location.pathname + (itemId ? '#' + itemId : '');
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(shareUrl).then(() => {
+                        showToast('🔗 Direktlink zum Gemälde kopiert!');
+                    }).catch(() => {
+                        showToast('Link: ' + shareUrl);
+                    });
+                } else {
+                    showToast('Link: ' + shareUrl);
+                }
+            };
+        }
+
+        // Favorit Button in Lightbox
+        if (lbFavBtn && itemId) {
+            const isFav = getFavorites().includes(itemId);
+            lbFavBtn.classList.toggle('active', isFav);
+            lbFavBtn.innerHTML = isFav ? '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Aus Favoriten entfernen' : '<i class="fa-regular fa-heart"></i> Zu Favoriten hinzufügen';
+            lbFavBtn.onclick = function(e) {
+                toggleFavorite(itemId, e);
+            };
+        }
+
+        // Hash in URL setzen ohne Neuladen
+        if (itemId && history.replaceState) {
+            history.replaceState(null, null, '#' + itemId);
         }
 
         const closeBtn = lightbox.querySelector('.close');
         if (closeBtn) closeBtn.focus();
+    }
+
+    // Touch Swipe Steuerung für Mobilgeräte in Lightbox
+    let touchStartX = 0;
+    let touchEndX = 0;
+    if (lightbox) {
+        lightbox.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+    }
+
+    function handleSwipe() {
+        const threshold = 40;
+        if (touchEndX < touchStartX - threshold) {
+            changeSlide(1); // Swipe Links -> Nächstes Bild
+        }
+        if (touchEndX > touchStartX + threshold) {
+            changeSlide(-1); // Swipe Rechts -> Vorheriges Bild
+        }
     }
 
     // Klicks auf Galerie-Bilder abfangen
@@ -289,6 +492,9 @@ document.addEventListener('DOMContentLoaded', function () {
         closeLightboxFn = function () {
             lightbox.style.display = 'none';
             document.body.style.overflow = 'auto';
+            if (history.replaceState) {
+                history.replaceState(null, null, window.location.pathname);
+            }
             if (lastFocusedElement) lastFocusedElement.focus();
         };
 
@@ -311,9 +517,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('keydown', function (e) {
         if (lightbox && lightbox.style.display === 'flex') {
             if (e.key === 'Escape') {
-                lightbox.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                if (lastFocusedElement) lastFocusedElement.focus();
+                closeLightboxFn();
             } else if (e.key === 'ArrowRight') {
                 changeSlide(1);
             } else if (e.key === 'ArrowLeft') {
@@ -321,6 +525,24 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    // Deep-Link Prüfung auf Seitenaufruf (#DSC_6622a)
+    function checkDeepLink() {
+        const hash = window.location.hash ? window.location.hash.substring(1) : '';
+        if (hash) {
+            const targetItem = document.getElementById(hash);
+            if (targetItem) {
+                const link = targetItem.querySelector('a');
+                if (link) {
+                    setTimeout(() => {
+                        const index = visibleGalleryLinks.indexOf(link);
+                        if (index !== -1) openLightbox(index);
+                    }, 300);
+                }
+            }
+        }
+    }
+    checkDeepLink();
 
     // --- D. FAQ Akkordeon ---
     const accHeaders = document.querySelectorAll('.accordion-header');
@@ -378,6 +600,7 @@ document.addEventListener('DOMContentLoaded', function () {
     reveal();
 
 }); // Ende DOMContentLoaded
+
 
 /* =========================================
    4. GLOBALE HILFSFUNKTIONEN
@@ -572,6 +795,106 @@ function initGallerySearch() {
     }
 }
 
+// Tag-Chips in Galerie
+function initTagChips() {
+    const tagChips = document.querySelectorAll('.tag-chip');
+    tagChips.forEach(chip => {
+        chip.addEventListener('click', function () {
+            const tagText = this.getAttribute('data-tag') || this.innerText.replace('#', '').trim();
+            const searchInput = document.getElementById('gallery-search');
+            if (searchInput) {
+                if (searchInput.value.toLowerCase() === tagText.toLowerCase()) {
+                    searchInput.value = '';
+                    this.classList.remove('active');
+                } else {
+                    searchInput.value = tagText;
+                    tagChips.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                }
+                filterGallery();
+            }
+        });
+    });
+}
+
+// Favoriten-Auswahl in Step 1 des Auftrags-Konfigurators
+function initFavoritesInConfigurator() {
+    const favContainer = document.getElementById('config-saved-favorites');
+    if (!favContainer) return;
+
+    const favIds = getFavorites();
+    if (favIds.length === 0) {
+        favContainer.style.display = 'none';
+        return;
+    }
+
+    const grid = favContainer.querySelector('.fav-cards-grid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+    favIds.forEach(id => {
+        const title = id.replace('_', ' ');
+        const card = document.createElement('div');
+        card.className = 'fav-card-item';
+        card.setAttribute('tabindex', '0');
+        card.innerHTML = `<img src="assets/images/img/thumbs/${id}.webp" alt="${title}" loading="lazy"><div style="padding:4px; font-size:0.75rem; text-align:center; font-weight:bold;">${id}</div>`;
+        
+        card.onclick = function() {
+            grid.querySelectorAll('.fav-card-item').forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            const hintEl = document.getElementById('hint-1');
+            if (hintEl) {
+                hintEl.innerHTML = `<i class="fa fa-circle-info"></i> Ausgewählte Lieblingswerk-Referenz: <strong>${id}</strong>`;
+                hintEl.style.display = 'block';
+                hintEl.style.color = 'var(--primary-color)';
+            }
+        };
+        grid.appendChild(card);
+    });
+
+    favContainer.style.display = 'block';
+}
+
+// Client Foto Upload Vorschau in Step 4 des Konfigurators
+function initPhotoUploadPreview() {
+    const fileInput = document.getElementById('client-photo-input');
+    const previewBox = document.getElementById('photo-preview-box');
+    const previewImg = document.getElementById('photo-preview-img');
+    const fileNameText = document.getElementById('photo-file-name');
+
+    if (fileInput && previewBox && previewImg) {
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                if (file.size > 10 * 1024 * 1024) {
+                    showToast('Hinweis: Datei ist größer als 10 MB.');
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    if (fileNameText) fileNameText.innerText = `${file.name} (${Math.round(file.size / 1024)} KB)`;
+                    previewBox.style.display = 'flex';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewBox.style.display = 'none';
+            }
+        });
+    }
+}
+
+// Service Worker Registrieren
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+            console.log('Service Worker registriert:', reg.scope);
+        }).catch(err => {
+            console.warn('Service Worker Info:', err);
+        });
+    }
+}
+
 // Lightbox Anfrage-Button
 function initLightboxInquiry() {
     const inquiryBtn = document.getElementById('lightbox-inquiry-btn');
@@ -730,11 +1053,15 @@ function runOnDOMReady(fn) {
 
 runOnDOMReady(function () {
     initGallerySearch();
+    initTagChips();
+    initFavoritesInConfigurator();
+    initPhotoUploadPreview();
     initLightboxInquiry();
     initUrlParamPrefill();
     initPriceCalculator();
     initBeforeAfterSlider();
     initTestimonialsCarousel();
+    registerServiceWorker();
 });
 
 /* =========================================
