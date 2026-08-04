@@ -339,6 +339,11 @@ function closeRoomVisualizer() {
 
 let currentLbScene = 'detail';
 let customWallScalePercent = 55;
+let wallFramePosX = 0;
+let wallFramePosY = 0;
+let isDraggingWallFrame = false;
+let dragStartX = 0;
+let dragStartY = 0;
 
 const KI_ROOM_IMAGES = {
     'livingroom': 'assets/images/rooms/livingroom.png',
@@ -347,6 +352,72 @@ const KI_ROOM_IMAGES = {
     'beigelounge': 'assets/images/rooms/beigelounge.png',
     'detail': ''
 };
+
+function resetWallFramePosition() {
+    wallFramePosX = 0;
+    wallFramePosY = 0;
+    updateWallFrameTransform();
+    showToast('🎯 Position zentriert');
+}
+
+function updateWallFrameTransform() {
+    const container = document.getElementById('wall-frame-container');
+    if (!container) return;
+
+    if (currentViewAngle === 'side3d') {
+        container.style.transform = `perspective(900px) rotateY(-26deg) rotateX(6deg) scale(0.92) translate(${wallFramePosX}px, ${wallFramePosY}px)`;
+    } else {
+        container.style.transform = `translate(${wallFramePosX}px, ${wallFramePosY}px)`;
+    }
+}
+
+function initWallFrameDragLogic() {
+    const container = document.getElementById('wall-frame-container');
+    if (!container) return;
+
+    const startDrag = (e) => {
+        if (currentLbScene === 'detail' || isZoomActive) return;
+        isDraggingWallFrame = true;
+        container.classList.add('is-dragging');
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        dragStartX = clientX - wallFramePosX;
+        dragStartY = clientY - wallFramePosY;
+    };
+
+    const doDrag = (e) => {
+        if (!isDraggingWallFrame) return;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        let newX = clientX - dragStartX;
+        let newY = clientY - dragStartY;
+
+        const maxOffset = 260;
+        newX = Math.max(-maxOffset, Math.min(maxOffset, newX));
+        newY = Math.max(-180, Math.min(180, newY));
+
+        wallFramePosX = newX;
+        wallFramePosY = newY;
+        updateWallFrameTransform();
+    };
+
+    const stopDrag = () => {
+        if (isDraggingWallFrame) {
+            isDraggingWallFrame = false;
+            container.classList.remove('is-dragging');
+        }
+    };
+
+    container.addEventListener('mousedown', startDrag);
+    container.addEventListener('touchstart', startDrag, { passive: true });
+
+    window.addEventListener('mousemove', doDrag);
+    window.addEventListener('touchmove', doDrag, { passive: true });
+
+    window.addEventListener('mouseup', stopDrag);
+    window.addEventListener('touchend', stopDrag);
+}
 
 function updateLbWallScale(val) {
     customWallScalePercent = parseInt(val) || 55;
@@ -365,6 +436,7 @@ function setLightboxScene(scene, btn) {
     
     const stage = document.getElementById('lightbox-wall-stage');
     const badge = document.getElementById('wall-badge-tag');
+    const dragHint = document.getElementById('wall-drag-hint');
     const sceneBar = document.getElementById('lightbox-scene-bar');
     const scaleControl = document.getElementById('lb-wall-scale-control');
     const sceneBtns = document.querySelectorAll('.lightbox-scene-bar .scene-btn');
@@ -381,6 +453,7 @@ function setLightboxScene(scene, btn) {
     if (currentLbScene === 'detail') {
         if (sceneBar) sceneBar.classList.add('hidden');
         if (scaleControl) scaleControl.classList.add('hidden');
+        if (dragHint) dragHint.classList.add('hidden');
         if (stage) {
             stage.className = 'lightbox-wall-stage scene-detail';
             stage.style.backgroundImage = 'none';
@@ -390,6 +463,7 @@ function setLightboxScene(scene, btn) {
     } else {
         if (sceneBar) sceneBar.classList.remove('hidden');
         if (scaleControl) scaleControl.classList.remove('hidden');
+        if (dragHint) dragHint.classList.remove('hidden');
         if (stage) {
             stage.className = 'lightbox-wall-stage scene-' + currentLbScene;
             const bgUrl = KI_ROOM_IMAGES[currentLbScene] || KI_ROOM_IMAGES['livingroom'];
@@ -1628,6 +1702,7 @@ runOnDOMReady(function () {
     initPriceCalculator();
     initBeforeAfterSlider();
     initTestimonialsCarousel();
+    initWallFrameDragLogic();
     registerServiceWorker();
 });
 

@@ -4189,6 +4189,34 @@ h2 {
     transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.lightbox-wall-stage:not(.scene-detail) .wall-frame-container {
+    cursor: grab;
+    user-select: none;
+}
+
+.wall-frame-container.is-dragging {
+    cursor: grabbing !important;
+    transition: none !important;
+}
+
+.wall-drag-hint {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.85);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
 .wall-frame-container img {
     width: 100%;
     height: 100%;

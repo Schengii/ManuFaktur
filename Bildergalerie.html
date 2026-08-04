@@ -531,13 +531,14 @@
         
         <!-- Wand-Bühne für KI-Hintergrund Vorlage -->
         <div id="lightbox-wall-stage" class="lightbox-wall-stage scene-detail">
-          <div class="wall-frame-container" id="wall-frame-container">
+          <div class="wall-frame-container" id="wall-frame-container" title="Gemälde auf der Wand verschieben (Drag & Drop)">
             <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
             <div id="wall-badge-tag" class="wall-badge-tag hidden"><i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage</div>
+            <div id="wall-drag-hint" class="wall-drag-hint hidden"><i class="fa-solid fa-up-down-left-right" aria-hidden="true"></i> Ziehen zum Verschieben</div>
           </div>
         </div>
         
-        <!-- Bild-Werkzeuge: Drehen, Lupe & Wandskalierung -->
+        <!-- Bild-Werkzeuge: Drehen, Lupe, Wandskalierung & Zentrierung -->
         <div class="lightbox-toolbar">
           <button id="btn-rotate-img" class="lb-tool-btn" onclick="rotateLightboxImage(90)" title="Um 90° drehen" aria-label="Bild um 90 Grad drehen">
             <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 90° Drehen
@@ -546,11 +547,14 @@
             <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Lupe Zoom
           </button>
 
-          <!-- Interaktive Größen-Skalierung für Wand-Hintergrund -->
+          <!-- Interaktive Größen-Skalierung & Zentrieren für Wand-Hintergrund -->
           <div id="lb-wall-scale-control" class="lb-scale-control hidden">
             <label for="lb-scale-slider" class="lb-scale-label"><i class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> Skalierung:</label>
             <input type="range" id="lb-scale-slider" min="25" max="90" value="55" oninput="updateLbWallScale(this.value)" aria-label="Gemäldegröße an der Wand skalieren">
             <span id="lb-scale-val" class="lb-scale-val">55%</span>
+            <button type="button" id="btn-reset-pos" class="lb-tool-btn lb-btn-subtle-sm" onclick="resetWallFramePosition()" title="Gemäldeposition auf der Wand zentrieren">
+              <i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> Zentrieren
+            </button>
           </div>
         </div>
       </div>
