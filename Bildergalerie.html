@@ -507,7 +507,7 @@
       <div class="lightbox-media-col">
         <div class="lightbox-top-bar">
           <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 53</div>
-          <div class="lightbox-scene-bar">
+          <div id="lightbox-scene-bar" class="lightbox-scene-bar hidden">
             <span class="scene-label"><i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage:</span>
             <button type="button" class="scene-btn active" data-scene="livingroom" onclick="setLightboxScene('livingroom', this)" title="Wohnzimmer-Wand">
               <i class="fa-solid fa-couch"></i> Wohnzimmer
@@ -530,14 +530,14 @@
         <div id="lightbox-magnifier" class="lightbox-magnifier-lens"></div>
         
         <!-- Wand-Bühne für KI-Hintergrund Vorlage -->
-        <div id="lightbox-wall-stage" class="lightbox-wall-stage scene-livingroom">
+        <div id="lightbox-wall-stage" class="lightbox-wall-stage scene-detail">
           <div class="wall-frame-container" id="wall-frame-container">
             <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
-            <div id="wall-badge-tag" class="wall-badge-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage</div>
+            <div id="wall-badge-tag" class="wall-badge-tag hidden"><i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage</div>
           </div>
         </div>
         
-        <!-- Bild-Werkzeuge: 90° Drehen & Lupe aktivieren -->
+        <!-- Bild-Werkzeuge: Drehen, Lupe & Wandskalierung -->
         <div class="lightbox-toolbar">
           <button id="btn-rotate-img" class="lb-tool-btn" onclick="rotateLightboxImage(90)" title="Um 90° drehen" aria-label="Bild um 90 Grad drehen">
             <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 90° Drehen
@@ -545,6 +545,13 @@
           <button id="btn-toggle-zoom" class="lb-tool-btn" onclick="toggleLightboxZoom()" title="Lupe aktivieren/deaktivieren" aria-label="Lupe aktivieren">
             <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Lupe Zoom
           </button>
+
+          <!-- Interaktive Größen-Skalierung für Wand-Hintergrund -->
+          <div id="lb-wall-scale-control" class="lb-scale-control hidden">
+            <label for="lb-scale-slider" class="lb-scale-label"><i class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> Skalierung:</label>
+            <input type="range" id="lb-scale-slider" min="25" max="90" value="55" oninput="updateLbWallScale(this.value)" aria-label="Gemäldegröße an der Wand skalieren">
+            <span id="lb-scale-val" class="lb-scale-val">55%</span>
+          </div>
         </div>
       </div>
 

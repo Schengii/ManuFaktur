@@ -4251,6 +4251,42 @@ h2 {
     color: #ffffff;
 }
 
+/* Lightbox Dynamic Wall Scaling Slider */
+.lb-scale-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    padding: 3px 12px;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.lb-scale-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--primary-color);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.lb-scale-control input[type="range"] {
+    accent-color: var(--primary-color);
+    width: 90px;
+    cursor: pointer;
+}
+
+.lb-scale-val {
+    font-size: 0.78rem;
+    font-weight: 700;
+    min-width: 32px;
+    color: #ffffff;
+}
+
 .lightbox-info-col {
     flex: 1;
     padding: 30px 25px;

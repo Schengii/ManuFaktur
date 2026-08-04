@@ -337,7 +337,8 @@ function closeRoomVisualizer() {
     }
 }
 
-let currentLbScene = 'livingroom';
+let currentLbScene = 'detail';
+let customWallScalePercent = 55;
 
 const KI_ROOM_IMAGES = {
     'livingroom': 'assets/images/rooms/livingroom.png',
@@ -347,11 +348,25 @@ const KI_ROOM_IMAGES = {
     'detail': ''
 };
 
+function updateLbWallScale(val) {
+    customWallScalePercent = parseInt(val) || 55;
+    const valEl = document.getElementById('lb-scale-val');
+    if (valEl) valEl.innerText = `${customWallScalePercent}%`;
+
+    const container = document.getElementById('wall-frame-container');
+    if (container && currentLbScene !== 'detail') {
+        container.style.maxWidth = `${customWallScalePercent}%`;
+        container.style.maxHeight = `${customWallScalePercent * 1.15}%`;
+    }
+}
+
 function setLightboxScene(scene, btn) {
-    currentLbScene = scene || 'livingroom';
+    currentLbScene = scene || 'detail';
     
     const stage = document.getElementById('lightbox-wall-stage');
     const badge = document.getElementById('wall-badge-tag');
+    const sceneBar = document.getElementById('lightbox-scene-bar');
+    const scaleControl = document.getElementById('lb-wall-scale-control');
     const sceneBtns = document.querySelectorAll('.lightbox-scene-bar .scene-btn');
     
     sceneBtns.forEach(b => {
@@ -363,13 +378,20 @@ function setLightboxScene(scene, btn) {
         }
     });
 
-    if (stage) {
-        stage.className = 'lightbox-wall-stage scene-' + currentLbScene;
-        if (currentLbScene === 'detail') {
+    if (currentLbScene === 'detail') {
+        if (sceneBar) sceneBar.classList.add('hidden');
+        if (scaleControl) scaleControl.classList.add('hidden');
+        if (stage) {
+            stage.className = 'lightbox-wall-stage scene-detail';
             stage.style.backgroundImage = 'none';
             stage.style.backgroundColor = '#0f172a';
             if (badge) badge.style.display = 'none';
-        } else {
+        }
+    } else {
+        if (sceneBar) sceneBar.classList.remove('hidden');
+        if (scaleControl) scaleControl.classList.remove('hidden');
+        if (stage) {
+            stage.className = 'lightbox-wall-stage scene-' + currentLbScene;
             const bgUrl = KI_ROOM_IMAGES[currentLbScene] || KI_ROOM_IMAGES['livingroom'];
             stage.style.backgroundImage = `url('${bgUrl}')`;
             stage.style.backgroundColor = 'transparent';
@@ -400,28 +422,8 @@ function adjustWallFrameScale() {
         return;
     }
 
-    // Determine scale based on natural aspect ratio of artwork
-    const width = img.naturalWidth || 600;
-    const height = img.naturalHeight || 500;
-    const ratio = width / height;
-
-    if (ratio > 1.8) {
-        // Panorama (wide)
-        container.style.maxWidth = '85%';
-        container.style.maxHeight = '42vh';
-    } else if (ratio > 1.15) {
-        // Querformat (standard landscape)
-        container.style.maxWidth = '75%';
-        container.style.maxHeight = '48vh';
-    } else if (ratio < 0.85) {
-        // Hochformat (portrait)
-        container.style.maxWidth = '46%';
-        container.style.maxHeight = '56vh';
-    } else {
-        // Quadratisch (square)
-        container.style.maxWidth = '56%';
-        container.style.maxHeight = '52vh';
-    }
+    container.style.maxWidth = `${customWallScalePercent}%`;
+    container.style.maxHeight = `${customWallScalePercent * 1.15}%`;
     container.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.55), 0 10px 20px rgba(0, 0, 0, 0.35)';
 }
 
@@ -854,8 +856,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (thumbFront) thumbFront.src = link.href;
         if (thumbSide) thumbSide.src = link.href;
 
-        // Apply active KI wall scene (default to living room)
-        setLightboxScene(currentLbScene || 'livingroom');
+        // Beim ersten Öffnen: Erstmal nur das reine Bild mit der Beschreibung anzeigen
+        setLightboxViewAngle('front');
+        setLightboxScene('detail');
 
         // Image Preloading for smooth slideshow navigation
         preloadNextPrevImages(currentIndex);
@@ -938,11 +941,13 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         }
 
-        // Room Visualizer Button in Lightbox
+        // Room Visualizer Button in Lightbox: Schaltet den KI-Raumhintergrund ein
         const lbRoomBtn = document.getElementById('lightbox-room-btn');
         if (lbRoomBtn) {
             lbRoomBtn.onclick = function() {
-                openRoomVisualizer(link.href, titleText);
+                setLightboxViewAngle('room', document.querySelector('.view-thumb-btn[data-view="room"]'));
+                setLightboxScene('livingroom', document.querySelector('.scene-btn[data-scene="livingroom"]'));
+                showToast('✨ KI-Wandvorlage im Raum aktiviert!');
             };
         }
 

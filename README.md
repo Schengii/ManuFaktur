@@ -1,6 +1,6 @@
 # 🎨 ManuFAKTUR Schenk – Kunst & Auftragsmalerei Webanwendung
 
-Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **ManuFAKTUR Schenk** (Manuela Schenk aus Bonn). Die Webseite präsentiert handgemalte Kunstwerke (Tierportraits, Landschaften, Stillleben) und bietet Besuchern einen interaktiven 4-Schritte-Auftragskonfigurator, eine hochoptimierte Bildergalerie mit Live-Suche, einen Vorab-Preiskalkulator, einen Vorher/Nachher-Vergleichsslider sowie ein Kundenstimmen-Karussell.
+Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **ManuFAKTUR Schenk** (Manuela Schenk aus Bonn). Die Webseite präsentiert handgemalte Kunstwerke (Tierportraits, Landschaften, Stillleben) und bietet Besuchern einen interaktiven 4-Schritte-Auftragskonfigurator, eine hochoptimierte Bildergalerie mit KI-Raumhintergründen, multiperspektivischer "Weitere Ansichten"-Galerie, Live-Suche, Vorab-Preiskalkulator, Vorher/Nachher-Vergleichsslider sowie ein Kundenstimmen-Karussell.
 
 ---
 
@@ -10,7 +10,7 @@ Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **M
 ManuFaktur/
 ├── index.html                  # Einstiegsseite (Weiterleitung zu Home.html)
 ├── Home.html                   # Startseite (Hero, Highlights, News, Testimonials-Carousel)
-├── Bildergalerie.html          # Filterbare Galerie (53 Kunstwerke, Live-Suche, WebP, Lightbox)
+├── Bildergalerie.html          # Filterbare Galerie (53 Kunstwerke, KI-Wandvorlagen, "Weitere Ansichten", WebP, Lightbox)
 ├── Leistungen.html             # Leistungsübersicht, Vorab-Preiskalkulator, Vorher/Nachher-Slider, FAQ
 ├── Auftrag.html                # Interaktiver 4-Schritte-Auftragskonfigurator mit Preisschätzung
 ├── UeberMich.html              # Porträt & Steckbrief der Künstlerin, Zeitstrahl, 3D-Visitenkarte
@@ -18,8 +18,8 @@ ManuFaktur/
 ├── Impressum.html              # Rechtliches Impressum (Anbieterkennzeichnung)
 ├── Datenschutz.html            # DSGVO-Datenschutzerklärung
 │
-├── style.css                   # Zentrales CSS-Designsystem & Stylesheet (Tokens, Layout, Animationen)
-├── Home.js                     # Zentrale JS-Logik (Shared Components, Galerie, Konfigurator, Features)
+├── style.css                   # Zentrales CSS-Designsystem & Stylesheet (Tokens, 3D-Perspektiven, Layout, Animationen)
+├── Home.js                     # Zentrale JS-Logik (Shared Components, Galerie, KI-Raumbühne, Konfigurator, Features)
 │
 ├── robots.txt                  # SEO-Indexierungsanweisungen für Suchmaschinen-Crawler
 ├── sitemap.xml                 # XML-Sitemap mit allen Seitenpfaden
@@ -47,6 +47,14 @@ ManuFaktur/
         ├── logos/              # Atelier-Logos & Favicons (.png, .svg)
         ├── flyer/              # Flyer-Vorschauseiten (.png)
         ├── manuela-balou.png   # Künstlerin & Hund Balou
+        ├── rooms/              # KI-generierte Raumkulissen & Ansichten
+        │   ├── livingroom.png  # KI-Wohnzimmer Wandvorlage
+        │   ├── bedroom.png     # KI-Schlafzimmer Wandvorlage
+        │   ├── darkloft.png    # KI-Dark Loft Betonwand
+        │   ├── beigelounge.png # KI-Beige Lounge
+        │   ├── canvas_back.png # Keilrahmen-Rückseite mit Aufhängung
+        │   └── artist_studio.png # Atelier-Atmosphäre von Manuela Schenk
+        │
         └── img/                # Hochauflösende Gemälde & WebP-Formate
             ├── DSC_6622a.jpg ... DSC_6790a.jpg (Originale Kamerafotos)
             ├── thumbs/          # WebP-Grid-Thumbnails (~40-80 KB, max. 600px)
@@ -55,7 +63,7 @@ ManuFaktur/
 
 ---
 
-## 📄 Detaillierter Inhalt der Dateien
+## 📄 Detaillierter Inhalt der Dateien & Features
 
 ### 1. `Home.html` / `index.html`
 - **Funktion:** Startseite der Webanwendung.
@@ -66,13 +74,22 @@ ManuFaktur/
   - **Kundenstimmen-Karussell:** Interaktiver Testimonial-Slider mit Sternebewertungen und Zitaten zufriedener Auftraggeber.
   - Schema.org JSON-LD Strukturierte Daten (`ArtGallery`).
 
-### 2. `Bildergalerie.html`
-- **Funktion:** Interaktive Kunstgalerie für alle 53 Gemälde.
-- **Inhalt:**
+### 2. `Bildergalerie.html` & Lightbox-System
+- **Funktion:** Interaktive Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Skalierung & Multiperspektiven.
+- **Inhalt & Features:**
+  - **Reine Erstansicht im Lightbox-Modal:** Beim Anklicken eines Galeriebildes öffnet sich die Lightbox ohne störende Wand-Filter in der klaren **Pur-/Frontansicht** mit Bild, Titel, Beschreibung und Produktspezifikationen.
+  - **Aktivierbare KI-Wandvorlagen:** Erst nach Klick auf den Button `In deinem Raum ansehen` werden die KI-Wandfilter-Leiste (*Wohnzimmer, Schlafzimmer, Loft, Beige Lounge*) und die Wandbühne eingeblendet.
+  - **Interaktive Wand-Skalierung (`25% - 90%` Slider):** In der KI-Raumansicht kann der Nutzer die Gemäldegröße über einen Stufen-Regler stufenlos kleiner oder größer skalieren, um das Maßverhältnis zum Hintergrund anzupassen.
+  - **„Weitere Ansichten:“ (Multiperspektivische Galerie):** Interaktive Leiste in der Lightbox für 5 Blickwinkel:
+    1. 🖼️ *Frontansicht (Reines Motiv mit Lupen-Zoom)*
+    2. 🛋️ *Wandansicht (KI-Interior-Mockup im Raum mit Skalierung)*
+    3. 🪵 *Rückseite & Keilrahmen (Echtholz-Keilrahmen mit Aufhängung)*
+    4. 📐 *3D-Seitenansicht & Textur (Gemalter Leinwandrand in 3D-Perspektive)*
+    5. 👩‍🎨 *Atelier & Künstlerin (Studio-Atmosphäre & Zitat)*
+  - **Runde Detail-Lupe auf Galerie-Karten:** Jedes Galeriebild besitzt oben rechts eine runde Detail-Lupe (`.gallery-zoom-circle`), die bei Hover eine Vergrößerung der Malstruktur zeigt.
   - **Live-Suchleiste:** Sofort-Filterung beim Tippen nach Stichwörtern (z. B. *„Rosen“*, *„Rheinaue“*, *„Acryl“*).
-  - **Kategorienschalter:** Filter-Buttons für *Alle*, *Tiere*, *Landschaften*, *Pflanzen* und *Sonstiges*.
-  - **Perfekte Performance:** Nutzt leichtgewichtige WebP-Thumbnails (`loading="lazy"` & `decoding="async"`).
-  - **Lightbox mit Konfigurator-Link:** Großansicht mit Button `🎨 Dieses Motiv als Auftrag anfragen`, welcher das gewählte Kunstwerk direkt in das Auftragsformular übernimmt.
+  - **Kategorien & Format-Chips:** Filter nach Kategorien (*Tiere, Landschaften, Pflanzen, Sonstiges, Gemerkt*) sowie Formaten (*Querformat, Hochformat, Quadratisch, Panorama*).
+  - **Favoriten-Funktion:** Herz-Buttons zum Merken von Lieblingskunstwerken (`localStorage`).
   - Schema.org JSON-LD Strukturierte Daten (`ImageGallery`).
 
 ### 3. `Auftrag.html`
@@ -111,15 +128,16 @@ ManuFaktur/
 
 ### 8. `style.css`
 - **Funktion:** Zentrales Designsystem.
-- **Inhalt:** CSS-Variablen (`:root` Farbtokens: warmes Gold `#7a5a1f`, Marineblau `#1a2d52`, Linnen `#faf8f5`), CSS Grid/Flexbox Layouts, Micro-Animations, Glassmorphism-Effekte, WCAG-Barrierefreiheit & responsive Breakpoints (Desktop, Tablet, Smartphone).
+- **Inhalt:** CSS-Variablen (`:root` Farbtokens: warmes Gold `#7a5a1f`, Marineblau `#1a2d52`, Linnen `#faf8f5`), CSS Grid/Flexbox Layouts, 3D-Perspektivtransformationen (`rotateY`), Micro-Animations, Glassmorphism-Effekte, WCAG-Barrierefreiheit & responsive Breakpoints (Desktop, Tablet, Smartphone).
 
 ### 9. `Home.js`
 - **Funktion:** Zentrale JavaScript-Architektur.
 - **Inhalt:**
   - Automatische Injektion von shared `<header>` Navigation und `<footer>`.
   - Hamburger-Mobilmenü-Steuerung.
-  - Galerie-Filterung & Live-Suchlogik.
-  - Lightbox-Slideshow & Tastatursteuerung.
+  - Galerie-Filterung, Format-Chips, Live-Suche & Sortierung.
+  - Lightbox-Slideshow, Tastatursteuerung & Touch-Swipe-Gesten.
+  - Multiperspektivische KI-Wandbühnen-Steuerung (`setLightboxScene` & `setLightboxViewAngle`).
   - Preiskalkulator-Berechnungsmathematik.
   - Vorher/Nachher-Slider Event-Handling.
   - Testimonial-Carousel Zeit- & Klicksteuerung.
