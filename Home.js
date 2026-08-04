@@ -277,7 +277,17 @@ function sortGallery(sortOption) {
     showToast('Galerie neu sortiert');
 }
 
-/* Room Visualizer Logic */
+/* Room Visualizer Logic with Wall Fitting & Rotation */
+let roomRotationDeg = 0;
+let currentRoomPreset = 'livingroom';
+
+// Vordefinierte Wandpositionen & Blickwinkel je Raumkulisse für realistisches Fitting
+const ROOM_WALL_SPECS = {
+    'livingroom': { scale: 50, posY: -15, posX: 0, rotateY: 0, shadowOffset: '0 20px 40px rgba(0,0,0,0.45)' },
+    'bedroom':    { scale: 44, posY: -28, posX: 0, rotateY: 0, shadowOffset: '0 18px 36px rgba(0,0,0,0.4)' },
+    'gallerywall':{ scale: 58, posY: -5,  posX: 0, rotateY: 0, shadowOffset: '0 25px 45px rgba(0,0,0,0.5)' }
+};
+
 function openRoomVisualizer(imgSrc, imgAlt) {
     const modal = document.getElementById('roomVisualizerModal');
     const artworkImg = document.getElementById('room-artwork');
@@ -292,6 +302,12 @@ function openRoomVisualizer(imgSrc, imgAlt) {
         artworkImg.alt = imgAlt || 'Gemälde';
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+
+        roomRotationDeg = 0;
+        const rotSlider = document.getElementById('room-rotation-slider');
+        if (rotSlider) rotSlider.value = 0;
+
+        autoFitToRoomWall();
     }
 }
 
@@ -303,21 +319,174 @@ function closeRoomVisualizer() {
     }
 }
 
+let currentLbScene = 'livingroom';
+
+const KI_ROOM_IMAGES = {
+    'livingroom': 'assets/images/rooms/livingroom.png',
+    'bedroom': 'assets/images/rooms/bedroom.png',
+    'darkloft': 'assets/images/rooms/darkloft.png',
+    'beigelounge': 'assets/images/rooms/beigelounge.png',
+    'detail': ''
+};
+
+function setLightboxScene(scene, btn) {
+    currentLbScene = scene || 'livingroom';
+    
+    const stage = document.getElementById('lightbox-wall-stage');
+    const badge = document.getElementById('wall-badge-tag');
+    const sceneBtns = document.querySelectorAll('.lightbox-scene-bar .scene-btn');
+    
+    sceneBtns.forEach(b => {
+        const sc = b.getAttribute('data-scene');
+        if (sc === currentLbScene || b === btn) {
+            b.classList.add('active');
+        } else {
+            b.classList.remove('active');
+        }
+    });
+
+    if (stage) {
+        stage.className = 'lightbox-wall-stage scene-' + currentLbScene;
+        if (currentLbScene === 'detail') {
+            stage.style.backgroundImage = 'none';
+            stage.style.backgroundColor = '#0f172a';
+            if (badge) badge.style.display = 'none';
+        } else {
+            const bgUrl = KI_ROOM_IMAGES[currentLbScene] || KI_ROOM_IMAGES['livingroom'];
+            stage.style.backgroundImage = `url('${bgUrl}')`;
+            stage.style.backgroundColor = 'transparent';
+            if (badge) {
+                badge.style.display = 'inline-flex';
+                const labelMap = {
+                    'livingroom': 'Wohnzimmer',
+                    'bedroom': 'Schlafzimmer',
+                    'darkloft': 'Loft / Beton',
+                    'beigelounge': 'Beige Lounge'
+                };
+                badge.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage (${labelMap[currentLbScene] || 'Wohnzimmer'})`;
+            }
+        }
+    }
+    adjustWallFrameScale();
+}
+
+function adjustWallFrameScale() {
+    const img = document.getElementById('lightbox-img');
+    const container = document.getElementById('wall-frame-container');
+    if (!img || !container) return;
+
+    if (currentLbScene === 'detail') {
+        container.style.maxWidth = '100%';
+        container.style.maxHeight = '68vh';
+        container.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+        return;
+    }
+
+    // Determine scale based on natural aspect ratio of artwork
+    const width = img.naturalWidth || 600;
+    const height = img.naturalHeight || 500;
+    const ratio = width / height;
+
+    if (ratio > 1.8) {
+        // Panorama (wide)
+        container.style.maxWidth = '85%';
+        container.style.maxHeight = '42vh';
+    } else if (ratio > 1.15) {
+        // Querformat (standard landscape)
+        container.style.maxWidth = '75%';
+        container.style.maxHeight = '48vh';
+    } else if (ratio < 0.85) {
+        // Hochformat (portrait)
+        container.style.maxWidth = '46%';
+        container.style.maxHeight = '56vh';
+    } else {
+        // Quadratisch (square)
+        container.style.maxWidth = '56%';
+        container.style.maxHeight = '52vh';
+    }
+    container.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.55), 0 10px 20px rgba(0, 0, 0, 0.35)';
+}
+
 function setRoomBackdrop(preset, btn) {
     const stage = document.getElementById('room-stage');
     if (!stage) return;
 
+    currentRoomPreset = preset || 'livingroom';
     document.querySelectorAll('.room-preset-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
 
     const backdrops = {
-        'livingroom': 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80',
-        'bedroom': 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80',
-        'gallerywall': 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=1200&q=80'
+        'livingroom': KI_ROOM_IMAGES.livingroom,
+        'bedroom': KI_ROOM_IMAGES.bedroom,
+        'gallerywall': KI_ROOM_IMAGES.darkloft
     };
 
     if (backdrops[preset]) {
         stage.style.backgroundImage = `url('${backdrops[preset]}')`;
+    }
+
+    autoFitToRoomWall();
+}
+
+function autoFitToRoomWall() {
+    const artworkImg = document.getElementById('room-artwork');
+    const scaleSlider = document.getElementById('room-scale-slider');
+    const rotSlider = document.getElementById('room-rotation-slider');
+
+    const spec = ROOM_WALL_SPECS[currentRoomPreset] || ROOM_WALL_SPECS['livingroom'];
+    let targetScale = spec.scale;
+
+    // Seitenverhältnis-Anpassung: Hochformat / Querformat optimal skalieren
+    if (artworkImg && artworkImg.naturalWidth && artworkImg.naturalHeight) {
+        const ratio = artworkImg.naturalWidth / artworkImg.naturalHeight;
+        if (ratio < 0.8) {
+            // Hochformat: Etwas weniger Höhe damit es nicht über das Sofa ragt
+            targetScale = Math.round(targetScale * 0.88);
+        } else if (ratio > 1.4) {
+            // Querformat / Panorama
+            targetScale = Math.round(targetScale * 1.1);
+        }
+    }
+
+    if (scaleSlider) scaleSlider.value = targetScale;
+    if (rotSlider) rotSlider.value = roomRotationDeg;
+
+    updateRoomArtworkTransform();
+}
+
+function rotateRoomArtwork90() {
+    roomRotationDeg = (roomRotationDeg + 90) % 360;
+    const rotSlider = document.getElementById('room-rotation-slider');
+    if (rotSlider) rotSlider.value = roomRotationDeg > 180 ? roomRotationDeg - 360 : roomRotationDeg;
+    updateRoomArtworkTransform();
+}
+
+function updateRoomArtworkTransform() {
+    const container = document.getElementById('room-artwork-container');
+    const artworkImg = document.getElementById('room-artwork');
+    const scaleSlider = document.getElementById('room-scale-slider');
+    const rotSlider = document.getElementById('room-rotation-slider');
+
+    const scaleValEl = document.getElementById('room-scale-val');
+    const rotateValEl = document.getElementById('room-rotate-val');
+
+    const scale = scaleSlider ? parseInt(scaleSlider.value) : 55;
+    const rotation = rotSlider ? parseInt(rotSlider.value) : 0;
+
+    if (scaleValEl) scaleValEl.innerText = `${scale}%`;
+    if (rotateValEl) rotateValEl.innerText = `${rotation}°`;
+
+    const spec = ROOM_WALL_SPECS[currentRoomPreset] || ROOM_WALL_SPECS['livingroom'];
+
+    if (container) {
+        container.style.transform = `translate(${spec.posX}px, ${spec.posY}px)`;
+    }
+
+    if (artworkImg) {
+        artworkImg.style.maxWidth = `${scale}%`;
+        artworkImg.style.maxHeight = `${scale * 1.2}%`;
+        artworkImg.style.transform = `rotate(${rotation}deg)`;
+        artworkImg.style.boxShadow = spec.shadowOffset;
     }
 }
 
@@ -396,6 +565,23 @@ function initLightboxMagnifier() {
     function hideLens() {
         lens.style.display = 'none';
     }
+}
+
+function filterSelection(category) {
+    activeCategory = category || 'alle';
+    const btnContainer = document.getElementById('filter-container');
+    if (btnContainer) {
+        const btns = btnContainer.getElementsByClassName('filter-btn');
+        for (let i = 0; i < btns.length; i++) {
+            const onclickAttr = btns[i].getAttribute('onclick') || '';
+            if (onclickAttr.includes(`'${activeCategory}'`)) {
+                btns[i].classList.add('active');
+            } else {
+                btns[i].classList.remove('active');
+            }
+        }
+    }
+    filterGallery();
 }
 
 function filterGallery() {
@@ -498,6 +684,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Galerie Live-Suche Event Listener
+    const searchInput = document.getElementById('gallery-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', filterGallery);
+    }
+
     // Favoriten UI & Links initialisieren
     initFavButtonsUI();
     updateGalleryLinks();
@@ -526,6 +718,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const lbFavBtn = document.getElementById('lightbox-fav-btn');
     let lastFocusedElement = null;
 
+    function preloadNextPrevImages(index) {
+        if (!visibleGalleryLinks || visibleGalleryLinks.length <= 1) return;
+        const nextIdx = (index + 1) % visibleGalleryLinks.length;
+        const prevIdx = (index - 1 + visibleGalleryLinks.length) % visibleGalleryLinks.length;
+
+        [nextIdx, prevIdx].forEach(i => {
+            if (visibleGalleryLinks[i]) {
+                const img = new Image();
+                img.src = visibleGalleryLinks[i].href;
+            }
+        });
+    }
+
     function openLightbox(index) {
         if (!lightbox || visibleGalleryLinks.length === 0) return;
 
@@ -536,12 +741,28 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentIndex >= visibleGalleryLinks.length) currentIndex = 0;
         if (currentIndex < 0) currentIndex = visibleGalleryLinks.length - 1;
 
+        lightbox.style.display = 'flex';
+
         const link = visibleGalleryLinks[currentIndex];
         const item = link.closest('.gallery-item');
         const itemId = item ? item.id : '';
         const imgInside = link.querySelector('img');
         const captionDiv = link.querySelector('.gallery-caption');
         const titleText = captionDiv ? captionDiv.innerText : (imgInside ? imgInside.alt : '');
+
+        if (lightboxImg) {
+            lightboxImg.src = link.href;
+            lightboxImg.alt = titleText;
+            lightboxImg.onload = function() {
+                adjustWallFrameScale();
+            };
+        }
+
+        // Apply active KI wall scene (default to living room)
+        setLightboxScene(currentLbScene || 'livingroom');
+
+        // Image Preloading for smooth slideshow navigation
+        preloadNextPrevImages(currentIndex);
 
         // Reset Rotation & Zoom State when opening/changing slide
         currentRotationAngle = 0;

@@ -3872,13 +3872,85 @@ h2 {
     justify-content: center;
 }
 
+.room-artwork-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .room-artwork-frame {
-    max-width: 45%;
-    max-height: 55%;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 5px 12px rgba(0,0,0,0.2);
+    max-width: 55%;
+    max-height: 70%;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.45);
     border: 8px solid #ffffff;
     border-radius: 4px;
-    transition: transform 0.3s ease, width 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Interaktive Wand- & Bildanpassungsleiste */
+.room-controls-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+    background: #faf8f5;
+    border: 1px solid var(--border-color);
+    padding: 12px 20px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+}
+
+.room-control-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.room-control-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.room-control-val {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    min-width: 36px;
+}
+
+.room-controls-panel input[type="range"] {
+    accent-color: var(--primary-color);
+    cursor: pointer;
+    width: 110px;
+}
+
+.room-tool-btn {
+    padding: 6px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.room-tool-btn:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
 }
 
 .room-presets-bar {
@@ -3948,6 +4020,19 @@ h2 {
     box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);
 }
 
+/* Gallery Toolbar Card (Clean & Focused Layout) */
+.gallery-toolbar-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 /* Utility classes for HTML cleanup */
 .hidden { display: none !important; }
 .text-center { text-align: center !important; }
@@ -3990,38 +4075,159 @@ h2 {
 }
 
 .lightbox-media-col {
-    flex: 1.3;
+    flex: 1.4;
     background: #0f172a;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
-    padding: 25px;
+    padding: 15px;
     overflow: hidden;
     user-select: none;
+    min-height: 520px;
 }
 
-.lightbox-media-col img {
-    max-width: 100%;
-    max-height: 68vh;
+/* Lightbox Top Bar with KI Scene Selector */
+.lightbox-top-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    z-index: 25;
+    background: rgba(15, 23, 42, 0.85);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 8px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.lightbox-counter {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.lightbox-scene-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.scene-label {
+    color: var(--primary-color);
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 4px;
+}
+
+.scene-btn {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.scene-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.scene-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 3px 12px rgba(179, 143, 77, 0.4);
+}
+
+/* KI-Wandvorlage Stage Container */
+.lightbox-wall-stage {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 12px;
+    margin: 10px 0;
+    transition: background-image 0.4s ease-in-out;
+}
+
+.lightbox-wall-stage.scene-livingroom {
+    background-image: url('assets/images/rooms/livingroom.png');
+}
+
+.wall-frame-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #1c1917;
+    border-radius: 2px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55), 0 10px 20px rgba(0, 0, 0, 0.35);
+    transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wall-frame-container img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    border-radius: 6px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    border-radius: 1px;
+}
+
+.wall-badge-tag {
+    position: absolute;
+    bottom: -32px;
+    right: 0;
+    background: rgba(15, 23, 42, 0.88);
+    color: #d4af37;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 5;
 }
 
 .lightbox-toolbar {
-    position: absolute;
-    bottom: 15px;
+    position: relative;
+    bottom: auto;
     display: flex;
     gap: 10px;
-    background: rgba(15, 23, 42, 0.75);
+    background: rgba(15, 23, 42, 0.85);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
     padding: 6px 14px;
     border-radius: 20px;
     z-index: 20;
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .lb-tool-btn {
@@ -4174,12 +4380,32 @@ h2 {
     }
 
     .lightbox-media-col {
-        min-height: 280px;
-        padding: 15px;
+        min-height: 380px;
+        padding: 12px;
     }
 
-    .lightbox-media-col img {
-        max-height: 40vh;
+    .lightbox-top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 8px 10px;
+    }
+
+    .lightbox-scene-bar {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 2px;
+    }
+
+    .scene-btn {
+        font-size: 0.72rem;
+        padding: 3px 8px;
+        white-space: nowrap;
+    }
+
+    .lightbox-wall-stage {
+        min-height: 260px;
     }
 
     .lightbox-info-col {
@@ -4187,7 +4413,7 @@ h2 {
     }
 }
 
-.room-stage-default { background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80'); }
+.room-stage-default { background-image: url('assets/images/rooms/livingroom.png'); }
 
 /* Gallery Sort Dropdown Selector */
 .gallery-sort-wrapper {

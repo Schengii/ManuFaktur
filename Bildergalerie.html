@@ -53,49 +53,23 @@
     <h1 class="page-title">Bildergalerie</h1>
     <p class="intro-text">Stöbere durch eine Auswahl meiner handgemalten Werke. Klicke auf ein Bild, um es in voller Größe anzusehen.</p>
 
-    <div class="gallery-search-container">
-      <div class="search-input-wrapper">
-        <i class="fa fa-search search-icon" aria-hidden="true"></i>
-        <input type="search" id="gallery-search" placeholder="Galerie durchsuchen (z.B. Landschaften, Rosen, Tier, Acryl)..." aria-label="Bildergalerie durchsuchen">
-        <button type="button" id="clear-search-btn" class="clear-search-btn" onclick="clearGallerySearch()" aria-label="Suche zurücksetzen"><i class="fa fa-times" aria-hidden="true"></i></button>
+    <div class="gallery-toolbar-card">
+      <div class="gallery-search-container">
+        <div class="search-input-wrapper">
+          <i class="fa fa-search search-icon" aria-hidden="true"></i>
+          <input type="search" id="gallery-search" placeholder="Gemälde suchen (z.B. Landschaften, Hund, Blumen, Acryl)..." aria-label="Bildergalerie durchsuchen">
+          <button type="button" id="clear-search-btn" class="clear-search-btn" onclick="clearGallerySearch()" aria-label="Suche zurücksetzen"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+        <span id="search-count-badge" class="search-count-badge" aria-live="polite"><i class="fa-solid fa-images" aria-hidden="true"></i> Zeige 53 Kunstwerke</span>
       </div>
-      <span id="search-count-badge" class="search-count-badge" aria-live="polite"><i class="fa-solid fa-images" aria-hidden="true"></i> Zeige 53 Kunstwerke</span>
-    </div>
 
-
-
-    <div id="filter-container">
-      <button class="filter-btn active" onclick="filterSelection('alle')">Alle</button>
-      <button class="filter-btn" onclick="filterSelection('tiere')">Tiere</button>
-      <button class="filter-btn" onclick="filterSelection('landschaften')">Landschaften</button>
-      <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
-      <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
-      <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
-    </div>
-
-    <!-- Format Filter Chips -->
-    <div class="format-filter-chips" aria-label="Format-Filter">
-      <button class="format-chip active" onclick="filterFormat('alle')">Alle Formate</button>
-      <button class="format-chip" onclick="filterFormat('hochformat')"><i class="fa-solid fa-arrows-up-down" aria-hidden="true"></i> Hochformat</button>
-      <button class="format-chip" onclick="filterFormat('querformat')"><i class="fa-solid fa-arrows-left-right" aria-hidden="true"></i> Querformat</button>
-      <button class="format-chip" onclick="filterFormat('quadratisch')"><i class="fa-solid fa-square" aria-hidden="true"></i> Quadratisch</button>
-      <button class="format-chip" onclick="filterFormat('panorama')"><i class="fa-solid fa-vector-square" aria-hidden="true"></i> Panorama</button>
-    </div>
-
-    <!-- View Mode Switcher & Sort Bar -->
-    <div class="view-mode-bar" aria-label="Ansicht und Sortierung">
-      <span class="font-size-085rem color-text-muted font-weight-600">Ansicht:</span>
-      <button class="view-mode-btn active" id="btn-view-grid" onclick="switchGalleryViewMode('grid')" title="Gitteransicht" aria-label="Gitteransicht"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i> Gitter</button>
-      <button class="view-mode-btn" id="btn-view-masonry" onclick="switchGalleryViewMode('masonry')" title="Wandgalerie (Masonry)" aria-label="Wandgalerie Masonry"><i class="fa-solid fa-border-all" aria-hidden="true"></i> Wandgalerie</button>
-      <button class="view-mode-btn" id="btn-view-list" onclick="switchGalleryViewMode('list')" title="Listenansicht" aria-label="Listenansicht"><i class="fa-solid fa-list" aria-hidden="true"></i> Liste</button>
-
-      <div class="gallery-sort-wrapper">
-        <label for="gallery-sort-select" class="font-size-085rem color-text-muted font-weight-600"><i class="fa-solid fa-arrow-down-short-wide" aria-hidden="true"></i> Sortierung:</label>
-        <select id="gallery-sort-select" class="gallery-sort-select" onchange="sortGallery(this.value)" aria-label="Gemälde sortieren">
-          <option value="default">Standard</option>
-          <option value="title-asc">Titel (A-Z)</option>
-          <option value="title-desc">Titel (Z-A)</option>
-        </select>
+      <div id="filter-container">
+        <button class="filter-btn active" onclick="filterSelection('alle')">Alle</button>
+        <button class="filter-btn" onclick="filterSelection('tiere')">Tiere</button>
+        <button class="filter-btn" onclick="filterSelection('landschaften')">Landschaften</button>
+        <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
+        <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
+        <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
       </div>
     </div>
 
@@ -508,11 +482,39 @@
     <a class="next" onclick="changeSlide(1)" aria-label="Nächstes Bild">&#10095;</a>
 
     <div class="lightbox-split-container">
-      <!-- Linke Spalte: Bild & Werkzeuge -->
+      <!-- Linke Spalte: Bild, KI-Wandvorlage & Werkzeuge -->
       <div class="lightbox-media-col">
-        <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 53</div>
+        <div class="lightbox-top-bar">
+          <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 53</div>
+          <div class="lightbox-scene-bar">
+            <span class="scene-label"><i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage:</span>
+            <button type="button" class="scene-btn active" data-scene="livingroom" onclick="setLightboxScene('livingroom', this)" title="Wohnzimmer-Wand">
+              <i class="fa-solid fa-couch"></i> Wohnzimmer
+            </button>
+            <button type="button" class="scene-btn" data-scene="bedroom" onclick="setLightboxScene('bedroom', this)" title="Schlafzimmer-Wand">
+              <i class="fa-solid fa-bed"></i> Schlafzimmer
+            </button>
+            <button type="button" class="scene-btn" data-scene="darkloft" onclick="setLightboxScene('darkloft', this)" title="Dark Loft Wand">
+              <i class="fa-solid fa-building-user"></i> Loft / Beton
+            </button>
+            <button type="button" class="scene-btn" data-scene="beigelounge" onclick="setLightboxScene('beigelounge', this)" title="Beige Lounge Wand">
+              <i class="fa-solid fa-sun"></i> Beige Lounge
+            </button>
+            <button type="button" class="scene-btn" data-scene="detail" onclick="setLightboxScene('detail', this)" title="Pur ohne Hintergrund">
+              <i class="fa-solid fa-expand"></i> Pur (Detail)
+            </button>
+          </div>
+        </div>
+
         <div id="lightbox-magnifier" class="lightbox-magnifier-lens"></div>
-        <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
+        
+        <!-- Wand-Bühne für KI-Hintergrund Vorlage -->
+        <div id="lightbox-wall-stage" class="lightbox-wall-stage scene-livingroom">
+          <div class="wall-frame-container" id="wall-frame-container">
+            <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
+            <div id="wall-badge-tag" class="wall-badge-tag"><i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage</div>
+          </div>
+        </div>
         
         <!-- Bild-Werkzeuge: 90° Drehen & Lupe aktivieren -->
         <div class="lightbox-toolbar">
@@ -564,12 +566,6 @@
           <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
             <i class="fa-regular fa-heart" aria-hidden="true"></i> Zu Favoriten
           </button>
-          <button id="lightbox-share-btn" class="btn-subtle" aria-label="Direktlink kopieren">
-            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Link kopieren
-          </button>
-          <a id="lightbox-whatsapp-btn" class="btn-subtle btn-subtle-whatsapp" target="_blank" rel="noopener" aria-label="Auf WhatsApp fragen">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Auf WhatsApp fragen
-          </a>
         </div>
       </div>
     </div>
@@ -589,7 +585,33 @@
       <p class="text-center font-size-09rem color-text-muted">Erlebe das Gemälde maßstabsgetreu in verschiedenen Raumkulissen oder auf deiner eigenen Wand.</p>
       
       <div id="room-stage" class="room-canvas-stage room-stage-default">
-        <img id="room-artwork" class="room-artwork-frame" alt="Gemälde an der Wand">
+        <div id="room-artwork-container" class="room-artwork-container">
+          <img id="room-artwork" class="room-artwork-frame" alt="Gemälde an der Wand">
+        </div>
+      </div>
+
+      <!-- Interaktive Wand- & Bildanpassungsleiste -->
+      <div class="room-controls-panel">
+        <div class="room-control-group">
+          <label for="room-scale-slider" class="room-control-label"><i class="fa-solid fa-expand" aria-hidden="true"></i> Größe:</label>
+          <input type="range" id="room-scale-slider" min="30" max="100" value="55" oninput="updateRoomArtworkTransform()" aria-label="Gemäldegröße anpassen">
+          <span id="room-scale-val" class="room-control-val">55%</span>
+        </div>
+
+        <div class="room-control-group">
+          <label for="room-rotation-slider" class="room-control-label"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Drehung:</label>
+          <input type="range" id="room-rotation-slider" min="-45" max="45" value="0" oninput="updateRoomArtworkTransform()" aria-label="Neigung anpassen">
+          <span id="room-rotate-val" class="room-control-val">0°</span>
+        </div>
+
+        <div class="room-control-group">
+          <button type="button" id="room-rotate-90-btn" class="room-tool-btn" onclick="rotateRoomArtwork90()" title="Um 90° drehen">
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 90° Drehen
+          </button>
+          <button type="button" id="room-fit-btn" class="room-tool-btn" onclick="autoFitToRoomWall()" title="Automatisch an Wand anpassen">
+            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Auto-Wand-Fit
+          </button>
+        </div>
       </div>
 
       <div class="room-presets-bar">
