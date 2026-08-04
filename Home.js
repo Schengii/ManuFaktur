@@ -245,6 +245,7 @@ function clearGallerySearch() {
 }
 
 let activeFormat = 'alle';
+let activeColor = 'alle';
 
 function filterFormat(format) {
     activeFormat = format || 'alle';
@@ -258,6 +259,60 @@ function filterFormat(format) {
         }
     });
     filterGallery();
+}
+
+function filterColor(color) {
+    activeColor = color || 'alle';
+    const chips = document.querySelectorAll('.color-chip');
+    chips.forEach(chip => {
+        const onclickAttr = chip.getAttribute('onclick') || '';
+        if (onclickAttr.includes(`'${activeColor}'`)) {
+            chip.classList.add('active');
+        } else {
+            chip.classList.remove('active');
+        }
+    });
+    filterGallery();
+}
+
+function openCertModal() {
+    const modal = document.getElementById('certModal');
+    const titleVal = document.getElementById('cert-title-val');
+    const idVal = document.getElementById('cert-id-val');
+    if (modal) {
+        if (visibleGalleryLinks[currentIndex]) {
+            const link = visibleGalleryLinks[currentIndex];
+            const item = link.closest('.gallery-item');
+            const itemId = item ? item.id : 'MS-2026';
+            const img = link.querySelector('img');
+            if (titleVal) titleVal.innerText = img ? (img.alt || 'Original Gemälde') : 'Original Gemälde';
+            if (idVal) idVal.innerText = `#${itemId || 'MS-2026'}`;
+        }
+        modal.style.display = 'flex';
+    }
+}
+
+function closeCertModal() {
+    const modal = document.getElementById('certModal');
+    if (modal) modal.style.display = 'none';
+}
+
+function openSizeModal() {
+    const modal = document.getElementById('sizeModal');
+    const img = document.getElementById('size-canvas-img');
+    const tag = document.getElementById('size-dimensions-tag');
+    if (modal) {
+        if (visibleGalleryLinks[currentIndex] && img) {
+            img.src = visibleGalleryLinks[currentIndex].href;
+            if (tag) tag.innerText = 'ca. 120 × 80 cm';
+        }
+        modal.style.display = 'flex';
+    }
+}
+
+function closeSizeModal() {
+    const modal = document.getElementById('sizeModal');
+    if (modal) modal.style.display = 'none';
 }
 
 function switchGalleryViewMode(mode) {
@@ -692,20 +747,46 @@ function toggleLightboxZoom() {
     showToast(isZoomActive ? '🔍 Lupe aktiviert (Fahre über das Bild)' : 'Lupe deaktiviert');
 }
 
-/* Magnifier Zoom Lens for Lightbox (Clicks Only) */
+/* Magnifier Zoom Lens for Lightbox (Mouse & Touch Supported) */
 function initLightboxMagnifier() {
     const lightboxImg = document.getElementById('lightbox-img');
     const lens = document.getElementById('lightbox-magnifier');
-    if (!lightboxImg || !lens) return;
+    const mediaCol = document.querySelector('.lightbox-media-col');
+    if (!lightboxImg || !lens || !mediaCol) return;
 
-    lightboxImg.removeEventListener('mousemove', moveLens);
-    lightboxImg.removeEventListener('mouseleave', hideLens);
+    mediaCol.removeEventListener('mousemove', handleMove);
+    mediaCol.removeEventListener('mouseleave', hideLens);
+    mediaCol.removeEventListener('touchmove', handleTouchMove);
+    mediaCol.removeEventListener('touchend', hideLens);
 
-    lightboxImg.addEventListener('mousemove', moveLens);
-    lightboxImg.addEventListener('mouseleave', hideLens);
+    mediaCol.addEventListener('mousemove', handleMove);
+    mediaCol.addEventListener('mouseleave', hideLens);
+    mediaCol.addEventListener('touchmove', handleTouchMove, { passive: true });
+    mediaCol.addEventListener('touchend', hideLens);
 
-    function moveLens(e) {
+    function handleTouchMove(e) {
+        if (e.touches && e.touches[0]) {
+            handleMove(e.touches[0]);
+        }
+    }
+
+    function handleMove(e) {
         if (!isZoomActive) {
+            lens.style.display = 'none';
+            return;
+        }
+
+        const imgBounds = lightboxImg.getBoundingClientRect();
+        const colBounds = mediaCol.getBoundingClientRect();
+
+        const clientX = e.clientX;
+        const clientY = e.clientY;
+
+        const relX = clientX - imgBounds.left;
+        const relY = clientY - imgBounds.top;
+
+        // Display lens only when cursor/finger is over artwork bounds
+        if (relX < 0 || relX > imgBounds.width || relY < 0 || relY > imgBounds.height) {
             lens.style.display = 'none';
             return;
         }
@@ -713,19 +794,21 @@ function initLightboxMagnifier() {
         lens.style.display = 'block';
         lens.style.backgroundImage = `url('${lightboxImg.src}')`;
 
-        const bounds = lightboxImg.getBoundingClientRect();
-        const x = e.clientX - bounds.left;
-        const y = e.clientY - bounds.top;
+        const zoomRatio = 3.0;
+        lens.style.backgroundSize = `${imgBounds.width * zoomRatio}px ${imgBounds.height * zoomRatio}px`;
 
-        const zoomRatio = 2.5;
-        lens.style.backgroundSize = `${bounds.width * zoomRatio}px ${bounds.height * zoomRatio}px`;
+        const lensW = (lens.offsetWidth || 150) / 2;
+        const lensH = (lens.offsetHeight || 150) / 2;
 
-        const lensW = lens.offsetWidth / 2;
-        const lensH = lens.offsetHeight / 2;
+        const colX = clientX - colBounds.left;
+        const colY = clientY - colBounds.top;
 
-        lens.style.left = `${e.clientX - lensW}px`;
-        lens.style.top = `${e.clientY - lensH}px`;
-        lens.style.backgroundPosition = `-${x * zoomRatio - lensW}px -${y * zoomRatio - lensH}px`;
+        lens.style.left = `${colX - lensW}px`;
+        lens.style.top = `${colY - lensH}px`;
+
+        const bgPosX = -(relX * zoomRatio - lensW);
+        const bgPosY = -(relY * zoomRatio - lensH);
+        lens.style.backgroundPosition = `${bgPosX}px ${bgPosY}px`;
     }
 
     function hideLens() {
@@ -785,10 +868,23 @@ function filterGallery() {
             matchesCategory = dataKat.includes(activeCategory);
         }
 
+        let matchesColor = true;
+        if (activeColor !== 'alle') {
+            const colorKeywords = {
+                'warm': ['rot', 'orange', 'warm', 'feuer', 'sonne', 'herbst', 'herz', 'rosen'],
+                'gold': ['gold', 'gelb', 'sonne', 'glanz'],
+                'kuehl': ['blau', 'türkis', 'wasser', 'meer', 'schiff', 'fluss', 'see'],
+                'gruen': ['grün', 'wald', 'natur', 'wiese', 'blatt', 'baum', 'pflanzen'],
+                'neutral': ['grau', 'weiß', 'schwarz', 'braun', 'sand', 'stein', 'stillleben']
+            };
+            const kwList = colorKeywords[activeColor] || [];
+            matchesColor = kwList.some(kw => itemText.toLowerCase().includes(kw));
+        }
+
         const matchesSearch = (!searchTerm || itemText.toLowerCase().includes(searchTerm));
         const matchesFormat = (activeFormat === 'alle' || detectedFormat === activeFormat);
 
-        if (matchesCategory && matchesSearch && matchesFormat) {
+        if (matchesCategory && matchesSearch && matchesFormat && matchesColor) {
             item.style.display = 'block';
             visibleCount++;
         } else {

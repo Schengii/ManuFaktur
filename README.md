@@ -75,23 +75,18 @@ ManuFaktur/
   - Schema.org JSON-LD Strukturierte Daten (`ArtGallery`).
 
 ### 2. `Bildergalerie.html` & Lightbox-System
-- **Funktion:** Interaktive Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung & Multiperspektiven.
+- **Funktion:** Interaktive High-End Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung, Echtheitszertifikat & Multiperspektiven.
 - **Inhalt & Features:**
-  - **Reine Erstansicht im Lightbox-Modal:** Beim Anklicken eines Galeriebildes öffnet sich die Lightbox ohne störende Wand-Filter in der klaren **Pur-/Frontansicht** mit Bild, Titel, Beschreibung und Produktspezifikationen.
+  - **Perfektionierte HD-Lupenfunktion (`🔍 Lupe Zoom`):** Mathematisch präzise Maus- & Touch-Lupenlinse mit relativer Container-Offset-Berechnung für flüssigen Zoom ohne Ruckeln.
+  - **Reine Erstansicht im Lightbox-Modal:** Beim Anklicken eines Galeriebildes öffnet sich die Lightbox in der klaren **Pur-/Frontansicht** mit Bild, Titel, Beschreibung und Produktspezifikationen.
   - **Aktivierbare KI-Wandvorlagen:** Erst nach Klick auf den Button `In deinem Raum ansehen` werden die KI-Wandfilter-Leiste (*Wohnzimmer, Schlafzimmer, Loft, Beige Lounge*) und die Wandbühne eingeblendet.
-  - **Interaktive Drag & Drop Positionierung:** Im KI-Raummodus kann der Nutzer das Gemälde mit der Maus oder dem Finger frei auf der Raumwand nach oben, unten, links oder rechts verschieben.
-  - **Zentrieren-Button (`🎯 Zentrieren`):** Setzt die Position des Gemäldes auf der Wand mit einem Klick sofort wieder in die Mitte zurück.
-  - **Interaktive Wand-Skalierung (`25% - 90%` Slider):** In der KI-Raumansicht kann der Nutzer die Gemäldegröße über einen Stufen-Regler stufenlos kleiner oder größer skalieren, um das Maßverhältnis zum Hintergrund anzupassen.
-  - **„Weitere Ansichten:“ (Multiperspektivische Galerie):** Interaktive Leiste in der Lightbox für 5 Blickwinkel:
-    1. 🖼️ *Frontansicht (Reines Motiv mit Lupen-Zoom)*
-    2. 🛋️ *Wandansicht (KI-Interior-Mockup im Raum mit Skalierung)*
-    3. 🪵 *Rückseite & Keilrahmen (Echtholz-Keilrahmen mit Aufhängung)*
-    4. 📐 *3D-Seitenansicht & Textur (Gemalter Leinwandrand in 3D-Perspektive)*
-    5. 👩‍🎨 *Atelier & Künstlerin (Studio-Atmosphäre & Zitat)*
-  - **Runde Detail-Lupe auf Galerie-Karten:** Jedes Galeriebild besitzt oben rechts eine runde Detail-Lupe (`.gallery-zoom-circle`), die bei Hover eine Vergrößerung der Malstruktur zeigt.
-  - **Live-Suchleiste:** Sofort-Filterung beim Tippen nach Stichwörtern (z. B. *„Rosen“*, *„Rheinaue“*, *„Acryl“*).
-  - **Kategorien & Format-Chips:** Filter nach Kategorien (*Tiere, Landschaften, Pflanzen, Sonstiges, Gemerkt*) sowie Formaten (*Querformat, Hochformat, Quadratisch, Panorama*).
-  - **Favoriten-Funktion:** Herz-Buttons zum Merken von Lieblingskunstwerken (`localStorage`).
+  - **Interaktive Drag & Drop Positionierung:** Im KI-Raummodus kann der Nutzer das Gemälde frei auf der Raumwand nach oben, unten, links oder rechts verschieben (`🎯 Zentrieren` setzt die Position zurück).
+  - **Interaktive Wand-Skalierung (`25% - 90%` Slider):** Stufenloses Skalieren der Bildgröße für das perfekte Maßverhältnis zum Raumhintergrund.
+  - **Größen- & Maßstabsvergleich (`📐 Größenvergleich`):** Interaktives Modal, das das Kunstwerk im direkten Größenvergleich neben einer 1,75 m großen Person und Möbeln zeigt.
+  - **Echtheitszertifikat (`🏆 Echtheitszertifikat`):** Zertifikat-Modal mit Siegel vom Atelier Bonn, Unikat-Garantie, handsignierter Signatur von Manuela Schenk und Seriennummer.
+  - **„Weitere Ansichten:“ (Multiperspektivische Galerie):** 5 interaktive Blickwinkel (*Frontansicht, Wandansicht, Keilrahmen-Rückseite, 3D-Seitenansicht, Atelier*).
+  - **Farbton-Filter & Format-Chips:** Sofortige Filterung nach Farbschemata (*Rot/Warm, Gold/Gelb, Blau/Kühl, Grün/Natur, Neutral*) und Formaten.
+  - **Runde Detail-Lupe auf Galerie-Karten:** Vergrößerungs-Lupe oben rechts auf jeder Galerie-Karte (`.gallery-zoom-circle`).
   - Schema.org JSON-LD Strukturierte Daten (`ImageGallery`).
 
 ### 3. `Auftrag.html`

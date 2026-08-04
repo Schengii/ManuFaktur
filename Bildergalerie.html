@@ -91,6 +91,16 @@
           <button type="button" class="format-chip" onclick="filterFormat('quadratisch')">Quadratisch</button>
           <button type="button" class="format-chip" onclick="filterFormat('panorama')">Panorama</button>
         </div>
+
+        <div class="filter-group-color">
+          <span class="format-label"><i class="fa-solid fa-palette" aria-hidden="true"></i> Farbton:</span>
+          <button type="button" class="color-chip active" onclick="filterColor('alle')" title="Alle Farbtöne"><span class="color-dot color-dot-all"></span> Alle</button>
+          <button type="button" class="color-chip" onclick="filterColor('warm')" title="Warme Farbtöne (Rot, Orange)"><span class="color-dot color-dot-warm"></span> Rot / Warm</button>
+          <button type="button" class="color-chip" onclick="filterColor('gold')" title="Gold & Gelb"><span class="color-dot color-dot-gold"></span> Gold & Gelb</button>
+          <button type="button" class="color-chip" onclick="filterColor('kuehl')" title="Kühle Farbtöne (Blau, Türkis)"><span class="color-dot color-dot-blue"></span> Blau / Kühl</button>
+          <button type="button" class="color-chip" onclick="filterColor('gruen')" title="Grün & Natur"><span class="color-dot color-dot-green"></span> Grün / Natur</button>
+          <button type="button" class="color-chip" onclick="filterColor('neutral')" title="Erdtöne & Neutral"><span class="color-dot color-dot-neutral"></span> Neutral</button>
+        </div>
       </div>
     </div>
 
@@ -640,10 +650,75 @@
           <button id="lightbox-room-btn" class="btn-subtle" aria-label="In deinem Raum ansehen">
             <i class="fa-solid fa-house-chimney" aria-hidden="true"></i> In deinem Raum ansehen
           </button>
+          <button type="button" onclick="openSizeModal()" class="btn-subtle" aria-label="Größen- & Maßstabsvergleich anzeigen">
+            <i class="fa-solid fa-ruler-combined" aria-hidden="true"></i> Größenvergleich (Maßstab)
+          </button>
+          <button type="button" onclick="openCertModal()" class="btn-subtle" aria-label="Echtheitszertifikat anzeigen">
+            <i class="fa-solid fa-award" aria-hidden="true"></i> Echtheitszertifikat
+          </button>
           <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
             <i class="fa-regular fa-heart" aria-hidden="true"></i> Zu Favoriten
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificate of Authenticity Modal -->
+  <div id="certModal" class="modal" role="dialog" aria-modal="true" aria-label="Echtheitszertifikat">
+    <div class="cert-modal-card">
+      <span class="close" tabindex="0" onclick="closeCertModal()" aria-label="Schließen">&times;</span>
+      <div class="cert-header text-center">
+        <img src="assets/images/rooms/cert_seal.png" alt="Gold Siegel Atelier Bonn" class="cert-seal-img">
+        <h2 class="color-secondary margin-bottom-5">Echtheitszertifikat</h2>
+        <p class="font-size-088rem color-text-muted">Handgemaltes Original-Kunstwerk &bull; Atelier Bonn</p>
+      </div>
+      <div class="cert-body">
+        <p class="cert-statement">
+          Hiermit wird garantiert, dass dieses Kunstwerk ein von <strong>Manuela Schenk</strong> handgemaltes Unikat aus dem Atelier Bonn ist.
+        </p>
+        <div class="cert-details-grid">
+          <div class="cert-detail-item"><strong>Titel:</strong> <span id="cert-title-val">Original Gemälde</span></div>
+          <div class="cert-detail-item"><strong>Künstlerin:</strong> Manuela Schenk</div>
+          <div class="cert-detail-item"><strong>Technik:</strong> Acryl / Öl auf Leinwand</div>
+          <div class="cert-detail-item"><strong>Archiv-ID:</strong> <span id="cert-id-val">#MS-2026-ART</span></div>
+          <div class="cert-detail-item"><strong>Herkunft:</strong> Atelier Bonn (Deutschland)</div>
+          <div class="cert-detail-item"><strong>Garantie:</strong> 100% Lichtechte Pigmente</div>
+        </div>
+        <div class="cert-signature-block text-center margin-top-20">
+          <div class="cert-signature-text">Manuela Schenk</div>
+          <div class="font-size-075rem color-text-muted">Handsigniertes Original &bull; Zertifikat liegt jedem Kauf bei</div>
+        </div>
+      </div>
+      <div class="text-center margin-top-20">
+        <button class="btn btn-primary" onclick="closeCertModal()"><i class="fa fa-check" aria-hidden="true"></i> Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual Size Comparison Modal -->
+  <div id="sizeModal" class="modal" role="dialog" aria-modal="true" aria-label="Größen- & Maßstabsvergleich">
+    <div class="size-modal-card">
+      <span class="close" tabindex="0" onclick="closeSizeModal()" aria-label="Schließen">&times;</span>
+      <h2 class="text-center color-secondary margin-bottom-5"><i class="fa-solid fa-ruler-combined"></i> Größenvergleich im Maßstab</h2>
+      <p class="text-center font-size-088rem color-text-muted">Visueller Vergleich des Gemäldes neben einer Person (1,75 m) & Designer-Sofa.</p>
+
+      <div class="size-stage-container">
+        <!-- Silhouette Person (1.75m) -->
+        <div class="size-silhouette-person" title="Person (1,75 m)">
+          <i class="fa-solid fa-person" aria-hidden="true"></i>
+          <span class="size-label-tag">1,75 m</span>
+        </div>
+
+        <!-- Canvas Frame Silhouette -->
+        <div id="size-canvas-preview-wrapper" class="size-canvas-wrapper">
+          <img id="size-canvas-img" src="" alt="Gemälde Maßstab">
+          <span id="size-dimensions-tag" class="size-dimensions-tag">120 × 80 cm</span>
+        </div>
+      </div>
+
+      <div class="text-center margin-top-20">
+        <button class="btn btn-primary" onclick="closeSizeModal()"><i class="fa fa-check" aria-hidden="true"></i> Schließen</button>
       </div>
     </div>
   </div>
