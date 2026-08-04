@@ -4509,37 +4509,9 @@ h2 {
     color: var(--primary-color);
 }
 
-/* Circular Detail Zoom Badge on Gallery Cards (Matching Reference Image 1) */
+/* Circular Detail Zoom Badge - Disabled for clean card layout */
 .gallery-zoom-circle {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    border: 3px solid #ffffff;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
-    overflow: hidden;
-    z-index: 10;
-    pointer-events: none;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-    background: #0f172a;
-}
-
-.gallery-zoom-circle img {
-    width: 260% !important;
-    height: 260% !important;
-    object-fit: cover !important;
-    object-position: center !important;
-    max-width: none !important;
-    max-height: none !important;
-    transition: transform 0.3s ease !important;
-}
-
-.gallery-item:hover .gallery-zoom-circle {
-    transform: scale(1.2);
-    box-shadow: 0 10px 25px rgba(179, 143, 77, 0.5);
-    border-color: var(--primary-color);
+    display: none !important;
 }
 
 /* Format Chips & Filter Rows */

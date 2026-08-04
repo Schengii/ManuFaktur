@@ -197,42 +197,7 @@ function updateFavBadgeCount() {
 }
 
 function initGalleryZoomCircles() {
-    const items = document.getElementsByClassName('gallery-item');
-    for (let i = 0; i < items.length; i++) {
-        const link = items[i].querySelector('a');
-        const img = link ? link.querySelector('img') : null;
-        if (link && img && !link.querySelector('.gallery-zoom-circle')) {
-            const zoomCircle = document.createElement('div');
-            zoomCircle.className = 'gallery-zoom-circle';
-            const detailImg = document.createElement('img');
-            detailImg.src = img.src;
-            detailImg.alt = 'Detailansicht Zoom';
-            zoomCircle.appendChild(detailImg);
-            link.appendChild(zoomCircle);
-        }
-    }
-}
-
-function initFavButtonsUI() {
-    const favs = getFavorites();
-    const items = document.getElementsByClassName('gallery-item');
-    for (let i = 0; i < items.length; i++) {
-        const itemId = items[i].id;
-        if (itemId) {
-            const isFav = favs.includes(itemId);
-            let btn = items[i].querySelector('.fav-toggle-btn');
-            if (!btn) {
-                btn = document.createElement('button');
-                btn.className = 'fav-toggle-btn' + (isFav ? ' active' : '');
-                btn.setAttribute('aria-label', isFav ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
-                btn.innerHTML = `<i class="${isFav ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}" aria-hidden="true"></i>`;
-                btn.onclick = function(e) { toggleFavorite(itemId, e); };
-                items[i].appendChild(btn);
-            }
-        }
-    }
     updateFavBadgeCount();
-    initGalleryZoomCircles();
 }
 
 function clearGallerySearch() {

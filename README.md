@@ -85,8 +85,7 @@ ManuFaktur/
   - **Größen- & Maßstabsvergleich (`📐 Größenvergleich`):** Interaktives Modal, das das Kunstwerk im direkten Größenvergleich neben einer 1,75 m großen Person und Möbeln zeigt.
   - **Echtheitszertifikat (`🏆 Echtheitszertifikat`):** Zertifikat-Modal mit Siegel vom Atelier Bonn, Unikat-Garantie, handsignierter Signatur von Manuela Schenk und Seriennummer.
   - **„Weitere Ansichten:“ (Multiperspektivische Galerie):** 5 interaktive Blickwinkel (*Frontansicht, Wandansicht, Keilrahmen-Rückseite, 3D-Seitenansicht, Atelier*).
-  - **Farbton-Filter & Format-Chips:** Sofortige Filterung nach Farbschemata (*Rot/Warm, Gold/Gelb, Blau/Kühl, Grün/Natur, Neutral*) und Formaten.
-  - **Runde Detail-Lupe auf Galerie-Karten:** Vergrößerungs-Lupe oben rechts auf jeder Galerie-Karte (`.gallery-zoom-circle`).
+  - **Clean Galerie-Karten:** Übersichtliche Galerie-Karten mit ungestörtem Herz-Favoriten-Button oben rechts (`.fav-toggle-btn`).
   - Schema.org JSON-LD Strukturierte Daten (`ImageGallery`).
 
 ### 3. `Auftrag.html`
