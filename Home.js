@@ -226,9 +226,132 @@ function clearGallerySearch() {
     }
 }
 
-function filterSelection(kategorie) {
-    activeCategory = kategorie || 'alle';
+let activeFormat = 'alle';
+
+function filterFormat(format) {
+    activeFormat = format || 'alle';
+    const chips = document.querySelectorAll('.format-chip');
+    chips.forEach(chip => {
+        const onclickAttr = chip.getAttribute('onclick') || '';
+        if (onclickAttr.includes(`'${activeFormat}'`)) {
+            chip.classList.add('active');
+        } else {
+            chip.classList.remove('active');
+        }
+    });
     filterGallery();
+}
+
+function switchGalleryViewMode(mode) {
+    const grid = document.querySelector('.gallery-grid');
+    if (!grid) return;
+
+    grid.classList.remove('view-masonry', 'view-list');
+    document.querySelectorAll('.view-mode-btn').forEach(btn => btn.classList.remove('active'));
+
+    const btn = document.getElementById(`btn-view-${mode}`);
+    if (btn) btn.classList.add('active');
+
+    if (mode === 'masonry') {
+        grid.classList.add('view-masonry');
+    } else if (mode === 'list') {
+        grid.classList.add('view-list');
+    }
+}
+
+/* Room Visualizer Logic */
+function openRoomVisualizer(imgSrc, imgAlt) {
+    const modal = document.getElementById('roomVisualizerModal');
+    const artworkImg = document.getElementById('room-artwork');
+    if (modal && artworkImg) {
+        if (!imgSrc && visibleGalleryLinks[currentIndex]) {
+            const link = visibleGalleryLinks[currentIndex];
+            imgSrc = link.href;
+            const img = link.querySelector('img');
+            imgAlt = img ? img.alt : '';
+        }
+        artworkImg.src = imgSrc || '';
+        artworkImg.alt = imgAlt || 'Gemälde';
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeRoomVisualizer() {
+    const modal = document.getElementById('roomVisualizerModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function setRoomBackdrop(preset, btn) {
+    const stage = document.getElementById('room-stage');
+    if (!stage) return;
+
+    document.querySelectorAll('.room-preset-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    const backdrops = {
+        'livingroom': 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80',
+        'bedroom': 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=80',
+        'gallerywall': 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=1200&q=80'
+    };
+
+    if (backdrops[preset]) {
+        stage.style.backgroundImage = `url('${backdrops[preset]}')`;
+    }
+}
+
+function handleCustomWallUpload(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const stage = document.getElementById('room-stage');
+            if (stage) {
+                stage.style.backgroundImage = `url('${e.target.result}')`;
+                showToast('Eigene Wand erfolgreich geladen!');
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+/* Magnifier Zoom Lens for Lightbox */
+function initLightboxMagnifier() {
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lens = document.getElementById('lightbox-magnifier');
+    if (!lightboxImg || !lens) return;
+
+    lightboxImg.removeEventListener('mousemove', moveLens);
+    lightboxImg.removeEventListener('mouseleave', hideLens);
+
+    lightboxImg.addEventListener('mousemove', moveLens);
+    lightboxImg.addEventListener('mouseleave', hideLens);
+
+    function moveLens(e) {
+        lens.style.display = 'block';
+        lens.style.backgroundImage = `url('${lightboxImg.src}')`;
+
+        const bounds = lightboxImg.getBoundingClientRect();
+        const x = e.clientX - bounds.left;
+        const y = e.clientY - bounds.top;
+
+        const zoomRatio = 2.5;
+        lens.style.backgroundSize = `${bounds.width * zoomRatio}px ${bounds.height * zoomRatio}px`;
+
+        const lensW = lens.offsetWidth / 2;
+        const lensH = lens.offsetHeight / 2;
+
+        lens.style.left = `${e.clientX - lensW}px`;
+        lens.style.top = `${e.clientY - lensH}px`;
+        lens.style.backgroundPosition = `-${x * zoomRatio - lensW}px -${y * zoomRatio - lensH}px`;
+    }
+
+    function hideLens() {
+        lens.style.display = 'none';
+    }
 }
 
 function filterGallery() {
@@ -246,7 +369,17 @@ function filterGallery() {
         const imgEl = item.querySelector('img');
         const captionEl = item.querySelector('.gallery-caption');
         const itemText = (captionEl ? captionEl.innerText : '') + ' ' + (imgEl ? imgEl.alt : '');
-        
+
+        const imgWidth = imgEl ? (parseInt(imgEl.getAttribute('width')) || 600) : 600;
+        const imgHeight = imgEl ? (parseInt(imgEl.getAttribute('height')) || 500) : 500;
+        const ratio = imgWidth / imgHeight;
+
+        let detectedFormat = 'querformat';
+        if (ratio > 1.8 || ratio < 0.55) detectedFormat = 'panorama';
+        else if (ratio > 1.15) detectedFormat = 'querformat';
+        else if (ratio < 0.85) detectedFormat = 'hochformat';
+        else detectedFormat = 'quadratisch';
+
         let matchesCategory = false;
         if (activeCategory === 'alle') {
             matchesCategory = true;
@@ -257,8 +390,9 @@ function filterGallery() {
         }
 
         const matchesSearch = (!searchTerm || itemText.toLowerCase().includes(searchTerm));
+        const matchesFormat = (activeFormat === 'alle' || detectedFormat === activeFormat);
 
-        if (matchesCategory && matchesSearch) {
+        if (matchesCategory && matchesSearch && matchesFormat) {
             item.style.display = 'block';
             visibleCount++;
         } else {
@@ -417,6 +551,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 toggleFavorite(itemId, e);
             };
         }
+
+        // Room Visualizer Button in Lightbox
+        const lbRoomBtn = document.getElementById('lightbox-room-btn');
+        if (lbRoomBtn) {
+            lbRoomBtn.onclick = function() {
+                openRoomVisualizer(link.href, titleText);
+            };
+        }
+
+        // Customer Testimonial Card in Lightbox
+        const testimonials = {
+            'DSC_6622a': '„Die Farbdynamik in diesem Landschaftsbild verzaubert unseren Flur jeden Tag aufs Neue.“ – Stefan K., Bonn',
+            'DSC_6626a': '„Manuela hat das Wesen unseres Hundes mit unglaublicher Liebe zum Detail eingefangen.“ – Elena M., Bad Godesberg',
+            'DSC_6689a': '„Wunderschöne Pfingstrosen! Ein Meisterwerk aus Acryl, das voller Leben steckt.“ – Karin S., Köln'
+        };
+        const lbTestimonialBox = document.getElementById('lightbox-testimonial-box');
+        if (lbTestimonialBox) {
+            if (testimonials[itemId]) {
+                lbTestimonialBox.innerHTML = `<i class="fa-solid fa-quote-left" aria-hidden="true"></i> ${testimonials[itemId]}`;
+                lbTestimonialBox.style.display = 'block';
+            } else {
+                lbTestimonialBox.style.display = 'none';
+            }
+        }
+
+        // Lupe / Magnifier Zoom initialisieren
+        initLightboxMagnifier();
 
         // Hash in URL setzen ohne Neuladen
         if (itemId && history.replaceState) {
