@@ -16,6 +16,7 @@
   <!-- Favicon -->
   <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
   <link rel="icon" href="assets/images/logos/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/images/logos/favicon.png">
 
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
@@ -76,7 +77,7 @@
       <button class="filter-btn" onclick="filterSelection('landschaften')">Landschaften</button>
       <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
       <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
-      <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart" style="color:#e74c3c;" aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
+      <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
     </div>
 
     <!-- Format Filter Chips -->
@@ -90,13 +91,13 @@
 
     <!-- View Mode Switcher Bar -->
     <div class="view-mode-bar" aria-label="Ansichtsmodus">
-      <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">Ansicht:</span>
+      <span class="font-size-085rem color-text-muted font-weight-600">Ansicht:</span>
       <button class="view-mode-btn active" id="btn-view-grid" onclick="switchGalleryViewMode('grid')" title="Gitteransicht" aria-label="Gitteransicht"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i> Gitter</button>
       <button class="view-mode-btn" id="btn-view-masonry" onclick="switchGalleryViewMode('masonry')" title="Wandgalerie (Masonry)" aria-label="Wandgalerie Masonry"><i class="fa-solid fa-border-all" aria-hidden="true"></i> Wandgalerie</button>
       <button class="view-mode-btn" id="btn-view-list" onclick="switchGalleryViewMode('list')" title="Listenansicht" aria-label="Listenansicht"><i class="fa-solid fa-list" aria-hidden="true"></i> Liste</button>
     </div>
 
-    <div id="no-gallery-results" class="no-results-msg" style="display:none;">
+    <div id="no-gallery-results" class="no-results-msg hidden">
       <i class="fa fa-magnifying-glass"></i>
       <p>Keine passenden Gemälde gefunden.</p>
       <small>Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.</small>
@@ -507,7 +508,7 @@
     <a class="next" onclick="changeSlide(1)" aria-label="Nächstes Bild">&#10095;</a>
     <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
     <div id="caption"></div>
-    <div id="lightbox-testimonial-box" class="lightbox-testimonial" style="display:none;"></div>
+    <div id="lightbox-testimonial-box" class="lightbox-testimonial hidden"></div>
     <div class="lightbox-actions">
       <button id="lightbox-inquiry-btn" class="btn btn-primary cursor-pointer" aria-label="Dieses Motiv als Auftrag anfragen">
         <i class="fa-solid fa-palette" aria-hidden="true"></i> Dieses Motiv als Auftrag anfragen
@@ -537,25 +538,25 @@
   <div id="roomVisualizerModal" class="modal" role="dialog" aria-modal="true" aria-label="An deiner Wand ansehen">
     <div class="room-modal-wrapper">
       <span class="close" tabindex="0" onclick="closeRoomVisualizer()" aria-label="Schließen">&times;</span>
-      <h2 style="text-align:center; color:var(--secondary-color); margin-bottom:5px;"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i> In deinem Raum ansehen</h2>
-      <p style="text-align:center; font-size:0.9rem; color:var(--text-muted);">Erlebe das Gemälde maßstabsgetreu in verschiedenen Raumkulissen oder auf deiner eigenen Wand.</p>
+      <h2 class="text-center color-secondary margin-bottom-5"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i> In deinem Raum ansehen</h2>
+      <p class="text-center font-size-09rem color-text-muted">Erlebe das Gemälde maßstabsgetreu in verschiedenen Raumkulissen oder auf deiner eigenen Wand.</p>
       
-      <div id="room-stage" class="room-canvas-stage" style="background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80');">
+      <div id="room-stage" class="room-canvas-stage room-stage-default">
         <img id="room-artwork" class="room-artwork-frame" alt="Gemälde an der Wand">
       </div>
 
       <div class="room-presets-bar">
-        <span style="font-weight:700; font-size:0.88rem; align-self:center;">Raumkulisse:</span>
+        <span class="font-weight-700 font-size-088rem align-self-center">Raumkulisse:</span>
         <button class="room-preset-btn active" onclick="setRoomBackdrop('livingroom', this)">Modernes Wohnzimmer</button>
         <button class="room-preset-btn" onclick="setRoomBackdrop('bedroom', this)">Schlafzimmer</button>
         <button class="room-preset-btn" onclick="setRoomBackdrop('gallerywall', this)">Galerie-Wand</button>
-        <label class="room-preset-btn cursor-pointer" style="display:inline-flex; align-items:center; gap:5px;">
+        <label class="room-preset-btn cursor-pointer display-inline-flex align-items-center gap-5">
           <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Eigene Wand hochladen
-          <input type="file" id="room-custom-upload" accept="image/*" style="display:none;" onchange="handleCustomWallUpload(this)">
+          <input type="file" id="room-custom-upload" accept="image/*" class="hidden" aria-label="Eigene Wand hochladen" title="Eigene Wand hochladen" onchange="handleCustomWallUpload(this)">
         </label>
       </div>
 
-      <div style="text-align:center; margin-top:20px;">
+      <div class="text-center margin-top-20">
         <button class="btn btn-primary" onclick="closeRoomVisualizer()"><i class="fa fa-check" aria-hidden="true"></i> Schließen</button>
       </div>
     </div>

@@ -16,6 +16,7 @@
   <!-- Favicon -->
   <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
   <link rel="icon" href="assets/images/logos/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/images/logos/favicon.png">
 
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
@@ -45,7 +46,7 @@
     <div class="configurator-wrapper">
 
       <!-- Restore-Banner: wird via JS eingeblendet, wenn gespeicherter State vorhanden -->
-      <div id="restore-banner" class="config-restore-banner" style="display:none;">
+      <div id="restore-banner" class="config-restore-banner hidden">
         <i class="fa fa-history" aria-hidden="true"></i>
         <span>Du hast eine gespeicherte Konfiguration. <button onclick="restoreSavedConfig()" id="restore-btn">Wiederherstellen</button> oder <button onclick="clearSavedConfig()" id="clear-btn">Neu starten</button>.</span>
       </div>
@@ -76,8 +77,8 @@
         <span class="config-subtitle">Was soll auf deinem einzigartigen Kunstwerk zu sehen sein?</span>
 
         <!-- Gemerkte Favoriten aus Galerie -->
-        <div id="config-saved-favorites" class="saved-favorites-container" style="display:none;">
-          <h3><i class="fa-solid fa-heart" style="color:#e74c3c;" aria-hidden="true"></i> Aus deinen gemerkten Favoriten wählen</h3>
+        <div id="config-saved-favorites" class="saved-favorites-container hidden">
+          <h3><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> Aus deinen gemerkten Favoriten wählen</h3>
           <p><small>Klicke auf eines deiner gemerkten Lieblingswerke, um es als Motiv-Inspiration zu übernehmen:</small></p>
           <div class="fav-cards-grid"></div>
         </div>
@@ -231,12 +232,12 @@
           <div class="photo-upload-wrapper">
             <h4><i class="fa fa-cloud-arrow-up" aria-hidden="true"></i> Eigenes Fotovorlage-Bild auswählen (Optional)</h4>
             <p><small>Du kannst hier dein Haustier- oder Landschaftsfoto auswählen, um die Vorlage direkt zu prüfen:</small></p>
-            <input type="file" id="client-photo-input" accept="image/*" style="margin-top:10px;">
+            <input type="file" id="client-photo-input" accept="image/*" class="margin-top-10" aria-label="Fotovorlage auswählen" title="Fotovorlage auswählen">
             <div id="photo-preview-box" class="photo-preview-box">
               <img id="photo-preview-img" class="photo-preview-img" alt="Fotovorlage Vorschau">
               <div>
                 <strong id="photo-file-name">Fotovorlage geladen</strong>
-                <div style="color:var(--primary-color); font-size:0.85rem;"><i class="fa fa-check-circle" aria-hidden="true"></i> Bereit für die Anfrage</div>
+                <div class="color-primary font-size-085rem"><i class="fa fa-check-circle" aria-hidden="true"></i> Bereit für die Anfrage</div>
               </div>
             </div>
           </div>
