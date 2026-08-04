@@ -62,14 +62,7 @@
       <span id="search-count-badge" class="search-count-badge" aria-live="polite"><i class="fa-solid fa-images" aria-hidden="true"></i> Zeige 53 Kunstwerke</span>
     </div>
 
-    <div class="gallery-tag-chips" aria-label="Schnellfilter-Tags">
-      <button class="tag-chip" data-tag="Tier"><i class="fa-solid fa-dog" aria-hidden="true"></i> #Tierportrait</button>
-      <button class="tag-chip" data-tag="Landschaft"><i class="fa-solid fa-mountain" aria-hidden="true"></i> #Landschaft</button>
-      <button class="tag-chip" data-tag="Pflanzen"><i class="fa-solid fa-leaf" aria-hidden="true"></i> #Pflanzen</button>
-      <button class="tag-chip" data-tag="Stillleben"><i class="fa-solid fa-apple-whole" aria-hidden="true"></i> #Stillleben</button>
-      <button class="tag-chip" data-tag="Acryl"><i class="fa-solid fa-palette" aria-hidden="true"></i> #Acryl</button>
-      <button class="tag-chip" data-tag="Bonn"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> #Bonn</button>
-    </div>
+
 
     <div id="filter-container">
       <button class="filter-btn active" onclick="filterSelection('alle')">Alle</button>
@@ -89,12 +82,21 @@
       <button class="format-chip" onclick="filterFormat('panorama')"><i class="fa-solid fa-vector-square" aria-hidden="true"></i> Panorama</button>
     </div>
 
-    <!-- View Mode Switcher Bar -->
-    <div class="view-mode-bar" aria-label="Ansichtsmodus">
+    <!-- View Mode Switcher & Sort Bar -->
+    <div class="view-mode-bar" aria-label="Ansicht und Sortierung">
       <span class="font-size-085rem color-text-muted font-weight-600">Ansicht:</span>
       <button class="view-mode-btn active" id="btn-view-grid" onclick="switchGalleryViewMode('grid')" title="Gitteransicht" aria-label="Gitteransicht"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i> Gitter</button>
       <button class="view-mode-btn" id="btn-view-masonry" onclick="switchGalleryViewMode('masonry')" title="Wandgalerie (Masonry)" aria-label="Wandgalerie Masonry"><i class="fa-solid fa-border-all" aria-hidden="true"></i> Wandgalerie</button>
       <button class="view-mode-btn" id="btn-view-list" onclick="switchGalleryViewMode('list')" title="Listenansicht" aria-label="Listenansicht"><i class="fa-solid fa-list" aria-hidden="true"></i> Liste</button>
+
+      <div class="gallery-sort-wrapper">
+        <label for="gallery-sort-select" class="font-size-085rem color-text-muted font-weight-600"><i class="fa-solid fa-arrow-down-short-wide" aria-hidden="true"></i> Sortierung:</label>
+        <select id="gallery-sort-select" class="gallery-sort-select" onchange="sortGallery(this.value)" aria-label="Gemälde sortieren">
+          <option value="default">Standard</option>
+          <option value="title-asc">Titel (A-Z)</option>
+          <option value="title-desc">Titel (Z-A)</option>
+        </select>
+      </div>
     </div>
 
     <div id="no-gallery-results" class="no-results-msg hidden">
@@ -499,32 +501,77 @@
   <!-- Footer wird via Home.js injiziert -->
   <footer></footer>
 
-  <!-- Lightbox für Galeriebilder -->
+  <!-- Lightbox für Galeriebilder (Redesigned Split Layout) -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Bilder-Großansicht">
-    <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 53</div>
-    <div id="lightbox-magnifier" class="lightbox-magnifier-lens"></div>
     <span class="close" tabindex="0" aria-label="Schließen">&times;</span>
     <a class="prev" onclick="changeSlide(-1)" aria-label="Vorheriges Bild">&#10094;</a>
     <a class="next" onclick="changeSlide(1)" aria-label="Nächstes Bild">&#10095;</a>
-    <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
-    <div id="caption"></div>
-    <div id="lightbox-testimonial-box" class="lightbox-testimonial hidden"></div>
-    <div class="lightbox-actions">
-      <button id="lightbox-inquiry-btn" class="btn btn-primary cursor-pointer" aria-label="Dieses Motiv als Auftrag anfragen">
-        <i class="fa-solid fa-palette" aria-hidden="true"></i> Dieses Motiv als Auftrag anfragen
-      </button>
-      <button id="lightbox-room-btn" class="btn cursor-pointer" aria-label="In deinem Raum ansehen">
-        <i class="fa-solid fa-house-chimney" aria-hidden="true"></i> In deinem Raum ansehen
-      </button>
-      <button id="lightbox-fav-btn" class="btn cursor-pointer" aria-label="Zu Favoriten hinzufügen">
-        <i class="fa-regular fa-heart" aria-hidden="true"></i> Zu Favoriten
-      </button>
-      <button id="lightbox-share-btn" class="btn btn-share cursor-pointer" aria-label="Direktlink kopieren">
-        <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Link kopieren
-      </button>
-      <a id="lightbox-whatsapp-btn" class="btn btn-whatsapp cursor-pointer" target="_blank" rel="noopener" aria-label="Auf WhatsApp fragen">
-        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Auf WhatsApp fragen
-      </a>
+
+    <div class="lightbox-split-container">
+      <!-- Linke Spalte: Bild & Werkzeuge -->
+      <div class="lightbox-media-col">
+        <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 53</div>
+        <div id="lightbox-magnifier" class="lightbox-magnifier-lens"></div>
+        <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
+        
+        <!-- Bild-Werkzeuge: 90° Drehen & Lupe aktivieren -->
+        <div class="lightbox-toolbar">
+          <button id="btn-rotate-img" class="lb-tool-btn" onclick="rotateLightboxImage(90)" title="Um 90° drehen" aria-label="Bild um 90 Grad drehen">
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 90° Drehen
+          </button>
+          <button id="btn-toggle-zoom" class="lb-tool-btn" onclick="toggleLightboxZoom()" title="Lupe aktivieren/deaktivieren" aria-label="Lupe aktivieren">
+            <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Lupe Zoom
+          </button>
+        </div>
+      </div>
+
+      <!-- Rechte Spalte: Details, Beschreibung & Unaufdringliche Buttons -->
+      <div class="lightbox-info-col">
+        <div class="lightbox-info-header">
+          <div id="lightbox-status-badge" class="lightbox-meta-badge badge-unikat">Unikat</div>
+          <h2 id="lightbox-info-title" class="lightbox-info-title">Gemälde</h2>
+        </div>
+
+        <div id="lightbox-info-description" class="lightbox-description-text">
+          Handgemaltes Kunstwerk von Manuela Schenk mit hochwertigen Farbpigmenten auf feiner Leinwand.
+        </div>
+
+        <div class="lightbox-details-list">
+          <div class="lightbox-detail-row">
+            <span class="lightbox-detail-label">Technik:</span>
+            <span id="lb-detail-technik" class="lightbox-detail-val">Acryl auf Leinwand</span>
+          </div>
+          <div class="lightbox-detail-row">
+            <span class="lightbox-detail-label">Kategorie:</span>
+            <span id="lb-detail-kat" class="lightbox-detail-val">Kunstwerk</span>
+          </div>
+          <div class="lightbox-detail-row">
+            <span class="lightbox-detail-label">Herkunft:</span>
+            <span class="lightbox-detail-val">Atelier Bonn</span>
+          </div>
+        </div>
+
+        <div id="lightbox-testimonial-box" class="lightbox-testimonial hidden"></div>
+
+        <!-- Dezentere, unaufdringliche Aktions-Buttons an der Seite -->
+        <div class="lightbox-actions-panel">
+          <button id="lightbox-inquiry-btn" class="btn-subtle btn-subtle-primary" aria-label="Dieses Motiv als Auftrag anfragen">
+            <i class="fa-solid fa-palette" aria-hidden="true"></i> Motiv als Auftrag anfragen
+          </button>
+          <button id="lightbox-room-btn" class="btn-subtle" aria-label="In deinem Raum ansehen">
+            <i class="fa-solid fa-house-chimney" aria-hidden="true"></i> In deinem Raum ansehen
+          </button>
+          <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
+            <i class="fa-regular fa-heart" aria-hidden="true"></i> Zu Favoriten
+          </button>
+          <button id="lightbox-share-btn" class="btn-subtle" aria-label="Direktlink kopieren">
+            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Link kopieren
+          </button>
+          <a id="lightbox-whatsapp-btn" class="btn-subtle btn-subtle-whatsapp" target="_blank" rel="noopener" aria-label="Auf WhatsApp fragen">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Auf WhatsApp fragen
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 

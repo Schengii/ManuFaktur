@@ -259,6 +259,24 @@ function switchGalleryViewMode(mode) {
     }
 }
 
+function sortGallery(sortOption) {
+    const grid = document.querySelector('.gallery-grid');
+    if (!grid) return;
+
+    const items = Array.from(grid.querySelectorAll('.gallery-item'));
+    items.sort((a, b) => {
+        const titleA = (a.querySelector('.gallery-caption')?.innerText || '').toLowerCase();
+        const titleB = (b.querySelector('.gallery-caption')?.innerText || '').toLowerCase();
+        if (sortOption === 'title-asc') return titleA.localeCompare(titleB, 'de');
+        if (sortOption === 'title-desc') return titleB.localeCompare(titleA, 'de');
+        return 0;
+    });
+
+    items.forEach(item => grid.appendChild(item));
+    updateGalleryLinks();
+    showToast('Galerie neu sortiert');
+}
+
 /* Room Visualizer Logic */
 function openRoomVisualizer(imgSrc, imgAlt) {
     const modal = document.getElementById('roomVisualizerModal');
@@ -318,7 +336,28 @@ function handleCustomWallUpload(input) {
     }
 }
 
-/* Magnifier Zoom Lens for Lightbox */
+/* 90-Degree Image Rotation & Click-Toggle Zoom State */
+let currentRotationAngle = 0;
+let isZoomActive = false;
+
+function rotateLightboxImage(deg) {
+    const img = document.getElementById('lightbox-img');
+    if (!img) return;
+    currentRotationAngle = (currentRotationAngle + (deg || 90)) % 360;
+    img.style.transform = `rotate(${currentRotationAngle}deg)`;
+    showToast(`Bild um ${currentRotationAngle}° gedreht`);
+}
+
+function toggleLightboxZoom() {
+    isZoomActive = !isZoomActive;
+    const btn = document.getElementById('btn-toggle-zoom');
+    const lens = document.getElementById('lightbox-magnifier');
+    if (btn) btn.classList.toggle('active', isZoomActive);
+    if (!isZoomActive && lens) lens.style.display = 'none';
+    showToast(isZoomActive ? '🔍 Lupe aktiviert (Fahre über das Bild)' : 'Lupe deaktiviert');
+}
+
+/* Magnifier Zoom Lens for Lightbox (Clicks Only) */
 function initLightboxMagnifier() {
     const lightboxImg = document.getElementById('lightbox-img');
     const lens = document.getElementById('lightbox-magnifier');
@@ -331,6 +370,11 @@ function initLightboxMagnifier() {
     lightboxImg.addEventListener('mouseleave', hideLens);
 
     function moveLens(e) {
+        if (!isZoomActive) {
+            lens.style.display = 'none';
+            return;
+        }
+
         lens.style.display = 'block';
         lens.style.backgroundImage = `url('${lightboxImg.src}')`;
 
@@ -499,16 +543,41 @@ document.addEventListener('DOMContentLoaded', function () {
         const captionDiv = link.querySelector('.gallery-caption');
         const titleText = captionDiv ? captionDiv.innerText : (imgInside ? imgInside.alt : '');
 
-        lightbox.style.display = 'flex';
+        // Reset Rotation & Zoom State when opening/changing slide
+        currentRotationAngle = 0;
+        isZoomActive = false;
+        if (lightboxImg) lightboxImg.style.transform = 'rotate(0deg)';
 
-        // Ladeindikator
-        if (lightboxImg) {
-            lightboxImg.style.opacity = '0';
-            lightboxImg.src = link.href;
-            lightboxImg.onload = function () {
-                lightboxImg.style.transition = 'opacity 0.3s ease';
-                lightboxImg.style.opacity = '1';
-            };
+        const zoomBtn = document.getElementById('btn-toggle-zoom');
+        if (zoomBtn) zoomBtn.classList.remove('active');
+        const lens = document.getElementById('lightbox-magnifier');
+        if (lens) lens.style.display = 'none';
+
+        // Infopanel Titel & Beschreibung befüllen
+        const infoTitle = document.getElementById('lightbox-info-title');
+        const infoDesc = document.getElementById('lightbox-info-description');
+        const detailTechnik = document.getElementById('lb-detail-technik');
+        const detailKat = document.getElementById('lb-detail-kat');
+        const statusBadge = document.getElementById('lightbox-status-badge');
+
+        if (infoTitle) infoTitle.innerText = titleText || 'Handgemaltes Unikat';
+        if (infoDesc) {
+            infoDesc.innerText = `Dieses einzigartige Werk wurde von Manuela Schenk in sorgfältiger Handarbeit gefertigt. Jedes Motiv ist ein Unikat mit lebendigen Farbakzenten.`;
+        }
+
+        const dataKat = item ? (item.getAttribute('data-kategorie') || 'Kunstwerk') : 'Kunstwerk';
+        if (detailKat) detailKat.innerText = dataKat.charAt(0).toUpperCase() + dataKat.slice(1);
+        if (detailTechnik) detailTechnik.innerText = 'Acryl / Öl auf Leinwand';
+
+        if (statusBadge) {
+            const badgeInside = item ? item.querySelector('.gallery-badge') : null;
+            if (badgeInside) {
+                statusBadge.innerText = badgeInside.innerText;
+                statusBadge.className = badgeInside.className + ' lightbox-meta-badge';
+                statusBadge.style.display = 'inline-block';
+            } else {
+                statusBadge.style.display = 'none';
+            }
         }
 
         if (captionText) {
@@ -612,14 +681,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Klicks auf Galerie-Bilder abfangen
+    // Klicks auf Galerie-Bilder / Karten zuverlässig abfangen
     document.addEventListener('click', function (e) {
-        const link = e.target.closest('.gallery-item a');
-        const galleryGrid = document.querySelector('.gallery-grid');
-        if (link && galleryGrid && galleryGrid.contains(link)) {
-            e.preventDefault();
-            const index = visibleGalleryLinks.indexOf(link);
-            openLightbox(index);
+        if (e.target.closest('.fav-toggle-btn')) return;
+
+        const galleryItem = e.target.closest('.gallery-item');
+        if (galleryItem) {
+            const link = galleryItem.querySelector('a');
+            if (link) {
+                e.preventDefault();
+                updateGalleryLinks();
+                let index = visibleGalleryLinks.indexOf(link);
+                if (index === -1) {
+                    visibleGalleryLinks = Array.from(document.querySelectorAll('.gallery-item'))
+                        .filter(item => item.style.display !== 'none')
+                        .map(item => item.querySelector('a'))
+                        .filter(a => a !== null);
+                    index = visibleGalleryLinks.indexOf(link);
+                }
+                if (index !== -1) {
+                    openLightbox(index);
+                }
+            }
         }
     });
 
@@ -645,20 +728,19 @@ document.addEventListener('DOMContentLoaded', function () {
         openLightbox(currentIndex + n);
     };
 
-    // Schließen
-    let closeLightboxFn = function () { };
+    // Schließen & Scroll-Restaurierung
+    const closeLightboxFn = function () {
+        if (lightbox) lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        if (history.replaceState) {
+            history.replaceState(null, null, window.location.pathname);
+        }
+        if (lastFocusedElement) lastFocusedElement.focus();
+    };
+
     if (lightbox) {
         const closeBtn = lightbox.querySelector('.close');
-
-        closeLightboxFn = function () {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            if (history.replaceState) {
-                history.replaceState(null, null, window.location.pathname);
-            }
-            if (lastFocusedElement) lastFocusedElement.focus();
-        };
-
         if (closeBtn) {
             closeBtn.onclick = closeLightboxFn;
             closeBtn.addEventListener('keydown', function (e) {
@@ -670,13 +752,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         lightbox.addEventListener('click', function (event) {
-            if (event.target === lightbox) closeLightboxFn();
+            if (event.target === lightbox) {
+                closeLightboxFn();
+            }
         });
     }
 
     // Tastaturbedienung für die Lightbox
     document.addEventListener('keydown', function (e) {
-        if (lightbox && lightbox.style.display === 'flex') {
+        if (lightbox && (lightbox.style.display === 'flex' || lightbox.style.display === 'block')) {
             if (e.key === 'Escape') {
                 closeLightboxFn();
             } else if (e.key === 'ArrowRight') {
