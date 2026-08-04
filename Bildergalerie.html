@@ -60,16 +60,37 @@
           <input type="search" id="gallery-search" placeholder="Gemälde suchen (z.B. Landschaften, Hund, Blumen, Acryl)..." aria-label="Bildergalerie durchsuchen">
           <button type="button" id="clear-search-btn" class="clear-search-btn" onclick="clearGallerySearch()" aria-label="Suche zurücksetzen"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
+
+        <div class="gallery-sort-wrapper">
+          <label for="gallery-sort-select" class="font-size-085rem font-weight-600 color-text-muted"><i class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> Sortieren:</label>
+          <select id="gallery-sort-select" class="gallery-sort-select" onchange="sortGallery(this.value)" aria-label="Galerie sortieren">
+            <option value="default">Standard</option>
+            <option value="title-asc">Titel (A-Z)</option>
+            <option value="title-desc">Titel (Z-A)</option>
+          </select>
+        </div>
+
         <span id="search-count-badge" class="search-count-badge" aria-live="polite"><i class="fa-solid fa-images" aria-hidden="true"></i> Zeige 53 Kunstwerke</span>
       </div>
 
-      <div id="filter-container">
-        <button class="filter-btn active" onclick="filterSelection('alle')">Alle</button>
-        <button class="filter-btn" onclick="filterSelection('tiere')">Tiere</button>
-        <button class="filter-btn" onclick="filterSelection('landschaften')">Landschaften</button>
-        <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
-        <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
-        <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
+      <div id="filter-container" class="filter-container-row">
+        <div class="filter-group-category">
+          <button class="filter-btn active" onclick="filterSelection('alle')">Alle</button>
+          <button class="filter-btn" onclick="filterSelection('tiere')">Tiere</button>
+          <button class="filter-btn" onclick="filterSelection('landschaften')">Landschaften</button>
+          <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
+          <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
+          <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
+        </div>
+
+        <div class="filter-group-format">
+          <span class="format-label"><i class="fa-solid fa-crop-simple" aria-hidden="true"></i> Format:</span>
+          <button type="button" class="format-chip active" onclick="filterFormat('alle')">Alle Formate</button>
+          <button type="button" class="format-chip" onclick="filterFormat('querformat')">Querformat</button>
+          <button type="button" class="format-chip" onclick="filterFormat('hochformat')">Hochformat</button>
+          <button type="button" class="format-chip" onclick="filterFormat('quadratisch')">Quadratisch</button>
+          <button type="button" class="format-chip" onclick="filterFormat('panorama')">Panorama</button>
+        </div>
       </div>
     </div>
 
@@ -550,6 +571,51 @@
           <div class="lightbox-detail-row">
             <span class="lightbox-detail-label">Herkunft:</span>
             <span class="lightbox-detail-val">Atelier Bonn</span>
+          </div>
+          <div class="lightbox-detail-row">
+            <span class="lightbox-detail-label">Rahmung:</span>
+            <span class="lightbox-detail-val">Sofort aufhängbar (Keilrahmen)</span>
+          </div>
+        </div>
+
+        <!-- Weitere Ansichten Grid (Multiperspektivische Galerie) -->
+        <div class="lightbox-views-section">
+          <h3 class="lightbox-views-title"><i class="fa-solid fa-images" aria-hidden="true"></i> Weitere Ansichten:</h3>
+          <div class="lightbox-views-grid">
+            <button type="button" class="view-thumb-btn active" data-view="front" onclick="setLightboxViewAngle('front', this)" title="Frontansicht Pur">
+              <div class="thumb-img-wrapper">
+                <img id="thumb-img-front" src="" alt="Frontansicht">
+              </div>
+              <span class="thumb-label">Frontansicht</span>
+            </button>
+
+            <button type="button" class="view-thumb-btn" data-view="room" onclick="setLightboxViewAngle('room', this)" title="Wand & Raumansicht">
+              <div class="thumb-img-wrapper">
+                <img src="assets/images/rooms/livingroom.png" alt="Wand & Raumansicht">
+              </div>
+              <span class="thumb-label">Wandansicht</span>
+            </button>
+
+            <button type="button" class="view-thumb-btn" data-view="back" onclick="setLightboxViewAngle('back', this)" title="Rückseite & Keilrahmen">
+              <div class="thumb-img-wrapper">
+                <img src="assets/images/rooms/canvas_back.png" alt="Rückseite & Keilrahmen">
+              </div>
+              <span class="thumb-label">Keilrahmen</span>
+            </button>
+
+            <button type="button" class="view-thumb-btn" data-view="side3d" onclick="setLightboxViewAngle('side3d', this)" title="3D-Seitenansicht & Textur">
+              <div class="thumb-img-wrapper thumb-3d-preview">
+                <img id="thumb-img-side" src="" alt="3D Seitenansicht">
+              </div>
+              <span class="thumb-label">3D-Perspektive</span>
+            </button>
+
+            <button type="button" class="view-thumb-btn" data-view="artist" onclick="setLightboxViewAngle('artist', this)" title="Künstlerin & Atelier">
+              <div class="thumb-img-wrapper">
+                <img src="assets/images/rooms/artist_studio.png" alt="Künstlerin & Atelier">
+              </div>
+              <span class="thumb-label">Atelier</span>
+            </button>
           </div>
         </div>
 

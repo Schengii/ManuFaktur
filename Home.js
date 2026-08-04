@@ -196,6 +196,23 @@ function updateFavBadgeCount() {
     }
 }
 
+function initGalleryZoomCircles() {
+    const items = document.getElementsByClassName('gallery-item');
+    for (let i = 0; i < items.length; i++) {
+        const link = items[i].querySelector('a');
+        const img = link ? link.querySelector('img') : null;
+        if (link && img && !link.querySelector('.gallery-zoom-circle')) {
+            const zoomCircle = document.createElement('div');
+            zoomCircle.className = 'gallery-zoom-circle';
+            const detailImg = document.createElement('img');
+            detailImg.src = img.src;
+            detailImg.alt = 'Detailansicht Zoom';
+            zoomCircle.appendChild(detailImg);
+            link.appendChild(zoomCircle);
+        }
+    }
+}
+
 function initFavButtonsUI() {
     const favs = getFavorites();
     const items = document.getElementsByClassName('gallery-item');
@@ -215,6 +232,7 @@ function initFavButtonsUI() {
         }
     }
     updateFavBadgeCount();
+    initGalleryZoomCircles();
 }
 
 function clearGallerySearch() {
@@ -405,6 +423,78 @@ function adjustWallFrameScale() {
         container.style.maxHeight = '52vh';
     }
     container.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.55), 0 10px 20px rgba(0, 0, 0, 0.35)';
+}
+
+let currentViewAngle = 'front';
+
+function setLightboxViewAngle(angle, btn) {
+    currentViewAngle = angle || 'front';
+    
+    document.querySelectorAll('.view-thumb-btn').forEach(b => {
+        const v = b.getAttribute('data-view');
+        if (v === currentViewAngle || b === btn) {
+            b.classList.add('active');
+        } else {
+            b.classList.remove('active');
+        }
+    });
+
+    const stage = document.getElementById('lightbox-wall-stage');
+    const container = document.getElementById('wall-frame-container');
+    const img = document.getElementById('lightbox-img');
+    const badge = document.getElementById('wall-badge-tag');
+
+    if (!container || !img) return;
+
+    // Reset 3D transform
+    container.style.transform = 'none';
+
+    if (currentViewAngle === 'front') {
+        setLightboxScene('detail');
+        if (visibleGalleryLinks[currentIndex]) {
+            img.src = visibleGalleryLinks[currentIndex].href;
+        }
+    } else if (currentViewAngle === 'room') {
+        setLightboxScene('livingroom');
+        if (visibleGalleryLinks[currentIndex]) {
+            img.src = visibleGalleryLinks[currentIndex].href;
+        }
+    } else if (currentViewAngle === 'back') {
+        if (stage) {
+            stage.style.backgroundImage = 'none';
+            stage.style.backgroundColor = '#0f172a';
+        }
+        img.src = 'assets/images/rooms/canvas_back.png';
+        if (badge) {
+            badge.style.display = 'inline-flex';
+            badge.innerHTML = `<i class="fa-solid fa-square-check"></i> Keilrahmen & Rückseite (Solid Fichtenholz)`;
+        }
+        container.style.maxWidth = '75%';
+        container.style.maxHeight = '52vh';
+    } else if (currentViewAngle === 'side3d') {
+        setLightboxScene('detail');
+        if (visibleGalleryLinks[currentIndex]) {
+            img.src = visibleGalleryLinks[currentIndex].href;
+        }
+        container.style.transform = 'perspective(900px) rotateY(-26deg) rotateX(6deg) scale(0.92)';
+        container.style.boxShadow = '-20px 25px 50px rgba(0, 0, 0, 0.65), -5px 8px 15px rgba(0, 0, 0, 0.4)';
+        if (badge) {
+            badge.style.display = 'inline-flex';
+            badge.innerHTML = `<i class="fa-solid fa-cube"></i> 3D-Seitenansicht (Gemalter Rand)`;
+        }
+    } else if (currentViewAngle === 'artist') {
+        if (stage) {
+            stage.style.backgroundImage = "url('assets/images/rooms/artist_studio.png')";
+            stage.style.backgroundColor = 'transparent';
+        }
+        if (visibleGalleryLinks[currentIndex]) {
+            img.src = visibleGalleryLinks[currentIndex].href;
+        }
+        if (badge) {
+            badge.style.display = 'inline-flex';
+            badge.innerHTML = `<i class="fa-solid fa-palette"></i> Handgemacht im Atelier Bonn`;
+        }
+    }
 }
 
 function setRoomBackdrop(preset, btn) {
@@ -757,6 +847,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 adjustWallFrameScale();
             };
         }
+
+        // Populiere Thumbnails in "Weitere Ansichten"
+        const thumbFront = document.getElementById('thumb-img-front');
+        const thumbSide = document.getElementById('thumb-img-side');
+        if (thumbFront) thumbFront.src = link.href;
+        if (thumbSide) thumbSide.src = link.href;
 
         // Apply active KI wall scene (default to living room)
         setLightboxScene(currentLbScene || 'livingroom');
