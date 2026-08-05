@@ -77,6 +77,8 @@ ManuFaktur/
 ### 2. `Bildergalerie.html` & Lightbox-System
 - **Funktion:** Interaktive High-End Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung, Echtheitszertifikat & Multiperspektiven.
 - **Inhalt & Features:**
+  - **Schnell-Tag-Chips:** Interaktive Tag-Chips (`#Tierportrait`, `#Landschaft`, `#Acryl`, `#Stillleben`, `#Pflanzen`) unter der Suchleiste für blitzschnelles Filtern nach beliebten Begriffen.
+  - **Detaillierte Werk-IDs & Favoriten-Herz-Buttons (`.fav-toggle-btn`):** Jedes der 53 Kunstwerke besitzt eine explizite HTML `id="DSC_..."` sowie dynamisch initialisierte Herz-Buttons zur Favoriten-Speicherung.
   - **Perfektionierte HD-Lupenfunktion (`🔍 Lupe Zoom`):** Mathematisch präzise Maus- & Touch-Lupenlinse mit relativer Container-Offset-Berechnung für flüssigen Zoom ohne Ruckeln.
   - **Reine Erstansicht im Lightbox-Modal:** Beim Anklicken eines Galeriebildes öffnet sich die Lightbox in der klaren **Pur-/Frontansicht** mit Bild, Titel, Beschreibung und Produktspezifikationen.
   - **Aktivierbare KI-Wandvorlagen:** Erst nach Klick auf den Button `In deinem Raum ansehen` werden die KI-Wandfilter-Leiste (*Wohnzimmer, Schlafzimmer, Loft, Beige Lounge*) und die Wandbühne eingeblendet.
@@ -116,8 +118,8 @@ ManuFaktur/
   - Schema.org JSON-LD Strukturierte Daten (`Person`).
 
 ### 6. `Kontakt.html`
-- **Funktion:** Kontaktseite mit Anfragen-Formular.
-- **Inhalt:** Formular mit Formspree-Integration, Kontaktdaten, Social-Media-Links (Instagram, WhatsApp, LinkedIn) und Vorab-Hinweis-Banner bei Weiterleitungen aus dem Konfigurator.
+- **Funktion:** Kontaktseite mit Anfragen-Formular & DSGVO-Standortkarte.
+- **Inhalt:** Formular mit Formspree-Integration, Kontaktdaten, Social-Media-Links (Instagram, WhatsApp, LinkedIn), 2-Klick DSGVO Google Maps Standorts-Karte für Bonn (`#map-container`) und Vorab-Hinweis-Banner bei Weiterleitungen aus dem Konfigurator.
 
 ### 7. `Impressum.html` & `Datenschutz.html`
 - **Funktion:** Rechtssichere Pflichtangaben nach deutschem Recht und DSGVO.
@@ -131,7 +133,9 @@ ManuFaktur/
 - **Inhalt:**
   - Automatische Injektion von shared `<header>` Navigation und `<footer>`.
   - Hamburger-Mobilmenü-Steuerung.
-  - Galerie-Filterung, Format-Chips, Live-Suche & Sortierung.
+  - Galerie-Filterung, Format-Chips, Farb-Chips, Schnell-Tag-Chips, Live-Suche & Sortierung.
+  - Dynamisches Favoriten-Management (`initFavButtonsUI`, `toggleFavorite`, Badge-Counter & LocalStorage).
+  - DSGVO 2-Klick Google Maps Ladefunktion (`loadGoogleMap`).
   - Lightbox-Slideshow, Tastatursteuerung & Touch-Swipe-Gesten.
   - Multiperspektivische KI-Wandbühnen-Steuerung (`setLightboxScene` & `setLightboxViewAngle`).
   - Preiskalkulator-Berechnungsmathematik.
