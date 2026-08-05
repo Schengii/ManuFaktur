@@ -150,13 +150,26 @@ ManuFaktur/
 ## 🛠️ Technologien & Standards
 
 - **Core:** HTML5, Vanilla CSS3, JavaScript (ES6+).
-- **DSGVO-Konformität:** 100 % lokale Einbindung aller Fonts und Icon-Sets (keine externen Aufrufe an Google Fonts oder CDN-Server).
-- **Performance:** WebP-Bildformate (Reduktion von 500 MB auf <3 MB = **99% Ersparnis**), `loading="lazy"`, `decoding="async"`, `width`/`height` Attribute gegen CLS.
-- **SEO:** Schema.org JSON-LD strukturierte Daten, Open Graph Meta-Tags, sprechende Bild-Alts, XML-Sitemap.
+- **DSGVO-Konformität:** 100 % lokale Einbindung aller Fonts (`Dancing Script`, `Playfair Display`, `Lato`) und Font Awesome Webfonts (keine externen Aufrufe an Google Fonts oder CDN-Server).
+- **Barrierefreiheit (WCAG 2.1 AA / AAA):**
+  - **Rot-Grün-Schwäche (Colorblindness):** Alle aktiven Zustände (Filter-Buttons, Navigation, Favoriten) nutzen neben Farbaccenten zusätzliche Form- und Textindikatoren (Symbole, fette Schrift, Border, Unterstreichung).
+  - **Lese-Rechtschreib-Schwäche (Dyslexia-Friendliness):** Optimierter Zeilenabstand (`1.65`), Wortabstand (`0.04em`) und Zeichenabstand (`0.02em`) mit klarer serifenloser Typografie (`Lato`).
+  - **Tastatur- & Screenreader-Support:** Sichtbare Fokus-Ringe (`:focus-visible`), ARIA-Attribute (`role="dialog"`, `aria-label`, `aria-expanded`), automatische Schutzsteuerung bei Texteingaben.
+- **Responsive Design & Touch-Targets:** Flüssige Typografie (`clamp()`), kein horizontales Scrollen auf Smartphones, Touch-Targets mit mindestens 44px Höhe.
+- **Micro-Animations:** Button-Shimmer-Effekt (`.btn::before`), Card Hover Elevation (`translateY(-6px)`), sanfte Scroll-Reveals und Puls-Effekte.
+- **Performance & SEO:** WebP-Bildformate (99% Ersparnis), LCP-Optimierung, Schema.org JSON-LD strukturierte Daten, Open Graph Meta-Tags, PWA Web App Manifest & Service Worker.
 
 ---
 
-## 🚀 Lokale Entwicklung
+## 🚀 Veröffentlichungs-Checkliste (Release Readiness)
+
+1. **Formspree E-Mail-ID (`Kontakt.html`):** Ersetzen der Formspree-ID `DEINE_FORMSPREE_ID` durch deine echte ID vor der Live-Schaltung.
+2. **HTTPS-Verschlüsselung:** Aktivierung eines SSL-Zertifikats beim Hoster für PWA Service Worker Funktionalität (`sw.js`).
+3. **XML-Sitemap:** Aktualisierung der Datumsangaben in `sitemap.xml`.
+
+---
+
+## 💻 Lokale Entwicklung
 
 Zum Ausführen der Webseite auf einem lokalen Testserver im Projektverzeichnis ausführen:
 
