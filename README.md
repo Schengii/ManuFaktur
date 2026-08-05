@@ -77,7 +77,7 @@ ManuFaktur/
 ### 2. `Bildergalerie.html` & Lightbox-System
 - **Funktion:** Interaktive High-End Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung, Echtheitszertifikat & Multiperspektiven.
 - **Inhalt & Features:**
-  - **Schnell-Tag-Chips:** Interaktive Tag-Chips (`#Tierportrait`, `#Landschaft`, `#Acryl`, `#Stillleben`, `#Pflanzen`) unter der Suchleiste für blitzschnelles Filtern nach beliebten Begriffen.
+  - **Fokussierte Galerie-Steuerung:** Schlanke, aufgeräumte Bedienoberfläche mit Suchfeld, Sortierung (*A-Z, Z-A*) sowie den Hauptkategorien (*Alle, Tiere, Landschaften, Pflanzen, Sonstiges, Gemerkt/Favoriten*).
   - **Detaillierte Werk-IDs & Favoriten-Herz-Buttons (`.fav-toggle-btn`):** Jedes der 53 Kunstwerke besitzt eine explizite HTML `id="DSC_..."` sowie dynamisch initialisierte Herz-Buttons zur Favoriten-Speicherung.
   - **Perfektionierte HD-Lupenfunktion (`🔍 Lupe Zoom`):** Mathematisch präzise Maus- & Touch-Lupenlinse mit relativer Container-Offset-Berechnung für flüssigen Zoom ohne Ruckeln.
   - **Reine Erstansicht im Lightbox-Modal:** Beim Anklicken eines Galeriebildes öffnet sich die Lightbox in der klaren **Pur-/Frontansicht** mit Bild, Titel, Beschreibung und Produktspezifikationen.

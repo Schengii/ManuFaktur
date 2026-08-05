@@ -61,15 +61,6 @@
           <button type="button" id="clear-search-btn" class="clear-search-btn" onclick="clearGallerySearch()" aria-label="Suche zurücksetzen"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
 
-        <div class="gallery-tag-chips margin-top-10 display-flex align-items-center flex-wrap gap-8">
-          <span class="font-size-085rem color-text-muted font-weight-600"><i class="fa-solid fa-tags" aria-hidden="true"></i> Beliebte Tags:</span>
-          <button type="button" class="tag-chip" data-tag="Tierportrait">#Tierportrait</button>
-          <button type="button" class="tag-chip" data-tag="Landschaft">#Landschaft</button>
-          <button type="button" class="tag-chip" data-tag="Acryl">#Acryl</button>
-          <button type="button" class="tag-chip" data-tag="Stillleben">#Stillleben</button>
-          <button type="button" class="tag-chip" data-tag="Blumen">#Pflanzen</button>
-        </div>
-
         <div class="gallery-sort-wrapper">
           <label for="gallery-sort-select" class="font-size-085rem font-weight-600 color-text-muted"><i class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> Sortieren:</label>
           <select id="gallery-sort-select" class="gallery-sort-select" onchange="sortGallery(this.value)" aria-label="Galerie sortieren">
@@ -90,25 +81,6 @@
           <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
           <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
           <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
-        </div>
-
-        <div class="filter-group-format">
-          <span class="format-label"><i class="fa-solid fa-crop-simple" aria-hidden="true"></i> Format:</span>
-          <button type="button" class="format-chip active" onclick="filterFormat('alle')">Alle Formate</button>
-          <button type="button" class="format-chip" onclick="filterFormat('querformat')">Querformat</button>
-          <button type="button" class="format-chip" onclick="filterFormat('hochformat')">Hochformat</button>
-          <button type="button" class="format-chip" onclick="filterFormat('quadratisch')">Quadratisch</button>
-          <button type="button" class="format-chip" onclick="filterFormat('panorama')">Panorama</button>
-        </div>
-
-        <div class="filter-group-color">
-          <span class="format-label"><i class="fa-solid fa-palette" aria-hidden="true"></i> Farbton:</span>
-          <button type="button" class="color-chip active" onclick="filterColor('alle')" title="Alle Farbtöne"><span class="color-dot color-dot-all"></span> Alle</button>
-          <button type="button" class="color-chip" onclick="filterColor('warm')" title="Warme Farbtöne (Rot, Orange)"><span class="color-dot color-dot-warm"></span> Rot / Warm</button>
-          <button type="button" class="color-chip" onclick="filterColor('gold')" title="Gold & Gelb"><span class="color-dot color-dot-gold"></span> Gold & Gelb</button>
-          <button type="button" class="color-chip" onclick="filterColor('kuehl')" title="Kühle Farbtöne (Blau, Türkis)"><span class="color-dot color-dot-blue"></span> Blau / Kühl</button>
-          <button type="button" class="color-chip" onclick="filterColor('gruen')" title="Grün & Natur"><span class="color-dot color-dot-green"></span> Grün / Natur</button>
-          <button type="button" class="color-chip" onclick="filterColor('neutral')" title="Erdtöne & Neutral"><span class="color-dot color-dot-neutral"></span> Neutral</button>
         </div>
       </div>
     </div>
