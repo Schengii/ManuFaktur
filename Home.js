@@ -894,7 +894,20 @@ function filterGallery() {
 
     const noResults = document.getElementById('no-gallery-results');
     if (noResults) {
-        noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+        if (visibleCount === 0) {
+            noResults.style.display = 'block';
+            const titleEl = noResults.querySelector('p');
+            const subEl = noResults.querySelector('small');
+            if (activeCategory === 'favoriten') {
+                if (titleEl) titleEl.innerText = 'Noch keine Favoriten gemerkt.';
+                if (subEl) subEl.innerText = 'Klicke auf das Herz-Symbol auf den Kunstwerken, um deine persönlichen Lieblingswerke hier zu speichern.';
+            } else {
+                if (titleEl) titleEl.innerText = 'Keine passenden Gemälde gefunden.';
+                if (subEl) subEl.innerText = 'Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.';
+            }
+        } else {
+            noResults.style.display = 'none';
+        }
     }
 
     const clearBtn = document.getElementById('clear-search-btn');
@@ -1250,9 +1263,11 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Tastaturbedienung für die Lightbox
+    // Tastaturbedienung für die Lightbox (ignoriert Texteingaben)
     document.addEventListener('keydown', function (e) {
         if (lightbox && (lightbox.style.display === 'flex' || lightbox.style.display === 'block')) {
+            const activeTag = document.activeElement ? document.activeElement.tagName : '';
+            if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
             if (e.key === 'Escape') {
                 closeLightboxFn();
             } else if (e.key === 'ArrowRight') {
@@ -1272,9 +1287,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const link = targetItem.querySelector('a');
                 if (link) {
                     setTimeout(() => {
+                        updateGalleryLinks();
                         const index = visibleGalleryLinks.indexOf(link);
                         if (index !== -1) openLightbox(index);
-                    }, 300);
+                    }, 250);
                 }
             }
         }

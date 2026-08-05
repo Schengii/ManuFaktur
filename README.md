@@ -75,17 +75,18 @@ ManuFaktur/
   - Schema.org JSON-LD Strukturierte Daten (`ArtGallery`).
 
 ### 2. `Bildergalerie.html` & Lightbox-System
-- **Funktion:** Interaktive High-End Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung, Echtheitszertifikat & Multiperspektiven.
+- **Funktion:** Interaktive High-End Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung & Multiperspektiven.
 - **Inhalt & Features:**
-  - **Fokussierte Galerie-Steuerung:** Schlanke, aufgeräumte Bedienoberfläche mit Suchfeld, Sortierung (*A-Z, Z-A*) sowie den Hauptkategorien (*Alle, Tiere, Landschaften, Pflanzen, Sonstiges, Gemerkt/Favoriten*).
+  - **Kompakte Galerie-Filterleiste:** Aufgeräumtes Suchfeld sowie nebeneinander platzierte Kategorie-Filter (*Alle, Tiere, Landschaften, Pflanzen, Sonstiges, Gemerkt/Favoriten*) und direkt rechts folgendem **Sortieren-Dropdown** (*A-Z, Z-A*).
   - **Detaillierte Werk-IDs & Favoriten-Herz-Buttons (`.fav-toggle-btn`):** Jedes der 53 Kunstwerke besitzt eine explizite HTML `id="DSC_..."` sowie dynamisch initialisierte Herz-Buttons zur Favoriten-Speicherung.
+  - **LCP-Ladeoptimierung:** Die ersten 4 Kunstwerke oberhalb des Fold-Bereichs werden mit `loading="eager"` und `fetchpriority="high"` geladen für herausragende Google PageSpeed & Lighthouse LCP-Werte.
+  - **Barrierefreie Tastatur- & Input-Schutzsteuerung:** Pfeiltasten-Navigation überspringt aktive Formularfelder, damit Benutzereingaben ungestört bleiben.
+  - **Benutzerfreundliche Leerzustände (Empty-State):** Angepasste Hilfetexte bei 0 Treffern oder noch leeren Favoriten.
   - **Perfektionierte HD-Lupenfunktion (`🔍 Lupe Zoom`):** Mathematisch präzise Maus- & Touch-Lupenlinse mit relativer Container-Offset-Berechnung für flüssigen Zoom ohne Ruckeln.
   - **Reine Erstansicht im Lightbox-Modal:** Beim Anklicken eines Galeriebildes öffnet sich die Lightbox in der klaren **Pur-/Frontansicht** mit Bild, Titel, Beschreibung und Produktspezifikationen.
   - **Aktivierbare KI-Wandvorlagen:** Erst nach Klick auf den Button `In deinem Raum ansehen` werden die KI-Wandfilter-Leiste (*Wohnzimmer, Schlafzimmer, Loft, Beige Lounge*) und die Wandbühne eingeblendet.
   - **Interaktive Drag & Drop Positionierung:** Im KI-Raummodus kann der Nutzer das Gemälde frei auf der Raumwand nach oben, unten, links oder rechts verschieben (`🎯 Zentrieren` setzt die Position zurück).
   - **Interaktive Wand-Skalierung (`25% - 90%` Slider):** Stufenloses Skalieren der Bildgröße für das perfekte Maßverhältnis zum Raumhintergrund.
-  - **Größen- & Maßstabsvergleich (`📐 Größenvergleich`):** Interaktives Modal, das das Kunstwerk im direkten Größenvergleich neben einer 1,75 m großen Person und Möbeln zeigt.
-  - **Echtheitszertifikat (`🏆 Echtheitszertifikat`):** Zertifikat-Modal mit Siegel vom Atelier Bonn, Unikat-Garantie, handsignierter Signatur von Manuela Schenk und Seriennummer.
   - **„Weitere Ansichten:“ (Multiperspektivische Galerie):** 5 interaktive Blickwinkel (*Frontansicht, Wandansicht, Keilrahmen-Rückseite, 3D-Seitenansicht, Atelier*).
   - **Clean Galerie-Karten:** Übersichtliche Galerie-Karten mit ungestörtem Herz-Favoriten-Button oben rechts (`.fav-toggle-btn`).
   - Schema.org JSON-LD Strukturierte Daten (`ImageGallery`).
