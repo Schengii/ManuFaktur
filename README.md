@@ -77,6 +77,7 @@ ManuFaktur/
 ### 2. `Bildergalerie.html` & Lightbox-System
 - **Funktion:** Interaktive High-End Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung & Multiperspektiven.
 - **Inhalt & Features:**
+  - **Authentischer Werkkatalog (53 Gemälde):** Vollständige Erfassung aller 53 Originalgemälde mit echten Werkstiteln (*Godesburg modern, Drachenfels, Balou, Siebengebirge, Dünenweg Normandie, Texel Leuchtturm, etc.*), exakten Maßen (*z.B. 40×50 cm, 100×150 cm, 19×19 cm*), Maltechniken (*Öl, Acryl, Multimediatechnik, Ölkreide auf handgerahmtem Birkenholz*) und persönlichen Künstler-Beschreibungen.
   - **Perfekt ausgerichtete Bildausrichtung (Upright Auto-Orientation):** Sämtliche 53 WebP-Thumbnails und Lightbox-Großansichten wurden anhand ihrer Aufnahmeparameter und Bildachsen automatisch korrigiert und aufgerichtet, sodass jedes Kunstwerk direkt richtig herum nach oben weist.
   - **Kompakte Galerie-Filterleiste:** Aufgeräumtes Suchfeld sowie nebeneinander platzierte Kategorie-Filter (*Alle, Tiere, Landschaften, Pflanzen, Sonstiges, Gemerkt/Favoriten*) und direkt rechts folgendem **Sortieren-Dropdown** (*A-Z, Z-A*).
   - **Detaillierte Werk-IDs & Favoriten-Herz-Buttons (`.fav-toggle-btn`):** Jedes der 53 Kunstwerke besitzt eine explizite HTML `id="DSC_..."` sowie dynamisch initialisierte Herz-Buttons zur Favoriten-Speicherung.
@@ -111,9 +112,10 @@ ManuFaktur/
   - Schema.org JSON-LD Strukturierte Daten (`Service`).
 
 ### 5. `UeberMich.html`
-- **Funktion:** persönliche Vorstellung von Manuela Schenk.
+- **Funktion:** persönliche Vorstellung & künstlerischer Werdegang von Manuela Schenk.
 - **Inhalt:**
-  - Steckbrief (Wohnort Bonn, Frauchen von Hund Balou, Techniken, Motivation).
+  - Steckbrief (Wohnort Bonn-Bad Godesberg, Frauchen von Hund Balou, Techniken, Alanus Hochschule Alfter, Motivation).
+  - **Künstlerische Ausbildung & Dozierende:** Dokumentation der akademischen Stationen an der *Alanus Hochschule Alfter* (Dozierende Angelika Kehlenbach, Cornelia Genschow, Johanna Hendel, Lukas Thein), dem *Art Studio Maryam Khalili* sowie *Kunstschule Aachen & VHS Bonn*.
   - Zeitstrahl („Mein Weg zur Kunst“ von 2010 bis heute).
   - Vorher/Nachher-Präzisionsslider.
   - Interaktive 3D-Flip-Visitenkarte mit VCF-Kontaktkarten-Download.

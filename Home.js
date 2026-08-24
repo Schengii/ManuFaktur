@@ -112,6 +112,433 @@ function getFooterHTML() {
 /* =========================================
    2. GALERIE: FILTER, LIVE-SUCHE, FAVORITEN & DATEN
    ========================================= */
+const ARTWORKS_METADATA = {
+    "DSC_6622a": {
+        "title": "Godesburg modern",
+        "technik": "Multimediatechnik auf Papier",
+        "masse": "40 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Eines meiner Lieblingsmotive ist die Godesburg in Bad Godesberg. Hier habe ich sie in einer modernen, ausdrucksstarken Multimediatechnik dargestellt.",
+        "badge": "Unikat"
+    },
+    "DSC_6624a": {
+        "title": "Siebengebirge Panorama",
+        "technik": "Acryl auf Leinwand",
+        "masse": "60 × 70 cm",
+        "kategorie": "landschaften",
+        "desc": "Auf einer ausgedehnten Wanderung durch das Siebengebirge musste ich diese stimmungsvolle Wald- und Weitblick-Ansicht auf Leinwand festhalten.",
+        "badge": "Unikat"
+    },
+    "DSC_6626a": {
+        "title": "Bad Godesberg City mit Godesburg",
+        "technik": "Öl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Diese Ansicht zeigt die historische Godesburg in Bad Godesberg, gesehen vom blühenden Stadtpark aus.",
+        "badge": "Unikat"
+    },
+    "DSC_6628a": {
+        "title": "Pförtnerhäuschen am Klufterhof Friesdorf",
+        "technik": "Öl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "sonstiges",
+        "desc": "Das malerische Pförtnerhäuschen in Bad Godesberg-Friesdorf gehört zum denkmalgeschützten Klufterhof-Ensemble.",
+        "badge": "Unikat"
+    },
+    "DSC_6630a": {
+        "title": "Friesdorf Annaberger Straße",
+        "technik": "Öl auf Leinwand",
+        "masse": "30 × 24 cm",
+        "kategorie": "landschaften",
+        "desc": "Das historische Turmhaus aus dem 12. Jahrhundert und die Annaberger Straße im Herzen von Bad Godesberg-Friesdorf.",
+        "badge": "Unikat"
+    },
+    "DSC_6632a": {
+        "title": "Der Klufterhof Friesdorf",
+        "technik": "Öl auf Leinwand",
+        "masse": "30 × 40 cm",
+        "kategorie": "landschaften",
+        "desc": "Der Klufterhof in Friesdorf ist eines der ältesten und schönsten Fachwerkhäuser der Region aus dem frühen 17. Jahrhundert.",
+        "badge": "Unikat"
+    },
+    "DSC_6634a": {
+        "title": "Drachenfels am Rhein (Ansicht Nähe Mehlem)",
+        "technik": "Öl auf Leinwand",
+        "masse": "60 × 70 cm",
+        "kategorie": "landschaften",
+        "desc": "Bei meinen zahlreichen Spaziergängen entlang der Rheinpromenade kann ich diesen wunderbaren Anblick auf den Drachenfels genießen.",
+        "badge": "Unikat"
+    },
+    "DSC_6636a": {
+        "title": "Drachenfels am Rhein im Sommer",
+        "technik": "Acryl auf Leinwand",
+        "masse": "60 × 70 cm",
+        "kategorie": "landschaften",
+        "desc": "Diesen herrlichen Anblick auf den geschichtsträchtigen Drachenfels kann man von einer sonnigen Bank in Bad Godesberg-Mehlem genießen.",
+        "badge": "Unikat"
+    },
+    "DSC_6638a": {
+        "title": "Godesburg im Sommerlicht",
+        "technik": "Acryl auf Leinwand",
+        "masse": "30 × 24 cm",
+        "kategorie": "landschaften",
+        "desc": "Die Godesburg in Bad Godesberg unter strahlend blauem Sommerhimmel mit lebhaften Grünschattierungen.",
+        "badge": "Unikat"
+    },
+    "DSC_6640a": {
+        "title": "Gasthaus „Zur Lindenwirtin“ mit Godesburg",
+        "technik": "Öl auf Leinwand",
+        "masse": "30 × 40 cm",
+        "kategorie": "landschaften",
+        "desc": "Dieses Werk zeigt eine historische Ansicht des traditionsreichen Gasthauses „Zur Lindenwirtin“ mit der majestätischen Godesburg im Hintergrund.",
+        "badge": "Unikat"
+    },
+    "DSC_6642a": {
+        "title": "Spazierweg Rheinaue Bonn",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Ein idyllischer Spazierweg im Bonner Rheinauenpark führt an diesen wunderschönen, knorrigen alten Parkbäumen vorbei.",
+        "badge": "Unikat"
+    },
+    "DSC_6644a": {
+        "title": "Historische Godesburg Ansicht",
+        "technik": "Acryl auf Leinwand",
+        "masse": "30 × 40 cm",
+        "kategorie": "landschaften",
+        "desc": "Vertikale Architekturstudie der Godesburg mit sanft geschwungenen Hangwegen und warmen Steinfarben.",
+        "badge": "Unikat"
+    },
+    "DSC_6688a": {
+        "title": "Blumenbouquet",
+        "technik": "Acryl auf Karton",
+        "masse": "30 × 30 cm",
+        "kategorie": "pflanzen",
+        "desc": "Farbenfrohes, lebensfrohes Blumenbouquet mit kontrastreichen Blütenarrangements in geschichteter Acryltechnik.",
+        "badge": "Unikat"
+    },
+    "DSC_6689a": {
+        "title": "Kleines Blumenbouquet",
+        "technik": "Öl auf Karton",
+        "masse": "30 × 30 cm",
+        "kategorie": "pflanzen",
+        "desc": "Zartes und detailreiches Blumenbouquet in feiner Ölmalerei mit weichen Übergängen und warmen Blütennuancen.",
+        "badge": "Unikat"
+    },
+    "DSC_6693a": {
+        "title": "Schafe auf Texel",
+        "technik": "Öl auf Leinwand",
+        "masse": "30 × 40 cm",
+        "kategorie": "tiere",
+        "desc": "Im Urlaub auf der Nordseeinsel Texel begegneten uns diese neugierigen, liebenswerten Schafe auf den grünen Deichen.",
+        "badge": "Unikat"
+    },
+    "DSC_6696a": {
+        "title": "Eulen im Kottenforst",
+        "technik": "Öl auf Leinwand",
+        "masse": "30 × 40 cm",
+        "kategorie": "tiere",
+        "desc": "Zwei kleine Eulen nebeneinander auf einem Ast im dämmrigen Kottenforst Bad Godesberg vor geheimnisvoll blauem Hintergrund.",
+        "badge": "Unikat"
+    },
+    "DSC_6698a": {
+        "title": "Blumen modern",
+        "technik": "Acryl auf Leinwand",
+        "masse": "60 × 70 cm",
+        "kategorie": "pflanzen",
+        "desc": "Moderne florale Abstraktion mit dynamischen Pinselstrichen und kräftigen Farbflächen auf großzügigem Leinwandformat.",
+        "badge": "Unikat"
+    },
+    "DSC_6700a": {
+        "title": "Blütenharmonie im Garten",
+        "technik": "Acryl auf Leinwand",
+        "masse": "50 × 60 cm",
+        "kategorie": "pflanzen",
+        "desc": "Frische Blütenkomposition voller Leuchtkraft und natürlicher Eleganz.",
+        "badge": "Unikat"
+    },
+    "DSC_6702a": {
+        "title": "Lustige Hühner",
+        "technik": "Acryl auf Leinwand",
+        "masse": "30 × 60 cm",
+        "kategorie": "tiere",
+        "desc": "Eine heitere Reihe bunter Hühner im charmanten Breitwand-Querformat – voller Lebensfreude und Witz.",
+        "badge": "Unikat"
+    },
+    "DSC_6703a": {
+        "title": "Mohnblumenwiese",
+        "technik": "Acryl auf Leinwand",
+        "masse": "60 × 70 cm",
+        "kategorie": "pflanzen",
+        "desc": "Leuchtend rote Sommer-Mohnblumen wiegen sich im Wind auf einer sonnendurchfluteten Wiese.",
+        "badge": "Unikat"
+    },
+    "DSC_6705a": {
+        "title": "Bunte Tulpenpracht",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 40 cm",
+        "kategorie": "pflanzen",
+        "desc": "Farbenfrohe Frühlings-Tulpen in leuchtenden Acrylfarben im quadratischen Format.",
+        "badge": "Unikat"
+    },
+    "DSC_6707a": {
+        "title": "Heuballen an der französischen Atlantikküste",
+        "technik": "Öl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Der Duft der frischen Heuballen an der französischen Atlantikküste inspirierte mich zu diesem Bild – man kann die Sommerbrise förmlich spüren.",
+        "badge": "Unikat"
+    },
+    "DSC_6710a": {
+        "title": "Dünenweg an der französischen Atlantikküste",
+        "technik": "Acryl auf Leinwand",
+        "masse": "100 × 150 cm",
+        "kategorie": "landschaften",
+        "desc": "Dünenwege laden zur vollkommenen Entspannung ein. Dieser zauberhafte Pfad führt durch den weichen Dünensand direkt ans Meer.",
+        "badge": "Unikat"
+    },
+    "DSC_6711a": {
+        "title": "Muschel am Strand",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "sonstiges",
+        "desc": "Eine einsame Meeresmuschel im warmen Küstensand mit sanften Licht- und Schattenspielen des Meeres.",
+        "badge": "Unikat"
+    },
+    "DSC_6713a": {
+        "title": "Leuchtturm auf Texel",
+        "technik": "Acryl auf Leinwand",
+        "masse": "24 × 30 cm",
+        "kategorie": "landschaften",
+        "desc": "Zahlreiche Urlaube führten uns nach Texel – der weithin sichtbare rote Leuchtturm im Norden der Insel durfte als Motiv nicht fehlen.",
+        "badge": "Unikat"
+    },
+    "DSC_6715a": {
+        "title": "Spazierweg Friedhof Dottendorf (I)",
+        "technik": "Ölkreide auf Papier, Rahmen aus Birkenholz",
+        "masse": "33 × 43 cm",
+        "kategorie": "landschaften",
+        "desc": "Auf Parkbänken kann man wunderbar entspannen und diese friedliche Lieblingsansicht mit sanfter Ölkreide festhalten.",
+        "badge": "Unikat"
+    },
+    "DSC_6717a": {
+        "title": "Spazierweg am Blausteinsee Eschweiler",
+        "technik": "Ölkreide auf Papier, Rahmen aus Birkenholz",
+        "masse": "33 × 43 cm",
+        "kategorie": "landschaften",
+        "desc": "Ein beliebtes Ausflugsziel in der Natur nahe Aachen: Der friedliche Uferweg am Blausteinsee.",
+        "badge": "Unikat"
+    },
+    "DSC_6719a": {
+        "title": "Spazierweg Friedhof Dottendorf (II)",
+        "technik": "Ölkreide auf Papier, Rahmen aus Birkenholz",
+        "masse": "33 × 43 cm",
+        "kategorie": "landschaften",
+        "desc": "Zarte Birkenbäume und herbstliche Stille in Bonn-Dottendorf – handgerahmt in edlem Birkenholz.",
+        "badge": "Unikat"
+    },
+    "DSC_6722a": {
+        "title": "Waldweg Kottenforst Bonn",
+        "technik": "Acryl auf Leinwand",
+        "masse": "30 × 90 cm",
+        "kategorie": "landschaften",
+        "desc": "Dieser sonnendurchflutete Waldweg im Bonner Kottenforst ist einer meiner absoluten Lieblingswege zu jeder Jahreszeit.",
+        "badge": "Unikat"
+    },
+    "DSC_6740a": {
+        "title": "Tulpenbouquet in Öl",
+        "technik": "Öl auf Leinwand",
+        "masse": "40 × 40 cm",
+        "kategorie": "pflanzen",
+        "desc": "Klassische botanische Ölmalerei mit feinen Farbabstufungen und samtigem Glanz.",
+        "badge": "Unikat"
+    },
+    "DSC_6742a": {
+        "title": "Balou – Hundeportrait in Öl",
+        "technik": "Öl auf Leinwand",
+        "masse": "40 × 40 cm",
+        "kategorie": "tiere",
+        "desc": "Unser Familienhund Balou mit seinem treuen Blick und samtweichem Fell in klassischer Ölmalerei verewigt.",
+        "badge": "Unikat"
+    },
+    "DSC_6744a": {
+        "title": "Balou – Hundeportrait modern",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "tiere",
+        "desc": "Moderne Porträtstudie von Balou mit mutigen Farbkontrasten und ausdrucksstarkem Charakter.",
+        "badge": "Unikat"
+    },
+    "DSC_6747a": {
+        "title": "Balou – Hundeportrait Acryl",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "tiere",
+        "desc": "Fein ausgearbeitetes Acrylportrait von Balou mit lebendigen Lichtreflexen in den Augen.",
+        "badge": "Unikat"
+    },
+    "DSC_6749a": {
+        "title": "Magnolientraum",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "pflanzen",
+        "desc": "So eine traumhafte Ansicht erhält man, wenn man im Frühling von unten in einen blühenden rosa Magnolienbaum schaut.",
+        "badge": "Unikat"
+    },
+    "DSC_6751a": {
+        "title": "Klassisches Stillleben",
+        "technik": "Öl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "sonstiges",
+        "desc": "Meisterhaft ausgeleuchtetes Stillleben in traditioneller Schichtölmalerei mit harmonischer Raumtiefe.",
+        "badge": "Unikat"
+    },
+    "DSC_6753a": {
+        "title": "Rote Paprikaschote",
+        "technik": "Acryl auf Leinwand",
+        "masse": "19 × 19 cm",
+        "kategorie": "sonstiges",
+        "desc": "Frische, glänzende Paprikaschote im modernen Kleinformat mit knackigen Glanzlichtern.",
+        "badge": "Unikat"
+    },
+    "DSC_6754a": {
+        "title": "Zitronen",
+        "technik": "Öl auf Leinwand",
+        "masse": "19 × 19 cm",
+        "kategorie": "sonstiges",
+        "desc": "Sonnengereifte Zitronen mit samtiger Schalenstruktur in leuchtendem Zitronengelb.",
+        "badge": "Unikat"
+    },
+    "DSC_6757a": {
+        "title": "Der gallische Hahn",
+        "technik": "Acryl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "tiere",
+        "desc": "Stolzer gallischer Hahn mit feurigem Kamm und stolzem Blick in lebendigem Farbauftrag.",
+        "badge": "Unikat"
+    },
+    "DSC_6759a": {
+        "title": "Frische Erdbeeren",
+        "technik": "Acryl auf Leinwand",
+        "masse": "19 × 19 cm",
+        "kategorie": "sonstiges",
+        "desc": "Sommerlich frische Erdbeeren im quadratischen Miniatur-Format – zum Anbeißen schön.",
+        "badge": "Unikat"
+    },
+    "DSC_6760a": {
+        "title": "Erdbeeren auf blauem Teller",
+        "technik": "Acryl auf Leinwand",
+        "masse": "19 × 19 cm",
+        "kategorie": "sonstiges",
+        "desc": "Satte rote Erdbeeren im wirkungsvollen Farbkontrast auf einem kobaltblauen Keramikteller.",
+        "badge": "Unikat"
+    },
+    "DSC_6763a": {
+        "title": "Bunter Hahn",
+        "technik": "Acryl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "tiere",
+        "desc": "Lebhaftes Vogelportrait mit schillernden Gefiedertönen und charaktervoller Pose.",
+        "badge": "Unikat"
+    },
+    "DSC_6765a": {
+        "title": "Rotkehlchen im Winter",
+        "technik": "Acryl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "tiere",
+        "desc": "Ein bezauberndes Rotkehlchen auf einem Ast mit feinsten Daunen und leuchtend roter Brust.",
+        "badge": "Unikat"
+    },
+    "DSC_6767a": {
+        "title": "Parfum Coco Mademoiselle",
+        "technik": "Acryl auf Leinwand",
+        "masse": "19 × 19 cm",
+        "kategorie": "sonstiges",
+        "desc": "Elegantes Stillleben des legendären Parfum-Klassikers in pudrigen Rosé- und Goldtönen.",
+        "badge": "Unikat"
+    },
+    "DSC_6769a": {
+        "title": "Biene auf Hortensie",
+        "technik": "Acryl auf Leinwand",
+        "masse": "19 × 19 cm",
+        "kategorie": "tiere",
+        "desc": "Eine fleißige Honigbiene inmitten eines dichten Meeres himmelblauer Hortensienblüten.",
+        "badge": "Unikat"
+    },
+    "DSC_6771a": {
+        "title": "Biene auf Lavendel",
+        "technik": "Acryl auf Leinwand",
+        "masse": "19 × 19 cm",
+        "kategorie": "tiere",
+        "desc": "Mediterrane Sommeridylle: Eine Biene bei der Nektarsuche auf duftendem violettem Lavendel.",
+        "badge": "Unikat"
+    },
+    "DSC_6774a": {
+        "title": "Stillleben „Le petit déjeuner“",
+        "technik": "Acryl auf Leinwand",
+        "masse": "19 × 19 cm",
+        "kategorie": "sonstiges",
+        "desc": "Französisches Frühstück mit frischem Buttercroissant und Kaffee in warmem Morgenlicht.",
+        "badge": "Unikat"
+    },
+    "DSC_6775a": {
+        "title": "Kühe in der Normandie (I)",
+        "technik": "Acryl auf Leinwand",
+        "masse": "24 × 30 cm",
+        "kategorie": "tiere",
+        "desc": "Diese beiden neugierigen Kühe begegneten uns bei einem erholsamen Sommerspaziergang in der Normandie.",
+        "badge": "Unikat"
+    },
+    "DSC_6778a": {
+        "title": "Kühe in der Normandie (II)",
+        "technik": "Acryl auf Leinwand",
+        "masse": "24 × 30 cm",
+        "kategorie": "tiere",
+        "desc": "Typische normannische Weidekühe mit ihrer markanten Fleckung in herrlicher Küstenlandschaft.",
+        "badge": "Unikat"
+    },
+    "DSC_6780a": {
+        "title": "Burger & Fries Pop-Art",
+        "technik": "Acryl auf Leinwand",
+        "masse": "24 × 30 cm",
+        "kategorie": "sonstiges",
+        "desc": "Köstlicher Burger mit knusprigen Pommes Frites als modernes, farbintensives Pop-Art Stillleben.",
+        "badge": "Unikat"
+    },
+    "DSC_6782a": {
+        "title": "Seerose im Botanischen Garten Bonn",
+        "technik": "Öl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "pflanzen",
+        "desc": "Zauberhafte weiße Seerose auf ruhigem Teichwasser im historischen Botanischen Garten Bonn.",
+        "badge": "Unikat"
+    },
+    "DSC_6784a": {
+        "title": "Gelbe Frühlings-Tulpen",
+        "technik": "Öl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "pflanzen",
+        "desc": "Strahlend sonnengelbe Tulpen in zarter Schichtölmalerei mit stimmungsvoller Tiefenwirkung.",
+        "badge": "Unikat"
+    },
+    "DSC_6788a": {
+        "title": "Aperol Spritz",
+        "technik": "Acryl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "sonstiges",
+        "desc": "Erfrischender Aperol Spritz im Weinglas mit Orangenscheibe und klaren Eiswürfeln.",
+        "badge": "Unikat"
+    },
+    "DSC_6790a": {
+        "title": "Kühles Bier im Glas",
+        "technik": "Acryl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "sonstiges",
+        "desc": "Frisch gezapftes, perlendes Bier mit goldgelber Farbe und dichter weißer Schaumkrone.",
+        "badge": "Unikat"
+    }
+};
+
 let visibleGalleryLinks = [];
 let currentIndex = 0;
 let activeCategory = 'alle';
@@ -279,14 +706,20 @@ function openCertModal() {
     const modal = document.getElementById('certModal');
     const titleVal = document.getElementById('cert-title-val');
     const idVal = document.getElementById('cert-id-val');
+    const technikVal = document.getElementById('cert-technik-val');
+    const sizeVal = document.getElementById('cert-size-val');
     if (modal) {
         if (visibleGalleryLinks[currentIndex]) {
             const link = visibleGalleryLinks[currentIndex];
             const item = link.closest('.gallery-item');
             const itemId = item ? item.id : 'MS-2026';
+            const artMeta = (itemId && typeof ARTWORKS_METADATA !== 'undefined' && ARTWORKS_METADATA[itemId]) ? ARTWORKS_METADATA[itemId] : null;
             const img = link.querySelector('img');
-            if (titleVal) titleVal.innerText = img ? (img.alt || 'Original Gemälde') : 'Original Gemälde';
+            
+            if (titleVal) titleVal.innerText = artMeta ? artMeta.title : (img ? (img.alt || 'Original Gemälde') : 'Original Gemälde');
             if (idVal) idVal.innerText = `#${itemId || 'MS-2026'}`;
+            if (technikVal && artMeta) technikVal.innerText = artMeta.technik;
+            if (sizeVal && artMeta) sizeVal.innerText = artMeta.masse;
         }
         modal.style.display = 'flex';
     }
@@ -303,8 +736,12 @@ function openSizeModal() {
     const tag = document.getElementById('size-dimensions-tag');
     if (modal) {
         if (visibleGalleryLinks[currentIndex] && img) {
-            img.src = visibleGalleryLinks[currentIndex].href;
-            if (tag) tag.innerText = 'ca. 120 × 80 cm';
+            const link = visibleGalleryLinks[currentIndex];
+            const item = link.closest('.gallery-item');
+            const itemId = item ? item.id : '';
+            const artMeta = (itemId && typeof ARTWORKS_METADATA !== 'undefined' && ARTWORKS_METADATA[itemId]) ? ARTWORKS_METADATA[itemId] : null;
+            img.src = link.href;
+            if (tag) tag.innerText = artMeta ? artMeta.masse : 'ca. 40 × 50 cm';
         }
         modal.style.display = 'flex';
     }
@@ -1060,31 +1497,33 @@ document.addEventListener('DOMContentLoaded', function () {
         const infoTitle = document.getElementById('lightbox-info-title');
         const infoDesc = document.getElementById('lightbox-info-description');
         const detailTechnik = document.getElementById('lb-detail-technik');
+        const detailMasse = document.getElementById('lb-detail-masse');
         const detailKat = document.getElementById('lb-detail-kat');
         const statusBadge = document.getElementById('lightbox-status-badge');
 
-        if (infoTitle) infoTitle.innerText = titleText || 'Handgemaltes Unikat';
-        if (infoDesc) {
-            infoDesc.innerText = `Dieses einzigartige Werk wurde von Manuela Schenk in sorgfältiger Handarbeit gefertigt. Jedes Motiv ist ein Unikat mit lebendigen Farbakzenten.`;
-        }
+        const artMeta = (itemId && typeof ARTWORKS_METADATA !== 'undefined' && ARTWORKS_METADATA[itemId]) ? ARTWORKS_METADATA[itemId] : null;
 
-        const dataKat = item ? (item.getAttribute('data-kategorie') || 'Kunstwerk') : 'Kunstwerk';
-        if (detailKat) detailKat.innerText = dataKat.charAt(0).toUpperCase() + dataKat.slice(1);
-        if (detailTechnik) detailTechnik.innerText = 'Acryl / Öl auf Leinwand';
+        const realTitle = artMeta ? artMeta.title : (titleText || 'Handgemaltes Unikat');
+        const realDesc = artMeta ? artMeta.desc : 'Dieses einzigartige Werk wurde von Manuela Schenk in sorgfältiger Handarbeit gefertigt.';
+        const realTechnik = artMeta ? artMeta.technik : 'Acryl / Öl auf Leinwand';
+        const realMasse = artMeta ? artMeta.masse : 'Unikatmaß';
+        const realKat = artMeta ? artMeta.kategorie : (item ? (item.getAttribute('data-kategorie') || 'Kunstwerk') : 'Kunstwerk');
+        const realBadge = artMeta ? artMeta.badge : (item && item.querySelector('.gallery-badge') ? item.querySelector('.gallery-badge').innerText : 'Unikat');
+
+        if (infoTitle) infoTitle.innerText = realTitle;
+        if (infoDesc) infoDesc.innerText = realDesc;
+        if (detailTechnik) detailTechnik.innerText = realTechnik;
+        if (detailMasse) detailMasse.innerText = realMasse;
+        if (detailKat) detailKat.innerText = realKat.charAt(0).toUpperCase() + realKat.slice(1);
 
         if (statusBadge) {
-            const badgeInside = item ? item.querySelector('.gallery-badge') : null;
-            if (badgeInside) {
-                statusBadge.innerText = badgeInside.innerText;
-                statusBadge.className = badgeInside.className + ' lightbox-meta-badge';
-                statusBadge.style.display = 'inline-block';
-            } else {
-                statusBadge.style.display = 'none';
-            }
+            statusBadge.innerText = realBadge;
+            statusBadge.className = 'gallery-badge badge-unikat lightbox-meta-badge';
+            statusBadge.style.display = 'inline-block';
         }
 
         if (captionText) {
-            captionText.innerHTML = titleText;
+            captionText.innerHTML = `${realTitle} <span class="caption-meta font-size-085rem color-text-muted">(${realTechnik}, ${realMasse})</span>`;
         }
 
         // Bildzähler
@@ -1094,7 +1533,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // WhatsApp Link
         if (lbWhatsappBtn) {
-            const waMsg = `Hallo Manuela, ich habe Interesse am Kunstwerk "${titleText}" (${itemId || link.href}) aus deiner Galerie.`;
+            const waMsg = `Hallo Manuela, ich habe Interesse am Kunstwerk "${realTitle}" (${realTechnik}, ${realMasse}) [#${itemId || 'Galerie'}] aus deiner Bildergalerie.`;
             lbWhatsappBtn.href = `https://wa.me/491632662435?text=${encodeURIComponent(waMsg)}`;
         }
 
