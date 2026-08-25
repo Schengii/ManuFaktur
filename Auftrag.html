@@ -31,6 +31,17 @@
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
   <!-- CSS: alle Konfigurator-Styles jetzt in style.css (Abschnitt 10) -->
   <link rel="stylesheet" type="text/css" href="style.min.css?v=4">
+  <script>
+    (function(){
+      try{
+        var t=localStorage.getItem('manufaktur_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+        document.documentElement.setAttribute('data-theme',t);
+        if(t==='dark')document.documentElement.classList.add('dark-mode');
+        var l=localStorage.getItem('manufaktur_lang')||'de';
+        document.documentElement.setAttribute('lang',l);
+      }catch(e){}
+    })();
+  </script>
 
   <!-- SEO Schema.org Strukturierte Daten -->
   <script type="application/ld+json">

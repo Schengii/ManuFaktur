@@ -4,51 +4,182 @@
    ========================================= */
 
 /* =========================================
+   0. THEME & LANGUAGE MANAGEMENT
+   ========================================= */
+let currentLang = 'de';
+let currentTheme = 'light';
+
+try {
+    currentLang = localStorage.getItem('manufaktur_lang') || 'de';
+    currentTheme = localStorage.getItem('manufaktur_theme') || 
+        (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+} catch (e) {
+    currentLang = 'de';
+    currentTheme = 'light';
+}
+
+function getTheme() {
+    return currentTheme;
+}
+
+function setTheme(theme) {
+    currentTheme = (theme === 'dark') ? 'dark' : 'light';
+    try {
+        localStorage.setItem('manufaktur_theme', currentTheme);
+    } catch (e) {}
+    
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (document.body) {
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    }
+    updateThemeButtonUI();
+}
+
+function toggleTheme() {
+    const newTheme = (currentTheme === 'dark') ? 'light' : 'dark';
+    setTheme(newTheme);
+    showToast(currentLang === 'en' 
+        ? (newTheme === 'dark' ? '🌙 Dark mode activated' : '☀️ Light mode activated')
+        : (newTheme === 'dark' ? '🌙 Dunkelmodus aktiviert' : '☀️ Hellmodus aktiviert'));
+}
+
+function updateThemeButtonUI() {
+    const btn = document.getElementById('theme-toggle-btn');
+    const icon = document.getElementById('theme-toggle-icon');
+    const text = document.getElementById('theme-toggle-text');
+    if (!btn) return;
+    const isDark = currentTheme === 'dark';
+    if (icon) {
+        icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    }
+    if (text) {
+        if (currentLang === 'en') {
+            text.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+        } else {
+            text.textContent = isDark ? 'Hellmodus' : 'Dunkelmodus';
+        }
+    }
+    btn.setAttribute('aria-label', isDark 
+        ? (currentLang === 'en' ? 'Switch to Light Mode' : 'Zu Hellmodus wechseln')
+        : (currentLang === 'en' ? 'Switch to Dark Mode' : 'Zu Dunkelmodus wechseln'));
+}
+
+function getLanguage() {
+    return currentLang;
+}
+
+function setLanguage(lang) {
+    currentLang = (lang === 'en') ? 'en' : 'de';
+    try {
+        localStorage.setItem('manufaktur_lang', currentLang);
+    } catch (e) {}
+    document.documentElement.setAttribute('lang', currentLang);
+    
+    // Header & Footer aktualisieren
+    const path = window.location.pathname;
+    const filename = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
+    const headerEl = document.querySelector('header');
+    if (headerEl) {
+        headerEl.outerHTML = getNavHTML(filename);
+        initHamburgerMenu();
+    }
+    const footerEl = document.querySelector('footer');
+    if (footerEl) {
+        footerEl.outerHTML = getFooterHTML();
+    }
+    
+    applyTranslations(currentLang);
+    updateLanguageButtonUI();
+    updateThemeButtonUI();
+    
+    // Galerie Filter & Suche aktualisieren falls vorhanden
+    if (typeof filterGallery === 'function') {
+        filterGallery();
+    }
+}
+
+function toggleLanguage() {
+    const newLang = (currentLang === 'de') ? 'en' : 'de';
+    setLanguage(newLang);
+    showToast(newLang === 'en' ? '🇬🇧 Switched to English' : '🇩🇪 Auf Deutsch gewechselt');
+}
+
+function updateLanguageButtonUI() {
+    const btn = document.getElementById('lang-toggle-btn');
+    const text = document.getElementById('lang-toggle-text');
+    if (!btn) return;
+    if (text) {
+        text.textContent = currentLang === 'de' ? 'EN (English)' : 'DE (Deutsch)';
+    }
+    btn.setAttribute('aria-label', currentLang === 'de' ? 'Sprache zu Englisch wechseln' : 'Switch language to German');
+}
+
+/* =========================================
    1. SHARED COMPONENTS (Nav & Footer)
    ========================================= */
+
+function initHamburgerMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger && navLinks) {
+        hamburger.onclick = function () {
+            const active = navLinks.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', active ? 'true' : 'false');
+            const icon = hamburger.querySelector('i');
+            if (icon) {
+                icon.className = active ? 'fa fa-close' : 'fa fa-bars';
+            }
+        };
+    }
+}
 
 /**
  * Gibt den HTML-String der gemeinsamen Navigation zurück.
  * Der aktive Link wird anhand der aktuellen URL gesetzt.
  */
 function getNavHTML(activePage) {
+    const isEn = currentLang === 'en';
     const links = [
-        { href: 'Home.html', icon: 'fa fa-home', label: 'Start' },
-        { href: 'UeberMich.html', icon: 'fa-solid fa-address-card', label: 'Über mich' },
-        { href: 'Leistungen.html', icon: 'fa fa-palette', label: 'Leistungen' },
-        { href: 'Bildergalerie.html', icon: 'fa fa-images', label: 'Galerie' },
-        { href: 'Auftrag.html', icon: 'fa fa-pen-ruler', label: 'Auftrag', title: 'Auftrag konfigurieren' },
+        { href: 'Home.html', icon: 'fa fa-home', label: isEn ? 'Home' : 'Start' },
+        { href: 'UeberMich.html', icon: 'fa-solid fa-address-card', label: isEn ? 'About Me' : 'Über mich' },
+        { href: 'Leistungen.html', icon: 'fa fa-palette', label: isEn ? 'Services' : 'Leistungen' },
+        { href: 'Bildergalerie.html', icon: 'fa fa-images', label: isEn ? 'Gallery' : 'Galerie' },
+        { href: 'Auftrag.html', icon: 'fa fa-pen-ruler', label: isEn ? 'Commission' : 'Auftrag', title: isEn ? 'Configure Commission' : 'Auftrag konfigurieren' },
     ];
 
     const navItems = links.map(l => {
         const isActive = activePage === l.href;
-        return `<li${isActive ? ' class="active"' : ''}><a href="${l.href}"${l.title ? ` title="${l.title}"` : ''}><i class="${l.icon}" aria-hidden="true"></i> ${l.label}</a></li>`;
+        return `<li${isActive ? ' class="active"' : ''}><a href="${l.href}"${l.title ? ` title="${l.title}"` : ''}><i class="${l.icon}" aria-hidden="true"></i> <span>${l.label}</span></a></li>`;
     }).join('\n            ');
 
     const isKontaktActive = ['Kontakt.html', 'Impressum.html', 'Datenschutz.html'].includes(activePage);
 
     return `
   <header>
-    <nav aria-label="Hauptmenü">
+    <nav aria-label="${isEn ? 'Main navigation' : 'Hauptmenü'}">
       <div class="nav-brand">
-        <a href="Home.html" class="headline" aria-label="ManuFAKTUR Startseite" title="Startseite">
+        <a href="Home.html" class="headline" aria-label="${isEn ? 'ManuFAKTUR Home' : 'ManuFAKTUR Startseite'}" title="${isEn ? 'Home' : 'Startseite'}">
           <img src="assets/images/logos/logo-transparent.png" alt="ManuFAKTUR Schenk Logo" class="nav-logo">
         </a>
       </div>
-      <button class="hamburger" aria-label="Menü öffnen" aria-expanded="false">
+      <button class="hamburger" aria-label="${isEn ? 'Open menu' : 'Menü öffnen'}" aria-expanded="false">
         <i class="fa fa-bars" aria-hidden="true"></i>
       </button>
       <ul class="nav-links">
             ${navItems}
             <li class="dropdown${isKontaktActive ? ' active' : ''}">
-              <a href="Kontakt.html" class="cursor-pointer" title="Kontakt">
-                <i class="fa-solid fa-envelope" aria-hidden="true"></i> Kontakt
+              <a href="Kontakt.html" class="cursor-pointer" title="${isEn ? 'Contact' : 'Kontakt'}">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i> <span>${isEn ? 'Contact' : 'Kontakt'}</span>
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
               </a>
               <div class="dropdown-content">
-                <a href="Kontakt.html"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Kontaktformular</a>
-                <a href="Impressum.html"><i class="fa-solid fa-paragraph" aria-hidden="true"></i> Impressum</a>
-                <a href="Datenschutz.html"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Datenschutz</a>
+                <a href="Kontakt.html"><i class="fa-solid fa-envelope" aria-hidden="true"></i> <span>${isEn ? 'Contact Form' : 'Kontaktformular'}</span></a>
+                <a href="Impressum.html"><i class="fa-solid fa-paragraph" aria-hidden="true"></i> <span>${isEn ? 'Imprint' : 'Impressum'}</span></a>
+                <a href="Datenschutz.html"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> <span>${isEn ? 'Privacy Policy' : 'Datenschutz'}</span></a>
               </div>
             </li>
       </ul>
@@ -60,30 +191,45 @@ function getNavHTML(activePage) {
  * Gibt den HTML-String des gemeinsamen Footers zurück.
  */
 function getFooterHTML() {
+    const isEn = currentLang === 'en';
+    const isDark = currentTheme === 'dark';
     return `
   <footer>
     <div class="footer-section">
       <h4>ManuFAKTUR</h4>
-      <i class="fa fa-envelope" aria-hidden="true"></i>
-          <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>
-      <p><i class="fa fa-phone" aria-hidden="true"></i> Telefon: Auf Anfrage</p>
+      <p class="footer-tagline">${isEn ? 'Custom Paintings & Craftsmanship' : 'Individuelle Malerei & Handwerkskunst'}</p>
+      <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a></p>
+      <p><i class="fa fa-phone" aria-hidden="true"></i> <span id="footer-phone-text">${isEn ? 'Phone: Upon Request' : 'Telefon: Auf Anfrage'}</span></p>
     </div>
     <div class="footer-section">
       <h4>Manuela Schenk</h4>
-      <p>53175 Bonn &bull; Deutschland</p>
+      <p>53175 Bonn &bull; ${isEn ? 'Germany' : 'Deutschland'}</p>
       <div class="social-icons">
-        <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" rel="noopener" class="instagram" aria-label="Folge uns auf Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
-        <a href="https://wa.me/491632662435" target="_blank" rel="noopener" class="whatsapp" aria-label="Kontaktiere uns auf WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
-        <a href="https://www.linkedin.com/in/manuela-schenk" target="_blank" rel="noopener" class="linkedin" aria-label="Verbinde dich auf LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" rel="noopener" class="instagram" aria-label="${isEn ? 'Follow on Instagram' : 'Folge uns auf Instagram'}"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a href="https://wa.me/491632662435" target="_blank" rel="noopener" class="whatsapp" aria-label="${isEn ? 'Contact on WhatsApp' : 'Kontaktiere uns auf WhatsApp'}"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="https://www.linkedin.com/in/manuela-schenk" target="_blank" rel="noopener" class="linkedin" aria-label="${isEn ? 'Connect on LinkedIn' : 'Verbinde dich auf LinkedIn'}"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
       </div>
     </div>
     <div class="footer-section">
-      <h4>Rechtliches</h4>
+      <h4>${isEn ? 'Legal' : 'Rechtliches'}</h4>
       <p>&copy; ${new Date().getFullYear()} ManuFAKTUR Schenk</p>
       <p class="font-size-09rem">
-        <a href="Impressum.html">Impressum</a> |
-        <a href="Datenschutz.html">Datenschutz</a>
+        <a href="Impressum.html">${isEn ? 'Imprint' : 'Impressum'}</a> |
+        <a href="Datenschutz.html">${isEn ? 'Privacy Policy' : 'Datenschutz'}</a>
       </p>
+    </div>
+    <div class="footer-section footer-settings">
+      <h4>${isEn ? 'Preferences' : 'Einstellungen'}</h4>
+      <div class="footer-controls-group">
+        <button type="button" id="theme-toggle-btn" class="footer-toggle-btn" onclick="toggleTheme()" aria-label="${isDark ? (isEn ? 'Switch to Light Mode' : 'Zu Hellmodus wechseln') : (isEn ? 'Switch to Dark Mode' : 'Zu Dunkelmodus wechseln')}" title="${isEn ? 'Toggle Dark / Light Mode' : 'Dark / Light Mode wechseln'}">
+          <i class="${isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon'}" id="theme-toggle-icon" aria-hidden="true"></i>
+          <span id="theme-toggle-text">${isDark ? (isEn ? 'Light Mode' : 'Hellmodus') : (isEn ? 'Dark Mode' : 'Dunkelmodus')}</span>
+        </button>
+        <button type="button" id="lang-toggle-btn" class="footer-toggle-btn" onclick="toggleLanguage()" aria-label="${isEn ? 'Switch to German' : 'Sprache zu Englisch wechseln'}" title="${isEn ? 'Switch to German' : 'Auf Englisch wechseln'}">
+          <i class="fa-solid fa-globe" aria-hidden="true"></i>
+          <span id="lang-toggle-text">${isEn ? 'DE (Deutsch)' : 'EN (English)'}</span>
+        </button>
+      </div>
     </div>
   </footer>`;
 }
@@ -95,6 +241,13 @@ function getFooterHTML() {
 (function injectSharedComponents() {
     const path = window.location.pathname;
     const filename = path.substring(path.lastIndexOf('/') + 1) || 'index.html';
+
+    // Theme & Lang sofort anwenden
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (document.body && currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+    document.documentElement.setAttribute('lang', currentLang);
 
     // Header nur auf Nicht-Hero-Seiten injizieren
     const headerEl = document.querySelector('header');
@@ -108,6 +261,538 @@ function getFooterHTML() {
         footerEl.outerHTML = getFooterHTML();
     }
 })();
+
+/* =========================================
+   BILINGUAL TRANSLATION DICTIONARY
+   ========================================= */
+const I18N_DICTIONARY = {
+    de: {
+        skip_link: 'Zum Hauptinhalt springen',
+        back_to_top: 'Nach oben',
+        hero_title: 'ManuFAKTUR',
+        hero_subtitle: 'Individuelle Malerei & Handwerkskunst',
+        hero_btn: 'Entdecke mehr!',
+        home_welcome_title: 'Herzlich Willkommen',
+        home_welcome_text: 'Hier entstehen meine Bilder, alle von mir in liebevoller Detailarbeit handgemalt.<br>Qualität und Individualität sind mein Markenzeichen. Ich male für Dich Tierportraits oder Landschaften.',
+        badge_handpainted: '100% Handgemalt',
+        badge_studio: 'Atelier aus Bonn',
+        badge_shipping: 'Versandkostenfrei in DE',
+        badge_detail: 'Liebevolle Detailarbeit',
+        news_title: 'Neuigkeiten',
+        news_1_date: '01. Dezember 2025',
+        news_1_title: 'Adventszeit',
+        news_1_text: 'Ab sofort male ich auch individuelle Motive für den Advent.',
+        news_2_date: '22. November 2025',
+        news_2_title: 'Weihnachtskarten jetzt verfügbar!',
+        news_2_text: 'Ab sofort male ich auch individuelle Motive für Weihnachtskarten.',
+        news_3_date: '10. Oktober 2025',
+        news_3_title: 'Neue Tierportraits in der Galerie',
+        news_3_text: 'Meine Bildergalerie wurde um viele neue Werke erweitert. Schau gerne vorbei und lass Dich inspirieren!',
+        highlights_title: 'Aktuelle Highlights',
+        highlights_intro: 'Eine kleine Auswahl meiner neuesten Gemälde aus dem Jahr 2025.',
+        testimonials_title: 'Das sagen meine Kunden',
+        testimonials_intro: 'Echte Erfahrungen & Rückmeldungen von begeisterten Meistbestellern:',
+        cta_title: 'Bereit für Dein individuelles Kunstwerk?',
+        cta_text: 'Entdecke die Vielfalt handgemalter Originale oder lass Dein ganz persönliches Wunschmotiv anfertigen.',
+        cta_btn_order: 'Jetzt Auftrag anfragen',
+        cta_btn_gallery: 'Galerie entdecken',
+        about_page_title: 'Über mich',
+        about_intro: 'Lerne die Künstlerin hinter den Bildern kennen.',
+        about_profile_title: 'Steckbrief',
+        about_profile_loc: 'Bonn (Bad Godesberg)',
+        about_profile_dog: 'Balou',
+        about_profile_motifs: 'Tierportraits, Lieblingsorte & Landschaften',
+        about_profile_tech: 'Acryl, Öl, Ölkreide, Mischtechniken',
+        about_profile_edu: 'Alanus Hochschule Alfter, Art Studio Maryam Khalili',
+        about_profile_motive: 'Freude am Festhalten lebendiger Emotionen & Momente',
+        about_greeting: 'Hallo, ich bin Manuela,',
+        about_subtitle: '...Künstlerin aus Bonn, Hundeliebhaberin und Frauchen von Balou',
+        about_p1: 'Ich liebe es, <strong>besondere Momente</strong>, <strong>Tiere</strong> oder <strong>Landschaften</strong> mit Pinsel und lebendigen Farben auf Leinwand oder handgeschöpftem Papier festzuhalten.',
+        about_p2: 'Meine Werke erzählen Geschichten: sei es der treue Blick eines Hundes, die Weite der französischen Atlantikküste oder historische Impressionen meiner Heimat Bonn und des Siebengebirges.',
+        about_p3: 'Ich male das, was mich berührt und fasziniert – in traditioneller <strong>Ölmalerei</strong>, leuchtenden <strong>Acrylfarben</strong> sowie feinen <strong>Ölkreide- und Multimediatechniken</strong>.',
+        about_p4: 'Jedes Bild ist ein handgemaltes Unikat, welches mit viel Liebe zum Detail und fundiertem künstlerischen Handwerk entsteht.',
+        about_p5: 'Gerne male ich auch Dein persönliches Wunschmotiv! Schau Dir meine <a href="Leistungen.html">Leistungen</a> an oder schreibe mir direkt über das <a href="Kontakt.html">Kontaktformular</a>.',
+        services_page_title: 'Leistungen',
+        services_intro: 'Individuelle Kunstwerke, ganz nach deinen Vorstellungen gestaltet.',
+        services_offer_title: 'Was ich anbiete',
+        service_dog_title: 'Dein Hund auf Leinwand',
+        service_dog_desc: 'Du hast Dir schon immer mal ein einzigartiges Portrait Deines treuen Begleiters gewünscht? Egal ob weißer Malteser oder schwarzer Labrador - jeder Hund ist ein besonderes Motiv.',
+        service_pets_title: 'Weitere tierische Freunde',
+        service_pets_desc: 'Natürlich male ich nicht nur Hunde! Auch andere tierische Familienmitglieder wie Papageien, Katzen oder auch Wildtiere sind wunderbare Motive für ausdrucksstarke Gemälde.',
+        service_places_title: 'Deine Lieblingsorte',
+        service_places_desc: 'Besondere Landschaften und Orte haben eine ganz eigene Magie. Wenn du solche Lieblingsorte hast, zaubere ich sie Dir als dauerhaftes Erinnerungsstück auf Leinwand.',
+        service_formats_title: 'Mögliche Formate',
+        service_formats_desc: 'Für Dein einzigartiges Kunstwerk biete ich verschiedene Größen und Formate an. Da alle Bilder mit viel Zeit und Liebe gemalt werden, mache ich Dir auf Anfrage gerne ein individuelles Angebot.',
+        ba_title: 'Vom Foto zum Kunstwerk (Vorher / Nachher)',
+        ba_hint: 'Ziehe den Schieberegler hin und her, um die Verwandlung von der Fotovorlage zum fertigen Gemälde zu sehen:',
+        ba_photo: 'Originalfoto',
+        ba_painting: 'Handgemaltes Gemälde',
+        steps_title: 'In 4 einfachen Schritten zu Deinem Kunstwerk',
+        step_1_title: '1. Fotovorlage senden',
+        step_1_desc: 'Sende mir ein oder mehrere Fotos Deines Tieres oder Deines Lieblingsortes.',
+        step_2_title: '2. Format & Technik abstimmen',
+        step_2_desc: 'Gemeinsam wählen wir die ideale Größe und Maltechnik (Acryl, Öl oder Mischtechnik).',
+        step_3_title: '3. Entstehung im Atelier',
+        step_3_desc: 'Mit viel Liebe zum Detail und hochwertigen Künstlerfarben entsteht Dein Unikat.',
+        step_4_title: '4. Sicherer Versand',
+        step_4_desc: 'Sorgfältig verpackt und versichert kommt Dein Bild direkt zu Dir nach Hause.',
+        faq_title: 'Häufig gestellte Fragen (FAQ)',
+        faq_1_q: 'Welche Qualität muss die Fotovorlage haben?',
+        faq_1_a: 'Je schärfer das Foto, desto mehr Details kann ich malen. Ein klares Handyfoto bei Tageslicht, auf dem Augen und Fellstruktur gut zu erkennen sind, reicht meistens völlig aus.',
+        faq_2_q: 'Wie lange dauert die Erstellung eines Bildes?',
+        faq_2_a: 'Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel 2 bis 4 Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!',
+        faq_3_q: 'Wie lange dauert der Versand?',
+        faq_3_a: 'Der Versand innerhalb Deutschlands dauert nach Fertigstellung und Durchtrocknung meist 2 bis 4 Werktage (versichert mit Sendungsverfolgung).',
+        faq_4_q: 'Wie läuft die Bezahlung ab?',
+        faq_4_a: 'Nach Fertigstellung sende ich Dir ein hochauflösendes Foto des Bildes. Erst wenn Du vollkommen zufrieden bist, begleichst Du die Rechnung bequem per Überweisung oder PayPal.',
+        gallery_page_title: 'Bildergalerie',
+        gallery_intro: 'Entdecke meine handgemalten Unikate aus verschiedenen Schaffensphasen.',
+        filter_all: 'Alle Werke',
+        filter_animals: 'Tiere',
+        filter_landscapes: 'Landschaften',
+        filter_plants: 'Pflanzen',
+        filter_other: 'Sonstiges',
+        filter_favorites: '❤️ Favoriten',
+        search_placeholder: 'Gemälde, Motive oder Techniken durchsuchen...',
+        sort_label: 'Sortierung:',
+        sort_default: 'Standard',
+        sort_title_asc: 'Titel (A-Z)',
+        sort_title_desc: 'Titel (Z-A)',
+        format_label: 'Format:',
+        color_label: 'Farbe:',
+        lb_btn_inquiry: 'Motiv als Auftrag anfragen',
+        lb_btn_room: 'In deinem Raum ansehen',
+        lb_btn_fav_add: 'Zu Favoriten hinzufügen',
+        lb_btn_fav_remove: 'Aus Favoriten entfernen',
+        lb_rotate: '90° Drehen',
+        lb_zoom: 'Lupe Zoom',
+        lb_center: 'Zentrieren',
+        room_modal_title: 'In deinem Raum ansehen',
+        room_modal_desc: 'Erlebe das Gemälde maßstabsgetreu in verschiedenen Raumkulissen oder auf deiner eigenen Wand.',
+        room_preset_living: 'Modernes Wohnzimmer',
+        room_preset_bedroom: 'Schlafzimmer',
+        room_preset_gallery: 'Galerie-Wand',
+        room_btn_close: 'Schließen',
+        order_page_title: 'Auftrag konfigurieren',
+        order_intro: 'In nur 4 Schritten zu deinem individuellen Kunstwerk – erhalte eine unverbindliche Preisschätzung und sende deine Anfrage direkt ab.',
+        step_1_lbl: 'Motiv',
+        step_2_lbl: 'Format',
+        step_3_lbl: 'Technik',
+        step_4_lbl: 'Zusammenfassung',
+        step_1_heading: 'Schritt 1: Wähle dein Motiv',
+        step_1_sub: 'Was soll auf deinem einzigartigen Kunstwerk zu sehen sein?',
+        step_2_heading: 'Schritt 2: Wähle das gewünschte Format',
+        step_2_sub: 'Welche Größe passt am besten in dein Zuhause?',
+        step_3_heading: 'Schritt 3: Wähle die Maltechnik',
+        step_3_sub: 'Welcher Malstil und welche Farbgebung sprechen dich am meisten an?',
+        step_4_heading: 'Schritt 4: Zusammenfassung & Anfrage',
+        step_4_sub: 'Überprüfe deine Konfiguration und sende deine unverbindliche Anfrage an Manuela ab.',
+        calc_title: 'Preiskalkulator',
+        calc_price_label: 'Geschätzter Richtpreis:',
+        contact_page_title: 'Kontakt',
+        contact_intro: 'Ich freue mich über Deine Nachricht, Fragen zu meinen Werken oder Auftragsanfragen.',
+        contact_direct_title: 'Direkter Kontakt',
+        contact_studio_title: 'Atelier Standort',
+        contact_studio_desc: 'Bonn, Deutschland (Besuche nach Absprache)',
+        contact_form_title: 'Nachricht schreiben',
+        contact_btn_send: 'Nachricht senden',
+        map_title: 'Google Maps Karte aktivieren',
+        map_text: 'Aus Datenschutzgründen wird die interaktive Karte erst nach einem Klick geladen.',
+        map_btn: 'Karte laden',
+        imprint_page_title: 'Impressum',
+        imprint_intro: 'Gesetzliche Anbieterkennzeichnung und Angaben gemäß § 5 DDG.',
+        privacy_page_title: 'Datenschutzerklärung',
+        privacy_intro: 'Informationen über die Verarbeitung deiner personenbezogenen Daten.',
+        notfound_title: 'Seite nicht gefunden',
+        notfound_text: 'Die aufgerufene Seite existiert leider nicht oder wurde verschoben.',
+        notfound_btn: 'Zur Startseite'
+    },
+    en: {
+        skip_link: 'Skip to main content',
+        back_to_top: 'Back to top',
+        hero_title: 'ManuFAKTUR',
+        hero_subtitle: 'Custom Paintings & Craftsmanship',
+        hero_btn: 'Discover More!',
+        home_welcome_title: 'Welcome',
+        home_welcome_text: 'Here my paintings come to life, all lovingly hand-painted by me in exquisite detail.<br>Quality and individuality are my hallmarks. I create custom animal portraits and landscapes for you.',
+        badge_handpainted: '100% Hand-painted',
+        badge_studio: 'Studio in Bonn, Germany',
+        badge_shipping: 'Free Shipping in DE',
+        badge_detail: 'Loving Attention to Detail',
+        news_title: 'Latest News',
+        news_1_date: 'December 01, 2025',
+        news_1_title: 'Advent Season',
+        news_1_text: 'Custom holiday and winter motifs are now available upon request.',
+        news_2_date: 'November 22, 2025',
+        news_2_title: 'Christmas Cards Available Now!',
+        news_2_text: 'I am now painting individual custom motifs for fine art Christmas cards.',
+        news_3_date: 'October 10, 2025',
+        news_3_title: 'New Animal Portraits in Gallery',
+        news_3_text: 'My art gallery has been enriched with many new original works. Come explore and get inspired!',
+        highlights_title: 'Current Highlights',
+        highlights_intro: 'A curated selection of my newest original paintings from 2025.',
+        testimonials_title: 'What My Clients Say',
+        testimonials_intro: 'Genuine experiences & feedback from happy art enthusiasts:',
+        cta_title: 'Ready for Your Custom Artwork?',
+        cta_text: 'Discover the collection of hand-painted originals or commission your very own personal motif.',
+        cta_btn_order: 'Request Commission Now',
+        cta_btn_gallery: 'Explore Gallery',
+        about_page_title: 'About Me',
+        about_intro: 'Get to know the artist behind the canvas.',
+        about_profile_title: 'Profile',
+        about_profile_loc: 'Bonn (Bad Godesberg), Germany',
+        about_profile_dog: 'Balou',
+        about_profile_motifs: 'Animal portraits, favorite places & landscapes',
+        about_profile_tech: 'Acrylic, Oil, Oil Pastel, Mixed Media',
+        about_profile_edu: 'Alanus University Alfter, Art Studio Maryam Khalili',
+        about_profile_motive: 'The joy of capturing vibrant emotions & living moments',
+        about_greeting: 'Hello, I am Manuela,',
+        about_subtitle: '...artist from Bonn, dog lover and owner of Balou',
+        about_p1: 'I love capturing <strong>special moments</strong>, <strong>animals</strong> or <strong>landscapes</strong> with fine brushes and vivid pigments on high-grade canvas or handmade cotton paper.',
+        about_p2: 'My paintings tell heartfelt stories: whether the loyal gaze of a dog, the serenity of the French Atlantic coast, or historic impressions of my home city Bonn and the Siebengebirge.',
+        about_p3: 'I paint what inspires and touches me – in traditional <strong>oil painting</strong>, radiant <strong>acrylic colors</strong>, and nuanced <strong>oil pastel and mixed media techniques</strong>.',
+        about_p4: 'Every single artwork is a hand-painted unique original created with great attention to detail and proven artistic craftsmanship.',
+        about_p5: 'I would be delighted to paint your personal custom motif! Feel free to view my <a href="Leistungen.html">services</a> or contact me directly via the <a href="Kontakt.html">contact form</a>.',
+        services_page_title: 'Services & Techniques',
+        services_intro: 'Unique, custom artworks crafted according to your personal vision.',
+        services_offer_title: 'What I Offer',
+        service_dog_title: 'Your Dog on Canvas',
+        service_dog_desc: 'Have you always dreamed of a timeless portrait of your loyal four-legged companion? From white Maltese to black Labrador – every dog is a wonderful motif.',
+        service_pets_title: 'More Animal Companions',
+        service_pets_desc: 'Of course I do not only paint dogs! Cats, horses, parrots, wildlife and all animal friends make expressive, soulful paintings.',
+        service_places_title: 'Your Favorite Places',
+        service_places_desc: 'Special landscapes and cherished places hold their own magic. If you have such memories, I will transform them into lasting art on canvas.',
+        service_formats_title: 'Available Formats',
+        service_formats_desc: 'I offer a wide variety of custom sizes and proportions. Since every piece is painted with time and passion, I gladly provide a personal non-binding offer.',
+        ba_title: 'From Photo to Artwork (Before / After)',
+        ba_hint: 'Drag the interactive slider to see the transformation from photo reference to finished painting:',
+        ba_photo: 'Original Photo',
+        ba_painting: 'Hand-painted Artwork',
+        steps_title: 'In 4 Simple Steps to Your Artwork',
+        step_1_title: '1. Send Photo Reference',
+        step_1_desc: 'Send me one or more clear photos of your pet, landscape or favorite place.',
+        step_2_title: '2. Select Format & Technique',
+        step_2_desc: 'Together we choose the perfect size and medium (acrylic, oil, or mixed media).',
+        step_3_title: '3. Creation in Studio',
+        step_3_desc: 'Your unique original is hand-crafted with premium artist pigments in my Bonn studio.',
+        step_4_title: '4. Safe Delivery',
+        step_4_desc: 'Carefully cushioned, safely packaged and insured right to your doorstep.',
+        faq_title: 'Frequently Asked Questions (FAQ)',
+        faq_1_q: 'What quality does the photo reference need to have?',
+        faq_1_a: 'The clearer the photo, the finer the details I can paint. A crisp smartphone photo taken in natural daylight where eyes and fur texture are clearly visible is usually ideal.',
+        faq_2_q: 'How long does it take to create a painting?',
+        faq_2_a: 'Depending on the technique (acrylic dries faster than oil) and current commissions, completion typically takes 2 to 4 weeks. Please order well in advance for gifts!',
+        faq_3_q: 'How long does shipping take?',
+        faq_3_a: 'Shipping within Germany takes 2 to 4 business days after full drying and packaging (fully insured with tracking number). International shipping is also available upon request.',
+        faq_4_q: 'How does payment work?',
+        faq_4_a: 'Upon completion, I send you high-resolution photos of the finished painting. You only finalize payment via bank transfer or PayPal once you are completely thrilled with the result.',
+        gallery_page_title: 'Art Gallery',
+        gallery_intro: 'Discover my hand-painted originals across diverse styles and creative periods.',
+        filter_all: 'All Works',
+        filter_animals: 'Animals',
+        filter_landscapes: 'Landscapes',
+        filter_plants: 'Botanicals',
+        filter_other: 'Still Life & More',
+        filter_favorites: '❤️ Favorites',
+        search_placeholder: 'Search paintings, motifs, techniques or sizes...',
+        sort_label: 'Sort by:',
+        sort_default: 'Default',
+        sort_title_asc: 'Title (A-Z)',
+        sort_title_desc: 'Title (Z-A)',
+        format_label: 'Format:',
+        color_label: 'Color:',
+        lb_btn_inquiry: 'Inquire this Motif as Commission',
+        lb_btn_room: 'View in Your Room',
+        lb_btn_fav_add: 'Add to Favorites',
+        lb_btn_fav_remove: 'Remove from Favorites',
+        lb_rotate: 'Rotate 90°',
+        lb_zoom: 'Magnifier Zoom',
+        lb_center: 'Center',
+        room_modal_title: 'View in Your Room',
+        room_modal_desc: 'Experience the painting true to scale in various interior settings or on your own wall.',
+        room_preset_living: 'Modern Living Room',
+        room_preset_bedroom: 'Bedroom',
+        room_preset_gallery: 'Gallery Wall',
+        room_btn_close: 'Close',
+        order_page_title: 'Configure Commission',
+        order_intro: 'In just 4 simple steps to your custom artwork – receive a non-binding price estimate and submit your request directly.',
+        step_1_lbl: 'Motif',
+        step_2_lbl: 'Size',
+        step_3_lbl: 'Medium',
+        step_4_lbl: 'Summary',
+        step_1_heading: 'Step 1: Choose Your Motif',
+        step_1_sub: 'What would you like to have painted on your unique artwork?',
+        step_2_heading: 'Step 2: Choose Your Format & Size',
+        step_2_sub: 'Which canvas dimensions suit your space best?',
+        step_3_heading: 'Step 3: Choose Your Medium & Technique',
+        step_3_sub: 'Which medium and artistic texture appeals most to you?',
+        step_4_heading: 'Step 4: Summary & Inquiry',
+        step_4_sub: 'Review your selected configuration and submit your non-binding inquiry directly to Manuela.',
+        calc_title: 'Price Estimator',
+        calc_price_label: 'Estimated Price Range:',
+        contact_page_title: 'Contact',
+        contact_intro: 'I look forward to hearing from you, whether with questions regarding existing artworks or commission requests.',
+        contact_direct_title: 'Direct Contact',
+        contact_studio_title: 'Studio Location',
+        contact_studio_desc: 'Bonn, Germany (Studio visits by appointment)',
+        contact_form_title: 'Send a Message',
+        contact_btn_send: 'Send Message',
+        map_title: 'Activate Google Maps',
+        map_text: 'For privacy reasons, the interactive map is only loaded after your consent click.',
+        map_btn: 'Load Map',
+        imprint_page_title: 'Imprint',
+        imprint_intro: 'Legal provider identification and statutory information pursuant to German law (§ 5 DDG).',
+        privacy_page_title: 'Privacy Policy',
+        privacy_intro: 'Information regarding the processing of your personal data according to GDPR regulations.',
+        notfound_title: 'Page Not Found',
+        notfound_text: 'The requested page does not exist or has been relocated.',
+        notfound_btn: 'Back to Home'
+    }
+};
+
+function applyTranslations(lang) {
+    const t = I18N_DICTIONARY[lang] || I18N_DICTIONARY.de;
+    const isEn = lang === 'en';
+
+    const setElemText = (selector, text) => {
+        const el = document.querySelector(selector);
+        if (el && text !== undefined) el.textContent = text;
+    };
+    const setElemHTML = (selector, html) => {
+        const el = document.querySelector(selector);
+        if (el && html !== undefined) el.innerHTML = html;
+    };
+
+    // Skip Link & Back to top
+    const skipLink = document.querySelector('.skip-link');
+    if (skipLink) skipLink.textContent = t.skip_link;
+    const backToTop = document.querySelector('.back-to-top');
+    if (backToTop) backToTop.setAttribute('title', t.back_to_top);
+
+    // Hero / Index
+    setElemText('.hero-content h1', t.hero_title);
+    setElemText('.hero-content p', t.hero_subtitle);
+    const heroBtn = document.querySelector('.hero-btn');
+    if (heroBtn) heroBtn.innerHTML = `${t.hero_btn} <i class="fa fa-angle-right" aria-hidden="true"></i>`;
+
+    // Global Page Title & Intro
+    const pageTitle = document.querySelector('h1.page-title');
+    if (pageTitle) {
+        const raw = pageTitle.textContent.trim();
+        if (raw.includes('Über mich') || raw.includes('About Me')) pageTitle.textContent = t.about_page_title;
+        else if (raw.includes('Leistungen') || raw.includes('Services')) pageTitle.textContent = t.services_page_title;
+        else if (raw.includes('Bildergalerie') || raw.includes('Gallery') || raw.includes('Art Gallery')) pageTitle.textContent = t.gallery_page_title;
+        else if (raw.includes('Auftrag') || raw.includes('Commission')) pageTitle.textContent = t.order_page_title;
+        else if (raw.includes('Kontakt') || raw.includes('Contact')) pageTitle.textContent = t.contact_page_title;
+        else if (raw.includes('Impressum') || raw.includes('Imprint')) pageTitle.textContent = t.imprint_page_title;
+        else if (raw.includes('Datenschutz') || raw.includes('Privacy')) pageTitle.textContent = t.privacy_page_title;
+    }
+
+    const introText = document.querySelector('p.intro-text:not(.intro-text--subtle)');
+    if (introText) {
+        const path = window.location.pathname.toLowerCase();
+        if (path.includes('uebermich')) introText.textContent = t.about_intro;
+        else if (path.includes('leistungen')) introText.textContent = t.services_intro;
+        else if (path.includes('bildergalerie')) introText.textContent = t.gallery_intro;
+        else if (path.includes('auftrag')) introText.textContent = t.order_intro;
+        else if (path.includes('kontakt')) introText.textContent = t.contact_intro;
+        else if (path.includes('impressum')) introText.textContent = t.imprint_intro;
+        else if (path.includes('datenschutz')) introText.textContent = t.privacy_intro;
+    }
+
+    // Home.html Elements
+    setElemHTML('.welcome h1', `${t.home_welcome_title} <i class="fa fa-palette" aria-hidden="true"></i>`);
+    setElemHTML('.welcome p', t.home_welcome_text);
+    const badges = document.querySelectorAll('.hero-trust-badges .trust-badge');
+    if (badges.length >= 4) {
+        badges[0].innerHTML = `<i class="fa-solid fa-paintbrush" aria-hidden="true"></i> ${t.badge_handpainted}`;
+        badges[1].innerHTML = `<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ${t.badge_studio}`;
+        badges[2].innerHTML = `<i class="fa-solid fa-truck-fast" aria-hidden="true"></i> ${t.badge_shipping}`;
+        badges[3].innerHTML = `<i class="fa-solid fa-heart" aria-hidden="true"></i> ${t.badge_detail}`;
+    }
+
+    setElemHTML('.news h2', `<i class="fa fa-bell" aria-hidden="true"></i> ${t.news_title}`);
+    const newsBoxes = document.querySelectorAll('.news-box');
+    if (newsBoxes.length >= 3) {
+        const d1 = newsBoxes[0].querySelector('.news-date'); if (d1) d1.textContent = t.news_1_date;
+        const h1 = newsBoxes[0].querySelector('h3'); if (h1) h1.textContent = t.news_1_title;
+        const p1 = newsBoxes[0].querySelector('p'); if (p1) p1.textContent = t.news_1_text;
+        const d2 = newsBoxes[1].querySelector('.news-date'); if (d2) d2.textContent = t.news_2_date;
+        const h2 = newsBoxes[1].querySelector('h3'); if (h2) h2.textContent = t.news_2_title;
+        const p2 = newsBoxes[1].querySelector('p'); if (p2) p2.textContent = t.news_2_text;
+        const d3 = newsBoxes[2].querySelector('.news-date'); if (d3) d3.textContent = t.news_3_date;
+        const h3 = newsBoxes[2].querySelector('h3'); if (h3) h3.textContent = t.news_3_title;
+        const p3 = newsBoxes[2].querySelector('p'); if (p3) p3.textContent = t.news_3_text;
+    }
+
+    setElemHTML('.latest-work h2', `<i class="fa-solid fa-paintbrush" aria-hidden="true"></i> ${t.highlights_title}`);
+    setElemText('.latest-work .intro-text', t.highlights_intro);
+    setElemHTML('.testimonials-section h2', `<i class="fa-solid fa-comments" aria-hidden="true"></i> ${t.testimonials_title}`);
+    setElemText('.testimonials-section .intro-text', t.testimonials_intro);
+
+    setElemText('.cta-content h2', t.cta_title);
+    setElemText('.cta-content p', t.cta_text);
+    const ctaBtns = document.querySelectorAll('.cta-buttons .btn');
+    if (ctaBtns.length >= 2) {
+        ctaBtns[0].innerHTML = `<i class="fa fa-pen-ruler" aria-hidden="true"></i> ${t.cta_btn_order}`;
+        ctaBtns[1].innerHTML = `<i class="fa fa-images" aria-hidden="true"></i> ${t.cta_btn_gallery}`;
+    }
+
+    // UeberMich.html Elements
+    setElemHTML('.info-card h3', `<i class="fa-solid fa-circle-info" aria-hidden="true"></i> ${t.about_profile_title}`);
+    const profileList = document.querySelectorAll('.info-card ul li');
+    if (profileList.length >= 6) {
+        profileList[0].innerHTML = `<strong>${isEn ? 'Location:' : 'Wohnort:'}</strong> ${t.about_profile_loc}`;
+        profileList[1].innerHTML = `<strong>${isEn ? 'Owner of:' : 'Frauchen von:'}</strong> ${t.about_profile_dog}`;
+        profileList[2].innerHTML = `<strong>${isEn ? 'Motifs:' : 'Motive:'}</strong> ${t.about_profile_motifs}`;
+        profileList[3].innerHTML = `<strong>${isEn ? 'Techniques:' : 'Techniken:'}</strong> ${t.about_profile_tech}`;
+        profileList[4].innerHTML = `<strong>${isEn ? 'Education:' : 'Ausbildung:'}</strong> ${t.about_profile_edu}`;
+        profileList[5].innerHTML = `<strong>${isEn ? 'Motivation:' : 'Motivation:'}</strong> ${t.about_profile_motive}`;
+    }
+    setElemText('.about-content h4', t.about_greeting);
+    setElemText('.about-content i p', t.about_subtitle);
+    const aboutPs = document.querySelectorAll('.about-content > p');
+    if (aboutPs.length >= 5) {
+        aboutPs[0].innerHTML = t.about_p1;
+        aboutPs[1].innerHTML = t.about_p2;
+        aboutPs[2].innerHTML = t.about_p3;
+        aboutPs[3].innerHTML = t.about_p4;
+        aboutPs[4].innerHTML = t.about_p5;
+    }
+
+    // Leistungen.html Elements
+    setElemHTML('.services h2', `<i class="fa fa-palette" aria-hidden="true"></i> ${t.services_offer_title}`);
+    const serviceCards = document.querySelectorAll('.service-card');
+    if (serviceCards.length >= 4) {
+        serviceCards[0].querySelector('h3').textContent = t.service_dog_title;
+        serviceCards[0].querySelector('p').textContent = t.service_dog_desc;
+        serviceCards[1].querySelector('h3').textContent = t.service_pets_title;
+        serviceCards[1].querySelector('p').textContent = t.service_pets_desc;
+        serviceCards[2].querySelector('h3').textContent = t.service_places_title;
+        serviceCards[2].querySelector('p').textContent = t.service_places_desc;
+        serviceCards[3].querySelector('h3').textContent = t.service_formats_title;
+        serviceCards[3].querySelector('p').textContent = t.service_formats_desc;
+    }
+    setElemHTML('.before-after-section h2', `<i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> ${t.ba_title}`);
+    setElemText('.before-after-section .intro-text', t.ba_hint);
+    setElemText('.ba-label-before', t.ba_photo);
+    setElemText('.ba-label-after', t.ba_painting);
+
+    setElemHTML('.steps-section h2', `<i class="fa-solid fa-list-ol" aria-hidden="true"></i> ${t.steps_title}`);
+    const stepCards = document.querySelectorAll('.step-card');
+    if (stepCards.length >= 4) {
+        stepCards[0].querySelector('h3').textContent = t.step_1_title;
+        stepCards[0].querySelector('p').textContent = t.step_1_desc;
+        stepCards[1].querySelector('h3').textContent = t.step_2_title;
+        stepCards[1].querySelector('p').textContent = t.step_2_desc;
+        stepCards[2].querySelector('h3').textContent = t.step_3_title;
+        stepCards[2].querySelector('p').textContent = t.step_3_desc;
+        stepCards[3].querySelector('h3').textContent = t.step_4_title;
+        stepCards[3].querySelector('p').textContent = t.step_4_desc;
+    }
+
+    setElemHTML('.faq-section h2', `<i class="fa fa-comments" aria-hidden="true"></i> ${t.faq_title}`);
+    const faqItems = document.querySelectorAll('.accordion-item');
+    if (faqItems.length >= 4) {
+        faqItems[0].querySelector('.accordion-header').innerHTML = `${t.faq_1_q} <i class="fa fa-chevron-down" aria-hidden="true"></i>`;
+        faqItems[0].querySelector('.accordion-content p').textContent = t.faq_1_a;
+        faqItems[1].querySelector('.accordion-header').innerHTML = `${t.faq_2_q} <i class="fa fa-chevron-down" aria-hidden="true"></i>`;
+        faqItems[1].querySelector('.accordion-content p').textContent = t.faq_2_a;
+        faqItems[2].querySelector('.accordion-header').innerHTML = `${t.faq_3_q} <i class="fa fa-chevron-down" aria-hidden="true"></i>`;
+        faqItems[2].querySelector('.accordion-content p').textContent = t.faq_3_a;
+        faqItems[3].querySelector('.accordion-header').innerHTML = `${t.faq_4_q} <i class="fa fa-chevron-down" aria-hidden="true"></i>`;
+        faqItems[3].querySelector('.accordion-content p').textContent = t.faq_4_a;
+    }
+
+    // Bildergalerie.html Filters & UI
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    if (filterBtns.length >= 6) {
+        filterBtns[0].textContent = t.filter_all;
+        filterBtns[1].textContent = t.filter_animals;
+        filterBtns[2].textContent = t.filter_landscapes;
+        filterBtns[3].textContent = t.filter_plants;
+        filterBtns[4].textContent = t.filter_other;
+        filterBtns[5].innerHTML = `<i class="fa-solid fa-heart" aria-hidden="true"></i> ${t.filter_favorites} (<span id="fav-count">${getFavorites().length}</span>)`;
+    }
+    const gallerySearch = document.getElementById('gallery-search');
+    if (gallerySearch) {
+        gallerySearch.setAttribute('placeholder', t.search_placeholder);
+        gallerySearch.setAttribute('aria-label', t.search_placeholder);
+    }
+    const sortSelect = document.getElementById('gallery-sort');
+    if (sortSelect && sortSelect.options.length >= 3) {
+        sortSelect.options[0].text = t.sort_default;
+        sortSelect.options[1].text = t.sort_title_asc;
+        sortSelect.options[2].text = t.sort_title_desc;
+    }
+    const sortLabel = document.querySelector('.gallery-sort-wrapper label');
+    if (sortLabel) sortLabel.innerHTML = `<i class="fa-solid fa-arrow-down-short-wide" aria-hidden="true"></i> ${t.sort_label}`;
+
+    // Lightbox Buttons
+    setElemHTML('#lightbox-inquiry-btn', `<i class="fa-solid fa-palette" aria-hidden="true"></i> ${t.lb_btn_inquiry}`);
+    setElemHTML('#lightbox-room-btn', `<i class="fa-solid fa-house-chimney" aria-hidden="true"></i> ${t.lb_btn_room}`);
+    setElemHTML('#btn-rotate-img', `<i class="fa-solid fa-rotate-right" aria-hidden="true"></i> ${t.lb_rotate}`);
+    setElemHTML('#btn-toggle-zoom', `<i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> ${t.lb_zoom}`);
+    setElemHTML('#btn-reset-pos', `<i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> ${t.lb_center}`);
+
+    // Room Visualizer Modal
+    setElemHTML('#roomVisualizerModal h2', `<i class="fa-solid fa-house-chimney" aria-hidden="true"></i> ${t.room_modal_title}`);
+    setElemText('#roomVisualizerModal p.color-text-muted', t.room_modal_desc);
+    const roomPresetBtns = document.querySelectorAll('.room-presets-bar .room-preset-btn');
+    if (roomPresetBtns.length >= 3) {
+        roomPresetBtns[0].textContent = t.room_preset_living;
+        roomPresetBtns[1].textContent = t.room_preset_bedroom;
+        roomPresetBtns[2].textContent = t.room_preset_gallery;
+    }
+    setElemHTML('#roomVisualizerModal .btn-primary', `<i class="fa fa-check" aria-hidden="true"></i> ${t.room_btn_close}`);
+
+    // Auftrag.html Configurator
+    const stepIndicators = document.querySelectorAll('.progress-step .step-label');
+    if (stepIndicators.length >= 4) {
+        stepIndicators[0].textContent = t.step_1_lbl;
+        stepIndicators[1].textContent = t.step_2_lbl;
+        stepIndicators[2].textContent = t.step_3_lbl;
+        stepIndicators[3].textContent = t.step_4_lbl;
+    }
+    setElemHTML('#panel-1 h2', `<i class="fa fa-paw" aria-hidden="true"></i> ${t.step_1_heading}`);
+    setElemText('#panel-1 .config-subtitle', t.step_1_sub);
+    setElemHTML('#panel-2 h2', `<i class="fa fa-ruler-combined" aria-hidden="true"></i> ${t.step_2_heading}`);
+    setElemText('#panel-2 .config-subtitle', t.step_2_sub);
+    setElemHTML('#panel-3 h2', `<i class="fa fa-palette" aria-hidden="true"></i> ${t.step_3_heading}`);
+    setElemText('#panel-3 .config-subtitle', t.step_3_sub);
+    setElemHTML('#panel-4 h2', `<i class="fa fa-clipboard-check" aria-hidden="true"></i> ${t.step_4_heading}`);
+    setElemText('#panel-4 .config-subtitle', t.step_4_sub);
+    setElemHTML('.calc-heading', `<i class="fa-solid fa-calculator" aria-hidden="true"></i> ${t.calc_title}`);
+    setElemText('#calc-price-label', t.calc_price_label);
+
+    // Kontakt.html Form & Cards
+    const contactCards = document.querySelectorAll('.contact-info .contact-info-card');
+    if (contactCards.length >= 2) {
+        contactCards[0].querySelector('h3').innerHTML = `<i class="fa-solid fa-address-book" aria-hidden="true"></i> ${t.contact_direct_title}`;
+        contactCards[1].querySelector('h3').innerHTML = `<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ${t.contact_studio_title}`;
+    }
+    setElemText('.contact-studio-desc', t.contact_studio_desc);
+    setElemHTML('.contact-form-wrapper h2', `<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> ${t.contact_form_title}`);
+    const nameInput = document.getElementById('name');
+    if (nameInput) nameInput.setAttribute('placeholder', isEn ? 'John Doe' : 'Max Mustermann');
+    const emailInput = document.getElementById('email');
+    if (emailInput) emailInput.setAttribute('placeholder', isEn ? 'your.name@example.com' : 'deine.email@beispiel.de');
+    const subjectInput = document.getElementById('subject');
+    if (subjectInput) subjectInput.setAttribute('placeholder', isEn ? 'e.g. Animal Portrait Commission' : 'z. B. Anfrage Tierportrait');
+    const messageInput = document.getElementById('message');
+    if (messageInput) messageInput.setAttribute('placeholder', isEn ? 'Describe your idea, pet or desired format...' : 'Beschreibe dein Wunschmotiv, Tier oder Format...');
+    setElemHTML('.contact-form .submit-btn', `<i class="fa fa-paper-plane" aria-hidden="true"></i> ${t.contact_btn_send}`);
+
+    // Map 2-click
+    setElemText('.map-placeholder-content h4', t.map_title);
+    setElemText('.map-placeholder-content p', t.map_text);
+    setElemText('.map-placeholder-content .btn', t.map_btn);
+
+    // 404.html
+    setElemText('.error-page h1', t.notfound_title);
+    setElemText('.error-page p', t.notfound_text);
+    setElemHTML('.error-page .btn', `<i class="fa fa-home" aria-hidden="true"></i> ${t.notfound_btn}`);
+}
 
 /* =========================================
    2. GALERIE: FILTER, LIVE-SUCHE, FAVORITEN & DATEN
@@ -1510,30 +2195,51 @@ document.addEventListener('DOMContentLoaded', function () {
         const realKat = artMeta ? artMeta.kategorie : (item ? (item.getAttribute('data-kategorie') || 'Kunstwerk') : 'Kunstwerk');
         const realBadge = artMeta ? artMeta.badge : (item && item.querySelector('.gallery-badge') ? item.querySelector('.gallery-badge').innerText : 'Unikat');
 
+        const isEn = currentLang === 'en';
+        const techniqueTranslations = {
+            'Acryl auf Leinwand': 'Acrylic on Canvas',
+            'Öl auf Leinwand': 'Oil on Canvas',
+            'Multimediatechnik auf Papier': 'Mixed Media on Paper',
+            'Ölkreide auf Papier, Rahmen aus Birkenholz': 'Oil Pastel on Paper, Birchwood Frame',
+            'Acryl auf Karton': 'Acrylic on Board',
+            'Öl auf Karton': 'Oil on Board'
+        };
+        const categoryTranslations = {
+            'landschaften': 'Landscapes',
+            'tiere': 'Animals',
+            'pflanzen': 'Botanicals',
+            'sonstiges': 'Still Life & More'
+        };
+        const displayTechnik = isEn ? (techniqueTranslations[realTechnik] || realTechnik) : realTechnik;
+        const displayKat = isEn ? (categoryTranslations[realKat.toLowerCase()] || (realKat.charAt(0).toUpperCase() + realKat.slice(1))) : (realKat.charAt(0).toUpperCase() + realKat.slice(1));
+        const displayBadge = isEn ? 'Unique Original' : realBadge;
+
         if (infoTitle) infoTitle.innerText = realTitle;
         if (infoDesc) infoDesc.innerText = realDesc;
-        if (detailTechnik) detailTechnik.innerText = realTechnik;
+        if (detailTechnik) detailTechnik.innerText = displayTechnik;
         if (detailMasse) detailMasse.innerText = realMasse;
-        if (detailKat) detailKat.innerText = realKat.charAt(0).toUpperCase() + realKat.slice(1);
+        if (detailKat) detailKat.innerText = displayKat;
 
         if (statusBadge) {
-            statusBadge.innerText = realBadge;
+            statusBadge.innerText = displayBadge;
             statusBadge.className = 'gallery-badge badge-unikat lightbox-meta-badge';
             statusBadge.style.display = 'inline-block';
         }
 
         if (captionText) {
-            captionText.innerHTML = `${realTitle} <span class="caption-meta font-size-085rem color-text-muted">(${realTechnik}, ${realMasse})</span>`;
+            captionText.innerHTML = `${realTitle} <span class="caption-meta font-size-085rem color-text-muted">(${displayTechnik}, ${realMasse})</span>`;
         }
 
         // Bildzähler
         if (lbCounter) {
-            lbCounter.innerText = `Bild ${currentIndex + 1} von ${visibleGalleryLinks.length}`;
+            lbCounter.innerText = isEn ? `Image ${currentIndex + 1} of ${visibleGalleryLinks.length}` : `Bild ${currentIndex + 1} von ${visibleGalleryLinks.length}`;
         }
 
         // WhatsApp Link
         if (lbWhatsappBtn) {
-            const waMsg = `Hallo Manuela, ich habe Interesse am Kunstwerk "${realTitle}" (${realTechnik}, ${realMasse}) [#${itemId || 'Galerie'}] aus deiner Bildergalerie.`;
+            const waMsg = isEn 
+                ? `Hello Manuela, I am interested in your artwork "${realTitle}" (${displayTechnik}, ${realMasse}) [#${itemId || 'Gallery'}] from your gallery.`
+                : `Hallo Manuela, ich habe Interesse am Kunstwerk "${realTitle}" (${realTechnik}, ${realMasse}) [#${itemId || 'Galerie'}] aus deiner Bildergalerie.`;
             lbWhatsappBtn.href = `https://wa.me/491632662435?text=${encodeURIComponent(waMsg)}`;
         }
 
@@ -1543,7 +2249,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const shareUrl = window.location.origin + window.location.pathname + (itemId ? '#' + itemId : '');
                 if (navigator.clipboard) {
                     navigator.clipboard.writeText(shareUrl).then(() => {
-                        showToast('🔗 Direktlink zum Gemälde kopiert!');
+                        showToast(isEn ? '🔗 Direct link to artwork copied!' : '🔗 Direktlink zum Gemälde kopiert!');
                     }).catch(() => {
                         showToast('Link: ' + shareUrl);
                     });
@@ -1557,7 +2263,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (lbFavBtn && itemId) {
             const isFav = getFavorites().includes(itemId);
             lbFavBtn.classList.toggle('active', isFav);
-            lbFavBtn.innerHTML = isFav ? '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Aus Favoriten entfernen' : '<i class="fa-regular fa-heart"></i> Zu Favoriten hinzufügen';
+            lbFavBtn.innerHTML = isFav 
+                ? (isEn ? '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Remove from Favorites' : '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Aus Favoriten entfernen')
+                : (isEn ? '<i class="fa-regular fa-heart"></i> Add to Favorites' : '<i class="fa-regular fa-heart"></i> Zu Favoriten hinzufügen');
             lbFavBtn.onclick = function(e) {
                 toggleFavorite(itemId, e);
             };
@@ -2244,6 +2952,12 @@ function runOnDOMReady(fn) {
 }
 
 runOnDOMReady(function () {
+    initHamburgerMenu();
+    updateThemeButtonUI();
+    updateLanguageButtonUI();
+    if (currentLang !== 'de') {
+        applyTranslations(currentLang);
+    }
     initGallerySearch();
     initTagChips();
     initFavoritesInConfigurator();

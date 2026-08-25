@@ -33,6 +33,17 @@
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="style.min.css?v=4">
+  <script>
+    (function(){
+      try{
+        var t=localStorage.getItem('manufaktur_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+        document.documentElement.setAttribute('data-theme',t);
+        if(t==='dark')document.documentElement.classList.add('dark-mode');
+        var l=localStorage.getItem('manufaktur_lang')||'de';
+        document.documentElement.setAttribute('lang',l);
+      }catch(e){}
+    })();
+  </script>
 
   <!-- SEO Schema.org Strukturierte Daten -->
   <script type="application/ld+json">
@@ -610,7 +621,11 @@
         <div id="lightbox-wall-stage" class="lightbox-wall-stage scene-detail">
           <div class="wall-frame-container" id="wall-frame-container"
             title="Gemälde auf der Wand verschieben (Drag & Drop)">
-            <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde">
+            <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde" draggable="false" oncontextmenu="return false;">
+            <div class="artwork-watermark" id="lb-watermark" aria-hidden="true">
+              <div class="watermark-pattern"></div>
+              <div class="watermark-brand">@ManuFAKTUR</div>
+            </div>
             <div id="wall-badge-tag" class="wall-badge-tag hidden"><i class="fa-solid fa-wand-magic-sparkles"></i>
               KI-Wandvorlage</div>
             <div id="wall-drag-hint" class="wall-drag-hint hidden"><i class="fa-solid fa-up-down-left-right"
@@ -761,7 +776,10 @@
 
       <div id="room-stage" class="room-canvas-stage room-stage-default">
         <div id="room-artwork-container" class="room-artwork-container">
-          <img id="room-artwork" class="room-artwork-frame" alt="Gemälde an der Wand">
+          <img id="room-artwork" class="room-artwork-frame" alt="Gemälde an der Wand" draggable="false" oncontextmenu="return false;">
+          <div class="artwork-watermark artwork-watermark--room" aria-hidden="true">
+            <div class="watermark-brand">@ManuFAKTUR</div>
+          </div>
         </div>
       </div>
 
