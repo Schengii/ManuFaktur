@@ -20,6 +20,10 @@ ManuFaktur/
 │
 ├── style.css                   # Zentrales CSS-Designsystem & Stylesheet (Tokens, 3D-Perspektiven, Layout, Animationen)
 ├── Home.js                     # Zentrale JS-Logik (Shared Components, Galerie, KI-Raumbühne, Konfigurator, Features)
+├── style.min.css               # Minifizierter Produktions-Build von style.css (per `npm run build` erzeugt)
+├── Home.min.js                 # Minifizierter Produktions-Build von Home.js (per `npm run build` erzeugt)
+├── package.json                # Build-Skripte für die Minifizierung (siehe Abschnitt "Build für Produktion")
+├── 404.html                    # Individuelle Fehlerseite für ungültige/verschobene Links
 │
 ├── robots.txt                  # SEO-Indexierungsanweisungen für Suchmaschinen-Crawler
 ├── sitemap.xml                 # XML-Sitemap mit allen Seitenpfaden
@@ -156,18 +160,22 @@ ManuFaktur/
 - **Barrierefreiheit (WCAG 2.1 AA / AAA):**
   - **Rot-Grün-Schwäche (Colorblindness):** Alle aktiven Zustände (Filter-Buttons, Navigation, Favoriten) nutzen neben Farbaccenten zusätzliche Form- und Textindikatoren (Symbole, fette Schrift, Border, Unterstreichung).
   - **Lese-Rechtschreib-Schwäche (Dyslexia-Friendliness):** Optimierter Zeilenabstand (`1.65`), Wortabstand (`0.04em`) und Zeichenabstand (`0.02em`) mit klarer serifenloser Typografie (`Lato`).
-  - **Tastatur- & Screenreader-Support:** Sichtbare Fokus-Ringe (`:focus-visible`), ARIA-Attribute (`role="dialog"`, `aria-label`, `aria-expanded`), automatische Schutzsteuerung bei Texteingaben.
+  - **Tastatur- & Screenreader-Support:** Sichtbare Fokus-Ringe (`:focus-visible`), ARIA-Attribute (`role="dialog"`, `aria-label`, `aria-expanded`), automatische Schutzsteuerung bei Texteingaben, „Zum Hauptinhalt springen“-Skip-Link (`.skip-link`) auf jeder Seite.
 - **Responsive Design & Touch-Targets:** Flüssige Typografie (`clamp()`), kein horizontales Scrollen auf Smartphones, Touch-Targets mit mindestens 44px Höhe.
 - **Micro-Animations:** Button-Shimmer-Effekt (`.btn::before`), Card Hover Elevation (`translateY(-6px)`), sanfte Scroll-Reveals und Puls-Effekte.
-- **Performance & SEO:** WebP-Bildformate (99% Ersparnis), LCP-Optimierung, Schema.org JSON-LD strukturierte Daten, Open Graph Meta-Tags, PWA Web App Manifest & Service Worker.
+- **Performance & SEO:** WebP-Bildformate (99% Ersparnis), LCP-Optimierung, minifizierte CSS/JS-Produktions-Builds, Font-Preloading, Schema.org JSON-LD strukturierte Daten (inkl. `BreadcrumbList`), kanonische URLs (`rel="canonical"`), Open Graph Meta-Tags, PWA Web App Manifest & Service Worker, individuelle 404-Fehlerseite.
+- **Formular-Spamschutz:** Verstecktes Honeypot-Feld (`_gotcha`) im Kontaktformular gegen automatisierte Bot-Einsendungen.
 
 ---
 
 ## 🚀 Veröffentlichungs-Checkliste (Release Readiness)
 
-1. **Formspree E-Mail-ID (`Kontakt.html`):** Ersetzen der Formspree-ID `DEINE_FORMSPREE_ID` durch deine echte ID vor der Live-Schaltung.
+1. **Formspree E-Mail-ID (`Kontakt.html`):** Ersetzen der Formspree-ID `DEINE_FORMSPREE_ID` durch deine echte ID vor der Live-Schaltung. Formspree-Honeypot-Feld (`_gotcha`) ist bereits als Spam-Schutz eingebaut.
 2. **HTTPS-Verschlüsselung:** Aktivierung eines SSL-Zertifikats beim Hoster für PWA Service Worker Funktionalität (`sw.js`).
-3. **XML-Sitemap:** Aktualisierung der Datumsangaben in `sitemap.xml`.
+3. **XML-Sitemap:** Datumsangaben in `sitemap.xml` unmittelbar vor dem tatsächlichen Go-Live nochmal aktualisieren.
+4. **Produktions-Build:** Vor dem Deploy `npm run build` ausführen, damit `style.min.css`/`Home.min.js` den aktuellen Stand von `style.css`/`Home.js` enthalten (siehe unten).
+5. **Deploy-Ausschlüsse:** `archive_sources/` und `assets/imgTxt/` (Rohdaten/interne Arbeitsdateien, ca. 580 MB) sind per `.gitignore` von der Versionierung ausgeschlossen und dürfen auch beim manuellen Hochladen zum Hoster nicht mitkopiert werden.
+6. **Impressum-Angaben prüfen:** Die Kleinunternehmer-Formulierung (§ 19 UStG) im Impressum stimmt nur, solange tatsächlich keine Umsatzsteuer ausgewiesen wird – bei Änderung des steuerlichen Status entsprechend anpassen.
 
 ---
 
@@ -181,3 +189,21 @@ python -m http.server 8080
 ```
 
 Anschließend im Browser öffnen: `http://localhost:8080`
+
+Da alle Seiten `style.min.css`/`Home.min.js` einbinden, während inhaltlich bearbeitet wird `style.css`/`Home.js` – nach jeder Änderung an einer der beiden Quelldateien `npm run build` ausführen (siehe unten), damit die im Browser sichtbare Version aktuell bleibt.
+
+---
+
+## 📦 Build für Produktion
+
+`style.css` (Quelle, kommentiert, gut lesbar) und `Home.js` (Quelle) werden im laufenden Betrieb geladen als `style.min.css` / `Home.min.js` – minifizierte Varianten, die Ladezeit und PageSpeed-Werte verbessern. Die Quelldateien bleiben die alleinige Grundlage für Änderungen; die `.min`-Dateien werden nie von Hand bearbeitet, sondern ausschließlich generiert.
+
+```bash
+npm run build       # baut style.min.css UND Home.min.js
+npm run build:css   # nur CSS
+npm run build:js    # nur JS
+```
+
+Die Skripte nutzen `npx` (clean-css-cli / terser) und benötigen daher einmalig eine Internetverbindung sowie Node.js. Es gibt kein `node_modules`-Verzeichnis im Repo (per `.gitignore` ausgeschlossen) – die Tools werden bei jedem Build-Lauf über `npx` bezogen.
+
+**Wichtig:** Nach jeder inhaltlichen Änderung an `style.css` oder `Home.js` muss `npm run build` erneut ausgeführt werden, bevor deployed wird – sonst sehen Live-Besucher eine veraltete `.min`-Version.

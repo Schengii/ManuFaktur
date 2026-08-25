@@ -1,5 +1,5 @@
 /* Service Worker für ManuFAKTUR Schenk */
-const CACHE_NAME = 'manufaktur-v2';
+const CACHE_NAME = 'manufaktur-v3';
 const ASSETS_TO_CACHE = [
   './',
   './Home.html',
@@ -10,8 +10,9 @@ const ASSETS_TO_CACHE = [
   './Kontakt.html',
   './Impressum.html',
   './Datenschutz.html',
-  './style.css',
-  './Home.js',
+  './404.html',
+  './style.min.css',
+  './Home.min.js',
   './manifest.json',
   './assets/images/logos/logo-transparent.png',
   './assets/images/logos/favicon.png',

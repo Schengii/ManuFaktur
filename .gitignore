@@ -1,0 +1,12 @@
+# Rohdaten & interne Arbeitsdateien – nicht Teil der veröffentlichten Webseite.
+# Bleiben lokal erhalten, werden aber nicht mehr versioniert/deployed (562 MB Ordner).
+archive_sources/
+assets/imgTxt/
+
+# Node (nur für den optionalen Minify-Build genutzt, siehe package.json)
+node_modules/
+package-lock.json
+
+# Editor-/OS-Artefakte
+.DS_Store
+Thumbs.db

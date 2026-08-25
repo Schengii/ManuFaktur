@@ -2236,7 +2236,7 @@ footer {
         font-size: 0.95rem;
     }
 
-    #myBtn {
+    .back-to-top {
         bottom: 20px;
         right: 20px;
         width: 44px;
@@ -2250,6 +2250,39 @@ footer {
    ========================================= */
 .display-none {
     display: none !important;
+}
+
+/* Visuell versteckt, aber weiterhin für Screenreader/Bots im DOM vorhanden.
+   Wird u.a. für das Honeypot-Spamschutzfeld im Kontaktformular genutzt. */
+.visually-hidden {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Skip-Link: für Tastatur-/Screenreader-Nutzer, erst bei Fokus sichtbar.
+   Erlaubt das Überspringen der Navigation direkt zum Hauptinhalt. */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 2000;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 0 0 8px 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: var(--focus-ring);
+    outline-offset: 2px;
 }
 
 .intro-text-sm {

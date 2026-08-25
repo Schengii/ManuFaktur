@@ -1,0 +1,11 @@
+{
+  "name": "manufaktur-schenk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build-Skripte für ManuFAKTUR Schenk – minifiziert style.css und Home.js für die Produktion.",
+  "scripts": {
+    "build:css": "npx --yes clean-css-cli -o style.min.css style.css",
+    "build:js": "npx --yes terser Home.js -o Home.min.js --compress --mangle --comments false",
+    "build": "npm run build:css && npm run build:js"
+  }
+}
