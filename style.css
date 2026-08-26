@@ -2232,11 +2232,13 @@ footer {
     }
 
     .dropdown:hover .dropdown-content,
-    .dropdown:focus-within .dropdown-content {
+    .dropdown:focus-within .dropdown-content,
+    .dropdown.open .dropdown-content {
         display: block;
     }
 
-    .dropdown:hover .fa-caret-down {
+    .dropdown:hover .fa-caret-down,
+    .dropdown.open .fa-caret-down {
         transform: rotate(180deg);
     }
 

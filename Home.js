@@ -134,7 +134,9 @@ function updateLanguageButtonUI() {
 function initHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+
     if (hamburger && navLinks) {
+        // Hamburger toggled das mobile Nav-Menü
         hamburger.onclick = function () {
             const active = navLinks.classList.toggle('active');
             hamburger.setAttribute('aria-expanded', active ? 'true' : 'false');
@@ -142,8 +144,36 @@ function initHamburgerMenu() {
             if (icon) {
                 icon.className = active ? 'fa fa-close' : 'fa fa-bars';
             }
+            // Alle offenen Dropdowns schließen wenn Menü geschlossen wird
+            if (!active) {
+                navLinks.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            }
         };
     }
+
+    // Dropdown-Toggle für Touch-Geräte (mobil)
+    // Klick auf den Dropdown-Trigger-Link togglet die .open-Klasse
+    document.querySelectorAll('.dropdown > a').forEach(function (trigger) {
+        trigger.addEventListener('click', function (e) {
+            const isMobile = window.innerWidth <= 768;
+            if (!isMobile) return; // Auf Desktop bleibt :hover aktiv
+            e.preventDefault(); // Verhindert Navigation beim ersten Klick (öffnet stattdessen)
+            const dropdown = trigger.closest('.dropdown');
+            const isOpen = dropdown.classList.contains('open');
+            // Alle anderen Dropdowns schließen
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+            if (!isOpen) {
+                dropdown.classList.add('open');
+            }
+        });
+    });
+
+    // Click-Outside schließt offene Dropdowns
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
+        }
+    });
 }
 
 /**
@@ -2803,18 +2833,7 @@ document.addEventListener('DOMContentLoaded', function () {
     updateGalleryLinks();
 
     // --- B. Hamburger Menü (Mobil) ---
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', function () {
-            const active = navLinks.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', active ? 'true' : 'false');
-            const icon = hamburger.querySelector('i');
-            if (icon) {
-                icon.className = active ? 'fa fa-close' : 'fa fa-bars';
-            }
-        });
-    }
+    // Wird bereits vollständig von initHamburgerMenu() (oben) behandelt.
 
     // --- C. Lightbox & Slideshow & Gesten ---
     const lightbox = document.getElementById('lightbox');
