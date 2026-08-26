@@ -29,7 +29,7 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=4">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=5">
   <script>
     (function(){
       try{
@@ -126,30 +126,30 @@
     </section>
 
     <section class="faq-section reveal">
-      <h2><i class="fa fa-comments" aria-hidden="true"></i> Häufig gestellte Fragen (FAQ)</h2>
+      <h2><i class="fa fa-comments" aria-hidden="true"></i> <span data-i18n="faq_title">Häufig gestellte Fragen (FAQ)</span></h2>
       <div class="accordion">
         <div class="accordion-item">
           <button class="accordion-header" id="faq-header-1" aria-controls="faq-content-1">
-            Welche Qualität muss die Fotovorlage haben? <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            <span data-i18n="faq_1_q">Welche Qualität muss die Fotovorlage haben?</span> <i class="fa fa-chevron-down" aria-hidden="true"></i>
           </button>
           <div class="accordion-content" id="faq-content-1" role="region" aria-labelledby="faq-header-1">
-            <p>Je schärfer das Foto, desto mehr Details kann ich malen. Ein klares Handyfoto bei Tageslicht, auf dem Augen und Fellstruktur gut zu erkennen sind, reicht meistens völlig aus.</p>
+            <p data-i18n="faq_1_a">Je schärfer das Foto, desto mehr Details kann ich malen. Ein klares Handyfoto bei Tageslicht, auf dem Augen und Fellstruktur gut zu erkennen sind, reicht meistens völlig aus.</p>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" id="faq-header-2" aria-controls="faq-content-2">
-            Wie lange dauert die Erstellung eines Bildes? <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            <span data-i18n="faq_2_q">Wie lange dauert die Erstellung eines Bildes?</span> <i class="fa fa-chevron-down" aria-hidden="true"></i>
           </button>
           <div class="accordion-content" id="faq-content-2" role="region" aria-labelledby="faq-header-2">
-            <p>Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel 2 bis 4 Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!</p>
+            <p data-i18n="faq_2_a">Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel 2 bis 4 Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!</p>
           </div>
         </div>
         <div class="accordion-item">
           <button class="accordion-header" id="faq-header-3" aria-controls="faq-content-3">
-            Wie lange dauert der Versand? <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            <span data-i18n="faq_3_q_ship">Wie lange dauert der Versand?</span> <i class="fa fa-chevron-down" aria-hidden="true"></i>
           </button>
           <div class="accordion-content" id="faq-content-3" role="region" aria-labelledby="faq-header-3">
-            <p>Nach Fertigstellung und Trocknung verschicke ich Dein Bild per DHL oder DPD gut gepolstert und <strong>versandkostenfrei</strong> innerhalb Deutschlands.</p>
+            <p data-i18n-html="faq_3_a_ship">Nach Fertigstellung und Trocknung verschicke ich Dein Bild per DHL oder DPD gut gepolstert und <strong>versandkostenfrei</strong> innerhalb Deutschlands.</p>
           </div>
         </div>
       </div>
@@ -157,97 +157,97 @@
 
     <!-- Vorab-Preiskalkulator Widget -->
     <section class="calc-widget-container reveal" id="calc-widget">
-      <h2><i class="fa fa-calculator" aria-hidden="true"></i> Vorab-Preiskalkulator</h2>
-      <p class="intro-text intro-text--subtle margin-bottom-2rem">Berechne hier unverbindlich einen geschätzten Richtpreis für dein Wunschgemälde:</p>
+      <h2><i class="fa fa-calculator" aria-hidden="true"></i> <span data-i18n="calc_h2">Vorab-Preiskalkulator</span></h2>
+      <p class="intro-text intro-text--subtle margin-bottom-2rem" data-i18n="calc_intro">Berechne hier unverbindlich einen geschätzten Richtpreis für dein Wunschgemälde:</p>
 
       <div class="calc-grid">
         <div class="calc-group">
-          <label for="calc-motiv"><i class="fa fa-paw"></i> Motiv-Kategorie</label>
+          <label for="calc-motiv"><i class="fa fa-paw"></i> <span data-i18n="calc_label_motiv">Motiv-Kategorie</span></label>
           <select id="calc-motiv">
-            <option value="1.0">Tierportrait (Hund, Katze, etc.)</option>
-            <option value="0.9">Landschaft & Natur</option>
-            <option value="0.85">Stillleben & Blumen</option>
-            <option value="1.1">Sonstiges / Wunschidee</option>
+            <option value="1.0" data-i18n="calc_opt_motiv1">Tierportrait (Hund, Katze, etc.)</option>
+            <option value="0.9" data-i18n="calc_opt_motiv2">Landschaft & Natur</option>
+            <option value="0.85" data-i18n="calc_opt_motiv3">Stillleben & Blumen</option>
+            <option value="1.1" data-i18n="calc_opt_motiv4">Sonstiges / Wunschidee</option>
           </select>
         </div>
 
         <div class="calc-group">
-          <label for="calc-format"><i class="fa fa-ruler-combined"></i> Format / Leinwandgröße</label>
+          <label for="calc-format"><i class="fa fa-ruler-combined"></i> <span data-i18n="calc_label_format">Format / Leinwandgröße</span></label>
           <select id="calc-format">
-            <option value="90">20 × 30 cm (Klein · ab 90 €)</option>
-            <option value="130" selected>30 × 40 cm (Beliebt · ab 130 €)</option>
-            <option value="175">40 × 50 cm (Mittel · ab 175 €)</option>
-            <option value="230">50 × 70 cm (Groß · ab 230 €)</option>
-            <option value="290">60 × 80 cm (XL · ab 290 €)</option>
+            <option value="90" data-i18n="calc_opt_format1">20 × 30 cm (Klein · ab 90 €)</option>
+            <option value="130" selected data-i18n="calc_opt_format2">30 × 40 cm (Beliebt · ab 130 €)</option>
+            <option value="175" data-i18n="calc_opt_format3">40 × 50 cm (Mittel · ab 175 €)</option>
+            <option value="230" data-i18n="calc_opt_format4">50 × 70 cm (Groß · ab 230 €)</option>
+            <option value="290" data-i18n="calc_opt_format5">60 × 80 cm (XL · ab 290 €)</option>
           </select>
         </div>
 
         <div class="calc-group">
-          <label for="calc-technik"><i class="fa fa-palette"></i> Maltechnik</label>
+          <label for="calc-technik"><i class="fa fa-palette"></i> <span data-i18n="calc_label_technik">Maltechnik</span></label>
           <select id="calc-technik">
-            <option value="1.0">Acryl auf Leinwand (Klassisch)</option>
-            <option value="1.15">Öl auf Leinwand (+15%)</option>
-            <option value="0.85">Bleistift / Kohlezeichnung (-15%)</option>
-            <option value="1.0">Aquarell auf Feinkarton</option>
+            <option value="1.0" data-i18n="calc_opt_tech1">Acryl auf Leinwand (Klassisch)</option>
+            <option value="1.15" data-i18n="calc_opt_tech2">Öl auf Leinwand (+15%)</option>
+            <option value="0.85" data-i18n="calc_opt_tech3">Bleistift / Kohlezeichnung (-15%)</option>
+            <option value="1.0" data-i18n="calc_opt_tech4">Aquarell auf Feinkarton</option>
           </select>
         </div>
 
         <div class="calc-group">
-          <label for="calc-anzahl"><i class="fa fa-users"></i> Motive auf einem Bild</label>
+          <label for="calc-anzahl"><i class="fa fa-users"></i> <span data-i18n="calc_label_anzahl">Motive auf einem Bild</span></label>
           <select id="calc-anzahl">
-            <option value="0">1 Hauptmotiv (+0 €)</option>
-            <option value="35">2 Motive (+35 €)</option>
-            <option value="65">3 Motive (+65 €)</option>
+            <option value="0" data-i18n="calc_opt_anzahl1">1 Hauptmotiv (+0 €)</option>
+            <option value="35" data-i18n="calc_opt_anzahl2">2 Motive (+35 €)</option>
+            <option value="65" data-i18n="calc_opt_anzahl3">3 Motive (+65 €)</option>
           </select>
         </div>
       </div>
 
       <div class="calc-result-box">
-        <div class="calc-price-title">Geschätzter Richtpreis</div>
+        <div class="calc-price-title" data-i18n="calc_price_title">Geschätzter Richtpreis</div>
         <div class="calc-price-amount" id="calc-price">ca. 115 € – 145 €</div>
-        <p class="calc-price-note">Genaue Preisvereinbarung erfolgt individuell vor Beginn. Inklusive kostenfreiem Versand innerhalb Deutschlands.</p>
-        <a href="Auftrag.html" class="btn"><i class="fa fa-pen-ruler" aria-hidden="true"></i> Jetzt als Auftrag konfigurieren</a>
+        <p class="calc-price-note" data-i18n="calc_price_hint">Genaue Preisvereinbarung erfolgt individuell vor Beginn. Inklusive kostenfreiem Versand innerhalb Deutschlands.</p>
+        <a href="Auftrag.html" class="btn"><i class="fa fa-pen-ruler" aria-hidden="true"></i> <span data-i18n="calc_btn">Jetzt als Auftrag konfigurieren</span></a>
       </div>
     </section>
 
     <!-- Voucher Gift Section -->
     <section class="voucher-section reveal">
-      <h2><i class="fa-solid fa-gift" aria-hidden="true"></i> Kunst schenken – Der ManuFAKTUR Gutschein</h2>
-      <p>Auf der Suche nach einem unvergesslichen Geschenk für Tierliebhaber oder Kunstbegeisterte? Ein maßgeschneiderter Gutschein für ein Auftragsgemälde bringt Augen zum Leuchten.</p>
+      <h2><i class="fa-solid fa-gift" aria-hidden="true"></i> <span data-i18n="voucher_h2">Kunst schenken – Der ManuFAKTUR Gutschein</span></h2>
+      <p data-i18n="voucher_text">Auf der Suche nach einem unvergesslichen Geschenk für Tierliebhaber oder Kunstbegeisterte? Ein maßgeschneiderter Gutschein für ein Auftragsgemälde bringt Augen zum Leuchten.</p>
       <br>
       <a href="Kontakt.html?betreff=Gutschein" class="btn btn-primary">
-        <i class="fa-solid fa-envelope" aria-hidden="true"></i> Gutschein anfragen
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i> <span data-i18n="voucher_btn">Gutschein anfragen</span>
       </a>
     </section>
 
     <!-- Interaktiver Vorher / Nachher Vergleichsslider -->
     <section class="ba-section reveal">
-      <h2><i class="fa fa-sliders" aria-hidden="true"></i> Vom Foto zum Unikat: Vorher & Nachher</h2>
-      <p class="intro-text intro-text--subtle">Ziehe den Schieberegler, um die Fotovorlage mit dem handgemalten Ergebnis zu vergleichen:</p>
+      <h2><i class="fa fa-sliders" aria-hidden="true"></i> <span data-i18n="leist_ba_h2">Vom Foto zum Unikat: Vorher & Nachher</span></h2>
+      <p class="intro-text intro-text--subtle" data-i18n="leist_ba_intro">Ziehe den Schieberegler, um die Fotovorlage mit dem handgemalten Ergebnis zu vergleichen:</p>
 
       <div class="ba-slider-wrapper" id="ba-slider-wrapper">
         <div class="ba-layer ba-after-layer">
-          <img src="assets/images/img/thumbs/DSC_6622a.webp" alt="Fertiges handgemaltes Gemälde">
-          <span class="ba-badge">Handgemaltes Gemälde</span>
+          <img src="assets/images/img/thumbs/DSC_6622a.webp" data-i18n-alt="ba_after_alt" alt="Fertiges handgemaltes Gemälde">
+          <span class="ba-badge" data-i18n="ba_after_badge">Handgemaltes Gemälde</span>
         </div>
         <div class="ba-layer ba-before-layer" id="ba-before-layer">
-          <img src="assets/images/img/thumbs/DSC_6707a.webp" alt="Fotovorlage">
-          <span class="ba-badge">Original Fotovorlage</span>
+          <img src="assets/images/img/thumbs/DSC_6707a.webp" data-i18n-alt="leist_ba_before_alt" alt="Fotovorlage">
+          <span class="ba-badge" data-i18n="ba_before_badge">Original Fotovorlage</span>
         </div>
         <div class="ba-line-handle" id="ba-line-handle">
           <div class="ba-handle-circle">
             <i class="fa fa-left-right" aria-hidden="true"></i>
           </div>
         </div>
-        <input type="range" min="0" max="100" value="50" class="ba-handle-input" id="ba-handle-input" aria-label="Vorher Nachher Vergleich Schieberegler">
+        <input type="range" min="0" max="100" value="50" class="ba-handle-input" id="ba-handle-input" data-i18n-aria-label="ba_slider_aria" aria-label="Vorher Nachher Vergleich Schieberegler">
       </div>
     </section>
 
     <div class="cta-block reveal">
-      <p class="cta-text"><strong>Hast Du noch weitere Fragen oder eigene Wünsche?</strong></p>
+      <p class="cta-text"><strong data-i18n="leist_cta_text">Hast Du noch weitere Fragen oder eigene Wünsche?</strong></p>
       <div class="cta-btn-row">
-        <a href="Auftrag.html" class="btn"><i class="fa fa-pen-ruler" aria-hidden="true"></i> Auftrag konfigurieren</a>
-        <a href="Kontakt.html" class="btn"><i class="fa fa-pen-to-square" aria-hidden="true"></i> Kontaktiere mich gerne!</a>
+        <a href="Auftrag.html" class="btn"><i class="fa fa-pen-ruler" aria-hidden="true"></i> <span data-i18n="leist_cta_btn1">Auftrag konfigurieren</span></a>
+        <a href="Kontakt.html" class="btn"><i class="fa fa-pen-to-square" aria-hidden="true"></i> <span data-i18n="leist_cta_btn2">Kontaktiere mich gerne!</span></a>
       </div>
     </div>
 
@@ -262,6 +262,6 @@
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=4"></script>
+  <script src="Home.min.js?v=5"></script>
 </body>
 </html>

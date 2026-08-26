@@ -29,7 +29,7 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität (kein externes Google Fonts) -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=4">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=5">
   <script>
     (function(){
       try{
@@ -87,22 +87,22 @@
     <p class="intro-text">Hast Du Fragen zu einem Bild oder möchtest Du eine Auftragsarbeit anfragen? Melde Dich gerne bei mir!</p>
 
     <section class="visitenkarte-section reveal">
-      <h2 class="centered"><i class="fa-solid fa-address-card" aria-hidden="true"></i> Digitale Visitenkarte</h2>
-      <p class="intro-text">Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.</p>
+      <h2 class="centered"><i class="fa-solid fa-address-card" aria-hidden="true"></i> <span data-i18n="kontakt_vcard_title">Digitale Visitenkarte</span></h2>
+      <p class="intro-text intro-text--subtle" data-i18n="kontakt_vcard_hint">Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.</p>
 
       <div class="media-row">
-        <div class="flip-card" tabindex="0" aria-label="Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
+        <div class="flip-card" tabindex="0" data-i18n-aria-label="kontakt_vcard_aria" aria-label="Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <img src="assets/images/logos/logo.png" alt="Logo von ManuFAKTUR Schenk">
             </div>
             <div class="flip-card-back">
               <h2>Manuela Schenk</h2>
-              <span class="title">Künstlerin &amp; Inhaberin</span>
+              <span class="title" data-i18n="kontakt_vcard_role">Künstlerin &amp; Inhaberin</span>
               <ul class="contact-info">
                 <li><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+491632662435">+49 163 2662435</a></li>
                 <li><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a></li>
-                <li><i class="fa fa-map-marker" aria-hidden="true"></i> Bonn, Deutschland</li>
+                <li><i class="fa fa-map-marker" aria-hidden="true"></i> <span data-i18n="kontakt_city">Bonn, Deutschland</span></li>
                 <li class="website-link"><i class="fa fa-globe" aria-hidden="true"></i> www.manufaktur-schenk.de</li>
               </ul>
             </div>
@@ -112,7 +112,7 @@
 
       <div class="centered-section">
         <a href="assets/documents/visitenkarte.vcf" class="btn" download>
-          <i class="fa fa-address-card" aria-hidden="true"></i> Kontakt speichern (.vcf)
+          <i class="fa fa-address-card" aria-hidden="true"></i> <span data-i18n="kontakt_vcard_save">Kontakt speichern (.vcf)</span>
         </a>
       </div>
     </section>
@@ -121,7 +121,7 @@
 
       <section class="contact-info reveal no-margin-bottom">
         <h3>Manuela Schenk</h3>
-        <p><i class="fa fa-map-marker" aria-hidden="true"></i> 53175 Bonn, Deutschland</p>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i> <span data-i18n="kontakt_address">53175 Bonn, Deutschland</span></p>
 
         <p class="contact-highlight">
           <i class="fa fa-phone" aria-hidden="true"></i>
@@ -135,13 +135,13 @@
         <hr>
 
         <div class="social-links-big">
-          <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" rel="noopener" aria-label="Folge mir auf Instagram">
+          <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" rel="noopener" data-i18n-aria-label="social_ig_label" aria-label="Folge mir auf Instagram">
             <i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram
           </a>
-          <a href="https://wa.me/491632662435" target="_blank" rel="noopener" aria-label="Schreibe mir auf WhatsApp">
+          <a href="https://wa.me/491632662435" target="_blank" rel="noopener" data-i18n-aria-label="social_wa_label" aria-label="Schreibe mir auf WhatsApp">
             <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
           </a>
-          <a href="https://www.linkedin.com/in/manuela-schenk" target="_blank" rel="noopener" aria-label="Verbinde dich auf LinkedIn">
+          <a href="https://www.linkedin.com/in/manuela-schenk" target="_blank" rel="noopener" data-i18n-aria-label="social_li_label" aria-label="Verbinde dich auf LinkedIn">
             <i class="fa-brands fa-linkedin" aria-hidden="true"></i> LinkedIn
           </a>
         </div>
@@ -150,7 +150,7 @@
       <!-- Prefill-Banner: wird via JS eingeblendet wenn Konfigurator-Parameter vorhanden -->
       <div id="prefill-banner" class="prefill-banner">
         <i class="fa fa-magic" aria-hidden="true"></i>
-        <span>
+        <span data-i18n-html="kontakt_prefill_text">
           <strong>Deine Konfiguration wurde übertragen!</strong> Das Formular wurde mit deinen Auswahlen aus dem Konfigurator vorausgefüllt.
         </span>
       </div>
@@ -161,52 +161,52 @@
         <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
 
         <div class="form-group">
-          <label for="name">Dein Name</label>
-          <input type="text" id="name" name="name" placeholder="Wie dürfen wir dich ansprechen?" autocomplete="name" required>
+          <label for="name" data-i18n="kontakt_label_name">Dein Name</label>
+          <input type="text" id="name" name="name" data-i18n-placeholder="kontakt_ph_name" placeholder="Wie dürfen wir dich ansprechen?" autocomplete="name" required>
         </div>
 
         <div class="form-group">
-          <label for="email">Deine E-Mail-Adresse</label>
-          <input type="email" id="email" name="email" placeholder="email@beispiel.de" autocomplete="email" required>
+          <label for="email" data-i18n="kontakt_label_email">Deine E-Mail-Adresse</label>
+          <input type="email" id="email" name="email" data-i18n-placeholder="kontakt_ph_email" placeholder="email@beispiel.de" autocomplete="email" required>
         </div>
 
         <div class="form-group">
-          <label for="subject">Betreff</label>
+          <label for="subject" data-i18n="kontakt_label_subject">Betreff</label>
           <select id="subject" name="subject">
-            <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
-            <option value="Auftragsarbeit Tierportrait">Auftrag: Tierportrait</option>
-            <option value="Auftragsarbeit Landschaft">Auftrag: Landschaft</option>
-            <option value="Kaufinteresse">Kaufinteresse an einem Bild</option>
+            <option value="Allgemeine Anfrage" data-i18n="kontakt_opt_general">Allgemeine Anfrage</option>
+            <option value="Auftragsarbeit Tierportrait" data-i18n="kontakt_opt_animal">Auftrag: Tierportrait</option>
+            <option value="Auftragsarbeit Landschaft" data-i18n="kontakt_opt_landscape">Auftrag: Landschaft</option>
+            <option value="Kaufinteresse" data-i18n="kontakt_opt_purchase">Kaufinteresse an einem Bild</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="message">Deine Nachricht:</label>
-          <textarea id="message" name="message" rows="6" required placeholder="Deine Nachricht..."></textarea>
+          <label for="message" data-i18n="kontakt_label_message">Deine Nachricht:</label>
+          <textarea id="message" name="message" rows="6" required data-i18n-placeholder="kontakt_ph_message" placeholder="Deine Nachricht..."></textarea>
         </div>
 
         <!-- DSGVO-konforme Datenschutzeinwilligung -->
         <div class="form-checkbox">
           <input type="checkbox" id="privacy" name="privacy" required>
-          <label for="privacy">Ich stimme zu, dass meine Angaben aus dem Kontaktformular zur Beantwortung meiner Anfrage erhoben und verarbeitet werden. Hinweis: Sie können Ihre Einwilligung jederzeit für die Zukunft per E‑Mail widerrufen. Detaillierte Informationen findest Du in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</label>
+          <label for="privacy" data-i18n-html="kontakt_privacy_label">Ich stimme zu, dass meine Angaben aus dem Kontaktformular zur Beantwortung meiner Anfrage erhoben und verarbeitet werden. Hinweis: Sie können Ihre Einwilligung jederzeit für die Zukunft per E‑Mail widerrufen. Detaillierte Informationen findest Du in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</label>
         </div>
 
         <button type="submit" class="submit-btn">
-          <i class="fa fa-paper-plane" aria-hidden="true"></i> Nachricht senden
+          <i class="fa fa-paper-plane" aria-hidden="true"></i> <span data-i18n="contact_btn_send">Nachricht senden</span>
         </button>
       </form>
 
     </div>
 
     <section class="map-section reveal margin-top-40">
-      <h2 class="centered"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Standorts-Karte (Bonn)</h2>
+      <h2 class="centered"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span data-i18n="kontakt_map_h2">Standorts-Karte (Bonn)</span></h2>
       <div id="map-container" class="map-placeholder">
         <div class="map-dsgvo-box text-center padding-30">
           <i class="fa-solid fa-map-location-dot font-size-3rem color-primary margin-bottom-15" aria-hidden="true"></i>
-          <h3>Google Maps Standorts-Karte laden</h3>
-          <p class="font-size-09rem color-text-muted margin-bottom-20">Aus Datenschutzgründen wird die Karte erst geladen, wenn du auf den Button klickst. Dabei können Daten an Google übertragen werden.</p>
+          <h3 data-i18n="map_title">Google Maps Standorts-Karte laden</h3>
+          <p class="font-size-09rem color-text-muted margin-bottom-20" data-i18n="kontakt_map_text">Aus Datenschutzgründen wird die Karte erst geladen, wenn du auf den Button klickst. Dabei können Daten an Google übertragen werden.</p>
           <button type="button" class="btn btn-primary" onclick="loadGoogleMap()">
-            <i class="fa-solid fa-check" aria-hidden="true"></i> Karte jetzt laden & anzeigen
+            <i class="fa-solid fa-check" aria-hidden="true"></i> <span data-i18n="kontakt_map_btn">Karte jetzt laden & anzeigen</span>
           </button>
         </div>
       </div>
@@ -222,6 +222,6 @@
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=4"></script>
+  <script src="Home.min.js?v=5"></script>
 </body>
 </html>

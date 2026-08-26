@@ -32,7 +32,7 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=4">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=5">
   <script>
     (function(){
       try{
@@ -99,7 +99,7 @@
             placeholder="Gemälde suchen (z.B. Landschaften, Hund, Blumen, Acryl)..."
             aria-label="Bildergalerie durchsuchen">
           <button type="button" id="clear-search-btn" class="clear-search-btn" onclick="clearGallerySearch()"
-            aria-label="Suche zurücksetzen"><i class="fa fa-times" aria-hidden="true"></i></button>
+            data-i18n-aria-label="clear_search_aria" aria-label="Suche zurücksetzen"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
       </div>
 
@@ -133,7 +133,7 @@
       <small>Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.</small>
     </div>
 
-    <div class="gallery-grid reveal">
+    <div class="gallery-grid">
       <div class="gallery-item" data-kategorie="landschaften" id="DSC_6622a">
         <span class="gallery-badge badge-unikat">Unikat</span>
         <a href="assets/images/img/lightbox/DSC_6622a.webp" aria-label="Großansicht: Godesburg modern (Multimediatechnik auf Papier, 40 × 50 cm)">
@@ -580,10 +580,10 @@
   <footer></footer>
 
   <!-- Lightbox für Galeriebilder (Redesigned Split Layout) -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Bilder-Großansicht">
-    <span class="close" tabindex="0" aria-label="Schließen">&times;</span>
-    <a class="prev" onclick="changeSlide(-1)" aria-label="Vorheriges Bild">&#10094;</a>
-    <a class="next" onclick="changeSlide(1)" aria-label="Nächstes Bild">&#10095;</a>
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" data-i18n-aria-label="ui_lightbox_label" aria-label="Bilder-Großansicht">
+    <span class="close" tabindex="0" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
+    <a class="prev" onclick="changeSlide(-1)" data-i18n-aria-label="ui_prev_image" aria-label="Vorheriges Bild">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)" data-i18n-aria-label="ui_next_image" aria-label="Nächstes Bild">&#10095;</a>
 
     <div class="lightbox-split-container">
       <!-- Linke Spalte: Bild, KI-Wandvorlage & Werkzeuge -->
@@ -591,26 +591,26 @@
         <div class="lightbox-top-bar">
           <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 53</div>
           <div id="lightbox-scene-bar" class="lightbox-scene-bar hidden">
-            <span class="scene-label"><i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage:</span>
+            <span class="scene-label"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="scene_label">KI-Wandvorlage:</span></span>
             <button type="button" class="scene-btn active" data-scene="livingroom"
-              onclick="setLightboxScene('livingroom', this)" title="Wohnzimmer-Wand">
-              <i class="fa-solid fa-couch"></i> Wohnzimmer
+              onclick="setLightboxScene('livingroom', this)" data-i18n-title="scene_living_title" title="Wohnzimmer-Wand">
+              <i class="fa-solid fa-couch"></i> <span data-i18n="scene_living">Wohnzimmer</span>
             </button>
             <button type="button" class="scene-btn" data-scene="bedroom" onclick="setLightboxScene('bedroom', this)"
-              title="Schlafzimmer-Wand">
-              <i class="fa-solid fa-bed"></i> Schlafzimmer
+              data-i18n-title="scene_bedroom_title" title="Schlafzimmer-Wand">
+              <i class="fa-solid fa-bed"></i> <span data-i18n="scene_bedroom">Schlafzimmer</span>
             </button>
             <button type="button" class="scene-btn" data-scene="darkloft" onclick="setLightboxScene('darkloft', this)"
-              title="Dark Loft Wand">
-              <i class="fa-solid fa-building-user"></i> Loft / Beton
+              data-i18n-title="scene_loft_title" title="Dark Loft Wand">
+              <i class="fa-solid fa-building-user"></i> <span data-i18n="scene_loft">Loft / Beton</span>
             </button>
             <button type="button" class="scene-btn" data-scene="beigelounge"
-              onclick="setLightboxScene('beigelounge', this)" title="Beige Lounge Wand">
-              <i class="fa-solid fa-sun"></i> Beige Lounge
+              onclick="setLightboxScene('beigelounge', this)" data-i18n-title="scene_lounge_title" title="Beige Lounge Wand">
+              <i class="fa-solid fa-sun"></i> <span data-i18n="scene_lounge">Beige Lounge</span>
             </button>
             <button type="button" class="scene-btn" data-scene="detail" onclick="setLightboxScene('detail', this)"
-              title="Pur ohne Hintergrund">
-              <i class="fa-solid fa-expand"></i> Pur (Detail)
+              data-i18n-title="scene_pure_title" title="Pur ohne Hintergrund">
+              <i class="fa-solid fa-expand"></i> <span data-i18n="scene_pure">Pur (Detail)</span>
             </button>
           </div>
         </div>
@@ -627,32 +627,32 @@
               <div class="watermark-brand">@ManuFAKTUR</div>
             </div>
             <div id="wall-badge-tag" class="wall-badge-tag hidden"><i class="fa-solid fa-wand-magic-sparkles"></i>
-              KI-Wandvorlage</div>
+              <span data-i18n="scene_label_short">KI-Wandvorlage</span></div>
             <div id="wall-drag-hint" class="wall-drag-hint hidden"><i class="fa-solid fa-up-down-left-right"
-                aria-hidden="true"></i> Ziehen zum Verschieben</div>
+                aria-hidden="true"></i> <span data-i18n="wall_drag_hint">Ziehen zum Verschieben</span></div>
           </div>
         </div>
 
         <!-- Bild-Werkzeuge: Drehen, Lupe, Wandskalierung & Zentrierung -->
         <div class="lightbox-toolbar">
-          <button id="btn-rotate-img" class="lb-tool-btn" onclick="rotateLightboxImage(90)" title="Um 90° drehen"
-            aria-label="Bild um 90 Grad drehen">
+          <button id="btn-rotate-img" class="lb-tool-btn" onclick="rotateLightboxImage(90)" data-i18n-title="lb_rotate_title" title="Um 90° drehen"
+            data-i18n-aria-label="lb_rotate_aria" aria-label="Bild um 90 Grad drehen">
             <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 90° Drehen
           </button>
           <button id="btn-toggle-zoom" class="lb-tool-btn" onclick="toggleLightboxZoom()"
-            title="Lupe aktivieren/deaktivieren" aria-label="Lupe aktivieren">
+            data-i18n-title="lb_zoom_title" title="Lupe aktivieren/deaktivieren" data-i18n-aria-label="lb_zoom_aria" aria-label="Lupe aktivieren">
             <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Lupe Zoom
           </button>
 
           <!-- Interaktive Größen-Skalierung & Zentrieren für Wand-Hintergrund -->
           <div id="lb-wall-scale-control" class="lb-scale-control hidden">
             <label for="lb-scale-slider" class="lb-scale-label"><i
-                class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> Skalierung:</label>
+                class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> <span data-i18n="lb_scale_label">Skalierung:</span></label>
             <input type="range" id="lb-scale-slider" min="25" max="90" value="55"
-              oninput="updateLbWallScale(this.value)" aria-label="Gemäldegröße an der Wand skalieren">
+              oninput="updateLbWallScale(this.value)" data-i18n-aria-label="lb_scale_aria" aria-label="Gemäldegröße an der Wand skalieren">
             <span id="lb-scale-val" class="lb-scale-val">55%</span>
             <button type="button" id="btn-reset-pos" class="lb-tool-btn lb-btn-subtle-sm"
-              onclick="resetWallFramePosition()" title="Gemäldeposition auf der Wand zentrieren">
+              onclick="resetWallFramePosition()" data-i18n-title="lb_center_title" title="Gemäldeposition auf der Wand zentrieren">
               <i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> Zentrieren
             </button>
           </div>
@@ -672,69 +672,69 @@
 
         <div class="lightbox-details-list">
           <div class="lightbox-detail-row">
-            <span class="lightbox-detail-label">Technik:</span>
+            <span class="lightbox-detail-label" data-i18n="lb_label_technik">Technik:</span>
             <span id="lb-detail-technik" class="lightbox-detail-val">Acryl auf Leinwand</span>
           </div>
           <div class="lightbox-detail-row">
-            <span class="lightbox-detail-label">Maße / Format:</span>
+            <span class="lightbox-detail-label" data-i18n="lb_label_masse">Maße / Format:</span>
             <span id="lb-detail-masse" class="lightbox-detail-val">40 × 50 cm</span>
           </div>
           <div class="lightbox-detail-row">
-            <span class="lightbox-detail-label">Kategorie:</span>
+            <span class="lightbox-detail-label" data-i18n="lb_label_kat">Kategorie:</span>
             <span id="lb-detail-kat" class="lightbox-detail-val">Kunstwerk</span>
           </div>
           <div class="lightbox-detail-row">
-            <span class="lightbox-detail-label">Herkunft:</span>
-            <span class="lightbox-detail-val">Atelier Bonn</span>
+            <span class="lightbox-detail-label" data-i18n="lb_label_herkunft">Herkunft:</span>
+            <span class="lightbox-detail-val" data-i18n="lb_val_herkunft">Atelier Bonn</span>
           </div>
           <div class="lightbox-detail-row">
-            <span class="lightbox-detail-label">Rahmung:</span>
-            <span class="lightbox-detail-val">Sofort aufhängbar (Keilrahmen)</span>
+            <span class="lightbox-detail-label" data-i18n="lb_label_rahmung">Rahmung:</span>
+            <span class="lightbox-detail-val" data-i18n="lb_val_rahmung">Sofort aufhängbar (Keilrahmen)</span>
           </div>
         </div>
 
         <!-- Weitere Ansichten Grid (Multiperspektivische Galerie) -->
         <div class="lightbox-views-section">
-          <h3 class="lightbox-views-title"><i class="fa-solid fa-images" aria-hidden="true"></i> Weitere Ansichten:</h3>
+          <h3 class="lightbox-views-title"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="lb_views_title">Weitere Ansichten:</span></h3>
           <div class="lightbox-views-grid">
             <button type="button" class="view-thumb-btn active" data-view="front"
-              onclick="setLightboxViewAngle('front', this)" title="Frontansicht Pur">
+              onclick="setLightboxViewAngle('front', this)" data-i18n-title="lb_view_front_title" title="Frontansicht Pur">
               <div class="thumb-img-wrapper">
-                <img id="thumb-img-front" src="" alt="Frontansicht">
+                <img id="thumb-img-front" src="" data-i18n-alt="lb_view_front" alt="Frontansicht">
               </div>
-              <span class="thumb-label">Frontansicht</span>
+              <span class="thumb-label" data-i18n="lb_view_front">Frontansicht</span>
             </button>
 
             <button type="button" class="view-thumb-btn" data-view="room" onclick="setLightboxViewAngle('room', this)"
-              title="Wand & Raumansicht">
+              data-i18n-title="lb_view_room_title" title="Wand & Raumansicht">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/livingroom.png" alt="Wand & Raumansicht">
+                <img src="assets/images/rooms/livingroom.png" data-i18n-alt="lb_view_room_title" alt="Wand & Raumansicht">
               </div>
-              <span class="thumb-label">Wandansicht</span>
+              <span class="thumb-label" data-i18n="lb_view_room">Wandansicht</span>
             </button>
 
             <button type="button" class="view-thumb-btn" data-view="back" onclick="setLightboxViewAngle('back', this)"
-              title="Rückseite & Keilrahmen">
+              data-i18n-title="lb_view_back_title" title="Rückseite & Keilrahmen">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/canvas_back.png" alt="Rückseite & Keilrahmen">
+                <img src="assets/images/rooms/canvas_back.png" data-i18n-alt="lb_view_back_title" alt="Rückseite & Keilrahmen">
               </div>
-              <span class="thumb-label">Keilrahmen</span>
+              <span class="thumb-label" data-i18n="lb_view_back">Keilrahmen</span>
             </button>
 
             <button type="button" class="view-thumb-btn" data-view="side3d"
-              onclick="setLightboxViewAngle('side3d', this)" title="3D-Seitenansicht & Textur">
+              onclick="setLightboxViewAngle('side3d', this)" data-i18n-title="lb_view_side_title" title="3D-Seitenansicht & Textur">
               <div class="thumb-img-wrapper thumb-3d-preview">
-                <img id="thumb-img-side" src="" alt="3D Seitenansicht">
+                <img id="thumb-img-side" src="" data-i18n-alt="lb_view_side" alt="3D Seitenansicht">
               </div>
-              <span class="thumb-label">3D-Perspektive</span>
+              <span class="thumb-label" data-i18n="lb_view_side">3D-Perspektive</span>
             </button>
 
             <button type="button" class="view-thumb-btn" data-view="artist"
-              onclick="setLightboxViewAngle('artist', this)" title="Künstlerin & Atelier">
+              onclick="setLightboxViewAngle('artist', this)" data-i18n-title="lb_view_artist_title" title="Künstlerin & Atelier">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/artist_studio.png" alt="Künstlerin & Atelier">
+                <img src="assets/images/rooms/artist_studio.png" data-i18n-alt="lb_view_artist_title" alt="Künstlerin & Atelier">
               </div>
-              <span class="thumb-label">Atelier</span>
+              <span class="thumb-label" data-i18n="lb_view_artist">Atelier</span>
             </button>
           </div>
         </div>
@@ -744,14 +744,14 @@
         <!-- Dezentere, unaufdringliche Aktions-Buttons an der Seite -->
         <div class="lightbox-actions-panel">
           <button id="lightbox-inquiry-btn" class="btn-subtle btn-subtle-primary"
-            aria-label="Dieses Motiv als Auftrag anfragen">
+            data-i18n-aria-label="lb_inquiry_aria" aria-label="Dieses Motiv als Auftrag anfragen">
             <i class="fa-solid fa-palette" aria-hidden="true"></i> Motiv als Auftrag anfragen
           </button>
-          <button id="lightbox-room-btn" class="btn-subtle" aria-label="In deinem Raum ansehen">
+          <button id="lightbox-room-btn" class="btn-subtle" data-i18n-aria-label="lb_btn_room" aria-label="In deinem Raum ansehen">
             <i class="fa-solid fa-house-chimney" aria-hidden="true"></i> In deinem Raum ansehen
           </button>
           <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
-            <i class="fa-regular fa-heart" aria-hidden="true"></i> Zu Favoriten
+            <i class="fa-regular fa-heart" aria-hidden="true"></i> <span data-i18n="lb_fav_default">Zu Favoriten</span>
           </button>
         </div>
       </div>
@@ -761,14 +761,14 @@
   <!-- Modal für Flyer -->
   <div id="flyerModal" class="modal" onclick="closeFlyerModal()" role="dialog" aria-modal="true"
     aria-label="Flyer Großansicht">
-    <span class="close" tabindex="0" onclick="closeFlyerModal()" aria-label="Schließen">&times;</span>
+    <span class="close" tabindex="0" onclick="closeFlyerModal()" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
     <img class="modal-content" id="modalImg" alt="Vergrößerte Flyer-Seite">
   </div>
 
   <!-- Room Visualizer Modal -->
   <div id="roomVisualizerModal" class="modal" role="dialog" aria-modal="true" aria-label="An deiner Wand ansehen">
     <div class="room-modal-wrapper">
-      <span class="close" tabindex="0" onclick="closeRoomVisualizer()" aria-label="Schließen">&times;</span>
+      <span class="close" tabindex="0" onclick="closeRoomVisualizer()" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
       <h2 class="text-center color-secondary margin-bottom-5"><i class="fa-solid fa-house-chimney"
           aria-hidden="true"></i> In deinem Raum ansehen</h2>
       <p class="text-center font-size-09rem color-text-muted">Erlebe das Gemälde maßstabsgetreu in verschiedenen
@@ -776,7 +776,7 @@
 
       <div id="room-stage" class="room-canvas-stage room-stage-default">
         <div id="room-artwork-container" class="room-artwork-container">
-          <img id="room-artwork" class="room-artwork-frame" alt="Gemälde an der Wand" draggable="false" oncontextmenu="return false;">
+          <img id="room-artwork" class="room-artwork-frame" data-i18n-alt="room_artwork_alt" alt="Gemälde an der Wand" draggable="false" oncontextmenu="return false;">
           <div class="artwork-watermark artwork-watermark--room" aria-hidden="true">
             <div class="watermark-brand">@ManuFAKTUR</div>
           </div>
@@ -787,42 +787,42 @@
       <div class="room-controls-panel">
         <div class="room-control-group">
           <label for="room-scale-slider" class="room-control-label"><i class="fa-solid fa-expand"
-              aria-hidden="true"></i> Größe:</label>
+              aria-hidden="true"></i> <span data-i18n="room_label_size">Größe:</span></label>
           <input type="range" id="room-scale-slider" min="30" max="100" value="55"
-            oninput="updateRoomArtworkTransform()" aria-label="Gemäldegröße anpassen">
+            oninput="updateRoomArtworkTransform()" data-i18n-aria-label="room_scale_aria" aria-label="Gemäldegröße anpassen">
           <span id="room-scale-val" class="room-control-val">55%</span>
         </div>
 
         <div class="room-control-group">
           <label for="room-rotation-slider" class="room-control-label"><i class="fa-solid fa-rotate"
-              aria-hidden="true"></i> Drehung:</label>
+              aria-hidden="true"></i> <span data-i18n="room_label_rotation">Drehung:</span></label>
           <input type="range" id="room-rotation-slider" min="-45" max="45" value="0"
-            oninput="updateRoomArtworkTransform()" aria-label="Neigung anpassen">
+            oninput="updateRoomArtworkTransform()" data-i18n-aria-label="room_rotation_aria" aria-label="Neigung anpassen">
           <span id="room-rotate-val" class="room-control-val">0°</span>
         </div>
 
         <div class="room-control-group">
           <button type="button" id="room-rotate-90-btn" class="room-tool-btn" onclick="rotateRoomArtwork90()"
-            title="Um 90° drehen">
-            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 90° Drehen
+            data-i18n-title="lb_rotate_title" title="Um 90° drehen">
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> <span data-i18n="room_rotate_btn">90° Drehen</span>
           </button>
           <button type="button" id="room-fit-btn" class="room-tool-btn" onclick="autoFitToRoomWall()"
-            title="Automatisch an Wand anpassen">
-            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Auto-Wand-Fit
+            data-i18n-title="room_fit_title" title="Automatisch an Wand anpassen">
+            <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> <span data-i18n="room_fit_btn">Auto-Wand-Fit</span>
           </button>
         </div>
       </div>
 
       <div class="room-presets-bar">
-        <span class="font-weight-700 font-size-088rem align-self-center">Raumkulisse:</span>
+        <span class="font-weight-700 font-size-088rem align-self-center" data-i18n="room_backdrop_label">Raumkulisse:</span>
         <button class="room-preset-btn active" onclick="setRoomBackdrop('livingroom', this)">Modernes
           Wohnzimmer</button>
         <button class="room-preset-btn" onclick="setRoomBackdrop('bedroom', this)">Schlafzimmer</button>
         <button class="room-preset-btn" onclick="setRoomBackdrop('gallerywall', this)">Galerie-Wand</button>
         <label class="room-preset-btn cursor-pointer display-inline-flex align-items-center gap-5">
-          <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Eigene Wand hochladen
-          <input type="file" id="room-custom-upload" accept="image/*" class="hidden" aria-label="Eigene Wand hochladen"
-            title="Eigene Wand hochladen" onchange="handleCustomWallUpload(this)">
+          <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> <span data-i18n="room_upload_label">Eigene Wand hochladen</span>
+          <input type="file" id="room-custom-upload" accept="image/*" class="hidden" data-i18n-aria-label="room_upload_label"
+            aria-label="Eigene Wand hochladen" data-i18n-title="room_upload_label" title="Eigene Wand hochladen" onchange="handleCustomWallUpload(this)">
         </label>
       </div>
 
@@ -839,7 +839,7 @@
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=4"></script>
+  <script src="Home.min.js?v=5"></script>
 </body>
 
 </html>

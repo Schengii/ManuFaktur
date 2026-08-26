@@ -29,7 +29,7 @@
     <link rel="manifest" href="manifest.json">
     <!-- Lokales Font Awesome für DSGVO-Konformität -->
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="style.min.css?v=4">
+    <link rel="stylesheet" type="text/css" href="style.min.css?v=5">
     <script>
       (function(){
         try{
@@ -66,7 +66,7 @@
     <div class="text-content">
         <h1 class="page-title page-title--left">Impressum</h1>
         
-        <h2>Angaben gemäß § 5 TMG</h2>
+        <h2 data-i18n="impressum_h_tmg">Angaben gemäß § 5 TMG</h2>
         <p>
             Manuela Schenk<br>
             ManuFAKTUR – Individuelle Malerei<br>
@@ -74,15 +74,15 @@
             53175 Bonn
         </p>
 
-        <h2>Kontakt</h2>
-        <p>
+        <h2 data-i18n="impressum_h_contact">Kontakt</h2>
+        <p data-i18n-html="impressum_contact_block">
             Telefon: +49 (0) 163 2662435<br>
             E-Mail: <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a><br>
             Anschrift: Rüdesheimer Straße 14, 53175 Bonn
         </p>
 
-        <h2>Umsatzsteuer</h2>
-        <p>
+        <h2 data-i18n="impressum_h_vat">Umsatzsteuer</h2>
+        <p data-i18n="impressum_vat_text">
             Gemäß § 19 Abs. 1 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer berechnet.
         </p>
 
@@ -90,48 +90,48 @@
         <div class="map-container">
             <div id="map-container" class="map-placeholder">
                 <div class="map-placeholder-content">
-                    <h4><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Google Maps laden</h4>
-                    <p>Um die interaktive Karte anzuzeigen, klicken Sie bitte auf "Karte laden". Dadurch stimmen Sie der Übertragung Ihrer IP-Adresse an Google und der Verarbeitung von Cookies gemäß der Datenschutzrichtlinien von Google zu. (Details in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>)</p>
-                    <button onclick="loadGoogleMap()" class="btn"><i class="fa-solid fa-map" aria-hidden="true"></i> Karte laden</button>
+                    <h4><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> <span data-i18n="impressum_map_title">Google Maps laden</span></h4>
+                    <p data-i18n-html="impressum_map_text">Um die interaktive Karte anzuzeigen, klicken Sie bitte auf "Karte laden". Dadurch stimmen Sie der Übertragung Ihrer IP-Adresse an Google und der Verarbeitung von Cookies gemäß der Datenschutzrichtlinien von Google zu. (Details in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>)</p>
+                    <button onclick="loadGoogleMap()" class="btn"><i class="fa-solid fa-map" aria-hidden="true"></i> <span data-i18n="impressum_map_btn">Karte laden</span></button>
                 </div>
             </div>
         </div>
 
-        <h2>Redaktionell verantwortlich und Erstellung der Webseite</h2>
+        <h2 data-i18n="impressum_h_editor">Redaktionell verantwortlich und Erstellung der Webseite</h2>
         <p>
             Maximilian Schenk<br>
             Rüdesheimer Straße 14<br>
             53175 Bonn
         </p>
-        <p>
+        <p data-i18n-html="impressum_dev_credit">
             Programmierung &amp; Design Code:<br>
             <a href="https://github.com/Schengii?tab=repositories" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Repository auf GitHub</a>
         </p>
         <hr>
 
-        <h2>Urheberrechtshinweis (Copyright Bildergalerie)</h2>
+        <h2 data-i18n="impressum_h_copyright">Urheberrechtshinweis (Copyright Bildergalerie)</h2>
         <p>
-          <strong>
+          <strong data-i18n-html="impressum_copyright_text">
             Alle Bilder wurden selbst gemalt und dürfen nicht ohne ausdrückliche Erlaubnis weder verändert, öffentlich genutzt, noch kopiert werden.<br>
             *** Für die Bilder gilt ein Copyright durch die Künstlerin Manuela Schenk. *** <br>
             Die Bilder gehören der ManuFAKTUR, bei unrechtmäßiger Nutzung behalten wir uns rechtliche Schritte vor und bringen diese zur Anzeige.
           </strong>
         </p>
 
-        <h2>EU-Streitschlichtung</h2>
-        <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br> Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+        <h2 data-i18n="impressum_h_eu">EU-Streitschlichtung</h2>
+        <p data-i18n-html="impressum_eu_text">Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br> Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
 
-        <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
-        <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+        <h2 data-i18n="impressum_h_dispute">Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+        <p data-i18n="impressum_dispute_text">Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
     </div>
 
     <section class="visitenkarte-section reveal">
-        <h2 class="h2--centered"><i class="fa-solid fa-address-card" aria-hidden="true"></i> Digitale Visitenkarte</h2>
-        <p class="intro-text">Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.</p>
-        
+        <h2 class="h2--centered"><i class="fa-solid fa-address-card" aria-hidden="true"></i> <span data-i18n="kontakt_vcard_title">Digitale Visitenkarte</span></h2>
+        <p class="intro-text intro-text--subtle" data-i18n="kontakt_vcard_hint">Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.</p>
+
         <div class="media-row">
             <!-- Interaktive 3D Flipping Card -->
-            <div class="flip-card" tabindex="0" aria-label="Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
+            <div class="flip-card" tabindex="0" data-i18n-aria-label="kontakt_vcard_aria" aria-label="Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
                 <div class="flip-card-inner">
                     <!-- Vorderseite -->
                     <div class="flip-card-front">
@@ -140,12 +140,12 @@
                     <!-- Rückseite -->
                     <div class="flip-card-back">
                         <h2>Manuela Schenk</h2>
-                        <span class="title">Künstlerin &amp; Inhaberin</span>
-                        
+                        <span class="title" data-i18n="kontakt_vcard_role">Künstlerin &amp; Inhaberin</span>
+
                         <ul class="contact-info">
                             <li><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+491632662435">+49 163 2662435</a></li>
                             <li><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a></li>
-                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> Bonn, Deutschland</li>
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> <span data-i18n="kontakt_city">Bonn, Deutschland</span></li>
                             <li class="website-link"><i class="fa fa-globe" aria-hidden="true"></i> www.manufaktur-schenk.de</li>
                         </ul>
                     </div>
@@ -165,6 +165,6 @@
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=4"></script>
+  <script src="Home.min.js?v=5"></script>
 </body>
 </html>

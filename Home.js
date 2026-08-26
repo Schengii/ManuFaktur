@@ -100,6 +100,15 @@ function setLanguage(lang) {
     if (typeof filterGallery === 'function') {
         filterGallery();
     }
+    // Favoriten-Buttons (Herz-Icons) neu beschriften
+    if (typeof initFavButtonsUI === 'function') {
+        initFavButtonsUI();
+    }
+
+    // Auftrag.html: Zusammenfassung neu lokalisieren, falls Schritt 4 bereits sichtbar ist
+    if (typeof buildSummary === 'function' && typeof state !== 'undefined' && state && state.step === 4) {
+        buildSummary();
+    }
 }
 
 function toggleLanguage() {
@@ -352,12 +361,67 @@ const I18N_DICTIONARY = {
         filter_landscapes: 'Landschaften',
         filter_plants: 'Pflanzen',
         filter_other: 'Sonstiges',
-        filter_favorites: '❤️ Favoriten',
+        filter_favorites: 'Favoriten',
         search_placeholder: 'Gemälde, Motive oder Techniken durchsuchen...',
         sort_label: 'Sortierung:',
         sort_default: 'Standard',
         sort_title_asc: 'Titel (A-Z)',
         sort_title_desc: 'Titel (Z-A)',
+        gallery_empty_fav_title: 'Noch keine Favoriten gemerkt.',
+        gallery_empty_fav_text: 'Klicke auf das Herz-Symbol auf den Kunstwerken, um deine persönlichen Lieblingswerke hier zu speichern.',
+        gallery_empty_search_title: 'Keine passenden Gemälde gefunden.',
+        gallery_empty_search_text: 'Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.',
+        scene_label: 'KI-Wandvorlage:',
+        scene_label_short: 'KI-Wandvorlage',
+        scene_living: 'Wohnzimmer',
+        scene_living_title: 'Wohnzimmer-Wand',
+        scene_bedroom: 'Schlafzimmer',
+        scene_bedroom_title: 'Schlafzimmer-Wand',
+        scene_loft: 'Loft / Beton',
+        scene_loft_title: 'Dark Loft Wand',
+        scene_lounge: 'Beige Lounge',
+        scene_lounge_title: 'Beige Lounge Wand',
+        scene_pure: 'Pur (Detail)',
+        scene_pure_title: 'Pur ohne Hintergrund',
+        wall_drag_hint: 'Ziehen zum Verschieben',
+        lb_rotate_title: 'Um 90° drehen',
+        lb_rotate_aria: 'Bild um 90 Grad drehen',
+        lb_zoom_title: 'Lupe aktivieren/deaktivieren',
+        lb_zoom_aria: 'Lupe aktivieren',
+        lb_scale_label: 'Skalierung:',
+        lb_scale_aria: 'Gemäldegröße an der Wand skalieren',
+        lb_center_title: 'Gemäldeposition auf der Wand zentrieren',
+        lb_label_technik: 'Technik:',
+        lb_label_masse: 'Maße / Format:',
+        lb_label_kat: 'Kategorie:',
+        lb_label_herkunft: 'Herkunft:',
+        lb_val_herkunft: 'Atelier Bonn',
+        lb_label_rahmung: 'Rahmung:',
+        lb_val_rahmung: 'Sofort aufhängbar (Keilrahmen)',
+        lb_views_title: 'Weitere Ansichten:',
+        lb_view_front: 'Frontansicht',
+        lb_view_front_title: 'Frontansicht Pur',
+        lb_view_room: 'Wandansicht',
+        lb_view_room_title: 'Wand & Raumansicht',
+        lb_view_back: 'Keilrahmen',
+        lb_view_back_title: 'Rückseite & Keilrahmen',
+        lb_view_side: '3D-Perspektive',
+        lb_view_side_title: '3D-Seitenansicht & Textur',
+        lb_view_artist: 'Atelier',
+        lb_view_artist_title: 'Künstlerin & Atelier',
+        lb_inquiry_aria: 'Dieses Motiv als Auftrag anfragen',
+        lb_fav_default: 'Zu Favoriten',
+        room_artwork_alt: 'Gemälde an der Wand',
+        room_label_size: 'Größe:',
+        room_scale_aria: 'Gemäldegröße anpassen',
+        room_label_rotation: 'Drehung:',
+        room_rotation_aria: 'Neigung anpassen',
+        room_rotate_btn: '90° Drehen',
+        room_fit_title: 'Automatisch an Wand anpassen',
+        room_fit_btn: 'Auto-Wand-Fit',
+        room_backdrop_label: 'Raumkulisse:',
+        room_upload_label: 'Eigene Wand hochladen',
+        clear_search_aria: 'Suche zurücksetzen',
         format_label: 'Format:',
         color_label: 'Farbe:',
         lb_btn_inquiry: 'Motiv als Auftrag anfragen',
@@ -403,9 +467,242 @@ const I18N_DICTIONARY = {
         imprint_intro: 'Gesetzliche Anbieterkennzeichnung und Angaben gemäß § 5 DDG.',
         privacy_page_title: 'Datenschutzerklärung',
         privacy_intro: 'Informationen über die Verarbeitung deiner personenbezogenen Daten.',
-        notfound_title: 'Seite nicht gefunden',
-        notfound_text: 'Die aufgerufene Seite existiert leider nicht oder wurde verschoben.',
-        notfound_btn: 'Zur Startseite'
+        notfound_title: '404 – Seite nicht gefunden',
+        notfound_text: 'Diese Leinwand ist noch leer. Die gesuchte Seite existiert nicht (mehr) oder wurde verschoben.',
+        notfound_btn: 'Zur Startseite',
+        notfound_btn2: 'Zur Bildergalerie',
+
+        // Global UI (Lightbox/Modal, seitenübergreifend wiederverwendet)
+        ui_close: 'Schließen',
+        ui_prev_image: 'Vorheriges Bild',
+        ui_next_image: 'Nächstes Bild',
+        ui_lightbox_label: 'Bilder-Großansicht',
+
+        // Home.html
+        hl_owls_aria: 'Großansicht: Zwei Eulen',
+        hl_owls_alt: 'Handgemaltes Acrylbild mit zwei kleinen Eulen auf einem Ast vor blauem Hintergrund',
+        hl_owls_caption: 'Zwei Eulen (Acryl auf Leinwand)',
+        hl_godesburg_aria: 'Großansicht: Godesburg Stadtansicht',
+        hl_godesburg_alt: 'Handgemaltes Landschaftsbild der historischen Godesburg in Bonn bei Dämmerung',
+        hl_godesburg_caption: 'Godesburg Stadtansicht (Acryl auf Leinwand)',
+        hl_rheinaue_aria: 'Großansicht: Rheinaue Bonn',
+        hl_rheinaue_alt: 'Handgemaltes Acrylbild des herbstlichen Rheinaue-Sees in Bonn mit Bäumen und Spiegelungen',
+        hl_rheinaue_caption: 'Rheinaue Bonn (Acryl auf Leinwand)',
+        hl_feld_aria: 'Großansicht: Feldweg',
+        hl_feld_alt: 'Handgemaltes Acrylbild eines idyllischen Feldwegs im Sommer unter blauem Himmel',
+        hl_feld_caption: 'Feldweg im Sommer (Acryl auf Leinwand)',
+        testi1_quote: '„Das Portrait von unserem Schäferhund Balou ist einfach fantastisch geworden. Manuela hat seinen treuen Blick exakt eingefangen. Wir sind überglücklich!“',
+        testi1_location: 'Bonn-Bad Godesberg · Tierportrait in Acryl',
+        testi2_quote: '„Ich habe ein Landschaftsbild der Rheinaue als Geschenk zur Hochzeit bestellt. Die Abstimmung war super unkompliziert und das Brautpaar war zu Tränen gerührt.“',
+        testi2_location: 'Rhein-Sieg-Kreis · Landschaftsgemälde',
+        testi3_quote: '„Wunderschöne Arbeit! Man merkt bei jedem Pinselstrich die Liebe zum Detail. Das Bild hat jetzt einen zentralen Ehrenplatz in unserem Wohnzimmer.“',
+        testi3_location: 'Köln · Hundeportrait & Stillleben',
+        testi_prev_aria: 'Vorherige Kundenstimme',
+        testi_next_aria: 'Nächste Kundenstimme',
+        home_btn_gallery: 'Zur Galerie',
+        home_btn_flyer: 'Flyer Download',
+
+        // UeberMich.html
+        process_h2: 'Der Entstehungsprozess eines Kunstwerks',
+        process_intro: 'Jedes Gemälde entsteht in präziser Handarbeit in mehreren abgestimmten Phasen:',
+        process1_title: 'Skizze & Proportionen',
+        process1_text: 'Exakte Übertragung deines Fotomotivs auf die Leinwand als feine Vorzeichnung.',
+        process2_title: 'Farbauftrag & Schichtung',
+        process2_text: 'Auftrag der ersten Farbschichten für Tiefe, Schatten und charakteristische Lichtakzente.',
+        process3_title: 'Details & Veredelung',
+        process3_text: 'Feinste Ausarbeitung von Augen, Fellstruktur oder Lichtreflexen sowie Schlussversiegelung.',
+        edu_h2: 'Künstlerische Ausbildung & Dozierende',
+        edu_intro: 'Fundiertes Handwerk durch kontinuierliche Weiterbildung an anerkannten Kunstakademien:',
+        edu1_place: 'Alfter bei Bonn',
+        edu1_text: 'Jahreskurs <em>„Ein Jahr für die Kunst“</em> sowie vertiefende Seminare und Intensivwochen zur künstlerischen Professionalisierung.',
+        edu1_dozenten_label: 'Dozierende:',
+        edu2_place: 'Bad Godesberg · Friesdorf',
+        edu2_text: 'Intensiver Privatunterricht in fortgeschrittenen Maltechniken, Farbenlehre, Pinselduktus und Komposition.',
+        edu3_place: 'Aachen & Bonn',
+        edu3_text: 'Fachkurse in figürlichem Zeichnen, Porträtmalerei, Landschaftsstudien und klassischer Öl- und Acrylmalerei.',
+        timeline_h2: 'Mein Weg zur Kunst',
+        tl1_title: 'Die ersten Schritte',
+        tl1_text: 'Erste Fachkurse an der VHS Bonn und der Kunstschule Aachen. Die Begeisterung für Farben, Licht und Formen wurde zur lebenslangen Leidenschaft.',
+        tl2_title: 'Das erste Tierportrait: Balou',
+        tl2_text: 'Das Porträt unseres Hundes Balou markierte den Beginn meiner Spezialisierung auf Tierportraits – die emotionale Resonanz war überwältigend.',
+        tl3_title: 'Akademische Vertiefung',
+        tl3_text: 'Jahreskurs und Intensivseminare an der Alanus Hochschule Alfter bei Kehlenbach, Genschow, Hendel und Thein zur Verfeinerung von Technik und Ausdruck.',
+        tl4_title: 'Gründung der ManuFAKTUR Schenk',
+        tl4_text: 'Eröffnung des Ateliers in Bonn-Bad Godesberg und Beginn professioneller Auftragsarbeiten für Kunden aus ganz Deutschland.',
+        tl5_date: 'Heute',
+        tl5_title: 'Kunst für Dein Zuhause',
+        tl5_text: 'Mit über 50 individuellen Unikaten und vielen glücklichen Auftraggebern schaffe ich bleibende Werte und persönliche Erinnerungsstücke.',
+        ba_h2: 'Handgemalte Präzision: Vorher & Nachher',
+        ba_intro: 'Schiebe den Regler, um die Vorlage mit dem fertigen Acrylgemälde zu vergleichen:',
+        ba_after_alt: 'Fertiges handgemaltes Gemälde',
+        ba_after_badge: 'Handgemaltes Gemälde',
+        ba_before_alt: 'Original Fotovorlage',
+        ba_before_badge: 'Original Fotovorlage',
+        ba_slider_aria: 'Vorher Nachher Vergleich Schieberegler',
+        flyer_h2: 'Mein Info-Flyer',
+        flyer_text: 'Klicke auf ein Bild für die Großansicht oder lade dir den Flyer als PDF herunter.',
+        flyer_front_alt: 'Vorderseite des Informationsflyers von ManuFAKTUR Schenk',
+        flyer_back_alt: 'Rückseite des Informationsflyers von ManuFAKTUR Schenk',
+        flyer_btn: 'Flyer herunterladen (PDF)',
+
+        // Leistungen.html (Ergänzungen)
+        faq_3_q_ship: 'Wie lange dauert der Versand?',
+        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild per DHL oder DPD gut gepolstert und <strong>versandkostenfrei</strong> innerhalb Deutschlands.',
+        calc_h2: 'Vorab-Preiskalkulator',
+        calc_intro: 'Berechne hier unverbindlich einen geschätzten Richtpreis für dein Wunschgemälde:',
+        calc_label_motiv: 'Motiv-Kategorie',
+        calc_opt_motiv1: 'Tierportrait (Hund, Katze, etc.)',
+        calc_opt_motiv2: 'Landschaft & Natur',
+        calc_opt_motiv3: 'Stillleben & Blumen',
+        calc_opt_motiv4: 'Sonstiges / Wunschidee',
+        calc_label_format: 'Format / Leinwandgröße',
+        calc_opt_format1: '20 × 30 cm (Klein · ab 90 €)',
+        calc_opt_format2: '30 × 40 cm (Beliebt · ab 130 €)',
+        calc_opt_format3: '40 × 50 cm (Mittel · ab 175 €)',
+        calc_opt_format4: '50 × 70 cm (Groß · ab 230 €)',
+        calc_opt_format5: '60 × 80 cm (XL · ab 290 €)',
+        calc_label_technik: 'Maltechnik',
+        calc_opt_tech1: 'Acryl auf Leinwand (Klassisch)',
+        calc_opt_tech2: 'Öl auf Leinwand (+15%)',
+        calc_opt_tech3: 'Bleistift / Kohlezeichnung (-15%)',
+        calc_opt_tech4: 'Aquarell auf Feinkarton',
+        calc_label_anzahl: 'Motive auf einem Bild',
+        calc_opt_anzahl1: '1 Hauptmotiv (+0 €)',
+        calc_opt_anzahl2: '2 Motive (+35 €)',
+        calc_opt_anzahl3: '3 Motive (+65 €)',
+        calc_price_title: 'Geschätzter Richtpreis',
+        calc_price_hint: 'Genaue Preisvereinbarung erfolgt individuell vor Beginn. Inklusive kostenfreiem Versand innerhalb Deutschlands.',
+        calc_btn: 'Jetzt als Auftrag konfigurieren',
+        voucher_h2: 'Kunst schenken – Der ManuFAKTUR Gutschein',
+        voucher_text: 'Auf der Suche nach einem unvergesslichen Geschenk für Tierliebhaber oder Kunstbegeisterte? Ein maßgeschneiderter Gutschein für ein Auftragsgemälde bringt Augen zum Leuchten.',
+        voucher_btn: 'Gutschein anfragen',
+        leist_ba_h2: 'Vom Foto zum Unikat: Vorher & Nachher',
+        leist_ba_intro: 'Ziehe den Schieberegler, um die Fotovorlage mit dem handgemalten Ergebnis zu vergleichen:',
+        leist_ba_before_alt: 'Fotovorlage',
+        leist_cta_text: 'Hast Du noch weitere Fragen oder eigene Wünsche?',
+        leist_cta_btn1: 'Auftrag konfigurieren',
+        leist_cta_btn2: 'Kontaktiere mich gerne!',
+
+        // Kontakt.html
+        kontakt_vcard_title: 'Digitale Visitenkarte',
+        kontakt_vcard_hint: 'Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.',
+        kontakt_vcard_aria: 'Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.',
+        kontakt_vcard_role: 'Künstlerin & Inhaberin',
+        kontakt_vcard_save: 'Kontakt speichern (.vcf)',
+        kontakt_city: 'Bonn, Deutschland',
+        kontakt_address: '53175 Bonn, Deutschland',
+        social_ig_label: 'Folge mir auf Instagram',
+        social_wa_label: 'Schreibe mir auf WhatsApp',
+        social_li_label: 'Verbinde dich auf LinkedIn',
+        kontakt_prefill_text: '<strong>Deine Konfiguration wurde übertragen!</strong> Das Formular wurde mit deinen Auswahlen aus dem Konfigurator vorausgefüllt.',
+        kontakt_label_name: 'Dein Name',
+        kontakt_ph_name: 'Wie dürfen wir dich ansprechen?',
+        kontakt_label_email: 'Deine E-Mail-Adresse',
+        kontakt_ph_email: 'deine.email@beispiel.de',
+        kontakt_label_subject: 'Betreff',
+        kontakt_opt_general: 'Allgemeine Anfrage',
+        kontakt_opt_animal: 'Auftrag: Tierportrait',
+        kontakt_opt_landscape: 'Auftrag: Landschaft',
+        kontakt_opt_purchase: 'Kaufinteresse an einem Bild',
+        kontakt_label_message: 'Deine Nachricht:',
+        kontakt_ph_message: 'Deine Nachricht...',
+        kontakt_privacy_label: 'Ich stimme zu, dass meine Angaben aus dem Kontaktformular zur Beantwortung meiner Anfrage erhoben und verarbeitet werden. Hinweis: Sie können Ihre Einwilligung jederzeit für die Zukunft per E‑Mail widerrufen. Detaillierte Informationen findest Du in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.',
+        kontakt_map_h2: 'Standorts-Karte (Bonn)',
+        kontakt_map_text: 'Aus Datenschutzgründen wird die Karte erst geladen, wenn du auf den Button klickst. Dabei können Daten an Google übertragen werden.',
+        kontakt_map_btn: 'Karte jetzt laden & anzeigen',
+
+        // Impressum.html
+        impressum_map_title: 'Google Maps laden',
+        impressum_map_text: 'Um die interaktive Karte anzuzeigen, klicken Sie bitte auf "Karte laden". Dadurch stimmen Sie der Übertragung Ihrer IP-Adresse an Google und der Verarbeitung von Cookies gemäß der Datenschutzrichtlinien von Google zu. (Details in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>)',
+        impressum_map_btn: 'Karte laden',
+        impressum_h_tmg: 'Angaben gemäß § 5 TMG',
+        impressum_h_contact: 'Kontakt',
+        impressum_contact_block: 'Telefon: +49 (0) 163 2662435<br>E-Mail: <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a><br>Anschrift: Rüdesheimer Straße 14, 53175 Bonn',
+        impressum_h_vat: 'Umsatzsteuer',
+        impressum_vat_text: 'Gemäß § 19 Abs. 1 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer berechnet.',
+        impressum_h_editor: 'Redaktionell verantwortlich und Erstellung der Webseite',
+        impressum_dev_credit: 'Programmierung &amp; Design Code:<br><a href="https://github.com/Schengii?tab=repositories" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Repository auf GitHub</a>',
+        impressum_h_copyright: 'Urheberrechtshinweis (Copyright Bildergalerie)',
+        impressum_copyright_text: 'Alle Bilder wurden selbst gemalt und dürfen nicht ohne ausdrückliche Erlaubnis weder verändert, öffentlich genutzt, noch kopiert werden.<br>*** Für die Bilder gilt ein Copyright durch die Künstlerin Manuela Schenk. *** <br>Die Bilder gehören der ManuFAKTUR, bei unrechtmäßiger Nutzung behalten wir uns rechtliche Schritte vor und bringen diese zur Anzeige.',
+        impressum_h_eu: 'EU-Streitschlichtung',
+        impressum_eu_text: 'Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br> Unsere E-Mail-Adresse finden Sie oben im Impressum.',
+        impressum_h_dispute: 'Verbraucherstreitbeilegung / Universalschlichtungsstelle',
+        impressum_dispute_text: 'Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
+
+        // Datenschutz.html
+        dsgvo_notice_title: 'Wichtiger Hinweis:',
+        dsgvo_notice_text: 'Dies ist eine Übersicht der auf dieser Webseite eingesetzten Techniken. Bitte erstellen Sie für den produktiven Einsatz einen individuellen, rechtskonformen Rechtstext, z.B. über einen Datenschutz-Generator (z.B. von e-recht24.de).',
+        dsgvo_h1: '1. Datenschutz auf einen Blick',
+        dsgvo_h1_1: 'Allgemeine Hinweise',
+        dsgvo_h1_1_text: 'Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.',
+        dsgvo_h1_2: 'Datenerfassung auf unserer Website',
+        dsgvo_h1_2_text1: '<strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.',
+        dsgvo_h1_2_text2: '<strong>Wie erfassen wir Ihre Daten?</strong><br>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).',
+        dsgvo_h2: '2. Hosting und Server-Log-Files',
+        dsgvo_h2_text: 'Wir hosten die Inhalte unserer Website bei einem Hoster in Deutschland. Der Hoster erhebt automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt (IP-Adresse, Browsertyp, Referrer URL, Uhrzeit des Serveraufrufs). Diese Daten werden zur Gewährleistung eines sicheren Betriebs erhoben.',
+        dsgvo_h3: '3. Lokale Einbindung von Schriftarten & Symbolen (DSGVO-konform)',
+        dsgvo_h3_intro: 'Um die Privatsphäre unserer Besucher bestmöglich zu schützen, nutzen wir keine CDNs (Content Delivery Networks) von Drittanbietern für Schriften oder Icons:',
+        dsgvo_h3_li1: '<strong>Google Fonts:</strong> Alle verwendeten Google Fonts (Lato, Playfair Display, Dancing Script) sind lokal auf unserem Webserver gespeichert und werden von dort geladen. Es besteht keine Verbindung zu Servern von Google.',
+        dsgvo_h3_li2: '<strong>Font Awesome:</strong> Die verwendeten Icons und Stylesheets von Font Awesome sind ebenfalls lokal auf unserem Webserver gehostet. Es findet kein Datentransfer zu Drittservern statt.',
+        dsgvo_h4: '4. Einwilligungspflichtige Dienste von Drittanbietern',
+        dsgvo_h4_1: 'Google Maps (Zwei-Klick-Lösung)',
+        dsgvo_h4_1_text: 'Auf unserer Website ist eine Karte von Google Maps eingebunden. Um zu verhindern, dass bereits beim Laden der Seite Ihre IP-Adresse an Google übertragen wird, nutzen wir eine sogenannte Zwei-Klick-Lösung. Die Karte ist standardmäßig deaktiviert. Erst wenn Sie aktiv auf die Schaltfläche "Karte laden" klicken, willigen Sie ein, dass eine Verbindung zu den Google-Servern aufgebaut und Cookies gesetzt werden. Rechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.',
+        dsgvo_h5: '5. Datenerfassung über das Kontaktformular',
+        dsgvo_h5_text1: 'Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.',
+        dsgvo_h5_text2: 'Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), falls diese abgefragt wurde.',
+        dsgvo_h6: '6. Ihre Rechte bezüglich Ihrer Daten',
+        dsgvo_h6_text: 'Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Wenden Sie sich hierzu einfach an die im Impressum genannte Adresse.',
+
+        // Auftrag.html Konfigurator (data-i18n)
+        auftrag_restore_text: 'Du hast eine gespeicherte Konfiguration. <button onclick="restoreSavedConfig()" id="restore-btn">Wiederherstellen</button> oder <button onclick="clearSavedConfig()" id="clear-btn">Neu starten</button>.',
+        auftrag_fav_title: 'Aus deinen gemerkten Favoriten wählen',
+        auftrag_fav_hint: 'Klicke auf eines deiner gemerkten Lieblingswerke, um es als Motiv-Inspiration zu übernehmen:',
+        auftrag_motiv1_title: 'Tierportrait',
+        auftrag_motiv1_desc: 'Hund, Katze, Pferd oder jedes andere Tier – als unvergängliches Gemälde.',
+        auftrag_motiv1_price: 'ab 120 €',
+        auftrag_motiv2_title: 'Landschaft',
+        auftrag_motiv2_desc: 'Ein besonderer Ort, eine Urlaubserinnerung oder eine traumhafte Szene.',
+        auftrag_motiv2_price: 'ab 100 €',
+        auftrag_motiv3_title: 'Stillleben / Pflanzen',
+        auftrag_motiv3_desc: 'Blumen, Früchte oder andere Objekte als dekoratives Gemälde.',
+        auftrag_motiv3_price: 'ab 90 €',
+        auftrag_motiv4_title: 'Sonstiges / Eigene Idee',
+        auftrag_motiv4_desc: 'Du hast eine ganz eigene Idee? Ich male nach deinem Wunschmotiv.',
+        auftrag_motiv4_price: 'Auf Anfrage',
+        auftrag_hint1: 'Bitte wähle ein Motiv, um fortzufahren.',
+        auftrag_next_format: 'Weiter: Format',
+        auftrag_format1_small: 'Klein · ideal als Geschenk',
+        auftrag_format2_small: 'Beliebt · viele Details',
+        auftrag_format3_small: 'Mittel · sehr ausdrucksstark',
+        auftrag_format4_small: 'Groß · imposanter Blickfang',
+        auftrag_format5_small: 'XL · für große Wände',
+        auftrag_format6_title: 'Individuell',
+        auftrag_format6_small: 'Wunschformat · auf Anfrage',
+        auftrag_hint2: 'Bitte wähle ein Format, um fortzufahren.',
+        auftrag_back: 'Zurück',
+        auftrag_next_technik: 'Weiter: Technik',
+        auftrag_tech1_title: 'Acrylfarben',
+        auftrag_tech1_desc: 'Schnelle Trocknungszeit, kräftige Farben und lebhafte Kontraste. Perfekt für detailreiche Portraits.',
+        auftrag_tech1_delivery: 'Lieferung in ca. 2–3 Wochen',
+        auftrag_tech2_title: 'Ölfarben',
+        auftrag_tech2_desc: 'Tiefe, samtige Farbübergänge und klassische Eleganz. Mehr Trocknungszeit, intensives Finish.',
+        auftrag_tech2_delivery: 'Lieferung in ca. 4–6 Wochen',
+        auftrag_hint3: 'Bitte wähle eine Technik, um fortzufahren.',
+        auftrag_next_summary: 'Zur Zusammenfassung',
+        auftrag_summary_h3: 'Dein Traumgemälde ✨',
+        auftrag_summary_motiv: 'Motiv',
+        auftrag_summary_format: 'Format',
+        auftrag_summary_technik: 'Technik',
+        auftrag_summary_lieferzeit: 'Lieferzeit',
+        auftrag_price_label: 'Unverbindliche Preisschätzung',
+        auftrag_price_note: '* Endpreis nach individueller Absprache. Versand innerhalb DE kostenlos.',
+        auftrag_photo_h4: 'Eigenes Fotovorlage-Bild auswählen (Optional)',
+        auftrag_photo_hint: 'Du kannst hier dein Haustier- oder Landschaftsfoto auswählen, um die Vorlage direkt zu prüfen:',
+        auftrag_photo_input_label: 'Fotovorlage auswählen',
+        auftrag_photo_preview_alt: 'Fotovorlage Vorschau',
+        auftrag_photo_loaded: 'Fotovorlage geladen',
+        auftrag_photo_ready: 'Bereit für die Anfrage',
+        auftrag_submit: 'Jetzt unverbindlich anfragen'
     },
     en: {
         skip_link: 'Skip to main content',
@@ -493,12 +790,67 @@ const I18N_DICTIONARY = {
         filter_landscapes: 'Landscapes',
         filter_plants: 'Botanicals',
         filter_other: 'Still Life & More',
-        filter_favorites: '❤️ Favorites',
+        filter_favorites: 'Favorites',
         search_placeholder: 'Search paintings, motifs, techniques or sizes...',
         sort_label: 'Sort by:',
         sort_default: 'Default',
         sort_title_asc: 'Title (A-Z)',
         sort_title_desc: 'Title (Z-A)',
+        gallery_empty_fav_title: 'No favorites saved yet.',
+        gallery_empty_fav_text: 'Click the heart icon on any artwork to save your personal favorites here.',
+        gallery_empty_search_title: 'No matching paintings found.',
+        gallery_empty_search_text: 'Try a different search term or reset the category filter.',
+        scene_label: 'AI Wall Preview:',
+        scene_label_short: 'AI Wall Preview',
+        scene_living: 'Living Room',
+        scene_living_title: 'Living Room Wall',
+        scene_bedroom: 'Bedroom',
+        scene_bedroom_title: 'Bedroom Wall',
+        scene_loft: 'Loft / Concrete',
+        scene_loft_title: 'Dark Loft Wall',
+        scene_lounge: 'Beige Lounge',
+        scene_lounge_title: 'Beige Lounge Wall',
+        scene_pure: 'Pure (Detail)',
+        scene_pure_title: 'Pure, No Background',
+        wall_drag_hint: 'Drag to Move',
+        lb_rotate_title: 'Rotate 90°',
+        lb_rotate_aria: 'Rotate image by 90 degrees',
+        lb_zoom_title: 'Activate/Deactivate Magnifier',
+        lb_zoom_aria: 'Activate magnifier',
+        lb_scale_label: 'Scale:',
+        lb_scale_aria: "Scale the painting's size on the wall",
+        lb_center_title: 'Center the painting position on the wall',
+        lb_label_technik: 'Technique:',
+        lb_label_masse: 'Size / Format:',
+        lb_label_kat: 'Category:',
+        lb_label_herkunft: 'Origin:',
+        lb_val_herkunft: 'Studio Bonn',
+        lb_label_rahmung: 'Framing:',
+        lb_val_rahmung: 'Ready to Hang (Stretcher Frame)',
+        lb_views_title: 'More Views:',
+        lb_view_front: 'Front View',
+        lb_view_front_title: 'Pure Front View',
+        lb_view_room: 'Wall View',
+        lb_view_room_title: 'Wall & Room View',
+        lb_view_back: 'Back',
+        lb_view_back_title: 'Back & Stretcher Frame',
+        lb_view_side: '3D Perspective',
+        lb_view_side_title: '3D Side View & Texture',
+        lb_view_artist: 'Studio',
+        lb_view_artist_title: 'Artist & Studio',
+        lb_inquiry_aria: 'Request this motif as a commission',
+        lb_fav_default: 'Favorite',
+        room_artwork_alt: 'Painting on the wall',
+        room_label_size: 'Size:',
+        room_scale_aria: "Adjust the painting's size",
+        room_label_rotation: 'Rotation:',
+        room_rotation_aria: 'Adjust the tilt',
+        room_rotate_btn: 'Rotate 90°',
+        room_fit_title: 'Automatically fit to wall',
+        room_fit_btn: 'Auto Wall Fit',
+        room_backdrop_label: 'Room Backdrop:',
+        room_upload_label: 'Upload Your Own Wall',
+        clear_search_aria: 'Clear search',
         format_label: 'Format:',
         color_label: 'Color:',
         lb_btn_inquiry: 'Inquire this Motif as Commission',
@@ -544,9 +896,242 @@ const I18N_DICTIONARY = {
         imprint_intro: 'Legal provider identification and statutory information pursuant to German law (§ 5 DDG).',
         privacy_page_title: 'Privacy Policy',
         privacy_intro: 'Information regarding the processing of your personal data according to GDPR regulations.',
-        notfound_title: 'Page Not Found',
-        notfound_text: 'The requested page does not exist or has been relocated.',
-        notfound_btn: 'Back to Home'
+        notfound_title: '404 – Page Not Found',
+        notfound_text: 'This canvas is still empty. The page you are looking for does not exist (anymore) or has been moved.',
+        notfound_btn: 'Back to Home',
+        notfound_btn2: 'To the Gallery',
+
+        // Global UI (Lightbox/Modal, reused across pages)
+        ui_close: 'Close',
+        ui_prev_image: 'Previous Image',
+        ui_next_image: 'Next Image',
+        ui_lightbox_label: 'Enlarged Image View',
+
+        // Home.html
+        hl_owls_aria: 'Enlarge: Two Owls',
+        hl_owls_alt: 'Hand-painted acrylic painting of two small owls on a branch against a blue background',
+        hl_owls_caption: 'Two Owls (Acrylic on Canvas)',
+        hl_godesburg_aria: 'Enlarge: Godesburg Cityscape',
+        hl_godesburg_alt: 'Hand-painted landscape of the historic Godesburg castle in Bonn at dusk',
+        hl_godesburg_caption: 'Godesburg Cityscape (Acrylic on Canvas)',
+        hl_rheinaue_aria: 'Enlarge: Rheinaue Bonn',
+        hl_rheinaue_alt: 'Hand-painted acrylic painting of the autumnal Rheinaue lake in Bonn with trees and reflections',
+        hl_rheinaue_caption: 'Rheinaue Bonn (Acrylic on Canvas)',
+        hl_feld_aria: 'Enlarge: Field Path',
+        hl_feld_alt: 'Hand-painted acrylic painting of an idyllic field path in summer under a blue sky',
+        hl_feld_caption: 'Field Path in Summer (Acrylic on Canvas)',
+        testi1_quote: '"The portrait of our German Shepherd Balou turned out simply fantastic. Manuela captured his loyal gaze perfectly. We are overjoyed!"',
+        testi1_location: 'Bonn-Bad Godesberg · Animal Portrait in Acrylic',
+        testi2_quote: '"I ordered a landscape painting of the Rheinaue as a wedding gift. The coordination was super easy, and the bride and groom were moved to tears."',
+        testi2_location: 'Rhein-Sieg District · Landscape Painting',
+        testi3_quote: '"Beautiful work! You can feel the love for detail in every brushstroke. The painting now has a central place of honor in our living room."',
+        testi3_location: 'Cologne · Dog Portrait & Still Life',
+        testi_prev_aria: 'Previous testimonial',
+        testi_next_aria: 'Next testimonial',
+        home_btn_gallery: 'View Gallery',
+        home_btn_flyer: 'Flyer Download',
+
+        // UeberMich.html
+        process_h2: 'How Each Artwork Is Created',
+        process_intro: 'Every painting is created by hand through several carefully coordinated phases:',
+        process1_title: 'Sketch & Proportions',
+        process1_text: 'Precise transfer of your photo motif onto the canvas as a fine preliminary sketch.',
+        process2_title: 'Color Application & Layering',
+        process2_text: 'Applying the first layers of paint for depth, shadow and characteristic highlights.',
+        process3_title: 'Details & Finishing',
+        process3_text: 'Fine detailing of eyes, fur texture or light reflections, followed by the final sealing.',
+        edu_h2: 'Artistic Training & Instructors',
+        edu_intro: 'A solid craft built through continuous training at recognized art academies:',
+        edu1_place: 'Alfter near Bonn',
+        edu1_text: 'The year-long course <em>"A Year for the Arts"</em> as well as in-depth seminars and intensive weeks for artistic professionalization.',
+        edu1_dozenten_label: 'Instructors:',
+        edu2_place: 'Bad Godesberg · Friesdorf',
+        edu2_text: 'Intensive private lessons in advanced painting techniques, color theory, brushwork and composition.',
+        edu3_place: 'Aachen & Bonn',
+        edu3_text: 'Specialized courses in figure drawing, portrait painting, landscape studies and classical oil and acrylic painting.',
+        timeline_h2: 'My Journey into Art',
+        tl1_title: 'The First Steps',
+        tl1_text: 'First specialized courses at VHS Bonn and the Kunstschule Aachen. My enthusiasm for color, light and form became a lifelong passion.',
+        tl2_title: 'The First Animal Portrait: Balou',
+        tl2_text: "The portrait of our dog Balou marked the beginning of my specialization in animal portraits – the emotional response was overwhelming.",
+        tl3_title: 'Academic Deepening',
+        tl3_text: 'Year-long course and intensive seminars at Alanus University Alfter with Kehlenbach, Genschow, Hendel and Thein to refine technique and expression.',
+        tl4_title: 'Founding of ManuFAKTUR Schenk',
+        tl4_text: 'Opening of the studio in Bonn-Bad Godesberg and the start of professional commissioned work for clients across Germany.',
+        tl5_date: 'Today',
+        tl5_title: 'Art for Your Home',
+        tl5_text: 'With over 50 individual originals and many happy clients, I create lasting value and personal keepsakes.',
+        ba_h2: 'Hand-Painted Precision: Before & After',
+        ba_intro: 'Drag the slider to compare the reference photo with the finished acrylic painting:',
+        ba_after_alt: 'Finished hand-painted artwork',
+        ba_after_badge: 'Hand-Painted Artwork',
+        ba_before_alt: 'Original photo reference',
+        ba_before_badge: 'Original Photo Reference',
+        ba_slider_aria: 'Before and after comparison slider',
+        flyer_h2: 'My Info Flyer',
+        flyer_text: 'Click on an image for a larger view or download the flyer as a PDF.',
+        flyer_front_alt: 'Front side of the ManuFAKTUR Schenk information flyer',
+        flyer_back_alt: 'Back side of the ManuFAKTUR Schenk information flyer',
+        flyer_btn: 'Download Flyer (PDF)',
+
+        // Leistungen.html (additions)
+        faq_3_q_ship: 'How long does shipping take?',
+        faq_3_a_ship: 'Once finished and fully dry, I ship your painting well-cushioned via DHL or DPD, <strong>free of charge</strong> within Germany.',
+        calc_h2: 'Price Estimator',
+        calc_intro: 'Calculate a non-binding estimated price for your desired painting here:',
+        calc_label_motiv: 'Motif Category',
+        calc_opt_motiv1: 'Animal Portrait (dog, cat, etc.)',
+        calc_opt_motiv2: 'Landscape & Nature',
+        calc_opt_motiv3: 'Still Life & Flowers',
+        calc_opt_motiv4: 'Other / Custom Idea',
+        calc_label_format: 'Format / Canvas Size',
+        calc_opt_format1: '20 × 30 cm (Small · from €90)',
+        calc_opt_format2: '30 × 40 cm (Popular · from €130)',
+        calc_opt_format3: '40 × 50 cm (Medium · from €175)',
+        calc_opt_format4: '50 × 70 cm (Large · from €230)',
+        calc_opt_format5: '60 × 80 cm (XL · from €290)',
+        calc_label_technik: 'Painting Technique',
+        calc_opt_tech1: 'Acrylic on Canvas (Classic)',
+        calc_opt_tech2: 'Oil on Canvas (+15%)',
+        calc_opt_tech3: 'Pencil / Charcoal Drawing (-15%)',
+        calc_opt_tech4: 'Watercolor on Fine Card',
+        calc_label_anzahl: 'Motifs in One Painting',
+        calc_opt_anzahl1: '1 Main Motif (+€0)',
+        calc_opt_anzahl2: '2 Motifs (+€35)',
+        calc_opt_anzahl3: '3 Motifs (+€65)',
+        calc_price_title: 'Estimated Guide Price',
+        calc_price_hint: 'The exact price is agreed individually before starting. Includes free shipping within Germany.',
+        calc_btn: 'Configure as a Commission Now',
+        voucher_h2: 'Give the Gift of Art – The ManuFAKTUR Voucher',
+        voucher_text: 'Looking for an unforgettable gift for animal lovers or art enthusiasts? A custom voucher for a commissioned painting makes eyes light up.',
+        voucher_btn: 'Request a Voucher',
+        leist_ba_h2: 'From Photo to Original: Before & After',
+        leist_ba_intro: 'Drag the slider to compare the photo reference with the hand-painted result:',
+        leist_ba_before_alt: 'Photo reference',
+        leist_cta_text: 'Do you have further questions or your own wishes?',
+        leist_cta_btn1: 'Configure Commission',
+        leist_cta_btn2: "I'd Love to Hear From You!",
+
+        // Kontakt.html
+        kontakt_vcard_title: 'Digital Business Card',
+        kontakt_vcard_hint: 'Move your mouse over the card or tap it to flip it.',
+        kontakt_vcard_aria: 'Digital business card of Manuela Schenk. Press Enter or Space to flip.',
+        kontakt_vcard_role: 'Artist & Owner',
+        kontakt_vcard_save: 'Save Contact (.vcf)',
+        kontakt_city: 'Bonn, Germany',
+        kontakt_address: '53175 Bonn, Germany',
+        social_ig_label: 'Follow me on Instagram',
+        social_wa_label: 'Message me on WhatsApp',
+        social_li_label: 'Connect on LinkedIn',
+        kontakt_prefill_text: '<strong>Your configuration has been transferred!</strong> The form has been pre-filled with your selections from the configurator.',
+        kontakt_label_name: 'Your Name',
+        kontakt_ph_name: 'What should we call you?',
+        kontakt_label_email: 'Your Email Address',
+        kontakt_ph_email: 'your.name@example.com',
+        kontakt_label_subject: 'Subject',
+        kontakt_opt_general: 'General Inquiry',
+        kontakt_opt_animal: 'Commission: Animal Portrait',
+        kontakt_opt_landscape: 'Commission: Landscape',
+        kontakt_opt_purchase: 'Interested in Purchasing a Painting',
+        kontakt_label_message: 'Your Message:',
+        kontakt_ph_message: 'Your message...',
+        kontakt_privacy_label: 'I agree that my details from the contact form will be collected and processed to answer my inquiry. Note: You can revoke your consent at any time for the future by email. Detailed information can be found in our <a href="Datenschutz.html" target="_blank" rel="noopener">Privacy Policy</a>.',
+        kontakt_map_h2: 'Location Map (Bonn)',
+        kontakt_map_text: 'For privacy reasons, the map is only loaded once you click the button. This may transfer data to Google.',
+        kontakt_map_btn: 'Load & Show Map Now',
+
+        // Impressum.html
+        impressum_map_title: 'Load Google Maps',
+        impressum_map_text: 'To display the interactive map, please click "Load Map". By doing so, you consent to the transmission of your IP address to Google and the processing of cookies in accordance with Google\'s privacy policies. (Details in our <a href="Datenschutz.html" target="_blank" rel="noopener">Privacy Policy</a>)',
+        impressum_map_btn: 'Load Map',
+        impressum_h_tmg: 'Information pursuant to § 5 TMG (German Telemedia Act)',
+        impressum_h_contact: 'Contact',
+        impressum_contact_block: 'Phone: +49 (0) 163 2662435<br>Email: <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a><br>Address: Rüdesheimer Straße 14, 53175 Bonn, Germany',
+        impressum_h_vat: 'VAT',
+        impressum_vat_text: 'Pursuant to § 19 (1) of the German VAT Act (UStG – small business regulation), no VAT is charged.',
+        impressum_h_editor: 'Editorially Responsible and Website Creation',
+        impressum_dev_credit: 'Programming &amp; Design Code:<br><a href="https://github.com/Schengii?tab=repositories" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Repository on GitHub</a>',
+        impressum_h_copyright: 'Copyright Notice (Gallery Images)',
+        impressum_copyright_text: 'All paintings were hand-painted by the artist herself and may not be modified, publicly used, or copied without her explicit permission.<br>*** All images are copyrighted by the artist Manuela Schenk. *** <br>The images belong to ManuFAKTUR; in the event of unlawful use, we reserve the right to take legal action.',
+        impressum_h_eu: 'EU Dispute Resolution',
+        impressum_eu_text: 'The European Commission provides a platform for online dispute resolution (ODR): <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br> Our email address can be found above in this legal notice.',
+        impressum_h_dispute: 'Consumer Dispute Resolution',
+        impressum_dispute_text: 'We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.',
+
+        // Datenschutz.html
+        dsgvo_notice_title: 'Important Note:',
+        dsgvo_notice_text: 'This is an overview of the technologies used on this website. Please create an individual, legally compliant text for productive use, e.g. via a privacy policy generator (such as e-recht24.de).',
+        dsgvo_h1: '1. Privacy at a Glance',
+        dsgvo_h1_1: 'General Information',
+        dsgvo_h1_1_text: 'The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is any data that can be used to personally identify you.',
+        dsgvo_h1_2: 'Data Collection on Our Website',
+        dsgvo_h1_2_text1: '<strong>Who is responsible for data collection on this website?</strong><br>Data processing on this website is carried out by the website operator, whose contact details can be found in the legal notice (Impressum) of this website.',
+        dsgvo_h1_2_text2: '<strong>How do we collect your data?</strong><br>Your data is collected in part when you provide it to us. This may, for example, be data you enter into a contact form. Other data is collected automatically, or after your consent, by our IT systems when you visit the website. This is primarily technical data (e.g. internet browser, operating system, or time of page access).',
+        dsgvo_h2: '2. Hosting and Server Log Files',
+        dsgvo_h2_text: 'We host our website content with a provider in Germany. The host automatically collects information in so-called server log files, which your browser automatically transmits to us (IP address, browser type, referrer URL, time of server request). This data is collected to ensure secure operation.',
+        dsgvo_h3: '3. Local Integration of Fonts & Icons (GDPR-compliant)',
+        dsgvo_h3_intro: 'To best protect the privacy of our visitors, we do not use third-party CDNs (Content Delivery Networks) for fonts or icons:',
+        dsgvo_h3_li1: '<strong>Google Fonts:</strong> All Google Fonts used (Lato, Playfair Display, Dancing Script) are stored locally on our web server and loaded from there. There is no connection to Google\'s servers.',
+        dsgvo_h3_li2: '<strong>Font Awesome:</strong> The Font Awesome icons and stylesheets used are likewise hosted locally on our web server. No data is transferred to third-party servers.',
+        dsgvo_h4: '4. Third-Party Services Requiring Consent',
+        dsgvo_h4_1: 'Google Maps (Two-Click Solution)',
+        dsgvo_h4_1_text: 'Our website includes a Google Maps map. To prevent your IP address from being transmitted to Google as soon as the page loads, we use a so-called two-click solution. The map is disabled by default. Only when you actively click the "Load Map" button do you consent to a connection being established with Google\'s servers and to cookies being set. The legal basis for this processing is your consent pursuant to Art. 6 (1)(a) GDPR.',
+        dsgvo_h5: '5. Data Collection via the Contact Form',
+        dsgvo_h5_text1: 'If you send us inquiries via the contact form, the information you provide there, including any contact details you enter, will be stored by us for the purpose of processing your inquiry and in case of follow-up questions. We will not share this data without your consent.',
+        dsgvo_h5_text2: 'The processing of this data is based on Art. 6 (1)(b) GDPR, provided your inquiry relates to the fulfillment of a contract or is necessary for carrying out pre-contractual measures. In all other cases, processing is based on our legitimate interest in the effective handling of inquiries addressed to us (Art. 6 (1)(f) GDPR), or on your consent (Art. 6 (1)(a) GDPR) where this was requested.',
+        dsgvo_h6: '6. Your Rights Regarding Your Data',
+        dsgvo_h6_text: 'You have the right at any time to receive free information about the origin, recipients, and purpose of your stored personal data. You also have the right to request the correction or deletion of this data. If you have given consent to data processing, you can revoke this consent at any time for the future. Simply contact us at the address given in the legal notice.',
+
+        // Auftrag.html Configurator (data-i18n)
+        auftrag_restore_text: 'You have a saved configuration. <button onclick="restoreSavedConfig()" id="restore-btn">Restore</button> or <button onclick="clearSavedConfig()" id="clear-btn">Start Over</button>.',
+        auftrag_fav_title: 'Choose from Your Saved Favorites',
+        auftrag_fav_hint: 'Click one of your saved favorite artworks to use it as motif inspiration:',
+        auftrag_motiv1_title: 'Animal Portrait',
+        auftrag_motiv1_desc: 'Dog, cat, horse or any other animal – as an everlasting painting.',
+        auftrag_motiv1_price: 'from €120',
+        auftrag_motiv2_title: 'Landscape',
+        auftrag_motiv2_desc: 'A special place, a holiday memory, or a dreamlike scene.',
+        auftrag_motiv2_price: 'from €100',
+        auftrag_motiv3_title: 'Still Life / Plants',
+        auftrag_motiv3_desc: 'Flowers, fruit, or other objects as a decorative painting.',
+        auftrag_motiv3_price: 'from €90',
+        auftrag_motiv4_title: 'Other / Custom Idea',
+        auftrag_motiv4_desc: 'Do you have your own idea? I paint according to your desired motif.',
+        auftrag_motiv4_price: 'Upon Request',
+        auftrag_hint1: 'Please choose a motif to continue.',
+        auftrag_next_format: 'Next: Format',
+        auftrag_format1_small: 'Small · ideal as a gift',
+        auftrag_format2_small: 'Popular · plenty of detail',
+        auftrag_format3_small: 'Medium · very expressive',
+        auftrag_format4_small: 'Large · an imposing eye-catcher',
+        auftrag_format5_small: 'XL · for large walls',
+        auftrag_format6_title: 'Custom',
+        auftrag_format6_small: 'Custom size · upon request',
+        auftrag_hint2: 'Please choose a format to continue.',
+        auftrag_back: 'Back',
+        auftrag_next_technik: 'Next: Technique',
+        auftrag_tech1_title: 'Acrylic Paint',
+        auftrag_tech1_desc: 'Fast drying time, bold colors and vivid contrasts. Perfect for detailed portraits.',
+        auftrag_tech1_delivery: 'Delivery in approx. 2–3 weeks',
+        auftrag_tech2_title: 'Oil Paint',
+        auftrag_tech2_desc: 'Deep, velvety color transitions and classic elegance. Longer drying time, intense finish.',
+        auftrag_tech2_delivery: 'Delivery in approx. 4–6 weeks',
+        auftrag_hint3: 'Please choose a technique to continue.',
+        auftrag_next_summary: 'To the Summary',
+        auftrag_summary_h3: 'Your Dream Painting ✨',
+        auftrag_summary_motiv: 'Motif',
+        auftrag_summary_format: 'Format',
+        auftrag_summary_technik: 'Technique',
+        auftrag_summary_lieferzeit: 'Delivery Time',
+        auftrag_price_label: 'Non-Binding Price Estimate',
+        auftrag_price_note: '* Final price subject to individual agreement. Free shipping within Germany.',
+        auftrag_photo_h4: 'Select Your Own Photo Reference (Optional)',
+        auftrag_photo_hint: 'You can select your pet or landscape photo here to check the reference directly:',
+        auftrag_photo_input_label: 'Select photo reference',
+        auftrag_photo_preview_alt: 'Photo reference preview',
+        auftrag_photo_loaded: 'Photo reference loaded',
+        auftrag_photo_ready: 'Ready for the inquiry',
+        auftrag_submit: 'Send Non-Binding Inquiry Now'
     }
 };
 
@@ -562,6 +1147,33 @@ function applyTranslations(lang) {
         const el = document.querySelector(selector);
         if (el && html !== undefined) el.innerHTML = html;
     };
+
+    // Generischer data-i18n Mechanismus: robust gegenüber DOM-Änderungen,
+    // da er direkt am Element hängt statt an fragilen CSS-Selektoren/Indizes.
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (t[key] !== undefined) el.setAttribute('title', t[key]);
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+        const key = el.getAttribute('data-i18n-alt');
+        if (t[key] !== undefined) el.setAttribute('alt', t[key]);
+    });
 
     // Skip Link & Back to top
     const skipLink = document.querySelector('.skip-link');
@@ -673,37 +1285,6 @@ function applyTranslations(lang) {
         serviceCards[3].querySelector('h3').textContent = t.service_formats_title;
         serviceCards[3].querySelector('p').textContent = t.service_formats_desc;
     }
-    setElemHTML('.before-after-section h2', `<i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> ${t.ba_title}`);
-    setElemText('.before-after-section .intro-text', t.ba_hint);
-    setElemText('.ba-label-before', t.ba_photo);
-    setElemText('.ba-label-after', t.ba_painting);
-
-    setElemHTML('.steps-section h2', `<i class="fa-solid fa-list-ol" aria-hidden="true"></i> ${t.steps_title}`);
-    const stepCards = document.querySelectorAll('.step-card');
-    if (stepCards.length >= 4) {
-        stepCards[0].querySelector('h3').textContent = t.step_1_title;
-        stepCards[0].querySelector('p').textContent = t.step_1_desc;
-        stepCards[1].querySelector('h3').textContent = t.step_2_title;
-        stepCards[1].querySelector('p').textContent = t.step_2_desc;
-        stepCards[2].querySelector('h3').textContent = t.step_3_title;
-        stepCards[2].querySelector('p').textContent = t.step_3_desc;
-        stepCards[3].querySelector('h3').textContent = t.step_4_title;
-        stepCards[3].querySelector('p').textContent = t.step_4_desc;
-    }
-
-    setElemHTML('.faq-section h2', `<i class="fa fa-comments" aria-hidden="true"></i> ${t.faq_title}`);
-    const faqItems = document.querySelectorAll('.accordion-item');
-    if (faqItems.length >= 4) {
-        faqItems[0].querySelector('.accordion-header').innerHTML = `${t.faq_1_q} <i class="fa fa-chevron-down" aria-hidden="true"></i>`;
-        faqItems[0].querySelector('.accordion-content p').textContent = t.faq_1_a;
-        faqItems[1].querySelector('.accordion-header').innerHTML = `${t.faq_2_q} <i class="fa fa-chevron-down" aria-hidden="true"></i>`;
-        faqItems[1].querySelector('.accordion-content p').textContent = t.faq_2_a;
-        faqItems[2].querySelector('.accordion-header').innerHTML = `${t.faq_3_q} <i class="fa fa-chevron-down" aria-hidden="true"></i>`;
-        faqItems[2].querySelector('.accordion-content p').textContent = t.faq_3_a;
-        faqItems[3].querySelector('.accordion-header').innerHTML = `${t.faq_4_q} <i class="fa fa-chevron-down" aria-hidden="true"></i>`;
-        faqItems[3].querySelector('.accordion-content p').textContent = t.faq_4_a;
-    }
-
     // Bildergalerie.html Filters & UI
     const filterBtns = document.querySelectorAll('.filter-btn');
     if (filterBtns.length >= 6) {
@@ -719,14 +1300,17 @@ function applyTranslations(lang) {
         gallerySearch.setAttribute('placeholder', t.search_placeholder);
         gallerySearch.setAttribute('aria-label', t.search_placeholder);
     }
-    const sortSelect = document.getElementById('gallery-sort');
+    const sortSelect = document.getElementById('gallery-sort-select');
     if (sortSelect && sortSelect.options.length >= 3) {
         sortSelect.options[0].text = t.sort_default;
         sortSelect.options[1].text = t.sort_title_asc;
         sortSelect.options[2].text = t.sort_title_desc;
     }
     const sortLabel = document.querySelector('.gallery-sort-wrapper label');
-    if (sortLabel) sortLabel.innerHTML = `<i class="fa-solid fa-arrow-down-short-wide" aria-hidden="true"></i> ${t.sort_label}`;
+    if (sortLabel) sortLabel.innerHTML = `<i class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> ${t.sort_label}`;
+
+    // Galerie-Karten (53 Kunstwerke): aria-label, alt/title, Bildunterschrift & "Unikat"-Badge
+    translateGalleryCards(lang);
 
     // Lightbox Buttons
     setElemHTML('#lightbox-inquiry-btn', `<i class="fa-solid fa-palette" aria-hidden="true"></i> ${t.lb_btn_inquiry}`);
@@ -762,36 +1346,6 @@ function applyTranslations(lang) {
     setElemText('#panel-3 .config-subtitle', t.step_3_sub);
     setElemHTML('#panel-4 h2', `<i class="fa fa-clipboard-check" aria-hidden="true"></i> ${t.step_4_heading}`);
     setElemText('#panel-4 .config-subtitle', t.step_4_sub);
-    setElemHTML('.calc-heading', `<i class="fa-solid fa-calculator" aria-hidden="true"></i> ${t.calc_title}`);
-    setElemText('#calc-price-label', t.calc_price_label);
-
-    // Kontakt.html Form & Cards
-    const contactCards = document.querySelectorAll('.contact-info .contact-info-card');
-    if (contactCards.length >= 2) {
-        contactCards[0].querySelector('h3').innerHTML = `<i class="fa-solid fa-address-book" aria-hidden="true"></i> ${t.contact_direct_title}`;
-        contactCards[1].querySelector('h3').innerHTML = `<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ${t.contact_studio_title}`;
-    }
-    setElemText('.contact-studio-desc', t.contact_studio_desc);
-    setElemHTML('.contact-form-wrapper h2', `<i class="fa-solid fa-paper-plane" aria-hidden="true"></i> ${t.contact_form_title}`);
-    const nameInput = document.getElementById('name');
-    if (nameInput) nameInput.setAttribute('placeholder', isEn ? 'John Doe' : 'Max Mustermann');
-    const emailInput = document.getElementById('email');
-    if (emailInput) emailInput.setAttribute('placeholder', isEn ? 'your.name@example.com' : 'deine.email@beispiel.de');
-    const subjectInput = document.getElementById('subject');
-    if (subjectInput) subjectInput.setAttribute('placeholder', isEn ? 'e.g. Animal Portrait Commission' : 'z. B. Anfrage Tierportrait');
-    const messageInput = document.getElementById('message');
-    if (messageInput) messageInput.setAttribute('placeholder', isEn ? 'Describe your idea, pet or desired format...' : 'Beschreibe dein Wunschmotiv, Tier oder Format...');
-    setElemHTML('.contact-form .submit-btn', `<i class="fa fa-paper-plane" aria-hidden="true"></i> ${t.contact_btn_send}`);
-
-    // Map 2-click
-    setElemText('.map-placeholder-content h4', t.map_title);
-    setElemText('.map-placeholder-content p', t.map_text);
-    setElemText('.map-placeholder-content .btn', t.map_btn);
-
-    // 404.html
-    setElemText('.error-page h1', t.notfound_title);
-    setElemText('.error-page p', t.notfound_text);
-    setElemHTML('.error-page .btn', `<i class="fa fa-home" aria-hidden="true"></i> ${t.notfound_btn}`);
 }
 
 /* =========================================
@@ -1224,6 +1778,114 @@ const ARTWORKS_METADATA = {
     }
 };
 
+/* =========================================
+   ENGLISCHE ÜBERSETZUNG DER GALERIE-WERKE
+   Enthält nur die zu übersetzenden Felder (title/technik/desc) je Werk-ID.
+   Maße, Kategorie und Badge bleiben sprachunabhängig (Zahlen/interne Werte).
+   ========================================= */
+const ARTWORKS_METADATA_EN = {
+    "DSC_6622a": { title: "Godesburg Modern", technik: "Mixed media on paper", desc: "One of my favorite motifs is Godesburg Castle in Bad Godesberg. Here I depicted it in a modern, expressive mixed-media technique." },
+    "DSC_6624a": { title: "Siebengebirge Panorama", technik: "Acrylic on canvas", desc: "On an extensive hike through the Siebengebirge hills, I had to capture this atmospheric forest and panoramic view on canvas." },
+    "DSC_6626a": { title: "Bad Godesberg City with Godesburg", technik: "Oil on canvas", desc: "This view shows the historic Godesburg Castle in Bad Godesberg, seen from the blooming city park." },
+    "DSC_6628a": { title: "Gatehouse at Klufterhof Friesdorf", technik: "Oil on canvas", desc: "The picturesque gatehouse in Bad Godesberg-Friesdorf belongs to the listed Klufterhof ensemble." },
+    "DSC_6630a": { title: "Friesdorf Annaberger Straße", technik: "Oil on canvas", desc: "The historic tower house from the 12th century and Annaberger Straße in the heart of Bad Godesberg-Friesdorf." },
+    "DSC_6632a": { title: "The Klufterhof Friesdorf", technik: "Oil on canvas", desc: "The Klufterhof in Friesdorf is one of the oldest and most beautiful half-timbered houses in the region, dating from the early 17th century." },
+    "DSC_6634a": { title: "Drachenfels on the Rhine (View near Mehlem)", technik: "Oil on canvas", desc: "On my many walks along the Rhine promenade, I get to enjoy this wonderful view of the Drachenfels." },
+    "DSC_6636a": { title: "Drachenfels on the Rhine in Summer", technik: "Acrylic on canvas", desc: "This magnificent view of the historic Drachenfels can be enjoyed from a sunny bench in Bad Godesberg-Mehlem." },
+    "DSC_6638a": { title: "Godesburg in Summer Light", technik: "Acrylic on canvas", desc: "Godesburg Castle in Bad Godesberg under a radiant blue summer sky with vivid shades of green." },
+    "DSC_6640a": { title: '"Zur Lindenwirtin" Inn with Godesburg', technik: "Oil on canvas", desc: 'This work shows a historic view of the traditional "Zur Lindenwirtin" inn with the majestic Godesburg Castle in the background.' },
+    "DSC_6642a": { title: "Rheinaue Park Path, Bonn", technik: "Acrylic on canvas", desc: "An idyllic path in Bonn's Rheinaue Park leads past these beautiful, gnarled old park trees." },
+    "DSC_6644a": { title: "Historic View of Godesburg", technik: "Acrylic on canvas", desc: "A vertical architectural study of Godesburg Castle with gently curving hillside paths and warm stone tones." },
+    "DSC_6688a": { title: "Flower Bouquet", technik: "Acrylic on cardboard", desc: "A colorful, vibrant flower bouquet with high-contrast floral arrangements in layered acrylic technique." },
+    "DSC_6689a": { title: "Small Flower Bouquet", technik: "Oil on cardboard", desc: "A delicate, detailed flower bouquet in fine oil painting with soft transitions and warm floral hues." },
+    "DSC_6693a": { title: "Sheep on Texel", technik: "Oil on canvas", desc: "While on vacation on the North Sea island of Texel, we encountered these curious, lovable sheep on the green dikes." },
+    "DSC_6696a": { title: "Owls in the Kottenforst", technik: "Oil on canvas", desc: "Two small owls side by side on a branch in the dusky Kottenforst forest of Bad Godesberg, set against a mysterious blue background." },
+    "DSC_6698a": { title: "Modern Flowers", technik: "Acrylic on canvas", desc: "A modern floral abstraction with dynamic brushstrokes and bold color fields on a generously sized canvas." },
+    "DSC_6700a": { title: "Blossom Harmony in the Garden", technik: "Acrylic on canvas", desc: "A fresh floral composition full of radiance and natural elegance." },
+    "DSC_6702a": { title: "Funny Chickens", technik: "Acrylic on canvas", desc: "A cheerful row of colorful chickens in a charming wide landscape format – full of joy and wit." },
+    "DSC_6703a": { title: "Poppy Meadow", technik: "Acrylic on canvas", desc: "Bright red summer poppies sway in the wind in a sun-drenched meadow." },
+    "DSC_6705a": { title: "Colorful Tulip Splendor", technik: "Acrylic on canvas", desc: "Vibrant spring tulips in brilliant acrylic colors in a square format." },
+    "DSC_6707a": { title: "Hay Bales on the French Atlantic Coast", technik: "Oil on canvas", desc: "The scent of fresh hay bales on the French Atlantic coast inspired this painting – you can almost feel the summer breeze." },
+    "DSC_6710a": { title: "Dune Path on the French Atlantic Coast", technik: "Acrylic on canvas", desc: "Dune paths invite complete relaxation. This enchanting trail leads through soft dune sand straight to the sea." },
+    "DSC_6711a": { title: "Seashell on the Beach", technik: "Acrylic on canvas", desc: "A lone seashell in warm coastal sand with gentle plays of light and shadow from the sea." },
+    "DSC_6713a": { title: "Lighthouse on Texel", technik: "Acrylic on canvas", desc: "Numerous vacations have taken us to Texel – the red lighthouse, visible from afar in the north of the island, simply had to become a motif." },
+    "DSC_6715a": { title: "Cemetery Path, Dottendorf (I)", technik: "Oil pastel on paper, birch wood frame", desc: "Park benches are wonderful places to relax and capture this peaceful favorite view in soft oil pastel." },
+    "DSC_6717a": { title: "Path at Lake Blausteinsee, Eschweiler", technik: "Oil pastel on paper, birch wood frame", desc: "A popular nature excursion destination near Aachen: the peaceful shoreline path at Lake Blausteinsee." },
+    "DSC_6719a": { title: "Cemetery Path, Dottendorf (II)", technik: "Oil pastel on paper, birch wood frame", desc: "Delicate birch trees and autumnal stillness in Bonn-Dottendorf – hand-framed in fine birch wood." },
+    "DSC_6722a": { title: "Forest Path in the Kottenforst, Bonn", technik: "Acrylic on canvas", desc: "This sun-drenched forest path in Bonn's Kottenforst is one of my absolute favorite trails in every season." },
+    "DSC_6740a": { title: "Tulip Bouquet in Oil", technik: "Oil on canvas", desc: "A classic botanical oil painting with fine color gradations and a velvety sheen." },
+    "DSC_6742a": { title: "Balou – Dog Portrait in Oil", technik: "Oil on canvas", desc: "Our family dog Balou, with his loyal gaze and velvety-soft coat, immortalized in classic oil painting." },
+    "DSC_6744a": { title: "Balou – Modern Dog Portrait", technik: "Acrylic on canvas", desc: "A modern portrait study of Balou with bold color contrasts and expressive character." },
+    "DSC_6747a": { title: "Balou – Dog Portrait in Acrylic", technik: "Acrylic on canvas", desc: "A finely detailed acrylic portrait of Balou with vivid highlights in the eyes." },
+    "DSC_6749a": { title: "Magnolia Dream", technik: "Acrylic on canvas", desc: "This dreamlike view appears when you look up in spring into a blooming pink magnolia tree from below." },
+    "DSC_6751a": { title: "Classic Still Life", technik: "Oil on canvas", desc: "A masterfully lit still life in traditional layered oil painting with harmonious depth." },
+    "DSC_6753a": { title: "Red Bell Pepper", technik: "Acrylic on canvas", desc: "A fresh, glossy bell pepper in a modern small format with crisp highlights." },
+    "DSC_6754a": { title: "Lemons", technik: "Oil on canvas", desc: "Sun-ripened lemons with a velvety peel texture in brilliant lemon yellow." },
+    "DSC_6757a": { title: "The Gallic Rooster", technik: "Acrylic on canvas", desc: "A proud Gallic rooster with a fiery comb and proud gaze in vivid brushwork." },
+    "DSC_6759a": { title: "Fresh Strawberries", technik: "Acrylic on canvas", desc: "Summer-fresh strawberries in a square miniature format – almost good enough to eat." },
+    "DSC_6760a": { title: "Strawberries on a Blue Plate", technik: "Acrylic on canvas", desc: "Rich red strawberries in striking color contrast on a cobalt blue ceramic plate." },
+    "DSC_6763a": { title: "Colorful Rooster", technik: "Acrylic on canvas", desc: "A lively bird portrait with shimmering plumage tones and a characterful pose." },
+    "DSC_6765a": { title: "Robin in Winter", technik: "Acrylic on canvas", desc: "A charming robin on a branch with the finest down feathers and a brilliant red breast." },
+    "DSC_6767a": { title: "Coco Mademoiselle Perfume", technik: "Acrylic on canvas", desc: "An elegant still life of the legendary perfume classic in powdery rosé and gold tones." },
+    "DSC_6769a": { title: "Bee on Hydrangea", technik: "Acrylic on canvas", desc: "A busy honeybee amid a dense sea of sky-blue hydrangea blossoms." },
+    "DSC_6771a": { title: "Bee on Lavender", technik: "Acrylic on canvas", desc: "A Mediterranean summer idyll: a bee foraging for nectar on fragrant purple lavender." },
+    "DSC_6774a": { title: 'Still Life "Le Petit Déjeuner"', technik: "Acrylic on canvas", desc: "A French breakfast with a fresh butter croissant and coffee in warm morning light." },
+    "DSC_6775a": { title: "Cows in Normandy (I)", technik: "Acrylic on canvas", desc: "These two curious cows crossed our path on a relaxing summer walk in Normandy." },
+    "DSC_6778a": { title: "Cows in Normandy (II)", technik: "Acrylic on canvas", desc: "Typical Normandy pasture cows with their distinctive markings in a beautiful coastal landscape." },
+    "DSC_6780a": { title: "Burger & Fries Pop Art", technik: "Acrylic on canvas", desc: "A delicious burger with crispy fries as a modern, vividly colored pop-art still life." },
+    "DSC_6782a": { title: "Water Lily at Bonn Botanical Garden", technik: "Oil on canvas", desc: "An enchanting white water lily on calm pond water at Bonn's historic Botanical Garden." },
+    "DSC_6784a": { title: "Yellow Spring Tulips", technik: "Oil on canvas", desc: "Radiant sun-yellow tulips in delicate layered oil painting with atmospheric depth." },
+    "DSC_6788a": { title: "Aperol Spritz", technik: "Acrylic on canvas", desc: "A refreshing Aperol Spritz in a wine glass with an orange slice and clear ice cubes." },
+    "DSC_6790a": { title: "Cold Beer in a Glass", technik: "Acrylic on canvas", desc: "Freshly poured, sparkling beer with a golden color and a dense white foam crown." }
+};
+
+/**
+ * Liefert die Metadaten eines Kunstwerks in der aktuell aktiven Sprache.
+ * Fällt bei fehlender Übersetzung auf die deutschen Basisdaten zurück.
+ */
+function getArtMeta(itemId) {
+    if (!itemId || typeof ARTWORKS_METADATA === 'undefined' || !ARTWORKS_METADATA[itemId]) return null;
+    const base = ARTWORKS_METADATA[itemId];
+    if (currentLang === 'en' && typeof ARTWORKS_METADATA_EN !== 'undefined' && ARTWORKS_METADATA_EN[itemId]) {
+        return Object.assign({}, base, ARTWORKS_METADATA_EN[itemId]);
+    }
+    return base;
+}
+
+/**
+ * Übersetzt die Galerie-Karten (aria-label, alt/title, Bildunterschrift, "Unikat"-Badge)
+ * direkt anhand von ARTWORKS_METADATA_EN, ohne auf 53 einzelne data-i18n-Attribute angewiesen zu sein.
+ */
+function translateGalleryCards(lang) {
+    if (typeof ARTWORKS_METADATA === 'undefined') return;
+    const isEn = lang === 'en';
+    document.querySelectorAll('.gallery-item[id]').forEach(item => {
+        const meta = ARTWORKS_METADATA[item.id];
+        if (!meta) return;
+        const metaEn = (isEn && typeof ARTWORKS_METADATA_EN !== 'undefined') ? ARTWORKS_METADATA_EN[item.id] : null;
+        const title = (metaEn && metaEn.title) || meta.title;
+        const technik = (metaEn && metaEn.technik) || meta.technik;
+        const masse = meta.masse;
+        const link = item.querySelector('a');
+        const img = item.querySelector('img');
+        const caption = item.querySelector('.gallery-caption');
+        if (link) {
+            link.setAttribute('aria-label', `${isEn ? 'Enlarge' : 'Großansicht'}: ${title} (${technik}, ${masse})`);
+        }
+        if (img) {
+            const altText = isEn
+                ? `Hand-painted artwork "${title}" – ${technik}, ${masse}, by Manuela Schenk`
+                : `Handgemaltes Gemälde „${title}“ – ${technik}, ${masse} von Manuela Schenk`;
+            img.setAttribute('alt', altText);
+            img.setAttribute('title', title);
+        }
+        if (caption) caption.textContent = `${title} (${technik}, ${masse})`;
+    });
+    document.querySelectorAll('.badge-unikat').forEach(b => {
+        b.textContent = isEn ? 'Original' : 'Unikat';
+    });
+}
+
 let visibleGalleryLinks = [];
 let currentIndex = 0;
 let activeCategory = 'alle';
@@ -1259,11 +1921,11 @@ function toggleFavorite(itemId, event) {
     if (index > -1) {
         favs.splice(index, 1);
         isAdded = false;
-        showToast('Kunstwerk aus Favoriten entfernt.');
+        showToast(currentLang === 'en' ? 'Artwork removed from favorites.' : 'Kunstwerk aus Favoriten entfernt.');
     } else {
         favs.push(itemId);
         isAdded = true;
-        showToast('❤️ Kunstwerk zu Favoriten hinzugefügt!');
+        showToast(currentLang === 'en' ? '❤️ Artwork added to favorites!' : '❤️ Kunstwerk zu Favoriten hinzugefügt!');
     }
 
     saveFavorites(favs);
@@ -1275,13 +1937,20 @@ function toggleFavorite(itemId, event) {
     }
 }
 
+/** Liefert die sprachabhängige Beschriftung für Favoriten-Buttons (Herz-Icons). */
+function favButtonLabel(isAdded) {
+    const dict = (typeof I18N_DICTIONARY !== 'undefined' && I18N_DICTIONARY[currentLang]) ? I18N_DICTIONARY[currentLang] : null;
+    if (dict) return isAdded ? dict.lb_btn_fav_remove : dict.lb_btn_fav_add;
+    return isAdded ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen';
+}
+
 function updateFavButtonsUI(itemId, isAdded) {
     const itemEl = document.getElementById(itemId);
     if (itemEl) {
         const btn = itemEl.querySelector('.fav-toggle-btn');
         if (btn) {
             btn.classList.toggle('active', isAdded);
-            btn.setAttribute('aria-label', isAdded ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+            btn.setAttribute('aria-label', favButtonLabel(isAdded));
             const icon = btn.querySelector('i');
             if (icon) {
                 icon.className = isAdded ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
@@ -1295,7 +1964,8 @@ function updateFavButtonsUI(itemId, isAdded) {
         const currentItem = visibleGalleryLinks[currentIndex].closest('.gallery-item');
         if (currentItem && currentItem.id === itemId) {
             lbFavBtn.classList.toggle('active', isAdded);
-            lbFavBtn.innerHTML = isAdded ? '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Aus Favoriten entfernen' : '<i class="fa-regular fa-heart"></i> Zu Favoriten hinzufügen';
+            const heartIcon = isAdded ? '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i>' : '<i class="fa-regular fa-heart"></i>';
+            lbFavBtn.innerHTML = `${heartIcon} ${favButtonLabel(isAdded)}`;
         }
     }
 }
@@ -1330,14 +2000,14 @@ function initFavButtonsUI() {
             btn = document.createElement('button');
             btn.className = 'fav-toggle-btn';
             btn.setAttribute('type', 'button');
-            btn.setAttribute('title', 'Zu Favoriten hinzufügen');
+            btn.setAttribute('title', favButtonLabel(false));
             btn.onclick = function(e) { toggleFavorite(itemId, e); };
             item.appendChild(btn);
         }
 
         const isAdded = favs.includes(itemId);
         btn.classList.toggle('active', isAdded);
-        btn.setAttribute('aria-label', isAdded ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen');
+        btn.setAttribute('aria-label', favButtonLabel(isAdded));
         btn.innerHTML = isAdded ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
     });
     updateFavBadgeCount();
@@ -1398,7 +2068,7 @@ function openCertModal() {
             const link = visibleGalleryLinks[currentIndex];
             const item = link.closest('.gallery-item');
             const itemId = item ? item.id : 'MS-2026';
-            const artMeta = (itemId && typeof ARTWORKS_METADATA !== 'undefined' && ARTWORKS_METADATA[itemId]) ? ARTWORKS_METADATA[itemId] : null;
+            const artMeta = getArtMeta(itemId);
             const img = link.querySelector('img');
             
             if (titleVal) titleVal.innerText = artMeta ? artMeta.title : (img ? (img.alt || 'Original Gemälde') : 'Original Gemälde');
@@ -1424,7 +2094,7 @@ function openSizeModal() {
             const link = visibleGalleryLinks[currentIndex];
             const item = link.closest('.gallery-item');
             const itemId = item ? item.id : '';
-            const artMeta = (itemId && typeof ARTWORKS_METADATA !== 'undefined' && ARTWORKS_METADATA[itemId]) ? ARTWORKS_METADATA[itemId] : null;
+            const artMeta = getArtMeta(itemId);
             img.src = link.href;
             if (tag) tag.innerText = artMeta ? artMeta.masse : 'ca. 40 × 50 cm';
         }
@@ -1469,7 +2139,7 @@ function sortGallery(sortOption) {
 
     items.forEach(item => grid.appendChild(item));
     updateGalleryLinks();
-    showToast('Galerie neu sortiert');
+    showToast(currentLang === 'en' ? 'Gallery re-sorted' : 'Galerie neu sortiert');
 }
 
 /* Room Visualizer Logic with Wall Fitting & Rotation */
@@ -1534,7 +2204,7 @@ function resetWallFramePosition() {
     wallFramePosX = 0;
     wallFramePosY = 0;
     updateWallFrameTransform();
-    showToast('🎯 Position zentriert');
+    showToast(currentLang === 'en' ? '🎯 Position centered' : '🎯 Position zentriert');
 }
 
 function updateWallFrameTransform() {
@@ -1841,7 +2511,7 @@ function handleCustomWallUpload(input) {
             const stage = document.getElementById('room-stage');
             if (stage) {
                 stage.style.backgroundImage = `url('${e.target.result}')`;
-                showToast('Eigene Wand erfolgreich geladen!');
+                showToast(currentLang === 'en' ? 'Custom wall loaded successfully!' : 'Eigene Wand erfolgreich geladen!');
             }
         };
         reader.readAsDataURL(file);
@@ -1857,7 +2527,7 @@ function rotateLightboxImage(deg) {
     if (!img) return;
     currentRotationAngle = (currentRotationAngle + (deg || 90)) % 360;
     img.style.transform = `rotate(${currentRotationAngle}deg)`;
-    showToast(`Bild um ${currentRotationAngle}° gedreht`);
+    showToast(currentLang === 'en' ? `Image rotated ${currentRotationAngle}°` : `Bild um ${currentRotationAngle}° gedreht`);
 }
 
 function toggleLightboxZoom() {
@@ -1866,7 +2536,9 @@ function toggleLightboxZoom() {
     const lens = document.getElementById('lightbox-magnifier');
     if (btn) btn.classList.toggle('active', isZoomActive);
     if (!isZoomActive && lens) lens.style.display = 'none';
-    showToast(isZoomActive ? '🔍 Lupe aktiviert (Fahre über das Bild)' : 'Lupe deaktiviert');
+    showToast(currentLang === 'en'
+        ? (isZoomActive ? '🔍 Magnifier activated (hover over the image)' : 'Magnifier deactivated')
+        : (isZoomActive ? '🔍 Lupe aktiviert (Fahre über das Bild)' : 'Lupe deaktiviert'));
 }
 
 /* Magnifier Zoom Lens for Lightbox (Mouse & Touch Supported) */
@@ -2020,12 +2692,13 @@ function filterGallery() {
             noResults.style.display = 'block';
             const titleEl = noResults.querySelector('p');
             const subEl = noResults.querySelector('small');
+            const dict = (typeof I18N_DICTIONARY !== 'undefined' && I18N_DICTIONARY[currentLang]) ? I18N_DICTIONARY[currentLang] : null;
             if (activeCategory === 'favoriten') {
-                if (titleEl) titleEl.innerText = 'Noch keine Favoriten gemerkt.';
-                if (subEl) subEl.innerText = 'Klicke auf das Herz-Symbol auf den Kunstwerken, um deine persönlichen Lieblingswerke hier zu speichern.';
+                if (titleEl) titleEl.innerText = dict ? dict.gallery_empty_fav_title : 'Noch keine Favoriten gemerkt.';
+                if (subEl) subEl.innerText = dict ? dict.gallery_empty_fav_text : 'Klicke auf das Herz-Symbol auf den Kunstwerken, um deine persönlichen Lieblingswerke hier zu speichern.';
             } else {
-                if (titleEl) titleEl.innerText = 'Keine passenden Gemälde gefunden.';
-                if (subEl) subEl.innerText = 'Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.';
+                if (titleEl) titleEl.innerText = dict ? dict.gallery_empty_search_title : 'Keine passenden Gemälde gefunden.';
+                if (subEl) subEl.innerText = dict ? dict.gallery_empty_search_text : 'Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.';
             }
         } else {
             noResults.style.display = 'none';
@@ -2039,7 +2712,15 @@ function filterGallery() {
 
     const countBadge = document.getElementById('search-count-badge');
     if (countBadge) {
-        const catMap = {
+        const isEnCount = currentLang === 'en';
+        const catMap = isEnCount ? {
+            'alle': 'all categories',
+            'tiere': 'Animals',
+            'landschaften': 'Landscapes',
+            'pflanzen': 'Botanicals',
+            'sonstiges': 'Still Life & More',
+            'favoriten': '❤️ Saved Favorites'
+        } : {
             'alle': 'alle Kategorien',
             'tiere': 'Tiere',
             'landschaften': 'Landschaften',
@@ -2048,7 +2729,9 @@ function filterGallery() {
             'favoriten': '❤️ Gemerkte Kunstwerke'
         };
         const catLabel = catMap[activeCategory] || activeCategory;
-        countBadge.innerHTML = `<i class="fa-solid fa-images" aria-hidden="true"></i> Zeige ${visibleCount} von ${items.length} Kunstwerken (${catLabel})`;
+        countBadge.innerHTML = isEnCount
+            ? `<i class="fa-solid fa-images" aria-hidden="true"></i> Showing ${visibleCount} of ${items.length} artworks (${catLabel})`
+            : `<i class="fa-solid fa-images" aria-hidden="true"></i> Zeige ${visibleCount} von ${items.length} Kunstwerken (${catLabel})`;
     }
 
     updateFavBadgeCount();
@@ -2186,7 +2869,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const detailKat = document.getElementById('lb-detail-kat');
         const statusBadge = document.getElementById('lightbox-status-badge');
 
-        const artMeta = (itemId && typeof ARTWORKS_METADATA !== 'undefined' && ARTWORKS_METADATA[itemId]) ? ARTWORKS_METADATA[itemId] : null;
+        const artMeta = getArtMeta(itemId);
 
         const realTitle = artMeta ? artMeta.title : (titleText || 'Handgemaltes Unikat');
         const realDesc = artMeta ? artMeta.desc : 'Dieses einzigartige Werk wurde von Manuela Schenk in sorgfältiger Handarbeit gefertigt.';
@@ -2277,7 +2960,7 @@ document.addEventListener('DOMContentLoaded', function () {
             lbRoomBtn.onclick = function() {
                 setLightboxViewAngle('room', document.querySelector('.view-thumb-btn[data-view="room"]'));
                 setLightboxScene('livingroom', document.querySelector('.scene-btn[data-scene="livingroom"]'));
-                showToast('✨ KI-Wandvorlage im Raum aktiviert!');
+                showToast(currentLang === 'en' ? '✨ AI wall preview activated!' : '✨ KI-Wandvorlage im Raum aktiviert!');
             };
         }
 
@@ -2287,10 +2970,16 @@ document.addEventListener('DOMContentLoaded', function () {
             'DSC_6626a': '„Manuela hat das Wesen unseres Hundes mit unglaublicher Liebe zum Detail eingefangen.“ – Elena M., Bad Godesberg',
             'DSC_6689a': '„Wunderschöne Pfingstrosen! Ein Meisterwerk aus Acryl, das voller Leben steckt.“ – Karin S., Köln'
         };
+        const testimonialsEn = {
+            'DSC_6622a': '"The color dynamics in this landscape enchant our hallway anew every day." – Stefan K., Bonn',
+            'DSC_6626a': '"Manuela captured the essence of our dog with incredible attention to detail." – Elena M., Bad Godesberg',
+            'DSC_6689a': '"Beautiful peonies! A masterpiece in acrylic, brimming with life." – Karin S., Cologne'
+        };
         const lbTestimonialBox = document.getElementById('lightbox-testimonial-box');
         if (lbTestimonialBox) {
-            if (testimonials[itemId]) {
-                lbTestimonialBox.innerHTML = `<i class="fa-solid fa-quote-left" aria-hidden="true"></i> ${testimonials[itemId]}`;
+            const testimonialText = (currentLang === 'en' ? testimonialsEn[itemId] : null) || testimonials[itemId];
+            if (testimonialText) {
+                lbTestimonialBox.innerHTML = `<i class="fa-solid fa-quote-left" aria-hidden="true"></i> ${testimonialText}`;
                 lbTestimonialBox.style.display = 'block';
             } else {
                 lbTestimonialBox.style.display = 'none';
@@ -2487,7 +3176,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('contextmenu', function (e) {
         if (e.target.tagName === 'IMG') {
             e.preventDefault();
-            showToast('Urheberrechtlich geschützt © Manuela Schenk');
+            showToast(currentLang === 'en' ? 'Copyright protected © Manuela Schenk' : 'Urheberrechtlich geschützt © Manuela Schenk');
         }
     });
 
@@ -2768,7 +3457,7 @@ function initPhotoUploadPreview() {
             const file = this.files[0];
             if (file) {
                 if (file.size > 10 * 1024 * 1024) {
-                    showToast('Hinweis: Datei ist größer als 10 MB.');
+                    showToast(currentLang === 'en' ? 'Note: File is larger than 10 MB.' : 'Hinweis: Datei ist größer als 10 MB.');
                 }
                 const reader = new FileReader();
                 reader.onload = function(e) {
@@ -2975,5 +3664,7 @@ runOnDOMReady(function () {
    8. GALERIE-FILTER START
    ========================================= */
 runOnDOMReady(function () {
-    filterSelection('alle');
+    if (document.getElementById('filter-container')) {
+        filterSelection('alle');
+    }
 });

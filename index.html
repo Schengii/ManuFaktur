@@ -29,7 +29,7 @@
     <link rel="manifest" href="manifest.json">
     <!-- Lokales Font Awesome für DSGVO-Konformität -->
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="style.min.css?v=4">
+    <link rel="stylesheet" type="text/css" href="style.min.css?v=5">
     <script>
       (function(){
         try{
@@ -51,8 +51,8 @@
         <div class="hero-section">
             <div class="hero-content">
                 <h1>ManuFAKTUR</h1>
-                <p>Individuelle Malerei &amp; Handwerkskunst</p>
-                <a href="Home.html" class="hero-btn">Entdecke mehr! <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                <p data-i18n-de="Individuelle Malerei &amp; Handwerkskunst" data-i18n-en="Custom Paintings &amp; Craftsmanship">Individuelle Malerei &amp; Handwerkskunst</p>
+                <a href="Home.html" class="hero-btn" data-i18n-de="Entdecke mehr!" data-i18n-en="Discover more!">Entdecke mehr! <i class="fa fa-angle-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </main>
@@ -61,13 +61,26 @@
         <i class="fa fa-angle-up" aria-hidden="true"></i>
     </button>
 
-    <!-- Nur topFunction und reveal werden benötigt, keine Nav/Footer-Injektion -->
+    <!-- Nur topFunction und reveal werden benötigt, keine Nav/Footer-Injektion.
+         Minimaler eigenständiger Sprachwechsel (ohne Home.js), damit die gespeicherte
+         Spracheinstellung auch auf dieser Einstiegsseite respektiert wird. -->
     <script>
         function topFunction() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         window.onscroll = function() {
             const btn = document.querySelector('.back-to-top');
             if (btn) btn.style.display = (document.documentElement.scrollTop > 150) ? 'flex' : 'none';
         };
+        (function () {
+            try {
+                var lang = localStorage.getItem('manufaktur_lang') || 'de';
+                if (lang === 'en') {
+                    document.querySelectorAll('[data-i18n-en]').forEach(function (el) {
+                        var icon = el.querySelector('i');
+                        el.innerHTML = el.getAttribute('data-i18n-en') + (icon ? ' ' + icon.outerHTML : '');
+                    });
+                }
+            } catch (e) {}
+        })();
     </script>
 </body>
 </html>
