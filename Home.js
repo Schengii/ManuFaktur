@@ -1773,8 +1773,35 @@ const ARTWORKS_METADATA = {
         "technik": "Acryl auf Leinwand",
         "masse": "18 × 24 cm",
         "kategorie": "sonstiges",
-        "desc": "Frisch gezapftes, perlendes Bier mit goldgelber Farbe und dichter weißer Schaumkrone.",
-        "badge": "Unikat"
+        "desc": "Frisch gezapftes, perlendes Bier mit goldgelber Farbe und dichter weißer Schaumkrone."
+    },
+    "bild18-eulen": {
+        "title": "Zwei Eulen",
+        "technik": "Acryl auf Leinwand",
+        "masse": "30 × 40 cm",
+        "kategorie": "tiere",
+        "desc": "Liebevoll handgemaltes Acrylbild mit zwei kleinen Eulen auf einem Ast vor blauem Hintergrund."
+    },
+    "bild16-godesburg": {
+        "title": "Godesburg Stadtansicht",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Malerische Stadtansicht der historischen Godesburg in Bonn bei abendlicher Dämmerung."
+    },
+    "bild8-rheinaue": {
+        "title": "Rheinaue Bonn",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Herbstliche Impression des Rheinaue-Sees in Bonn mit spiegelnden Bäumen und stimmungsvollem Licht."
+    },
+    "bild9-feld": {
+        "title": "Feldweg im Sommer",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Idyllischer sonniger Feldweg im Sommer unter weitem blauem Himmel."
     }
 };
 
@@ -1836,7 +1863,11 @@ const ARTWORKS_METADATA_EN = {
     "DSC_6782a": { title: "Water Lily at Bonn Botanical Garden", technik: "Oil on canvas", desc: "An enchanting white water lily on calm pond water at Bonn's historic Botanical Garden." },
     "DSC_6784a": { title: "Yellow Spring Tulips", technik: "Oil on canvas", desc: "Radiant sun-yellow tulips in delicate layered oil painting with atmospheric depth." },
     "DSC_6788a": { title: "Aperol Spritz", technik: "Acrylic on canvas", desc: "A refreshing Aperol Spritz in a wine glass with an orange slice and clear ice cubes." },
-    "DSC_6790a": { title: "Cold Beer in a Glass", technik: "Acrylic on canvas", desc: "Freshly poured, sparkling beer with a golden color and a dense white foam crown." }
+    "DSC_6790a": { title: "Cold Beer in a Glass", technik: "Acrylic on canvas", desc: "Freshly poured, sparkling beer with a golden color and a dense white foam crown." },
+    "bild18-eulen": { title: "Two Little Owls", technik: "Acrylic on canvas", desc: "Lovingly hand-painted acrylic artwork of two little owls perched on a branch against a blue sky." },
+    "bild16-godesburg": { title: "Godesburg Cityscape", technik: "Acrylic on canvas", desc: "Atmospheric painting of historic Godesburg fortress in Bonn during evening twilight." },
+    "bild8-rheinaue": { title: "Rheinaue Park Bonn", technik: "Acrylic on canvas", desc: "Autumn impression of the scenic Rheinaue lake in Bonn with reflective waters and golden foliage." },
+    "bild9-feld": { title: "Summer Field Path", technik: "Acrylic on canvas", desc: "Idyllic sunlit country field path in summer under a bright open sky." }
 };
 
 /**
