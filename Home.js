@@ -1881,9 +1881,6 @@ function translateGalleryCards(lang) {
         }
         if (caption) caption.textContent = `${title} (${technik}, ${masse})`;
     });
-    document.querySelectorAll('.badge-unikat').forEach(b => {
-        b.textContent = isEn ? 'Original' : 'Unikat';
-    });
 }
 
 let visibleGalleryLinks = [];

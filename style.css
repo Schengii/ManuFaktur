@@ -1474,18 +1474,21 @@ cite {
 }
 
 .gallery-item::after {
-    content: "© M. Schenk";
+    content: "© ManuFAKTUR";
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 12px;
+    left: 12px;
     font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.85);
-    background-color: rgba(26, 37, 47, 0.7);
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(26, 37, 47, 0.75);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
     padding: 4px 8px;
     border-radius: 4px;
     pointer-events: none;
+    z-index: 8;
     transition: var(--transition-smooth);
 }
 
@@ -4346,6 +4349,7 @@ h2 {
     position: relative;
     padding: 15px;
     overflow: hidden;
+    -webkit-user-select: none;
     user-select: none;
     min-height: 520px;
 }
@@ -4453,6 +4457,7 @@ h2 {
 
 .lightbox-wall-stage:not(.scene-detail) .wall-frame-container {
     cursor: grab;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -5201,16 +5206,16 @@ footer {
 .wall-frame-container,
 .room-artwork-container {
     position: relative;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 .artwork-watermark {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5267,44 +5272,10 @@ footer {
     border-width: 1.5px;
 }
 
-/* Watermark für Galerie-Karten (z.B. Home Highlights) */
-.gallery-item a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    border-radius: inherit;
-}
-
-.artwork-watermark--card {
-    z-index: 4;
-}
-
-.artwork-watermark--card .watermark-pattern {
-    opacity: 0.12;
-}
-
-.artwork-watermark--card .watermark-brand {
-    font-size: clamp(0.95rem, 1.8vw, 1.35rem);
-    padding: 6px 16px;
-    letter-spacing: 3px;
-    border-width: 1.5px;
-    border-radius: 8px;
-    background: rgba(10, 15, 25, 0.35);
-    color: rgba(255, 255, 255, 0.70);
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.95);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-}
-
-.gallery-item:has(.artwork-watermark)::after {
-    display: none;
-}
-
 /* Einfache zentrierte Lightbox-Bühne (z.B. Home.html) */
 .lightbox-simple-stage {
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     max-width: 90%;
@@ -5312,14 +5283,28 @@ footer {
     margin: auto;
     border-radius: 8px;
     overflow: hidden;
-    user-select: none;
     -webkit-user-select: none;
+    user-select: none;
 }
 
 .lightbox-simple-stage .lightbox-content {
     margin: 0;
     max-width: 100%;
     max-height: 80vh;
+    display: block;
+    object-fit: contain;
+}
+
+.lightbox-simple-stage .artwork-watermark {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10;
 }
 
 /* =========================================

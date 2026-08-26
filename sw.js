@@ -1,5 +1,5 @@
 /* Service Worker für ManuFAKTUR Schenk */
-const CACHE_NAME = 'manufaktur-v4';
+const CACHE_NAME = 'manufaktur-v6';
 const ASSETS_TO_CACHE = [
   './',
   './Home.html',
@@ -11,8 +11,8 @@ const ASSETS_TO_CACHE = [
   './Impressum.html',
   './Datenschutz.html',
   './404.html',
-  './style.min.css?v=5',
-  './Home.min.js?v=5',
+  './style.min.css?v=6',
+  './Home.min.js?v=6',
   './manifest.json',
   './assets/images/logos/logo-transparent.png',
   './assets/images/logos/favicon.png',
@@ -46,20 +46,38 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Nur GET-Anfragen cachen
   if (event.request.method !== 'GET') return;
-  
+
+  const isHtml = event.request.mode === 'navigate' || 
+                 (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html'));
+
+  if (isHtml) {
+    // Für HTML-Seiten: Network First, Fallback auf Cache (offline)
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const copy = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return networkResponse;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // Für statische Assets: Cache First / Stale-While-Revalidate
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
-        // Im Hintergrund aktualisieren (Stale-while-revalidate)
         fetch(event.request).then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, networkResponse);
             });
           }
-        }).catch(() => {/* offline fallback silence */});
+        }).catch(() => {});
         return cachedResponse;
       }
       return fetch(event.request);
