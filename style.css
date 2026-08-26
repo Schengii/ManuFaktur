@@ -5267,6 +5267,61 @@ footer {
     border-width: 1.5px;
 }
 
+/* Watermark für Galerie-Karten (z.B. Home Highlights) */
+.gallery-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.artwork-watermark--card {
+    z-index: 4;
+}
+
+.artwork-watermark--card .watermark-pattern {
+    opacity: 0.12;
+}
+
+.artwork-watermark--card .watermark-brand {
+    font-size: clamp(0.95rem, 1.8vw, 1.35rem);
+    padding: 6px 16px;
+    letter-spacing: 3px;
+    border-width: 1.5px;
+    border-radius: 8px;
+    background: rgba(10, 15, 25, 0.35);
+    color: rgba(255, 255, 255, 0.70);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85), 0 0 3px rgba(0, 0, 0, 0.95);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-item:has(.artwork-watermark)::after {
+    display: none;
+}
+
+/* Einfache zentrierte Lightbox-Bühne (z.B. Home.html) */
+.lightbox-simple-stage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 90%;
+    max-height: 80vh;
+    margin: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.lightbox-simple-stage .lightbox-content {
+    margin: 0;
+    max-width: 100%;
+    max-height: 80vh;
+}
+
 /* =========================================
    KOMPONENTEN OVERRIDES FÜR DARK THEME
    ========================================= */

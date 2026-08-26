@@ -115,15 +115,19 @@
     </section>
 
     <section class="latest-work">
-      <h2><i class="fa-solid fa-paintbrush" aria-hidden="true"></i> Aktuelle Highlights</h2>
-      <p class="intro-text">Eine kleine Auswahl meiner neuesten Gemälde aus dem Jahr 2025.</p>
+      <h2><i class="fa-solid fa-paintbrush" aria-hidden="true"></i> <span data-i18n="home_h2_highlights">Aktuelle Highlights</span></h2>
+      <p class="intro-text" data-i18n="home_highlights_intro">Eine kleine Auswahl meiner neuesten Gemälde aus dem Jahr 2025.</p>
       <div class="gallery-grid">
         <div class="gallery-item reveal">
           <a href="assets/images/artworks/lightbox/bild18-eulen.webp" data-i18n-aria-label="hl_owls_aria" aria-label="Großansicht: Zwei Eulen">
             <img src="assets/images/artworks/thumbs/bild18-eulen.webp"
               data-i18n-alt="hl_owls_alt" alt="Handgemaltes Acrylbild mit zwei kleinen Eulen auf einem Ast vor blauem Hintergrund"
               data-i18n-title="hl_owls_alt" title="Handgemaltes Acrylbild mit zwei kleinen Eulen auf einem Ast vor blauem Hintergrund"
-              width="600" height="832" loading="lazy" decoding="async">
+              width="600" height="832" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;">
+            <div class="artwork-watermark artwork-watermark--card" aria-hidden="true">
+              <div class="watermark-pattern"></div>
+              <div class="watermark-brand">@ManuFAKTUR</div>
+            </div>
             <div class="gallery-caption" data-i18n="hl_owls_caption">Zwei Eulen (Acryl auf Leinwand)</div>
           </a>
         </div>
@@ -132,7 +136,11 @@
             <img src="assets/images/artworks/thumbs/bild16-godesburg.webp"
               data-i18n-alt="hl_godesburg_alt" alt="Handgemaltes Landschaftsbild der historischen Godesburg in Bonn bei Dämmerung"
               data-i18n-title="hl_godesburg_alt" title="Handgemaltes Landschaftsbild der historischen Godesburg in Bonn bei Dämmerung"
-              width="600" height="496" loading="lazy" decoding="async">
+              width="600" height="496" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;">
+            <div class="artwork-watermark artwork-watermark--card" aria-hidden="true">
+              <div class="watermark-pattern"></div>
+              <div class="watermark-brand">@ManuFAKTUR</div>
+            </div>
             <div class="gallery-caption" data-i18n="hl_godesburg_caption">Godesburg Stadtansicht (Acryl auf Leinwand)</div>
           </a>
         </div>
@@ -141,7 +149,11 @@
             <img src="assets/images/artworks/thumbs/bild8-rheinaue.webp"
               data-i18n-alt="hl_rheinaue_alt" alt="Handgemaltes Acrylbild des herbstlichen Rheinaue-Sees in Bonn mit Bäumen und Spiegelungen"
               data-i18n-title="hl_rheinaue_alt" title="Handgemaltes Acrylbild des herbstlichen Rheinaue-Sees in Bonn mit Bäumen und Spiegelungen"
-              width="600" height="513" loading="lazy" decoding="async">
+              width="600" height="513" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;">
+            <div class="artwork-watermark artwork-watermark--card" aria-hidden="true">
+              <div class="watermark-pattern"></div>
+              <div class="watermark-brand">@ManuFAKTUR</div>
+            </div>
             <div class="gallery-caption" data-i18n="hl_rheinaue_caption">Rheinaue Bonn (Acryl auf Leinwand)</div>
           </a>
         </div>
@@ -150,7 +162,11 @@
             <img src="assets/images/artworks/thumbs/bild9-feld.webp"
               data-i18n-alt="hl_feld_alt" alt="Handgemaltes Acrylbild eines idyllischen Feldwegs im Sommer unter blauem Himmel"
               data-i18n-title="hl_feld_alt" title="Handgemaltes Acrylbild eines idyllischen Feldwegs im Sommer unter blauem Himmel"
-              width="600" height="503" loading="lazy" decoding="async">
+              width="600" height="503" loading="lazy" decoding="async" draggable="false" oncontextmenu="return false;">
+            <div class="artwork-watermark artwork-watermark--card" aria-hidden="true">
+              <div class="watermark-pattern"></div>
+              <div class="watermark-brand">@ManuFAKTUR</div>
+            </div>
             <div class="gallery-caption" data-i18n="hl_feld_caption">Feldweg im Sommer (Acryl auf Leinwand)</div>
           </a>
         </div>
@@ -158,8 +174,8 @@
     </section>
 
     <section class="testimonials-section reveal" id="testimonials-carousel">
-      <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> Das sagen meine Kunden</h2>
-      <p class="intro-text intro-text--subtle">Echte Erfahrungen & Rückmeldungen von begeisterten Meistbestellern:</p>
+      <h2><i class="fa-solid fa-comments" aria-hidden="true"></i> <span data-i18n="testi_h2">Das sagen meine Kunden</span></h2>
+      <p class="intro-text intro-text--subtle" data-i18n="testi_intro">Echte Erfahrungen & Rückmeldungen von begeisterten Meistbestellern:</p>
       
       <div class="testimonial-container">
         <div class="testimonial-slide active">
@@ -211,7 +227,13 @@
     <span class="close" tabindex="0" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
     <a class="prev" onclick="changeSlide(-1)" data-i18n-aria-label="ui_prev_image" aria-label="Vorheriges Bild">&#10094;</a>
     <a class="next" onclick="changeSlide(1)" data-i18n-aria-label="ui_next_image" aria-label="Nächstes Bild">&#10095;</a>
-    <img class="lightbox-content" id="lightbox-img" alt="Vergrößerte Ansicht des Kunstwerks">
+    <div class="lightbox-simple-stage">
+      <img class="lightbox-content" id="lightbox-img" alt="Vergrößerte Ansicht des Kunstwerks" draggable="false" oncontextmenu="return false;">
+      <div class="artwork-watermark" id="lb-watermark" aria-hidden="true">
+        <div class="watermark-pattern"></div>
+        <div class="watermark-brand">@ManuFAKTUR</div>
+      </div>
+    </div>
     <div id="caption"></div>
   </div>
 
