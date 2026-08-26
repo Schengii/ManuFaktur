@@ -134,12 +134,15 @@ ManuFaktur/
 
 ### 8. `style.css`
 - **Funktion:** Zentrales Designsystem.
-- **Inhalt:** CSS-Variablen (`:root` Farbtokens: warmes Gold `#7a5a1f`, Marineblau `#1a2d52`, Linnen `#faf8f5`), CSS Grid/Flexbox Layouts, 3D-Perspektivtransformationen (`rotateY`), Micro-Animations, Glassmorphism-Effekte, WCAG-Barrierefreiheit & responsive Breakpoints (Desktop, Tablet, Smartphone).
+- **Inhalt:** CSS-Variablen (`:root` Farbtokens: warmes Gold `#7a5a1f`, Marineblau `#1a2d52`, Linnen `#faf8f5`), vollständiges **Light- und Dark-Mode-Farbschema** (`data-theme="dark"` / `.dark-mode`), CSS Grid/Flexbox Layouts, 3D-Perspektivtransformationen (`rotateY`), Micro-Animations, Glassmorphism-Effekte, WCAG-Barrierefreiheit & responsive Breakpoints (Desktop, Tablet, Smartphone).
 
 ### 9. `Home.js`
 - **Funktion:** Zentrale JavaScript-Architektur.
 - **Inhalt:**
   - Automatische Injektion von shared `<header>` Navigation und `<footer>`.
+  - **Zweisprachige Lokalisierung (DE/EN):** Integriertes i18n-Übersetzungssystem (`I18N_DICTIONARY`) mit Live-Sprachumschalter und LocalStorage-Merkfunktion.
+  - **Dark/Light Mode Theme Toggle:** Umschaltung zwischen hellem und dunklem Design mit automatischer Systempräferenz-Erkennung und LocalStorage-Speicherung.
+  - **Urheberrechtsschutz & Wasserzeichen:** Copyright-Wasserzeichen-Badge in der Lightbox-Großansicht und Rechtsklick-Schutz mit Hinweis-Toast.
   - Hamburger-Mobilmenü-Steuerung.
   - Galerie-Filterung, Format-Chips, Farb-Chips, Schnell-Tag-Chips, Live-Suche & Sortierung.
   - Dynamisches Favoriten-Management (`initFavButtonsUI`, `toggleFavorite`, Badge-Counter & LocalStorage).
@@ -156,6 +159,7 @@ ManuFaktur/
 ## 🛠️ Technologien & Standards
 
 - **Core:** HTML5, Vanilla CSS3, JavaScript (ES6+).
+- **Mehrsprachigkeit & Theming:** Nahtloser Sprachwechsel (Deutsch / Englisch) und Light/Dark Mode ohne externe Frameworks oder Reloads.
 - **DSGVO-Konformität:** 100 % lokale Einbindung aller Fonts (`Dancing Script`, `Playfair Display`, `Lato`) und Font Awesome Webfonts (keine externen Aufrufe an Google Fonts oder CDN-Server).
 - **Barrierefreiheit (WCAG 2.1 AA / AAA):**
   - **Rot-Grün-Schwäche (Colorblindness):** Alle aktiven Zustände (Filter-Buttons, Navigation, Favoriten) nutzen neben Farbaccenten zusätzliche Form- und Textindikatoren (Symbole, fette Schrift, Border, Unterstreichung).
