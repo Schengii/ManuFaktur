@@ -1,5 +1,5 @@
 /* Service Worker für ManuFAKTUR Schenk */
-const CACHE_NAME = 'manufaktur-v6';
+const CACHE_NAME = 'manufaktur-v7';
 const ASSETS_TO_CACHE = [
   './',
   './Home.html',
@@ -20,7 +20,12 @@ const ASSETS_TO_CACHE = [
   './assets/images/logos/apple-touch-icon.png',
   './assets/images/logos/icon-192.png',
   './assets/images/logos/icon-512.png',
-  './assets/vendor/font-awesome/css/all.min.css'
+  './assets/vendor/font-awesome/css/all.min.css',
+  './assets/vendor/font-awesome/webfonts/fa-solid-900.woff2',
+  './assets/vendor/font-awesome/webfonts/fa-brands-400.woff2',
+  './assets/fonts/lato-400-normal.woff2',
+  './assets/fonts/playfairdisplay-700-normal.woff2',
+  './assets/fonts/dancingscript-700-normal.woff2'
 ];
 
 self.addEventListener('install', (event) => {

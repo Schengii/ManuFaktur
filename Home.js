@@ -315,7 +315,7 @@ const I18N_DICTIONARY = {
         home_welcome_text: 'Hier entstehen meine Bilder, alle von mir in liebevoller Detailarbeit handgemalt.<br>Qualität und Individualität sind mein Markenzeichen. Ich male für Dich Tierportraits oder Landschaften.',
         badge_handpainted: '100% Handgemalt',
         badge_studio: 'Atelier aus Bonn',
-        badge_shipping: 'Versandkostenfrei in DE',
+        badge_shipping: 'Sicherer Versand in DE',
         badge_detail: 'Liebevolle Detailarbeit',
         news_title: 'Neuigkeiten',
         news_1_date: '01. Dezember 2025',
@@ -564,7 +564,7 @@ const I18N_DICTIONARY = {
 
         // Leistungen.html (Ergänzungen)
         faq_3_q_ship: 'Wie lange dauert der Versand?',
-        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild per DHL oder DPD gut gepolstert und <strong>versandkostenfrei</strong> innerhalb Deutschlands.',
+        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild gut gepolstert und versichert per DHL oder DPD. Die genauen Versandkosten stimmen wir individuell vorab ab.',
         leist_cta_text: 'Hast Du noch weitere Fragen oder eigene Wünsche?',
         leist_cta_btn1: 'Auftrag konfigurieren',
         leist_cta_btn2: 'Kontaktiere mich gerne!',
@@ -592,13 +592,14 @@ const I18N_DICTIONARY = {
         kontakt_opt_purchase: 'Kaufinteresse an einem Bild',
         kontakt_label_message: 'Deine Nachricht:',
         kontakt_ph_message: 'Deine Nachricht...',
-        kontakt_privacy_label: 'Ich stimme zu, dass meine Angaben aus dem Kontaktformular zur Beantwortung meiner Anfrage erhoben und verarbeitet werden. Hinweis: Sie können Ihre Einwilligung jederzeit für die Zukunft per E‑Mail widerrufen. Detaillierte Informationen findest Du in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.',
+        kontakt_privacy_label: 'Ich stimme zu, dass meine Angaben aus dem Kontaktformular zur Beantwortung meiner Anfrage erhoben und verarbeitet werden. Hinweis: Du kannst Deine Einwilligung jederzeit für die Zukunft per E‑Mail widerrufen. Detaillierte Informationen findest Du in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.',
 
         // Impressum.html
         impressum_map_title: 'Google Maps laden',
         impressum_map_text: 'Um die interaktive Karte anzuzeigen, klicken Sie bitte auf "Karte laden". Dadurch stimmen Sie der Übertragung Ihrer IP-Adresse an Google und der Verarbeitung von Cookies gemäß der Datenschutzrichtlinien von Google zu. (Details in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>)',
         impressum_map_btn: 'Karte laden',
-        impressum_h_tmg: 'Angaben gemäß § 5 TMG',
+        impressum_h_ddg: 'Angaben gemäß § 5 DDG',
+        impressum_h_tmg: 'Angaben gemäß § 5 DDG',
         impressum_h_contact: 'Kontakt',
         impressum_contact_block: 'Telefon: +49 (0) 163 2662435<br>E-Mail: <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a><br>Anschrift: Rüdesheimer Straße 14, 53175 Bonn',
         impressum_h_vat: 'Umsatzsteuer',
@@ -613,28 +614,30 @@ const I18N_DICTIONARY = {
         impressum_dispute_text: 'Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
 
         // Datenschutz.html
-        dsgvo_notice_title: 'Wichtiger Hinweis:',
-        dsgvo_notice_text: 'Dies ist eine Übersicht der auf dieser Webseite eingesetzten Techniken. Bitte erstellen Sie für den produktiven Einsatz einen individuellen, rechtskonformen Rechtstext, z.B. über einen Datenschutz-Generator (z.B. von e-recht24.de).',
         dsgvo_h1: '1. Datenschutz auf einen Blick',
         dsgvo_h1_1: 'Allgemeine Hinweise',
         dsgvo_h1_1_text: 'Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.',
         dsgvo_h1_2: 'Datenerfassung auf unserer Website',
-        dsgvo_h1_2_text1: '<strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.',
-        dsgvo_h1_2_text2: '<strong>Wie erfassen wir Ihre Daten?</strong><br>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).',
+        dsgvo_h1_2_text1: '<strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>Die Datenverarbeitung auf dieser Website erfolgt durch die Websitebetreiberin Manuela Schenk (ManuFAKTUR). Die vollständigen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.',
+        dsgvo_h1_2_text2: '<strong>Wie erfassen wir Ihre Daten?</strong><br>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen (z. B. Daten, die Sie in das Kontaktformular eingeben). Andere Daten werden automatisch oder nach Ihrer ausdrücklichen Einwilligung beim Besuch der Website durch IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).',
         dsgvo_h2: '2. Hosting und Server-Log-Files',
-        dsgvo_h2_text: 'Wir hosten die Inhalte unserer Website bei einem Hoster in Deutschland. Der Hoster erhebt automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt (IP-Adresse, Browsertyp, Referrer URL, Uhrzeit des Serveraufrufs). Diese Daten werden zur Gewährleistung eines sicheren Betriebs erhoben.',
+        dsgvo_h2_text: 'Wir hosten die Inhalte unserer Website bei einem Hoster in Deutschland. Der Hoster erhebt automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt (IP-Adresse, Browsertyp, Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage). Diese Daten werden zur Gewährleistung eines sicheren und fehlerfreien Betriebs erhoben (Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO).',
         dsgvo_h3: '3. Lokale Einbindung von Schriftarten & Symbolen (DSGVO-konform)',
-        dsgvo_h3_intro: 'Um die Privatsphäre unserer Besucher bestmöglich zu schützen, nutzen wir keine CDNs (Content Delivery Networks) von Drittanbietern für Schriften oder Icons:',
-        dsgvo_h3_li1: '<strong>Google Fonts:</strong> Alle verwendeten Google Fonts (Lato, Playfair Display, Dancing Script) sind lokal auf unserem Webserver gespeichert und werden von dort geladen. Es besteht keine Verbindung zu Servern von Google.',
-        dsgvo_h3_li2: '<strong>Font Awesome:</strong> Die verwendeten Icons und Stylesheets von Font Awesome sind ebenfalls lokal auf unserem Webserver gehostet. Es findet kein Datentransfer zu Drittservern statt.',
+        dsgvo_h3_intro: 'Um die Privatsphäre unserer Besucher bestmöglich zu schützen, nutzen wir keine externen CDNs (Content Delivery Networks) von Drittanbietern:',
+        dsgvo_h3_li1: '<strong>Google Fonts:</strong> Alle verwendeten Schriften (Lato, Playfair Display, Dancing Script) sind lokal auf unserem Webserver gespeichert und werden von dort geladen. Es findet keine Verbindung zu Servern von Google statt.',
+        dsgvo_h3_li2: '<strong>Font Awesome:</strong> Die verwendeten Icons und Stylesheets von Font Awesome sind ebenfalls vollständig lokal auf unserem Webserver gehostet. Es erfolgt kein Datentransfer zu Drittservern.',
         dsgvo_h4: '4. Einwilligungspflichtige Dienste von Drittanbietern',
         dsgvo_h4_1: 'Google Maps (Zwei-Klick-Lösung)',
-        dsgvo_h4_1_text: 'Auf unserer Website ist eine Karte von Google Maps eingebunden. Um zu verhindern, dass bereits beim Laden der Seite Ihre IP-Adresse an Google übertragen wird, nutzen wir eine sogenannte Zwei-Klick-Lösung. Die Karte ist standardmäßig deaktiviert. Erst wenn Sie aktiv auf die Schaltfläche "Karte laden" klicken, willigen Sie ein, dass eine Verbindung zu den Google-Servern aufgebaut und Cookies gesetzt werden. Rechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.',
-        dsgvo_h5: '5. Datenerfassung über das Kontaktformular',
-        dsgvo_h5_text1: 'Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.',
-        dsgvo_h5_text2: 'Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), falls diese abgefragt wurde.',
-        dsgvo_h6: '6. Ihre Rechte bezüglich Ihrer Daten',
-        dsgvo_h6_text: 'Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Wenden Sie sich hierzu einfach an die im Impressum genannte Adresse.',
+        dsgvo_h4_1_text: 'Auf unserer Website ist eine Karte von Google Maps eingebunden. Um zu verhindern, dass bereits beim Laden der Seite Ihre IP-Adresse an Google übertragen wird, nutzen wir eine datenschutzfreundliche Zwei-Klick-Lösung. Die Karte ist standardmäßig deaktiviert. Erst wenn Sie aktiv auf die Schaltfläche "Karte laden" klicken, willigen Sie ein, dass eine Verbindung zu den Servern von Google (Google Ireland Limited) aufgebaut wird. Rechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können diese Einwilligung jederzeit für die Zukunft widerrufen.',
+        dsgvo_h5: '5. Datenerfassung über das Kontaktformular & Formspree',
+        dsgvo_h5_text1: 'Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns verarbeitet.',
+        dsgvo_h5_formspree: 'Für die technische Übermittlung von Formularanfragen nutzen wir den Dienst <strong>Formspree</strong> (Formspree Inc., 420 5th Ave, New York, NY 10018, USA). Wenn Sie das Formular absenden, werden Ihre eingegebenen Daten verschlüsselt an die Server von Formspree übertragen und per E-Mail an uns weitergeleitet. Die Datenübertragung in die USA erfolgt auf Grundlage von Standardvertragsklauseln der EU-Kommission (Standard Contractual Clauses, Art. 46 Abs. 2 lit. c DSGVO). Rechtsgrundlage ist die Anbahnung oder Erfüllung eines Vertrags (Art. 6 Abs. 1 lit. b DSGVO) sowie unser berechtigtes Interesse an einer verlässlichen Bearbeitung von Kundenanfragen (Art. 6 Abs. 1 lit. f DSGVO).',
+        dsgvo_h6: '6. Lokale Speicherung im Browser (LocalStorage gemäß § 25 Abs. 2 Nr. 2 TDDG)',
+        dsgvo_h6_text: 'Diese Website verwendet die lokale Speicherfunktion Ihres Browsers (LocalStorage). Wir speichern darin ausschließlich Ihre gewählte Spracheinstellung (manufaktur_lang), das gewünschte Farbdesign (manufaktur_theme) sowie Ihre persönliche Merkliste von Kunstwerken (manufaktur_favorites). Es werden keine Tracking-Cookies gesetzt und keine personenbezogenen Nutzungsprofile erstellt. Die Speicherung ist technisch erforderlich, um die von Ihnen ausdrücklich gewünschten Anzeigeeinstellungen sitzungsübergreifend bereitzustellen (§ 25 Abs. 2 Nr. 2 TDDG).',
+        dsgvo_h7: '7. SSL- bzw. TLS-Verschlüsselung',
+        dsgvo_h7_text: 'Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Anfragen über das Kontaktformular, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.',
+        dsgvo_h8: '8. Ihre Rechte bezüglich Ihrer Daten',
+        dsgvo_h8_text: 'Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit folgende Rechte:<br>• <strong>Recht auf Auskunft (Art. 15 DSGVO):</strong> Sie können Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten verlangen.<br>• <strong>Recht auf Berichtigung (Art. 16 DSGVO):</strong> Sie können die Berichtigung unrichtiger Daten verlangen.<br>• <strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Sie können die Löschung Ihrer bei uns gespeicherten personenbezogenen Daten verlangen.<br>• <strong>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO):</strong> Sie können die Einschränkung der Datenverarbeitung verlangen.<br>• <strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Sie können verlangen, Ihre Daten in einem strukturierten, gängigen Format zu erhalten.<br>• <strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Sie haben das Recht, jederzeit gegen die Verarbeitung Ihrer personenbezogenen Daten Widerspruch einzulegen.<br>• <strong>Widerruf Ihrer Einwilligung (Art. 7 Abs. 3 DSGVO):</strong> Sie können erteilte Einwilligungen jederzeit für die Zukunft per E-Mail widerrufen.<br>• <strong>Beschwerderecht bei der zuständigen Aufsichtsbehörde (Art. 77 DSGVO):</strong> Zuständige Aufsichtsbehörde ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), Kavalleriestraße 2–4, 40213 Düsseldorf.',
 
         // Auftrag.html Konfigurator (data-i18n)
         auftrag_restore_text: 'Du hast eine gespeicherte Konfiguration. <button onclick="restoreSavedConfig()" id="restore-btn">Wiederherstellen</button> oder <button onclick="clearSavedConfig()" id="clear-btn">Neu starten</button>.',
@@ -696,7 +699,7 @@ const I18N_DICTIONARY = {
         home_welcome_text: 'Here my paintings come to life, all lovingly hand-painted by me in exquisite detail.<br>Quality and individuality are my hallmarks. I create custom animal portraits and landscapes for you.',
         badge_handpainted: '100% Hand-painted',
         badge_studio: 'Studio in Bonn, Germany',
-        badge_shipping: 'Free Shipping in DE',
+        badge_shipping: 'Insured Shipping in DE',
         badge_detail: 'Loving Attention to Detail',
         news_title: 'Latest News',
         news_1_date: 'December 01, 2025',
@@ -945,7 +948,7 @@ const I18N_DICTIONARY = {
 
         // Leistungen.html (additions)
         faq_3_q_ship: 'How long does shipping take?',
-        faq_3_a_ship: 'Once finished and fully dry, I ship your painting well-cushioned via DHL or DPD, <strong>free of charge</strong> within Germany.',
+        faq_3_a_ship: 'Once finished and fully dry, I ship your painting carefully cushioned and insured via DHL or DPD. Exact shipping costs are individually coordinated in advance.',
         leist_cta_text: 'Do you have further questions or your own wishes?',
         leist_cta_btn1: 'Configure Commission',
         leist_cta_btn2: "I'd Love to Hear From You!",
@@ -979,7 +982,8 @@ const I18N_DICTIONARY = {
         impressum_map_title: 'Load Google Maps',
         impressum_map_text: 'To display the interactive map, please click "Load Map". By doing so, you consent to the transmission of your IP address to Google and the processing of cookies in accordance with Google\'s privacy policies. (Details in our <a href="Datenschutz.html" target="_blank" rel="noopener">Privacy Policy</a>)',
         impressum_map_btn: 'Load Map',
-        impressum_h_tmg: 'Information pursuant to § 5 TMG (German Telemedia Act)',
+        impressum_h_ddg: 'Information pursuant to § 5 DDG (Digital Services Act)',
+        impressum_h_tmg: 'Information pursuant to § 5 DDG (Digital Services Act)',
         impressum_h_contact: 'Contact',
         impressum_contact_block: 'Phone: +49 (0) 163 2662435<br>Email: <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a><br>Address: Rüdesheimer Straße 14, 53175 Bonn, Germany',
         impressum_h_vat: 'VAT',
@@ -993,29 +997,30 @@ const I18N_DICTIONARY = {
         impressum_h_dispute: 'Consumer Dispute Resolution',
         impressum_dispute_text: 'We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.',
 
-        // Datenschutz.html
-        dsgvo_notice_title: 'Important Note:',
-        dsgvo_notice_text: 'This is an overview of the technologies used on this website. Please create an individual, legally compliant text for productive use, e.g. via a privacy policy generator (such as e-recht24.de).',
         dsgvo_h1: '1. Privacy at a Glance',
         dsgvo_h1_1: 'General Information',
         dsgvo_h1_1_text: 'The following information provides a simple overview of what happens to your personal data when you visit this website. Personal data is any data that can be used to personally identify you.',
         dsgvo_h1_2: 'Data Collection on Our Website',
-        dsgvo_h1_2_text1: '<strong>Who is responsible for data collection on this website?</strong><br>Data processing on this website is carried out by the website operator, whose contact details can be found in the legal notice (Impressum) of this website.',
-        dsgvo_h1_2_text2: '<strong>How do we collect your data?</strong><br>Your data is collected in part when you provide it to us. This may, for example, be data you enter into a contact form. Other data is collected automatically, or after your consent, by our IT systems when you visit the website. This is primarily technical data (e.g. internet browser, operating system, or time of page access).',
+        dsgvo_h1_2_text1: '<strong>Who is responsible for data collection on this website?</strong><br>Data processing on this website is carried out by the website operator Manuela Schenk (ManuFAKTUR), whose full contact details can be found in the legal notice (Impressum) of this website.',
+        dsgvo_h1_2_text2: '<strong>How do we collect your data?</strong><br>Your data is collected in part when you provide it to us (e.g. data you enter into the contact form). Other data is collected automatically, or after your consent, by IT systems when you visit the website. This is primarily technical data (e.g. internet browser, operating system, or time of page access).',
         dsgvo_h2: '2. Hosting and Server Log Files',
-        dsgvo_h2_text: 'We host our website content with a provider in Germany. The host automatically collects information in so-called server log files, which your browser automatically transmits to us (IP address, browser type, referrer URL, time of server request). This data is collected to ensure secure operation.',
+        dsgvo_h2_text: 'We host our website content with a provider in Germany. The host automatically collects information in so-called server log files, which your browser automatically transmits to us (IP address, browser type, operating system, referrer URL, host name of accessing machine, time of server request). This data is collected to ensure secure and trouble-free operation (Legal basis: Art. 6 (1)(f) GDPR).',
         dsgvo_h3: '3. Local Integration of Fonts & Icons (GDPR-compliant)',
         dsgvo_h3_intro: 'To best protect the privacy of our visitors, we do not use third-party CDNs (Content Delivery Networks) for fonts or icons:',
-        dsgvo_h3_li1: '<strong>Google Fonts:</strong> All Google Fonts used (Lato, Playfair Display, Dancing Script) are stored locally on our web server and loaded from there. There is no connection to Google\'s servers.',
+        dsgvo_h3_li1: '<strong>Google Fonts:</strong> All fonts used (Lato, Playfair Display, Dancing Script) are stored locally on our web server and loaded from there. There is no connection to Google\'s servers.',
         dsgvo_h3_li2: '<strong>Font Awesome:</strong> The Font Awesome icons and stylesheets used are likewise hosted locally on our web server. No data is transferred to third-party servers.',
         dsgvo_h4: '4. Third-Party Services Requiring Consent',
         dsgvo_h4_1: 'Google Maps (Two-Click Solution)',
-        dsgvo_h4_1_text: 'Our website includes a Google Maps map. To prevent your IP address from being transmitted to Google as soon as the page loads, we use a so-called two-click solution. The map is disabled by default. Only when you actively click the "Load Map" button do you consent to a connection being established with Google\'s servers and to cookies being set. The legal basis for this processing is your consent pursuant to Art. 6 (1)(a) GDPR.',
-        dsgvo_h5: '5. Data Collection via the Contact Form',
-        dsgvo_h5_text1: 'If you send us inquiries via the contact form, the information you provide there, including any contact details you enter, will be stored by us for the purpose of processing your inquiry and in case of follow-up questions. We will not share this data without your consent.',
-        dsgvo_h5_text2: 'The processing of this data is based on Art. 6 (1)(b) GDPR, provided your inquiry relates to the fulfillment of a contract or is necessary for carrying out pre-contractual measures. In all other cases, processing is based on our legitimate interest in the effective handling of inquiries addressed to us (Art. 6 (1)(f) GDPR), or on your consent (Art. 6 (1)(a) GDPR) where this was requested.',
-        dsgvo_h6: '6. Your Rights Regarding Your Data',
-        dsgvo_h6_text: 'You have the right at any time to receive free information about the origin, recipients, and purpose of your stored personal data. You also have the right to request the correction or deletion of this data. If you have given consent to data processing, you can revoke this consent at any time for the future. Simply contact us at the address given in the legal notice.',
+        dsgvo_h4_1_text: 'Our website includes a Google Maps map. To prevent your IP address from being transmitted to Google as soon as the page loads, we use a privacy-friendly two-click solution. The map is disabled by default. Only when you actively click the "Load Map" button do you consent to a connection being established with Google\'s servers (Google Ireland Limited). The legal basis for this processing is your consent pursuant to Art. 6 (1)(a) GDPR. You can revoke this consent at any time for the future.',
+        dsgvo_h5: '5. Data Collection via the Contact Form & Formspree',
+        dsgvo_h5_text1: 'If you send us inquiries via the contact form, the information you provide there, including any contact details you enter, will be processed by us for the purpose of handling your inquiry and in case of follow-up questions.',
+        dsgvo_h5_formspree: 'For the technical transmission of form inquiries, we use the service <strong>Formspree</strong> (Formspree Inc., 420 5th Ave, New York, NY 10018, USA). When you submit the form, your entered data is transmitted in encrypted form to Formspree\'s servers and forwarded to us by email. Data transfer to the USA is conducted on the basis of the European Commission\'s Standard Contractual Clauses (Art. 46 (2)(c) GDPR). The legal basis is the initiation or performance of a contract (Art. 6 (1)(b) GDPR) and our legitimate interest in the reliable handling of customer inquiries (Art. 6 (1)(f) GDPR).',
+        dsgvo_h6: '6. Local Storage in Browser (LocalStorage pursuant to § 25 (2) No. 2 TDDG)',
+        dsgvo_h6_text: 'This website uses your browser\'s local storage function (LocalStorage). We solely store your chosen language preference (manufaktur_lang), selected color theme (manufaktur_theme), and your personal favorites wishlist of artworks (manufaktur_favorites). No tracking cookies are set and no personal user profiles are created. Storage is technically necessary to provide your explicitly requested display settings across sessions (§ 25 (2) No. 2 TDDG).',
+        dsgvo_h7: '7. SSL / TLS Encryption',
+        dsgvo_h7_text: 'For security reasons and to protect the transmission of confidential content, such as inquiries via the contact form, this site uses SSL or TLS encryption. You can recognize an encrypted connection by the change in the browser address line from "http://" to "https://" and by the lock symbol in your browser bar.',
+        dsgvo_h8: '8. Your Rights Regarding Your Data',
+        dsgvo_h8_text: 'Under applicable statutory provisions, you have the following rights at any time:<br>• <strong>Right of access (Art. 15 GDPR):</strong> You can request information about your personal data processed by us.<br>• <strong>Right to rectification (Art. 16 GDPR):</strong> You can request the correction of inaccurate data.<br>• <strong>Right to erasure (Art. 17 GDPR):</strong> You can request the deletion of your personal data stored with us.<br>• <strong>Right to restriction of processing (Art. 18 GDPR):</strong> You can request the restriction of data processing.<br>• <strong>Right to data portability (Art. 20 GDPR):</strong> You can request to receive your data in a structured, commonly used format.<br>• <strong>Right to object (Art. 21 GDPR):</strong> You have the right to object at any time to the processing of your personal data.<br>• <strong>Revocation of your consent (Art. 7 (3) GDPR):</strong> You can revoke given consent at any time for the future via email.<br>• <strong>Right to lodge a complaint with a supervisory authority (Art. 77 GDPR):</strong> The competent supervisory authority is the State Commissioner for Data Protection and Freedom of Information of North Rhine-Westphalia (LDI NRW), Kavalleriestraße 2–4, 40213 Düsseldorf, Germany.',
 
         // Auftrag.html Configurator (data-i18n)
         auftrag_restore_text: 'You have a saved configuration. <button onclick="restoreSavedConfig()" id="restore-btn">Restore</button> or <button onclick="clearSavedConfig()" id="clear-btn">Start Over</button>.',
@@ -3268,11 +3273,15 @@ function initContactForm() {
 
     form.addEventListener('submit', async function (e) {
         const action = form.getAttribute('action');
+        const isEn = currentLang === 'en';
 
-        // Nur abfangen wenn echte Formspree-ID vorhanden
+        // Nur abfangen wenn echte Formspree-ID noch nicht konfiguriert
         if (!action || action.includes('DEINE_FORMSPREE_ID')) {
             e.preventDefault();
-            showFormFeedback('error', '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Das Formular ist noch nicht konfiguriert. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
+            const msg = isEn
+                ? '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The contact form is not yet configured with an endpoint ID. Please email directly to <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>'
+                : '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Das Formular ist noch nicht vollständig konfiguriert. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>';
+            showFormFeedback('error', msg);
             return;
         }
 
@@ -3280,7 +3289,7 @@ function initContactForm() {
         const submitBtn = form.querySelector('.submit-btn');
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Sende...';
+            submitBtn.innerHTML = `<i class="fa fa-spinner fa-spin" aria-hidden="true"></i> ${isEn ? 'Sending...' : 'Sende...'}`;
         }
 
         try {
@@ -3293,16 +3302,25 @@ function initContactForm() {
 
             if (response.ok) {
                 form.reset();
-                showFormFeedback('success', '<i class="fa fa-check-circle" aria-hidden="true"></i> Vielen Dank! Deine Nachricht wurde gesendet. Ich melde mich bald bei dir.');
+                const successMsg = isEn
+                    ? '<i class="fa fa-check-circle" aria-hidden="true"></i> Thank you! Your inquiry has been sent successfully. I will get back to you shortly.'
+                    : '<i class="fa fa-check-circle" aria-hidden="true"></i> Vielen Dank! Deine Nachricht wurde gesendet. Ich melde mich bald bei dir.';
+                showFormFeedback('success', successMsg);
             } else {
-                showFormFeedback('error', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
+                const errorMsg = isEn
+                    ? '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> An error occurred while sending. Please try again or contact me directly at <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>'
+                    : '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>';
+                showFormFeedback('error', errorMsg);
             }
         } catch {
-            showFormFeedback('error', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Verbindungsfehler. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>');
+            const connMsg = isEn
+                ? '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Connection error. Please contact me directly at <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>'
+                : '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Verbindungsfehler. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>';
+            showFormFeedback('error', connMsg);
         } finally {
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fa fa-paper-plane" aria-hidden="true"></i> Nachricht senden';
+                submitBtn.innerHTML = `<i class="fa fa-paper-plane" aria-hidden="true"></i> ${isEn ? 'Send Message' : 'Nachricht senden'}`;
             }
         }
     });
