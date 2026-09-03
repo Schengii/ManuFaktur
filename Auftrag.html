@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Auftrags-Konfigurator von ManuFAKTUR – Wähle Motiv, Format und Technik und erhalte eine unverbindliche Preisschätzung für dein individuelles Kunstwerk.">
+  <meta name="description"
+    content="Auftrags-Konfigurator von ManuFAKTUR – Wähle Motiv, Format und Technik und erhalte eine unverbindliche Preisschätzung für dein individuelles Kunstwerk.">
   <title>Auftrag konfigurieren | ManuFAKTUR Schenk</title>
 
   <!-- Open Graph / Social Media -->
   <meta property="og:title" content="Auftrag konfigurieren – ManuFAKTUR Schenk">
-  <meta property="og:description" content="Konfiguriere in 4 Schritten dein individuelles handgemaltes Kunstwerk und erhalte eine unverbindliche Preisschätzung.">
+  <meta property="og:description"
+    content="Konfiguriere in 4 Schritten dein individuelles handgemaltes Kunstwerk und erhalte eine unverbindliche Preisschätzung.">
   <meta property="og:image" content="assets/images/artworks/bild18-eulen.jpg">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="de_DE">
@@ -32,14 +35,14 @@
   <!-- CSS: alle Konfigurator-Styles jetzt in style.css (Abschnitt 10) -->
   <link rel="stylesheet" type="text/css" href="style.min.css?v=6">
   <script>
-    (function(){
-      try{
-        var t=localStorage.getItem('manufaktur_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-        document.documentElement.setAttribute('data-theme',t);
-        if(t==='dark')document.documentElement.classList.add('dark-mode');
-        var l=localStorage.getItem('manufaktur_lang')||'de';
-        document.documentElement.setAttribute('lang',l);
-      }catch(e){}
+    (function () {
+      try {
+        var t = localStorage.getItem('manufaktur_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark') document.documentElement.classList.add('dark-mode');
+        var l = localStorage.getItem('manufaktur_lang') || 'de';
+        document.documentElement.setAttribute('lang', l);
+      } catch (e) { }
     })();
   </script>
 
@@ -65,6 +68,7 @@
   }
   </script>
 </head>
+
 <body>
 
   <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
@@ -74,14 +78,17 @@
 
   <main id="main-content">
     <h1 class="page-title">Auftrag konfigurieren</h1>
-    <p class="intro-text">In nur 4 Schritten zu deinem individuellen Kunstwerk – erhalte eine unverbindliche Preisschätzung und sende deine Anfrage direkt ab.</p>
+    <p class="intro-text">In nur 4 Schritten zu deinem individuellen Kunstwerk – erhalte eine unverbindliche
+      Preisschätzung und sende deine Anfrage direkt ab.</p>
 
     <div class="configurator-wrapper">
 
       <!-- Restore-Banner: wird via JS eingeblendet, wenn gespeicherter State vorhanden -->
       <div id="restore-banner" class="config-restore-banner hidden">
         <i class="fa fa-history" aria-hidden="true"></i>
-        <span data-i18n-html="auftrag_restore_text">Du hast eine gespeicherte Konfiguration. <button onclick="restoreSavedConfig()" id="restore-btn">Wiederherstellen</button> oder <button onclick="clearSavedConfig()" id="clear-btn">Neu starten</button>.</span>
+        <span data-i18n-html="auftrag_restore_text">Du hast eine gespeicherte Konfiguration. <button
+            onclick="restoreSavedConfig()" id="restore-btn">Wiederherstellen</button> oder <button
+            onclick="clearSavedConfig()" id="clear-btn">Neu starten</button>.</span>
       </div>
 
       <!-- Progress Bar -->
@@ -111,31 +118,39 @@
 
         <!-- Gemerkte Favoriten aus Galerie -->
         <div id="config-saved-favorites" class="saved-favorites-container hidden">
-          <h3><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> <span data-i18n="auftrag_fav_title">Aus deinen gemerkten Favoriten wählen</span></h3>
-          <p><small data-i18n="auftrag_fav_hint">Klicke auf eines deiner gemerkten Lieblingswerke, um es als Motiv-Inspiration zu übernehmen:</small></p>
+          <h3><i class="fa-solid fa-heart color-heart" aria-hidden="true"></i> <span data-i18n="auftrag_fav_title">Aus
+              deinen gemerkten Favoriten wählen</span></h3>
+          <p><small data-i18n="auftrag_fav_hint">Klicke auf eines deiner gemerkten Lieblingswerke, um es als
+              Motiv-Inspiration zu übernehmen:</small></p>
           <div class="fav-cards-grid"></div>
         </div>
 
         <div class="option-grid">
-          <div class="option-card" data-value="Tierportrait" data-multiplier="1.0" onclick="selectOption(this, 'motiv')" tabindex="0" role="button" aria-pressed="false">
+          <div class="option-card" data-value="Tierportrait" data-multiplier="1.0" onclick="selectOption(this, 'motiv')"
+            tabindex="0" role="button" aria-pressed="false">
             <i class="fa fa-dog option-icon" aria-hidden="true"></i>
             <h3 data-i18n="auftrag_motiv1_title">Tierportrait</h3>
-            <p data-i18n="auftrag_motiv1_desc">Hund, Katze, Pferd oder jedes andere Tier – als unvergängliches Gemälde.</p>
-            <span class="option-price-hint" data-i18n="auftrag_motiv1_price">ab 120 €</span>
+            <p data-i18n="auftrag_motiv1_desc">Hund, Katze, Pferd oder jedes andere Tier – als unvergängliches Gemälde.
+            </p>
+            <span class="option-price-hint" data-i18n="auftrag_motiv4_price">Auf Anfrage</span>
           </div>
-          <div class="option-card" data-value="Landschaft" data-multiplier="0.9" onclick="selectOption(this, 'motiv')" tabindex="0" role="button" aria-pressed="false">
+          <div class="option-card" data-value="Landschaft" data-multiplier="0.9" onclick="selectOption(this, 'motiv')"
+            tabindex="0" role="button" aria-pressed="false">
             <i class="fa fa-mountain option-icon" aria-hidden="true"></i>
             <h3 data-i18n="auftrag_motiv2_title">Landschaft</h3>
-            <p data-i18n="auftrag_motiv2_desc">Ein besonderer Ort, eine Urlaubserinnerung oder eine traumhafte Szene.</p>
-            <span class="option-price-hint" data-i18n="auftrag_motiv2_price">ab 100 €</span>
+            <p data-i18n="auftrag_motiv2_desc">Ein besonderer Ort, eine Urlaubserinnerung oder eine traumhafte Szene.
+            </p>
+            <span class="option-price-hint" data-i18n="auftrag_motiv4_price">Auf Anfrage</span>
           </div>
-          <div class="option-card" data-value="Stillleben" data-multiplier="0.85" onclick="selectOption(this, 'motiv')" tabindex="0" role="button" aria-pressed="false">
+          <div class="option-card" data-value="Stillleben" data-multiplier="0.85" onclick="selectOption(this, 'motiv')"
+            tabindex="0" role="button" aria-pressed="false">
             <i class="fa fa-seedling option-icon" aria-hidden="true"></i>
             <h3 data-i18n="auftrag_motiv3_title">Stillleben / Pflanzen</h3>
             <p data-i18n="auftrag_motiv3_desc">Blumen, Früchte oder andere Objekte als dekoratives Gemälde.</p>
-            <span class="option-price-hint" data-i18n="auftrag_motiv3_price">ab 90 €</span>
+            <span class="option-price-hint" data-i18n="auftrag_motiv4_price">Auf Anfrage</span>
           </div>
-          <div class="option-card" data-value="Sonstiges" data-multiplier="1.1" onclick="selectOption(this, 'motiv')" tabindex="0" role="button" aria-pressed="false">
+          <div class="option-card" data-value="Sonstiges" data-multiplier="1.1" onclick="selectOption(this, 'motiv')"
+            tabindex="0" role="button" aria-pressed="false">
             <i class="fa fa-star option-icon" aria-hidden="true"></i>
             <h3 data-i18n="auftrag_motiv4_title">Sonstiges / Eigene Idee</h3>
             <p data-i18n="auftrag_motiv4_desc">Du hast eine ganz eigene Idee? Ich male nach deinem Wunschmotiv.</p>
@@ -143,10 +158,12 @@
           </div>
         </div>
 
-        <p class="selection-hint" id="hint-1"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span data-i18n="auftrag_hint1">Bitte wähle ein Motiv, um fortzufahren.</span></p>
+        <p class="selection-hint" id="hint-1"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span
+            data-i18n="auftrag_hint1">Bitte wähle ein Motiv, um fortzufahren.</span></p>
         <div class="config-nav">
           <button class="btn-next" id="next-1" onclick="nextStep(1)" disabled>
-            <span data-i18n="auftrag_next_format">Weiter: Format</span> <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            <span data-i18n="auftrag_next_format">Weiter: Format</span> <i class="fa fa-arrow-right"
+              aria-hidden="true"></i>
           </button>
         </div>
       </section>
@@ -157,43 +174,52 @@
         <span class="config-subtitle">Auf welcher Leinwandgröße soll dein Werk entstehen?</span>
 
         <div class="format-grid">
-          <div class="format-card" data-value="20×30 cm" data-base-price="90" onclick="selectFormat(this)" tabindex="0" role="button" aria-pressed="false">
+          <div class="format-card" data-value="20×30 cm" data-base-price="90" onclick="selectFormat(this)" tabindex="0"
+            role="button" aria-pressed="false">
             <div class="format-visual format-visual--20x30"></div>
             <strong>20 × 30 cm</strong>
             <small data-i18n="auftrag_format1_small">Klein · ideal als Geschenk</small>
           </div>
-          <div class="format-card" data-value="30×40 cm" data-base-price="130" onclick="selectFormat(this)" tabindex="0" role="button" aria-pressed="false">
+          <div class="format-card" data-value="30×40 cm" data-base-price="130" onclick="selectFormat(this)" tabindex="0"
+            role="button" aria-pressed="false">
             <div class="format-visual format-visual--30x40"></div>
             <strong>30 × 40 cm</strong>
             <small data-i18n="auftrag_format2_small">Beliebt · viele Details</small>
           </div>
-          <div class="format-card" data-value="40×50 cm" data-base-price="175" onclick="selectFormat(this)" tabindex="0" role="button" aria-pressed="false">
+          <div class="format-card" data-value="40×50 cm" data-base-price="175" onclick="selectFormat(this)" tabindex="0"
+            role="button" aria-pressed="false">
             <div class="format-visual format-visual--40x50"></div>
             <strong>40 × 50 cm</strong>
             <small data-i18n="auftrag_format3_small">Mittel · sehr ausdrucksstark</small>
           </div>
-          <div class="format-card" data-value="50×70 cm" data-base-price="230" onclick="selectFormat(this)" tabindex="0" role="button" aria-pressed="false">
+          <div class="format-card" data-value="50×70 cm" data-base-price="230" onclick="selectFormat(this)" tabindex="0"
+            role="button" aria-pressed="false">
             <div class="format-visual format-visual--50x70"></div>
             <strong>50 × 70 cm</strong>
             <small data-i18n="auftrag_format4_small">Groß · imposanter Blickfang</small>
           </div>
-          <div class="format-card" data-value="60×80 cm" data-base-price="290" onclick="selectFormat(this)" tabindex="0" role="button" aria-pressed="false">
+          <div class="format-card" data-value="60×80 cm" data-base-price="290" onclick="selectFormat(this)" tabindex="0"
+            role="button" aria-pressed="false">
             <div class="format-visual format-visual--60x80"></div>
             <strong>60 × 80 cm</strong>
             <small data-i18n="auftrag_format5_small">XL · für große Wände</small>
           </div>
-          <div class="format-card" data-value="Individuell" data-base-price="0" onclick="selectFormat(this)" tabindex="0" role="button" aria-pressed="false">
+          <div class="format-card" data-value="Individuell" data-base-price="0" onclick="selectFormat(this)"
+            tabindex="0" role="button" aria-pressed="false">
             <div class="format-visual format-visual--custom"></div>
             <strong data-i18n="auftrag_format6_title">Individuell</strong>
             <small data-i18n="auftrag_format6_small">Wunschformat · auf Anfrage</small>
           </div>
         </div>
 
-        <p class="selection-hint" id="hint-2"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span data-i18n="auftrag_hint2">Bitte wähle ein Format, um fortzufahren.</span></p>
+        <p class="selection-hint" id="hint-2"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span
+            data-i18n="auftrag_hint2">Bitte wähle ein Format, um fortzufahren.</span></p>
         <div class="config-nav">
-          <button class="btn-back" onclick="prevStep(2)"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span data-i18n="auftrag_back">Zurück</span></button>
+          <button class="btn-back" onclick="prevStep(2)"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span
+              data-i18n="auftrag_back">Zurück</span></button>
           <button class="btn-next" id="next-2" onclick="nextStep(2)" disabled>
-            <span data-i18n="auftrag_next_technik">Weiter: Technik</span> <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            <span data-i18n="auftrag_next_technik">Weiter: Technik</span> <i class="fa fa-arrow-right"
+              aria-hidden="true"></i>
           </button>
         </div>
       </section>
@@ -204,25 +230,34 @@
         <span class="config-subtitle">Beide Techniken ergeben wunderschöne, langlebige Unikate.</span>
 
         <div class="technique-row">
-          <div class="technique-card" data-value="Acryl" data-multiplier="1.0" onclick="selectTechnique(this)" tabindex="0" role="button" aria-pressed="false">
+          <div class="technique-card" data-value="Acryl" data-multiplier="1.0" onclick="selectTechnique(this)"
+            tabindex="0" role="button" aria-pressed="false">
             <i class="fa fa-droplet" aria-hidden="true"></i>
             <h3 data-i18n="auftrag_tech1_title">Acrylfarben</h3>
-            <p data-i18n="auftrag_tech1_desc">Schnelle Trocknungszeit, kräftige Farben und lebhafte Kontraste. Perfekt für detailreiche Portraits.</p>
-            <span class="option-price-hint technique-delivery-hint" data-i18n="auftrag_tech1_delivery">Lieferung in ca. 2–3 Wochen</span>
+            <p data-i18n="auftrag_tech1_desc">Schnelle Trocknungszeit, kräftige Farben und lebhafte Kontraste. Perfekt
+              für detailreiche Portraits.</p>
+            <span class="option-price-hint technique-delivery-hint" data-i18n="auftrag_tech1_delivery">Lieferung in ca.
+              2–3 Wochen</span>
           </div>
-          <div class="technique-card" data-value="Öl" data-multiplier="1.2" onclick="selectTechnique(this)" tabindex="0" role="button" aria-pressed="false">
+          <div class="technique-card" data-value="Öl" data-multiplier="1.2" onclick="selectTechnique(this)" tabindex="0"
+            role="button" aria-pressed="false">
             <i class="fa fa-palette" aria-hidden="true"></i>
             <h3 data-i18n="auftrag_tech2_title">Ölfarben</h3>
-            <p data-i18n="auftrag_tech2_desc">Tiefe, samtige Farbübergänge und klassische Eleganz. Mehr Trocknungszeit, intensives Finish.</p>
-            <span class="option-price-hint technique-delivery-hint" data-i18n="auftrag_tech2_delivery">Lieferung in ca. 4–6 Wochen</span>
+            <p data-i18n="auftrag_tech2_desc">Tiefe, samtige Farbübergänge und klassische Eleganz. Mehr Trocknungszeit,
+              intensives Finish.</p>
+            <span class="option-price-hint technique-delivery-hint" data-i18n="auftrag_tech2_delivery">Lieferung in ca.
+              4–6 Wochen</span>
           </div>
         </div>
 
-        <p class="selection-hint" id="hint-3"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span data-i18n="auftrag_hint3">Bitte wähle eine Technik, um fortzufahren.</span></p>
+        <p class="selection-hint" id="hint-3"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span
+            data-i18n="auftrag_hint3">Bitte wähle eine Technik, um fortzufahren.</span></p>
         <div class="config-nav">
-          <button class="btn-back" onclick="prevStep(3)"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span data-i18n="auftrag_back">Zurück</span></button>
+          <button class="btn-back" onclick="prevStep(3)"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span
+              data-i18n="auftrag_back">Zurück</span></button>
           <button class="btn-next" id="next-3" onclick="nextStep(3)" disabled>
-            <span data-i18n="auftrag_next_summary">Zur Zusammenfassung</span> <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            <span data-i18n="auftrag_next_summary">Zur Zusammenfassung</span> <i class="fa fa-arrow-right"
+              aria-hidden="true"></i>
           </button>
         </div>
       </section>
@@ -230,56 +265,68 @@
       <!-- ====== SCHRITT 4: ZUSAMMENFASSUNG ====== -->
       <section class="config-panel" id="panel-4" aria-labelledby="step4-title">
         <h2 id="step4-title"><i class="fa fa-check-circle" aria-hidden="true"></i> Deine Konfiguration</h2>
-        <span class="config-subtitle">Hier ist deine unverbindliche Übersicht – schicke sie direkt als Anfrage ab.</span>
+        <span class="config-subtitle">Hier ist deine unverbindliche Übersicht – schicke sie direkt als Anfrage
+          ab.</span>
 
         <div class="summary-card">
           <h3 data-i18n="auftrag_summary_h3">Dein Traumgemälde ✨</h3>
 
           <div class="summary-row">
-            <span class="label"><i class="fa fa-paw" aria-hidden="true"></i> <span data-i18n="auftrag_summary_motiv">Motiv</span></span>
+            <span class="label"><i class="fa fa-paw" aria-hidden="true"></i> <span
+                data-i18n="auftrag_summary_motiv">Motiv</span></span>
             <span class="value" id="summary-motiv">–</span>
           </div>
           <div class="summary-row">
-            <span class="label"><i class="fa fa-ruler-combined" aria-hidden="true"></i> <span data-i18n="auftrag_summary_format">Format</span></span>
+            <span class="label"><i class="fa fa-ruler-combined" aria-hidden="true"></i> <span
+                data-i18n="auftrag_summary_format">Format</span></span>
             <span class="value" id="summary-format">–</span>
           </div>
           <div class="summary-row">
-            <span class="label"><i class="fa fa-paintbrush" aria-hidden="true"></i> <span data-i18n="auftrag_summary_technik">Technik</span></span>
+            <span class="label"><i class="fa fa-paintbrush" aria-hidden="true"></i> <span
+                data-i18n="auftrag_summary_technik">Technik</span></span>
             <span class="value" id="summary-technik">–</span>
           </div>
           <div class="summary-row">
-            <span class="label"><i class="fa fa-clock" aria-hidden="true"></i> <span data-i18n="auftrag_summary_lieferzeit">Lieferzeit</span></span>
+            <span class="label"><i class="fa fa-clock" aria-hidden="true"></i> <span
+                data-i18n="auftrag_summary_lieferzeit">Lieferzeit</span></span>
             <span class="value" id="summary-lieferzeit">–</span>
           </div>
 
           <div class="price-estimate-box">
             <div>
-              <div class="price-label" data-i18n="auftrag_price_label">Unverbindliche Preisschätzung</div>
-              <div class="price-value" id="summary-preis">–</div>
-              <div class="price-note" data-i18n="auftrag_price_note">* Endpreis nach individueller Absprache. Versand innerhalb DE kostenlos.</div>
+              <div class="price-note" data-i18n="auftrag_price_note">* Endpreis nach individueller Absprache. Versand
+                innerhalb DE kostenpflichtig.</div>
             </div>
             <i class="fa fa-tag price-box-icon" aria-hidden="true"></i>
           </div>
 
           <!-- Photo Upload Preview Field -->
           <div class="photo-upload-wrapper">
-            <h4><i class="fa fa-cloud-arrow-up" aria-hidden="true"></i> <span data-i18n="auftrag_photo_h4">Eigenes Fotovorlage-Bild auswählen (Optional)</span></h4>
-            <p><small data-i18n="auftrag_photo_hint">Du kannst hier dein Haustier- oder Landschaftsfoto auswählen, um die Vorlage direkt zu prüfen:</small></p>
-            <input type="file" id="client-photo-input" accept="image/*" class="margin-top-10" data-i18n-aria-label="auftrag_photo_input_label" aria-label="Fotovorlage auswählen" data-i18n-title="auftrag_photo_input_label" title="Fotovorlage auswählen">
+            <h4><i class="fa fa-cloud-arrow-up" aria-hidden="true"></i> <span data-i18n="auftrag_photo_h4">Eigenes
+                Fotovorlage-Bild auswählen (Optional)</span></h4>
+            <p><small data-i18n="auftrag_photo_hint">Du kannst hier dein Haustier- oder Landschaftsfoto auswählen, um
+                die Vorlage direkt zu prüfen:</small></p>
+            <input type="file" id="client-photo-input" accept="image/*" class="margin-top-10"
+              data-i18n-aria-label="auftrag_photo_input_label" aria-label="Fotovorlage auswählen"
+              data-i18n-title="auftrag_photo_input_label" title="Fotovorlage auswählen">
             <div id="photo-preview-box" class="photo-preview-box">
-              <img id="photo-preview-img" class="photo-preview-img" data-i18n-alt="auftrag_photo_preview_alt" alt="Fotovorlage Vorschau">
+              <img id="photo-preview-img" class="photo-preview-img" data-i18n-alt="auftrag_photo_preview_alt"
+                alt="Fotovorlage Vorschau">
               <div>
                 <strong id="photo-file-name" data-i18n="auftrag_photo_loaded">Fotovorlage geladen</strong>
-                <div class="color-primary font-size-085rem"><i class="fa fa-check-circle" aria-hidden="true"></i> <span data-i18n="auftrag_photo_ready">Bereit für die Anfrage</span></div>
+                <div class="color-primary font-size-085rem"><i class="fa fa-check-circle" aria-hidden="true"></i> <span
+                    data-i18n="auftrag_photo_ready">Bereit für die Anfrage</span></div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="config-nav">
-          <button class="btn-back" onclick="prevStep(4)"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span data-i18n="auftrag_back">Zurück</span></button>
+          <button class="btn-back" onclick="prevStep(4)"><i class="fa fa-arrow-left" aria-hidden="true"></i> <span
+              data-i18n="auftrag_back">Zurück</span></button>
           <a href="#" id="anfrage-link" class="btn-submit">
-            <i class="fa fa-paper-plane" aria-hidden="true"></i> <span data-i18n="auftrag_submit">Jetzt unverbindlich anfragen</span>
+            <i class="fa fa-paper-plane" aria-hidden="true"></i> <span data-i18n="auftrag_submit">Jetzt unverbindlich
+              anfragen</span>
           </a>
         </div>
       </section>
@@ -422,8 +469,8 @@
 
     function nextStep(current) {
       const hintEl = document.getElementById('hint-' + current);
-      if (current === 1 && !state.motiv)   { hintEl.classList.add('visible'); return; }
-      if (current === 2 && !state.format)  { hintEl.classList.add('visible'); return; }
+      if (current === 1 && !state.motiv) { hintEl.classList.add('visible'); return; }
+      if (current === 2 && !state.format) { hintEl.classList.add('visible'); return; }
       if (current === 3 && !state.technik) { hintEl.classList.add('visible'); return; }
 
       if (current === 3) buildSummary();
@@ -478,8 +525,8 @@
     }
 
     function buildSummary() {
-      document.getElementById('summary-motiv').textContent   = localizedLabel(VALUE_LABELS.motiv, state.motiv);
-      document.getElementById('summary-format').textContent  = localizedLabel(VALUE_LABELS.format, state.format);
+      document.getElementById('summary-motiv').textContent = localizedLabel(VALUE_LABELS.motiv, state.motiv);
+      document.getElementById('summary-format').textContent = localizedLabel(VALUE_LABELS.format, state.format);
       document.getElementById('summary-technik').textContent = localizedLabel(VALUE_LABELS.technik, state.technik);
       document.getElementById('summary-lieferzeit').textContent = localizedLabel(VALUE_LABELS.lieferzeit, state.lieferzeit);
 
@@ -488,18 +535,18 @@
       if (state.basePrice === 0) {
         priceText = lang === 'en' ? 'Upon Request' : 'Auf Anfrage';
       } else {
-        const low  = Math.round(state.basePrice * state.motivMultiplier * state.technikMultiplier);
+        const low = Math.round(state.basePrice * state.motivMultiplier * state.technikMultiplier);
         const high = Math.round(low * 1.25);
-        priceText  = `ca. ${low} – ${high} €*`;
+        priceText = `ca. ${low} – ${high} €*`;
       }
       document.getElementById('summary-preis').textContent = priceText;
 
       // Prefilled Kontakt-Link mit allen Parametern (inkl. Preis für Formular-Vorausfüllung)
       const params = new URLSearchParams({
-        motiv:   state.motiv,
-        format:  state.format,
+        motiv: state.motiv,
+        format: state.format,
         technik: state.technik,
-        preis:   priceText.replace('*', '').trim()
+        preis: priceText.replace('*', '').trim()
       });
       document.getElementById('anfrage-link').href = `Kontakt.html?${params.toString()}`;
 
@@ -513,11 +560,12 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') {
         const t = e.target;
-        if (t.classList.contains('option-card'))    { e.preventDefault(); t.click(); }
-        if (t.classList.contains('format-card'))    { e.preventDefault(); t.click(); }
+        if (t.classList.contains('option-card')) { e.preventDefault(); t.click(); }
+        if (t.classList.contains('format-card')) { e.preventDefault(); t.click(); }
         if (t.classList.contains('technique-card')) { e.preventDefault(); t.click(); }
       }
     });
   </script>
 </body>
+
 </html>

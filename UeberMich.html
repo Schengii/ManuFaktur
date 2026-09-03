@@ -34,14 +34,14 @@
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
   <link rel="stylesheet" type="text/css" href="style.min.css?v=6">
   <script>
-    (function(){
-      try{
-        var t=localStorage.getItem('manufaktur_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-        document.documentElement.setAttribute('data-theme',t);
-        if(t==='dark')document.documentElement.classList.add('dark-mode');
-        var l=localStorage.getItem('manufaktur_lang')||'de';
-        document.documentElement.setAttribute('lang',l);
-      }catch(e){}
+    (function () {
+      try {
+        var t = localStorage.getItem('manufaktur_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark') document.documentElement.classList.add('dark-mode');
+        var l = localStorage.getItem('manufaktur_lang') || 'de';
+        document.documentElement.setAttribute('lang', l);
+      } catch (e) { }
     })();
   </script>
 
@@ -119,13 +119,16 @@
           mit Pinsel und lebendigen Farben auf Leinwand oder handgeschöpftem Papier festzuhalten.
         </p>
         <p>
-          Meine Werke erzählen Geschichten: sei es der treue Blick eines Hundes, die Weite der französischen Atlantikküste oder historische Impressionen meiner Heimat Bonn und des Siebengebirges.
+          Meine Werke erzählen Geschichten: sei es der treue Blick eines Hundes, die Weite der französischen
+          Atlantikküste oder historische Impressionen meiner Heimat Bonn und des Siebengebirges.
         </p>
         <p>
-          Ich male das, was mich berührt und fasziniert – in traditioneller <strong>Ölmalerei</strong>, leuchtenden <strong>Acrylfarben</strong> sowie feinen <strong>Ölkreide- und Multimediatechniken</strong>.
+          Ich male das, was mich berührt und fasziniert – in traditioneller <strong>Ölmalerei</strong>, leuchtenden
+          <strong>Acrylfarben</strong> sowie feinen <strong>Ölkreide- und Multimediatechniken</strong>.
         </p>
         <p>
-          Jedes Bild ist ein handgemaltes Unikat, welches mit viel Liebe zum Detail und fundiertem künstlerischen Handwerk entsteht.
+          Jedes Bild ist ein handgemaltes Unikat, welches mit viel Liebe zum Detail und fundiertem künstlerischen
+          Handwerk entsteht.
         </p>
         <p>
           Gerne male ich auch Dein persönliches Wunschmotiv! Schau Dir meine <a href="Leistungen.html"
@@ -142,41 +145,52 @@
 
     <!-- Interactive Process Workflow -->
     <section class="process-slider-container reveal">
-      <h2 class="centered-heading"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> <span data-i18n="process_h2">Der Entstehungsprozess eines Kunstwerks</span></h2>
-      <p class="centered-text" data-i18n="process_intro">Jedes Gemälde entsteht in präziser Handarbeit in mehreren abgestimmten Phasen:</p>
+      <h2 class="centered-heading"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> <span
+          data-i18n="process_h2">Der Entstehungsprozess eines Kunstwerks</span></h2>
+      <p class="centered-text" data-i18n="process_intro">Jedes Gemälde entsteht in präziser Handarbeit in mehreren
+        abgestimmten Phasen:</p>
 
       <div class="process-grid">
         <div class="process-card">
           <div class="process-step-num">1</div>
-          <h3><i class="fa-solid fa-pencil" aria-hidden="true"></i> <span data-i18n="process1_title">Skizze &amp; Proportionen</span></h3>
+          <h3><i class="fa-solid fa-pencil" aria-hidden="true"></i> <span data-i18n="process1_title">Skizze &amp;
+              Proportionen</span></h3>
           <p data-i18n="process1_text">Exakte Übertragung deines Fotomotivs auf die Leinwand als feine Vorzeichnung.</p>
         </div>
         <div class="process-card">
           <div class="process-step-num">2</div>
-          <h3><i class="fa-solid fa-palette" aria-hidden="true"></i> <span data-i18n="process2_title">Farbauftrag &amp; Schichtung</span></h3>
-          <p data-i18n="process2_text">Auftrag der ersten Farbschichten für Tiefe, Schatten und charakteristische Lichtakzente.</p>
+          <h3><i class="fa-solid fa-palette" aria-hidden="true"></i> <span data-i18n="process2_title">Farbauftrag &amp;
+              Schichtung</span></h3>
+          <p data-i18n="process2_text">Auftrag der ersten Farbschichten für Tiefe, Schatten und charakteristische
+            Lichtakzente.</p>
         </div>
         <div class="process-card">
           <div class="process-step-num">3</div>
-          <h3><i class="fa-solid fa-paintbrush" aria-hidden="true"></i> <span data-i18n="process3_title">Details &amp; Veredelung</span></h3>
-          <p data-i18n="process3_text">Feinste Ausarbeitung von Augen, Fellstruktur oder Lichtreflexen sowie Schlussversiegelung.</p>
+          <h3><i class="fa-solid fa-paintbrush" aria-hidden="true"></i> <span data-i18n="process3_title">Details &amp;
+              Veredelung</span></h3>
+          <p data-i18n="process3_text">Feinste Ausarbeitung von Augen, Fellstruktur oder Lichtreflexen sowie
+            Schlussversiegelung.</p>
         </div>
       </div>
     </section>
 
     <!-- Künstlerischer Werdegang & Ausbildung -->
     <section class="education-section reveal section--margin-top">
-      <h2 class="centered-heading"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> <span data-i18n="edu_h2">Künstlerische Ausbildung &amp; Dozierende</span></h2>
-      <p class="centered-text" data-i18n="edu_intro">Fundiertes Handwerk durch kontinuierliche Weiterbildung an anerkannten Kunstakademien:</p>
+      <h2 class="centered-heading"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> <span
+          data-i18n="edu_h2">Künstlerische Ausbildung &amp; Dozierende</span></h2>
+      <p class="centered-text" data-i18n="edu_intro">Fundiertes Handwerk durch kontinuierliche Weiterbildung an
+        anerkannten Kunstakademien:</p>
 
       <div class="education-grid">
         <div class="education-card">
           <div class="education-icon"><i class="fa-solid fa-landmark"></i></div>
           <h3>Alanus Hochschule für Kunst und Gesellschaft</h3>
           <span class="education-place" data-i18n="edu1_place">Alfter bei Bonn</span>
-          <p data-i18n-html="edu1_text">Jahreskurs <em>„Ein Jahr für die Kunst“</em> sowie vertiefende Seminare und Intensivwochen zur künstlerischen Professionalisierung.</p>
+          <p data-i18n-html="edu1_text">Jahreskurs <em>„Ein Jahr für die Kunst“</em> sowie vertiefende Seminare und
+            Intensivwochen zur künstlerischen Professionalisierung.</p>
           <div class="dozenten-list">
-            <strong data-i18n="edu1_dozenten_label">Dozierende:</strong> Angelika Kehlenbach, Cornelia Genschow, Johanna Hendel, Lukas Thein
+            <strong data-i18n="edu1_dozenten_label">Dozierende:</strong> Angelika Kehlenbach, Cornelia Genschow, Johanna
+            Hendel, Lukas Thein
           </div>
         </div>
 
@@ -184,14 +198,16 @@
           <div class="education-icon"><i class="fa-solid fa-palette"></i></div>
           <h3>Art Studio Maryam Khalili</h3>
           <span class="education-place" data-i18n="edu2_place">Bad Godesberg · Friesdorf</span>
-          <p data-i18n="edu2_text">Intensiver Privatunterricht in fortgeschrittenen Maltechniken, Farbenlehre, Pinselduktus und Komposition.</p>
+          <p data-i18n="edu2_text">Intensiver Privatunterricht in fortgeschrittenen Maltechniken, Farbenlehre,
+            Pinselduktus und Komposition.</p>
         </div>
 
         <div class="education-card">
           <div class="education-icon"><i class="fa-solid fa-brush"></i></div>
           <h3>Kunstschule Aachen &amp; VHS Bonn</h3>
           <span class="education-place" data-i18n="edu3_place">Aachen &amp; Bonn</span>
-          <p data-i18n="edu3_text">Fachkurse in figürlichem Zeichnen, Porträtmalerei, Landschaftsstudien und klassischer Öl- und Acrylmalerei.</p>
+          <p data-i18n="edu3_text">Fachkurse in figürlichem Zeichnen, Porträtmalerei, Landschaftsstudien und klassischer
+            Öl- und Acrylmalerei.</p>
         </div>
       </div>
     </section>
@@ -206,7 +222,8 @@
           <div class="timeline-content">
             <span class="date">2010</span>
             <h3 data-i18n="tl1_title">Die ersten Schritte</h3>
-            <p data-i18n="tl1_text">Erste Fachkurse an der VHS Bonn und der Kunstschule Aachen. Die Begeisterung für Farben, Licht und Formen wurde zur lebenslangen Leidenschaft.</p>
+            <p data-i18n="tl1_text">Erste Fachkurse an der VHS Bonn und der Kunstschule Aachen. Die Begeisterung für
+              Farben, Licht und Formen wurde zur lebenslangen Leidenschaft.</p>
           </div>
         </div>
 
@@ -215,7 +232,8 @@
           <div class="timeline-content">
             <span class="date">2015</span>
             <h3 data-i18n="tl2_title">Das erste Tierportrait: Balou</h3>
-            <p data-i18n="tl2_text">Das Porträt unseres Hundes Balou markierte den Beginn meiner Spezialisierung auf Tierportraits – die emotionale Resonanz war überwältigend.</p>
+            <p data-i18n="tl2_text">Das Porträt unseres Hundes Balou markierte den Beginn meiner Spezialisierung auf
+              Tierportraits – die emotionale Resonanz war überwältigend.</p>
           </div>
         </div>
 
@@ -224,7 +242,8 @@
           <div class="timeline-content">
             <span class="date">2018–2021</span>
             <h3 data-i18n="tl3_title">Akademische Vertiefung</h3>
-            <p data-i18n="tl3_text">Jahreskurs und Intensivseminare an der Alanus Hochschule Alfter bei Kehlenbach, Genschow, Hendel und Thein zur Verfeinerung von Technik und Ausdruck.</p>
+            <p data-i18n="tl3_text">Jahreskurs und Intensivseminare an der Alanus Hochschule Alfter bei Kehlenbach,
+              Genschow, Hendel und Thein zur Verfeinerung von Technik und Ausdruck.</p>
           </div>
         </div>
 
@@ -233,7 +252,8 @@
           <div class="timeline-content">
             <span class="date">2022</span>
             <h3 data-i18n="tl4_title">Gründung der ManuFAKTUR Schenk</h3>
-            <p data-i18n="tl4_text">Eröffnung des Ateliers in Bonn-Bad Godesberg und Beginn professioneller Auftragsarbeiten für Kunden aus ganz Deutschland.</p>
+            <p data-i18n="tl4_text">Eröffnung des Ateliers in Bonn-Bad Godesberg und Beginn professioneller
+              Auftragsarbeiten für Kunden aus ganz Deutschland.</p>
           </div>
         </div>
 
@@ -242,45 +262,27 @@
           <div class="timeline-content">
             <span class="date" data-i18n="tl5_date">Heute</span>
             <h3 data-i18n="tl5_title">Kunst für Dein Zuhause</h3>
-            <p data-i18n="tl5_text">Mit über 50 individuellen Unikaten und vielen glücklichen Auftraggebern schaffe ich bleibende Werte und persönliche Erinnerungsstücke.</p>
+            <p data-i18n="tl5_text">Mit über 50 individuellen Unikaten und vielen glücklichen Auftraggebern schaffe ich
+              bleibende Werte und persönliche Erinnerungsstücke.</p>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Interaktiver Vorher / Nachher Vergleichsslider -->
-    <section class="ba-section reveal">
-      <h2><i class="fa fa-sliders" aria-hidden="true"></i> <span data-i18n="ba_h2">Handgemalte Präzision: Vorher & Nachher</span></h2>
-      <p class="intro-text intro-text--subtle" data-i18n="ba_intro">Schiebe den Regler, um die Vorlage mit dem fertigen Acrylgemälde zu vergleichen:</p>
-
-      <div class="ba-slider-wrapper" id="ba-slider-wrapper">
-        <div class="ba-layer ba-after-layer">
-          <img src="assets/images/img/thumbs/DSC_6622a.webp" data-i18n-alt="ba_after_alt" alt="Fertiges handgemaltes Gemälde">
-          <span class="ba-badge" data-i18n="ba_after_badge">Handgemaltes Gemälde</span>
-        </div>
-        <div class="ba-layer ba-before-layer" id="ba-before-layer">
-          <img src="assets/images/img/thumbs/DSC_6707a.webp" data-i18n-alt="ba_before_alt" alt="Original Fotovorlage">
-          <span class="ba-badge" data-i18n="ba_before_badge">Original Fotovorlage</span>
-        </div>
-        <div class="ba-line-handle" id="ba-line-handle">
-          <div class="ba-handle-circle">
-            <i class="fa fa-left-right" aria-hidden="true"></i>
-          </div>
-        </div>
-        <input type="range" min="0" max="100" value="50" class="ba-handle-input" id="ba-handle-input" data-i18n-aria-label="ba_slider_aria" aria-label="Vorher Nachher Vergleich Schieberegler">
-      </div>
-    </section>
 
     <section class="flyer-section reveal">
-      <h2><i class="fa-solid fa-file-lines" aria-hidden="true"></i> <span data-i18n="flyer_h2">Mein Info-Flyer</span></h2>
+      <h2><i class="fa-solid fa-file-lines" aria-hidden="true"></i> <span data-i18n="flyer_h2">Mein Info-Flyer</span>
+      </h2>
       <p data-i18n="flyer_text">Klicke auf ein Bild für die Großansicht oder lade dir den Flyer als PDF herunter.</p>
       <hr class="divider-short">
       <div class="flyer-row">
-        <img src="assets/images/flyer/flyer-page1.png" data-i18n-alt="flyer_front_alt" alt="Vorderseite des Informationsflyers von ManuFAKTUR Schenk"
-          class="flyer-image" onclick="openFlyerModal(this)">
-        <img src="assets/images/flyer/flyer-page2.png" data-i18n-alt="flyer_back_alt" alt="Rückseite des Informationsflyers von ManuFAKTUR Schenk"
-          class="flyer-image" onclick="openFlyerModal(this)">
+        <img src="assets/images/flyer/flyer-page1.png" data-i18n-alt="flyer_front_alt"
+          alt="Vorderseite des Informationsflyers von ManuFAKTUR Schenk" class="flyer-image"
+          onclick="openFlyerModal(this)">
+        <img src="assets/images/flyer/flyer-page2.png" data-i18n-alt="flyer_back_alt"
+          alt="Rückseite des Informationsflyers von ManuFAKTUR Schenk" class="flyer-image"
+          onclick="openFlyerModal(this)">
       </div>
       <br>
       <a href="assets/documents/flyer.pdf" class="btn" target="_blank" rel="noopener" download>
@@ -289,8 +291,10 @@
     </section>
 
     <section class="visitenkarte-section reveal section--margin-top">
-      <h2 class="h2--centered"><i class="fa-solid fa-address-card" aria-hidden="true"></i> <span data-i18n="kontakt_vcard_title">Digitale Visitenkarte</span></h2>
-      <p class="intro-text intro-text--subtle" data-i18n="kontakt_vcard_hint">Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.</p>
+      <h2 class="h2--centered"><i class="fa-solid fa-address-card" aria-hidden="true"></i> <span
+          data-i18n="kontakt_vcard_title">Digitale Visitenkarte</span></h2>
+      <p class="intro-text intro-text--subtle" data-i18n="kontakt_vcard_hint">Bewege die Maus über die Karte oder tippe
+        sie an, um sie umzudrehen.</p>
       <div class="media-row">
         <div class="flip-card" tabindex="0" data-i18n-aria-label="kontakt_vcard_aria"
           aria-label="Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
@@ -305,7 +309,8 @@
                 <li><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+491632662435">+49 163 2662435</a></li>
                 <li><i class="fa fa-envelope" aria-hidden="true"></i> <a
                     href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a></li>
-                <li><i class="fa fa-map-marker" aria-hidden="true"></i> <span data-i18n="kontakt_city">Bonn, Deutschland</span></li>
+                <li><i class="fa fa-map-marker" aria-hidden="true"></i> <span data-i18n="kontakt_city">Bonn,
+                    Deutschland</span></li>
                 <li class="website-link"><i class="fa fa-globe" aria-hidden="true"></i> www.manufaktur-schenk.de</li>
               </ul>
             </div>
@@ -314,7 +319,8 @@
       </div>
       <div class="text-align-center margin-top-30">
         <a href="assets/documents/visitenkarte.vcf" class="btn" download>
-          <i class="fa fa-address-card" aria-hidden="true"></i> <span data-i18n="kontakt_vcard_save">Kontakt speichern (.vcf)</span>
+          <i class="fa fa-address-card" aria-hidden="true"></i> <span data-i18n="kontakt_vcard_save">Kontakt speichern
+            (.vcf)</span>
         </a>
       </div>
     </section>
@@ -327,7 +333,8 @@
   <!-- Modal für Flyer Großansicht -->
   <div id="flyerModal" class="modal" onclick="closeFlyerModal()" role="dialog" aria-modal="true"
     aria-label="Flyer Großansicht">
-    <span class="close" tabindex="0" onclick="closeFlyerModal()" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
+    <span class="close" tabindex="0" onclick="closeFlyerModal()" data-i18n-aria-label="ui_close"
+      aria-label="Schließen">&times;</span>
     <img class="modal-content" id="modalImg" alt="Vergrößerte Ansicht des Flyers">
   </div>
 
