@@ -362,10 +362,6 @@ const I18N_DICTIONARY = {
         service_places_desc: 'Besondere Landschaften und Orte haben eine ganz eigene Magie. Wenn du solche Lieblingsorte hast, zaubere ich sie Dir als dauerhaftes Erinnerungsstück auf Leinwand.',
         service_formats_title: 'Mögliche Formate',
         service_formats_desc: 'Für Dein einzigartiges Kunstwerk biete ich verschiedene Größen und Formate an. Da alle Bilder mit viel Zeit und Liebe gemalt werden, mache ich Dir auf Anfrage gerne ein individuelles Angebot.',
-        ba_title: 'Vom Foto zum Kunstwerk (Vorher / Nachher)',
-        ba_hint: 'Ziehe den Schieberegler hin und her, um die Verwandlung von der Fotovorlage zum fertigen Gemälde zu sehen:',
-        ba_photo: 'Originalfoto',
-        ba_painting: 'Handgemaltes Gemälde',
         steps_title: 'In 4 einfachen Schritten zu Deinem Kunstwerk',
         step_1_title: '1. Fotovorlage senden',
         step_1_desc: 'Sende mir ein oder mehrere Fotos Deines Tieres oder Deines Lieblingsortes.',
@@ -481,8 +477,6 @@ const I18N_DICTIONARY = {
         step_3_sub: 'Welcher Malstil und welche Farbgebung sprechen dich am meisten an?',
         step_4_heading: 'Schritt 4: Zusammenfassung & Anfrage',
         step_4_sub: 'Überprüfe deine Konfiguration und sende deine unverbindliche Anfrage an Manuela ab.',
-        calc_title: 'Preiskalkulator',
-        calc_price_label: 'Geschätzter Richtpreis:',
         contact_page_title: 'Kontakt',
         contact_intro: 'Ich freue mich über Deine Nachricht, Fragen zu meinen Werken oder Auftragsanfragen.',
         contact_direct_title: 'Direkter Kontakt',
@@ -562,13 +556,6 @@ const I18N_DICTIONARY = {
         tl5_date: 'Heute',
         tl5_title: 'Kunst für Dein Zuhause',
         tl5_text: 'Mit über 50 individuellen Unikaten und vielen glücklichen Auftraggebern schaffe ich bleibende Werte und persönliche Erinnerungsstücke.',
-        ba_h2: 'Handgemalte Präzision: Vorher & Nachher',
-        ba_intro: 'Schiebe den Regler, um die Vorlage mit dem fertigen Acrylgemälde zu vergleichen:',
-        ba_after_alt: 'Fertiges handgemaltes Gemälde',
-        ba_after_badge: 'Handgemaltes Gemälde',
-        ba_before_alt: 'Original Fotovorlage',
-        ba_before_badge: 'Original Fotovorlage',
-        ba_slider_aria: 'Vorher Nachher Vergleich Schieberegler',
         flyer_h2: 'Mein Info-Flyer',
         flyer_text: 'Klicke auf ein Bild für die Großansicht oder lade dir den Flyer als PDF herunter.',
         flyer_front_alt: 'Vorderseite des Informationsflyers von ManuFAKTUR Schenk',
@@ -578,37 +565,6 @@ const I18N_DICTIONARY = {
         // Leistungen.html (Ergänzungen)
         faq_3_q_ship: 'Wie lange dauert der Versand?',
         faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild per DHL oder DPD gut gepolstert und <strong>versandkostenfrei</strong> innerhalb Deutschlands.',
-        calc_h2: 'Vorab-Preiskalkulator',
-        calc_intro: 'Berechne hier unverbindlich einen geschätzten Richtpreis für dein Wunschgemälde:',
-        calc_label_motiv: 'Motiv-Kategorie',
-        calc_opt_motiv1: 'Tierportrait (Hund, Katze, etc.)',
-        calc_opt_motiv2: 'Landschaft & Natur',
-        calc_opt_motiv3: 'Stillleben & Blumen',
-        calc_opt_motiv4: 'Sonstiges / Wunschidee',
-        calc_label_format: 'Format / Leinwandgröße',
-        calc_opt_format1: '20 × 30 cm (Klein · ab 90 €)',
-        calc_opt_format2: '30 × 40 cm (Beliebt · ab 130 €)',
-        calc_opt_format3: '40 × 50 cm (Mittel · ab 175 €)',
-        calc_opt_format4: '50 × 70 cm (Groß · ab 230 €)',
-        calc_opt_format5: '60 × 80 cm (XL · ab 290 €)',
-        calc_label_technik: 'Maltechnik',
-        calc_opt_tech1: 'Acryl auf Leinwand (Klassisch)',
-        calc_opt_tech2: 'Öl auf Leinwand (+15%)',
-        calc_opt_tech3: 'Bleistift / Kohlezeichnung (-15%)',
-        calc_opt_tech4: 'Aquarell auf Feinkarton',
-        calc_label_anzahl: 'Motive auf einem Bild',
-        calc_opt_anzahl1: '1 Hauptmotiv (+0 €)',
-        calc_opt_anzahl2: '2 Motive (+35 €)',
-        calc_opt_anzahl3: '3 Motive (+65 €)',
-        calc_price_title: 'Geschätzter Richtpreis',
-        calc_price_hint: 'Genaue Preisvereinbarung erfolgt individuell vor Beginn. Inklusive kostenfreiem Versand innerhalb Deutschlands.',
-        calc_btn: 'Jetzt als Auftrag konfigurieren',
-        voucher_h2: 'Kunst schenken – Der ManuFAKTUR Gutschein',
-        voucher_text: 'Auf der Suche nach einem unvergesslichen Geschenk für Tierliebhaber oder Kunstbegeisterte? Ein maßgeschneiderter Gutschein für ein Auftragsgemälde bringt Augen zum Leuchten.',
-        voucher_btn: 'Gutschein anfragen',
-        leist_ba_h2: 'Vom Foto zum Unikat: Vorher & Nachher',
-        leist_ba_intro: 'Ziehe den Schieberegler, um die Fotovorlage mit dem handgemalten Ergebnis zu vergleichen:',
-        leist_ba_before_alt: 'Fotovorlage',
         leist_cta_text: 'Hast Du noch weitere Fragen oder eigene Wünsche?',
         leist_cta_btn1: 'Auftrag konfigurieren',
         leist_cta_btn2: 'Kontaktiere mich gerne!',
@@ -637,9 +593,6 @@ const I18N_DICTIONARY = {
         kontakt_label_message: 'Deine Nachricht:',
         kontakt_ph_message: 'Deine Nachricht...',
         kontakt_privacy_label: 'Ich stimme zu, dass meine Angaben aus dem Kontaktformular zur Beantwortung meiner Anfrage erhoben und verarbeitet werden. Hinweis: Sie können Ihre Einwilligung jederzeit für die Zukunft per E‑Mail widerrufen. Detaillierte Informationen findest Du in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.',
-        kontakt_map_h2: 'Standorts-Karte (Bonn)',
-        kontakt_map_text: 'Aus Datenschutzgründen wird die Karte erst geladen, wenn du auf den Button klickst. Dabei können Daten an Google übertragen werden.',
-        kontakt_map_btn: 'Karte jetzt laden & anzeigen',
 
         // Impressum.html
         impressum_map_title: 'Google Maps laden',
@@ -724,8 +677,7 @@ const I18N_DICTIONARY = {
         auftrag_summary_format: 'Format',
         auftrag_summary_technik: 'Technik',
         auftrag_summary_lieferzeit: 'Lieferzeit',
-        auftrag_price_label: 'Unverbindliche Preisschätzung',
-        auftrag_price_note: '* Endpreis nach individueller Absprache. Versand innerhalb DE kostenlos.',
+        auftrag_price_note: '* Endpreis nach individueller Absprache. Versand innerhalb DE kostenpflichtig.',
         auftrag_photo_h4: 'Eigenes Fotovorlage-Bild auswählen (Optional)',
         auftrag_photo_hint: 'Du kannst hier dein Haustier- oder Landschaftsfoto auswählen, um die Vorlage direkt zu prüfen:',
         auftrag_photo_input_label: 'Fotovorlage auswählen',
@@ -791,10 +743,6 @@ const I18N_DICTIONARY = {
         service_places_desc: 'Special landscapes and cherished places hold their own magic. If you have such memories, I will transform them into lasting art on canvas.',
         service_formats_title: 'Available Formats',
         service_formats_desc: 'I offer a wide variety of custom sizes and proportions. Since every piece is painted with time and passion, I gladly provide a personal non-binding offer.',
-        ba_title: 'From Photo to Artwork (Before / After)',
-        ba_hint: 'Drag the interactive slider to see the transformation from photo reference to finished painting:',
-        ba_photo: 'Original Photo',
-        ba_painting: 'Hand-painted Artwork',
         steps_title: 'In 4 Simple Steps to Your Artwork',
         step_1_title: '1. Send Photo Reference',
         step_1_desc: 'Send me one or more clear photos of your pet, landscape or favorite place.',
@@ -910,8 +858,6 @@ const I18N_DICTIONARY = {
         step_3_sub: 'Which medium and artistic texture appeals most to you?',
         step_4_heading: 'Step 4: Summary & Inquiry',
         step_4_sub: 'Review your selected configuration and submit your non-binding inquiry directly to Manuela.',
-        calc_title: 'Price Estimator',
-        calc_price_label: 'Estimated Price Range:',
         contact_page_title: 'Contact',
         contact_intro: 'I look forward to hearing from you, whether with questions regarding existing artworks or commission requests.',
         contact_direct_title: 'Direct Contact',
@@ -991,13 +937,6 @@ const I18N_DICTIONARY = {
         tl5_date: 'Today',
         tl5_title: 'Art for Your Home',
         tl5_text: 'With over 50 individual originals and many happy clients, I create lasting value and personal keepsakes.',
-        ba_h2: 'Hand-Painted Precision: Before & After',
-        ba_intro: 'Drag the slider to compare the reference photo with the finished acrylic painting:',
-        ba_after_alt: 'Finished hand-painted artwork',
-        ba_after_badge: 'Hand-Painted Artwork',
-        ba_before_alt: 'Original photo reference',
-        ba_before_badge: 'Original Photo Reference',
-        ba_slider_aria: 'Before and after comparison slider',
         flyer_h2: 'My Info Flyer',
         flyer_text: 'Click on an image for a larger view or download the flyer as a PDF.',
         flyer_front_alt: 'Front side of the ManuFAKTUR Schenk information flyer',
@@ -1007,37 +946,6 @@ const I18N_DICTIONARY = {
         // Leistungen.html (additions)
         faq_3_q_ship: 'How long does shipping take?',
         faq_3_a_ship: 'Once finished and fully dry, I ship your painting well-cushioned via DHL or DPD, <strong>free of charge</strong> within Germany.',
-        calc_h2: 'Price Estimator',
-        calc_intro: 'Calculate a non-binding estimated price for your desired painting here:',
-        calc_label_motiv: 'Motif Category',
-        calc_opt_motiv1: 'Animal Portrait (dog, cat, etc.)',
-        calc_opt_motiv2: 'Landscape & Nature',
-        calc_opt_motiv3: 'Still Life & Flowers',
-        calc_opt_motiv4: 'Other / Custom Idea',
-        calc_label_format: 'Format / Canvas Size',
-        calc_opt_format1: '20 × 30 cm (Small · from €90)',
-        calc_opt_format2: '30 × 40 cm (Popular · from €130)',
-        calc_opt_format3: '40 × 50 cm (Medium · from €175)',
-        calc_opt_format4: '50 × 70 cm (Large · from €230)',
-        calc_opt_format5: '60 × 80 cm (XL · from €290)',
-        calc_label_technik: 'Painting Technique',
-        calc_opt_tech1: 'Acrylic on Canvas (Classic)',
-        calc_opt_tech2: 'Oil on Canvas (+15%)',
-        calc_opt_tech3: 'Pencil / Charcoal Drawing (-15%)',
-        calc_opt_tech4: 'Watercolor on Fine Card',
-        calc_label_anzahl: 'Motifs in One Painting',
-        calc_opt_anzahl1: '1 Main Motif (+€0)',
-        calc_opt_anzahl2: '2 Motifs (+€35)',
-        calc_opt_anzahl3: '3 Motifs (+€65)',
-        calc_price_title: 'Estimated Guide Price',
-        calc_price_hint: 'The exact price is agreed individually before starting. Includes free shipping within Germany.',
-        calc_btn: 'Configure as a Commission Now',
-        voucher_h2: 'Give the Gift of Art – The ManuFAKTUR Voucher',
-        voucher_text: 'Looking for an unforgettable gift for animal lovers or art enthusiasts? A custom voucher for a commissioned painting makes eyes light up.',
-        voucher_btn: 'Request a Voucher',
-        leist_ba_h2: 'From Photo to Original: Before & After',
-        leist_ba_intro: 'Drag the slider to compare the photo reference with the hand-painted result:',
-        leist_ba_before_alt: 'Photo reference',
         leist_cta_text: 'Do you have further questions or your own wishes?',
         leist_cta_btn1: 'Configure Commission',
         leist_cta_btn2: "I'd Love to Hear From You!",
@@ -1066,9 +974,6 @@ const I18N_DICTIONARY = {
         kontakt_label_message: 'Your Message:',
         kontakt_ph_message: 'Your message...',
         kontakt_privacy_label: 'I agree that my details from the contact form will be collected and processed to answer my inquiry. Note: You can revoke your consent at any time for the future by email. Detailed information can be found in our <a href="Datenschutz.html" target="_blank" rel="noopener">Privacy Policy</a>.',
-        kontakt_map_h2: 'Location Map (Bonn)',
-        kontakt_map_text: 'For privacy reasons, the map is only loaded once you click the button. This may transfer data to Google.',
-        kontakt_map_btn: 'Load & Show Map Now',
 
         // Impressum.html
         impressum_map_title: 'Load Google Maps',
@@ -1153,8 +1058,7 @@ const I18N_DICTIONARY = {
         auftrag_summary_format: 'Format',
         auftrag_summary_technik: 'Technique',
         auftrag_summary_lieferzeit: 'Delivery Time',
-        auftrag_price_label: 'Non-Binding Price Estimate',
-        auftrag_price_note: '* Final price subject to individual agreement. Free shipping within Germany.',
+        auftrag_price_note: '* Final price subject to individual agreement. Shipping within Germany subject to charge.',
         auftrag_photo_h4: 'Select Your Own Photo Reference (Optional)',
         auftrag_photo_hint: 'You can select your pet or landscape photo here to check the reference directly:',
         auftrag_photo_input_label: 'Select photo reference',
@@ -3582,54 +3486,6 @@ function initUrlParamPrefill() {
     }
 }
 
-// Preiskalkulator Widget
-function initPriceCalculator() {
-    const calcContainer = document.getElementById('calc-widget');
-    if (!calcContainer) return;
-
-    const selectMotiv = document.getElementById('calc-motiv');
-    const selectFormat = document.getElementById('calc-format');
-    const selectTechnik = document.getElementById('calc-technik');
-    const selectAnzahl = document.getElementById('calc-anzahl');
-    const priceDisplay = document.getElementById('calc-price');
-
-    function calculate() {
-        if (!selectFormat || !priceDisplay) return;
-        
-        const basePrice = parseInt(selectFormat.value) || 120;
-        const motivMult = parseFloat(selectMotiv ? selectMotiv.value : 1.0);
-        const technikMult = parseFloat(selectTechnik ? selectTechnik.value : 1.0);
-        const anzahlExtra = parseInt(selectAnzahl ? selectAnzahl.value : 0);
-
-        const total = Math.round((basePrice * motivMult * technikMult) + anzahlExtra);
-        const minPrice = Math.max(70, total - 15);
-        const maxPrice = total + 15;
-
-        priceDisplay.innerText = `ca. ${minPrice} € – ${maxPrice} €`;
-    }
-
-    [selectMotiv, selectFormat, selectTechnik, selectAnzahl].forEach(el => {
-        if (el) el.addEventListener('change', calculate);
-    });
-
-    calculate();
-}
-
-// Vorher / Nachher Vergleichsslider
-function initBeforeAfterSlider() {
-    const slider = document.getElementById('ba-handle-input');
-    const beforeLayer = document.getElementById('ba-before-layer');
-    const lineHandle = document.getElementById('ba-line-handle');
-
-    if (slider && beforeLayer && lineHandle) {
-        slider.addEventListener('input', function () {
-            const val = this.value;
-            beforeLayer.style.width = val + '%';
-            lineHandle.style.left = val + '%';
-        });
-    }
-}
-
 // Testimonials Karussell
 function initTestimonialsCarousel() {
     const slides = document.querySelectorAll('.testimonial-slide');
@@ -3700,8 +3556,6 @@ runOnDOMReady(function () {
     initPhotoUploadPreview();
     initLightboxInquiry();
     initUrlParamPrefill();
-    initPriceCalculator();
-    initBeforeAfterSlider();
     initTestimonialsCarousel();
     initWallFrameDragLogic();
     registerServiceWorker();
