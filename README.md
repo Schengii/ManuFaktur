@@ -73,7 +73,6 @@ ManuFaktur/
 - **Funktion:** Startseite der Webanwendung.
 - **Inhalt:**
   - Willkommensbereich mit Atelier-Logo und Einleitungstext.
-  - Aktuelle Neuigkeiten und Ankündigungen.
   - Highlights-Raster mit ausgewählten Gemälden.
   - **Kundenstimmen-Karussell:** Interaktiver Testimonial-Slider mit Sternebewertungen und Zitaten zufriedener Auftraggeber.
   - Schema.org JSON-LD Strukturierte Daten (`ArtGallery`).

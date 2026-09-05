@@ -155,7 +155,7 @@ function initHamburgerMenu() {
     // Klick auf den Dropdown-Trigger-Link togglet die .open-Klasse
     document.querySelectorAll('.dropdown > a').forEach(function (trigger) {
         trigger.addEventListener('click', function (e) {
-            const isMobile = window.innerWidth <= 768;
+            const isMobile = window.innerWidth <= 1024;
             if (!isMobile) return; // Auf Desktop bleibt :hover aktiv
             e.preventDefault(); // Verhindert Navigation beim ersten Klick (öffnet stattdessen)
             const dropdown = trigger.closest('.dropdown');
@@ -342,7 +342,7 @@ const I18N_DICTIONARY = {
         about_profile_dog: 'Balou',
         about_profile_motifs: 'Tierportraits, Lieblingsorte & Landschaften',
         about_profile_tech: 'Acryl, Öl, Ölkreide, Mischtechniken',
-        about_profile_edu: 'Alanus Hochschule Alfter, Art Studio Maryam Khalili',
+        about_profile_edu: 'Alanus Hochschule Alfter, Art Studio Bonn-Friesdorf',
         about_profile_motive: 'Freude am Festhalten lebendiger Emotionen & Momente',
         about_greeting: 'Hallo, ich bin Manuela,',
         about_subtitle: '...Künstlerin aus Bonn, Hundeliebhaberin und Frauchen von Balou',
@@ -372,10 +372,10 @@ const I18N_DICTIONARY = {
         step_4_title: '4. Sicherer Versand',
         step_4_desc: 'Sorgfältig verpackt und versichert kommt Dein Bild direkt zu Dir nach Hause.',
         faq_title: 'Häufig gestellte Fragen (FAQ)',
-        faq_1_q: 'Welche Qualität muss die Fotovorlage haben?',
-        faq_1_a: 'Je schärfer das Foto, desto mehr Details kann ich malen. Ein klares Handyfoto bei Tageslicht, auf dem Augen und Fellstruktur gut zu erkennen sind, reicht meistens völlig aus.',
+        faq_1_q: 'Was kostet ein Bild?',
+        faq_1_a: 'Der Preis gestaltet sich nach Größe des Bildes. Die Bezahlung erfolgt gegen Vorkasse (inkl. Porto und Verpackung).',
         faq_2_q: 'Wie lange dauert die Erstellung eines Bildes?',
-        faq_2_a: 'Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel 2 bis 4 Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!',
+        faq_2_a: 'Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel einige Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!',
         faq_3_q: 'Wie lange dauert der Versand?',
         faq_3_a: 'Der Versand innerhalb Deutschlands dauert nach Fertigstellung und Durchtrocknung meist 2 bis 4 Werktage (versichert mit Sendungsverfolgung).',
         faq_4_q: 'Wie läuft die Bezahlung ab?',
@@ -437,19 +437,7 @@ const I18N_DICTIONARY = {
         lb_view_artist_title: 'Künstlerin & Atelier',
         lb_inquiry_aria: 'Dieses Motiv als Auftrag anfragen',
         lb_fav_default: 'Zu Favoriten',
-        room_artwork_alt: 'Gemälde an der Wand',
-        room_label_size: 'Größe:',
-        room_scale_aria: 'Gemäldegröße anpassen',
-        room_label_rotation: 'Drehung:',
-        room_rotation_aria: 'Neigung anpassen',
-        room_rotate_btn: '90° Drehen',
-        room_fit_title: 'Automatisch an Wand anpassen',
-        room_fit_btn: 'Auto-Wand-Fit',
-        room_backdrop_label: 'Raumkulisse:',
-        room_upload_label: 'Eigene Wand hochladen',
         clear_search_aria: 'Suche zurücksetzen',
-        format_label: 'Format:',
-        color_label: 'Farbe:',
         lb_btn_inquiry: 'Motiv als Auftrag anfragen',
         lb_btn_room: 'In deinem Raum ansehen',
         lb_btn_fav_add: 'Zu Favoriten hinzufügen',
@@ -457,12 +445,6 @@ const I18N_DICTIONARY = {
         lb_rotate: '90° Drehen',
         lb_zoom: 'Lupe Zoom',
         lb_center: 'Zentrieren',
-        room_modal_title: 'In deinem Raum ansehen',
-        room_modal_desc: 'Erlebe das Gemälde maßstabsgetreu in verschiedenen Raumkulissen oder auf deiner eigenen Wand.',
-        room_preset_living: 'Modernes Wohnzimmer',
-        room_preset_bedroom: 'Schlafzimmer',
-        room_preset_gallery: 'Galerie-Wand',
-        room_btn_close: 'Schließen',
         order_page_title: 'Auftrag konfigurieren',
         order_intro: 'In nur 4 Schritten zu deinem individuellen Kunstwerk – erhalte eine unverbindliche Preisschätzung und sende deine Anfrage direkt ab.',
         step_1_lbl: 'Motiv',
@@ -528,12 +510,12 @@ const I18N_DICTIONARY = {
 
         // UeberMich.html
         process_h2: 'Der Entstehungsprozess eines Kunstwerks',
-        process_intro: 'Jedes Gemälde entsteht in präziser Handarbeit in mehreren abgestimmten Phasen:',
-        process1_title: 'Skizze & Proportionen',
+        process_intro: 'Kunst für dein Zuhause',
+        process1_title: 'Anfertigung mehrerer Skizzen',
         process1_text: 'Exakte Übertragung deines Fotomotivs auf die Leinwand als feine Vorzeichnung.',
-        process2_title: 'Farbauftrag & Schichtung',
+        process2_title: 'verschiedene Farbaufträge',
         process2_text: 'Auftrag der ersten Farbschichten für Tiefe, Schatten und charakteristische Lichtakzente.',
-        process3_title: 'Details & Veredelung',
+        process3_title: 'feinste Ausarbeitung',
         process3_text: 'Feinste Ausarbeitung von Augen, Fellstruktur oder Lichtreflexen sowie Schlussversiegelung.',
         edu_h2: 'Künstlerische Ausbildung & Dozierende',
         edu_intro: 'Fundiertes Handwerk durch kontinuierliche Weiterbildung an anerkannten Kunstakademien:',
@@ -544,18 +526,8 @@ const I18N_DICTIONARY = {
         edu2_text: 'Intensiver Privatunterricht in fortgeschrittenen Maltechniken, Farbenlehre, Pinselduktus und Komposition.',
         edu3_place: 'Aachen & Bonn',
         edu3_text: 'Fachkurse in figürlichem Zeichnen, Porträtmalerei, Landschaftsstudien und klassischer Öl- und Acrylmalerei.',
-        timeline_h2: 'Mein Weg zur Kunst',
-        tl1_title: 'Die ersten Schritte',
-        tl1_text: 'Erste Fachkurse an der VHS Bonn und der Kunstschule Aachen. Die Begeisterung für Farben, Licht und Formen wurde zur lebenslangen Leidenschaft.',
-        tl2_title: 'Das erste Tierportrait: Balou',
-        tl2_text: 'Das Porträt unseres Hundes Balou markierte den Beginn meiner Spezialisierung auf Tierportraits – die emotionale Resonanz war überwältigend.',
-        tl3_title: 'Akademische Vertiefung',
-        tl3_text: 'Jahreskurs und Intensivseminare an der Alanus Hochschule Alfter bei Kehlenbach, Genschow, Hendel und Thein zur Verfeinerung von Technik und Ausdruck.',
-        tl4_title: 'Gründung der ManuFAKTUR Schenk',
-        tl4_text: 'Eröffnung des Ateliers in Bonn-Bad Godesberg und Beginn professioneller Auftragsarbeiten für Kunden aus ganz Deutschland.',
-        tl5_date: 'Heute',
         tl5_title: 'Kunst für Dein Zuhause',
-        tl5_text: 'Mit über 50 individuellen Unikaten und vielen glücklichen Auftraggebern schaffe ich bleibende Werte und persönliche Erinnerungsstücke.',
+        tl5_text: 'Mit vielen individuellen Unikaten und vielen glücklichen Auftraggebern schaffe ich bleibende Werte und persönliche Erinnerungsstücke.',
         flyer_h2: 'Mein Info-Flyer',
         flyer_text: 'Klicke auf ein Bild für die Großansicht oder lade dir den Flyer als PDF herunter.',
         flyer_front_alt: 'Vorderseite des Informationsflyers von ManuFAKTUR Schenk',
@@ -563,8 +535,8 @@ const I18N_DICTIONARY = {
         flyer_btn: 'Flyer herunterladen (PDF)',
 
         // Leistungen.html (Ergänzungen)
-        faq_3_q_ship: 'Wie lange dauert der Versand?',
-        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild gut gepolstert und versichert per DHL oder DPD. Die genauen Versandkosten stimmen wir individuell vorab ab.',
+        faq_3_q_ship: 'Versand',
+        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild auf dem Postwege weg. Die genauen Versandkosten stimmen wir individuell vorab ab.',
         leist_cta_text: 'Hast Du noch weitere Fragen oder eigene Wünsche?',
         leist_cta_btn1: 'Auftrag konfigurieren',
         leist_cta_btn2: 'Kontaktiere mich gerne!',
@@ -657,22 +629,22 @@ const I18N_DICTIONARY = {
         auftrag_motiv4_price: 'Auf Anfrage',
         auftrag_hint1: 'Bitte wähle ein Motiv, um fortzufahren.',
         auftrag_next_format: 'Weiter: Format',
-        auftrag_format1_small: 'Klein · ideal als Geschenk',
-        auftrag_format2_small: 'Beliebt · viele Details',
-        auftrag_format3_small: 'Mittel · sehr ausdrucksstark',
-        auftrag_format4_small: 'Groß · imposanter Blickfang',
-        auftrag_format5_small: 'XL · für große Wände',
+        auftrag_format1_small: 'Klein',
+        auftrag_format2_small: 'Beliebt',
+        auftrag_format3_small: 'Mittel',
+        auftrag_format4_small: 'Groß',
+        auftrag_format5_small: 'XL',
         auftrag_format6_title: 'Individuell',
         auftrag_format6_small: 'Wunschformat · auf Anfrage',
         auftrag_hint2: 'Bitte wähle ein Format, um fortzufahren.',
         auftrag_back: 'Zurück',
         auftrag_next_technik: 'Weiter: Technik',
         auftrag_tech1_title: 'Acrylfarben',
-        auftrag_tech1_desc: 'Schnelle Trocknungszeit, kräftige Farben und lebhafte Kontraste. Perfekt für detailreiche Portraits.',
-        auftrag_tech1_delivery: 'Lieferung in ca. 2–3 Wochen',
+        auftrag_tech1_desc: 'Schnelle Trocknungszeit',
+        auftrag_tech1_delivery: 'Lieferung in einigen Wochen',
         auftrag_tech2_title: 'Ölfarben',
-        auftrag_tech2_desc: 'Tiefe, samtige Farbübergänge und klassische Eleganz. Mehr Trocknungszeit, intensives Finish.',
-        auftrag_tech2_delivery: 'Lieferung in ca. 4–6 Wochen',
+        auftrag_tech2_desc: 'längere Trocknungszeit',
+        auftrag_tech2_delivery: 'Lieferung in einigen Wochen',
         auftrag_hint3: 'Bitte wähle eine Technik, um fortzufahren.',
         auftrag_next_summary: 'Zur Zusammenfassung',
         auftrag_summary_h3: 'Dein Traumgemälde ✨',
@@ -726,7 +698,7 @@ const I18N_DICTIONARY = {
         about_profile_dog: 'Balou',
         about_profile_motifs: 'Animal portraits, favorite places & landscapes',
         about_profile_tech: 'Acrylic, Oil, Oil Pastel, Mixed Media',
-        about_profile_edu: 'Alanus University Alfter, Art Studio Maryam Khalili',
+        about_profile_edu: 'Alanus University Alfter, Art Studio Bonn-Friesdorf',
         about_profile_motive: 'The joy of capturing vibrant emotions & living moments',
         about_greeting: 'Hello, I am Manuela,',
         about_subtitle: '...artist from Bonn, dog lover and owner of Balou',
@@ -756,10 +728,10 @@ const I18N_DICTIONARY = {
         step_4_title: '4. Safe Delivery',
         step_4_desc: 'Carefully cushioned, safely packaged and insured right to your doorstep.',
         faq_title: 'Frequently Asked Questions (FAQ)',
-        faq_1_q: 'What quality does the photo reference need to have?',
-        faq_1_a: 'The clearer the photo, the finer the details I can paint. A crisp smartphone photo taken in natural daylight where eyes and fur texture are clearly visible is usually ideal.',
+        faq_1_q: 'What does a painting cost?',
+        faq_1_a: 'The price depends on the size of the painting. Payment is made in advance (incl. postage and packaging).',
         faq_2_q: 'How long does it take to create a painting?',
-        faq_2_a: 'Depending on the technique (acrylic dries faster than oil) and current commissions, completion typically takes 2 to 4 weeks. Please order well in advance for gifts!',
+        faq_2_a: 'Depending on the technique (acrylic dries faster than oil) and current commissions, completion typically takes a few weeks. Please order well in advance for gifts!',
         faq_3_q: 'How long does shipping take?',
         faq_3_a: 'Shipping within Germany takes 2 to 4 business days after full drying and packaging (fully insured with tracking number). International shipping is also available upon request.',
         faq_4_q: 'How does payment work?',
@@ -821,19 +793,7 @@ const I18N_DICTIONARY = {
         lb_view_artist_title: 'Artist & Studio',
         lb_inquiry_aria: 'Request this motif as a commission',
         lb_fav_default: 'Favorite',
-        room_artwork_alt: 'Painting on the wall',
-        room_label_size: 'Size:',
-        room_scale_aria: "Adjust the painting's size",
-        room_label_rotation: 'Rotation:',
-        room_rotation_aria: 'Adjust the tilt',
-        room_rotate_btn: 'Rotate 90°',
-        room_fit_title: 'Automatically fit to wall',
-        room_fit_btn: 'Auto Wall Fit',
-        room_backdrop_label: 'Room Backdrop:',
-        room_upload_label: 'Upload Your Own Wall',
         clear_search_aria: 'Clear search',
-        format_label: 'Format:',
-        color_label: 'Color:',
         lb_btn_inquiry: 'Inquire this Motif as Commission',
         lb_btn_room: 'View in Your Room',
         lb_btn_fav_add: 'Add to Favorites',
@@ -841,12 +801,6 @@ const I18N_DICTIONARY = {
         lb_rotate: 'Rotate 90°',
         lb_zoom: 'Magnifier Zoom',
         lb_center: 'Center',
-        room_modal_title: 'View in Your Room',
-        room_modal_desc: 'Experience the painting true to scale in various interior settings or on your own wall.',
-        room_preset_living: 'Modern Living Room',
-        room_preset_bedroom: 'Bedroom',
-        room_preset_gallery: 'Gallery Wall',
-        room_btn_close: 'Close',
         order_page_title: 'Configure Commission',
         order_intro: 'In just 4 simple steps to your custom artwork – receive a non-binding price estimate and submit your request directly.',
         step_1_lbl: 'Motif',
@@ -912,12 +866,12 @@ const I18N_DICTIONARY = {
 
         // UeberMich.html
         process_h2: 'How Each Artwork Is Created',
-        process_intro: 'Every painting is created by hand through several carefully coordinated phases:',
-        process1_title: 'Sketch & Proportions',
+        process_intro: 'Art for your home',
+        process1_title: 'Creating several sketches',
         process1_text: 'Precise transfer of your photo motif onto the canvas as a fine preliminary sketch.',
-        process2_title: 'Color Application & Layering',
+        process2_title: 'Various layers of color',
         process2_text: 'Applying the first layers of paint for depth, shadow and characteristic highlights.',
-        process3_title: 'Details & Finishing',
+        process3_title: 'Finest detailing',
         process3_text: 'Fine detailing of eyes, fur texture or light reflections, followed by the final sealing.',
         edu_h2: 'Artistic Training & Instructors',
         edu_intro: 'A solid craft built through continuous training at recognized art academies:',
@@ -928,18 +882,8 @@ const I18N_DICTIONARY = {
         edu2_text: 'Intensive private lessons in advanced painting techniques, color theory, brushwork and composition.',
         edu3_place: 'Aachen & Bonn',
         edu3_text: 'Specialized courses in figure drawing, portrait painting, landscape studies and classical oil and acrylic painting.',
-        timeline_h2: 'My Journey into Art',
-        tl1_title: 'The First Steps',
-        tl1_text: 'First specialized courses at VHS Bonn and the Kunstschule Aachen. My enthusiasm for color, light and form became a lifelong passion.',
-        tl2_title: 'The First Animal Portrait: Balou',
-        tl2_text: "The portrait of our dog Balou marked the beginning of my specialization in animal portraits – the emotional response was overwhelming.",
-        tl3_title: 'Academic Deepening',
-        tl3_text: 'Year-long course and intensive seminars at Alanus University Alfter with Kehlenbach, Genschow, Hendel and Thein to refine technique and expression.',
-        tl4_title: 'Founding of ManuFAKTUR Schenk',
-        tl4_text: 'Opening of the studio in Bonn-Bad Godesberg and the start of professional commissioned work for clients across Germany.',
-        tl5_date: 'Today',
         tl5_title: 'Art for Your Home',
-        tl5_text: 'With over 50 individual originals and many happy clients, I create lasting value and personal keepsakes.',
+        tl5_text: 'With many individual originals and many happy clients, I create lasting value and personal keepsakes.',
         flyer_h2: 'My Info Flyer',
         flyer_text: 'Click on an image for a larger view or download the flyer as a PDF.',
         flyer_front_alt: 'Front side of the ManuFAKTUR Schenk information flyer',
@@ -947,8 +891,8 @@ const I18N_DICTIONARY = {
         flyer_btn: 'Download Flyer (PDF)',
 
         // Leistungen.html (additions)
-        faq_3_q_ship: 'How long does shipping take?',
-        faq_3_a_ship: 'Once finished and fully dry, I ship your painting carefully cushioned and insured via DHL or DPD. Exact shipping costs are individually coordinated in advance.',
+        faq_3_q_ship: 'Shipping',
+        faq_3_a_ship: 'Once finished and fully dry, I ship your painting by post. Exact shipping costs are individually coordinated in advance.',
         leist_cta_text: 'Do you have further questions or your own wishes?',
         leist_cta_btn1: 'Configure Commission',
         leist_cta_btn2: "I'd Love to Hear From You!",
@@ -1040,22 +984,22 @@ const I18N_DICTIONARY = {
         auftrag_motiv4_price: 'Upon Request',
         auftrag_hint1: 'Please choose a motif to continue.',
         auftrag_next_format: 'Next: Format',
-        auftrag_format1_small: 'Small · ideal as a gift',
-        auftrag_format2_small: 'Popular · plenty of detail',
-        auftrag_format3_small: 'Medium · very expressive',
-        auftrag_format4_small: 'Large · an imposing eye-catcher',
-        auftrag_format5_small: 'XL · for large walls',
+        auftrag_format1_small: 'Small',
+        auftrag_format2_small: 'Popular',
+        auftrag_format3_small: 'Medium',
+        auftrag_format4_small: 'Large',
+        auftrag_format5_small: 'XL',
         auftrag_format6_title: 'Custom',
         auftrag_format6_small: 'Custom size · upon request',
         auftrag_hint2: 'Please choose a format to continue.',
         auftrag_back: 'Back',
         auftrag_next_technik: 'Next: Technique',
         auftrag_tech1_title: 'Acrylic Paint',
-        auftrag_tech1_desc: 'Fast drying time, bold colors and vivid contrasts. Perfect for detailed portraits.',
-        auftrag_tech1_delivery: 'Delivery in approx. 2–3 weeks',
+        auftrag_tech1_desc: 'Fast drying time',
+        auftrag_tech1_delivery: 'Delivery in a few weeks',
         auftrag_tech2_title: 'Oil Paint',
-        auftrag_tech2_desc: 'Deep, velvety color transitions and classic elegance. Longer drying time, intense finish.',
-        auftrag_tech2_delivery: 'Delivery in approx. 4–6 weeks',
+        auftrag_tech2_desc: 'longer drying time',
+        auftrag_tech2_delivery: 'Delivery in a few weeks',
         auftrag_hint3: 'Please choose a technique to continue.',
         auftrag_next_summary: 'To the Summary',
         auftrag_summary_h3: 'Your Dream Painting ✨',
@@ -1257,17 +1201,6 @@ function applyTranslations(lang) {
     setElemHTML('#btn-rotate-img', `<i class="fa-solid fa-rotate-right" aria-hidden="true"></i> ${t.lb_rotate}`);
     setElemHTML('#btn-toggle-zoom', `<i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> ${t.lb_zoom}`);
     setElemHTML('#btn-reset-pos', `<i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> ${t.lb_center}`);
-
-    // Room Visualizer Modal
-    setElemHTML('#roomVisualizerModal h2', `<i class="fa-solid fa-house-chimney" aria-hidden="true"></i> ${t.room_modal_title}`);
-    setElemText('#roomVisualizerModal p.color-text-muted', t.room_modal_desc);
-    const roomPresetBtns = document.querySelectorAll('.room-presets-bar .room-preset-btn');
-    if (roomPresetBtns.length >= 3) {
-        roomPresetBtns[0].textContent = t.room_preset_living;
-        roomPresetBtns[1].textContent = t.room_preset_bedroom;
-        roomPresetBtns[2].textContent = t.room_preset_gallery;
-    }
-    setElemHTML('#roomVisualizerModal .btn-primary', `<i class="fa fa-check" aria-hidden="true"></i> ${t.room_btn_close}`);
 
     // Auftrag.html Configurator
     const stepIndicators = document.querySelectorAll('.progress-step .step-label');
@@ -1996,101 +1929,6 @@ function clearGallerySearch() {
 let activeFormat = 'alle';
 let activeColor = 'alle';
 
-function filterFormat(format) {
-    activeFormat = format || 'alle';
-    const chips = document.querySelectorAll('.format-chip');
-    chips.forEach(chip => {
-        const onclickAttr = chip.getAttribute('onclick') || '';
-        if (onclickAttr.includes(`'${activeFormat}'`)) {
-            chip.classList.add('active');
-        } else {
-            chip.classList.remove('active');
-        }
-    });
-    filterGallery();
-}
-
-function filterColor(color) {
-    activeColor = color || 'alle';
-    const chips = document.querySelectorAll('.color-chip');
-    chips.forEach(chip => {
-        const onclickAttr = chip.getAttribute('onclick') || '';
-        if (onclickAttr.includes(`'${activeColor}'`)) {
-            chip.classList.add('active');
-        } else {
-            chip.classList.remove('active');
-        }
-    });
-    filterGallery();
-}
-
-function openCertModal() {
-    const modal = document.getElementById('certModal');
-    const titleVal = document.getElementById('cert-title-val');
-    const idVal = document.getElementById('cert-id-val');
-    const technikVal = document.getElementById('cert-technik-val');
-    const sizeVal = document.getElementById('cert-size-val');
-    if (modal) {
-        if (visibleGalleryLinks[currentIndex]) {
-            const link = visibleGalleryLinks[currentIndex];
-            const item = link.closest('.gallery-item');
-            const itemId = item ? item.id : 'MS-2026';
-            const artMeta = getArtMeta(itemId);
-            const img = link.querySelector('img');
-            
-            if (titleVal) titleVal.innerText = artMeta ? artMeta.title : (img ? (img.alt || 'Original Gemälde') : 'Original Gemälde');
-            if (idVal) idVal.innerText = `#${itemId || 'MS-2026'}`;
-            if (technikVal && artMeta) technikVal.innerText = artMeta.technik;
-            if (sizeVal && artMeta) sizeVal.innerText = artMeta.masse;
-        }
-        modal.style.display = 'flex';
-    }
-}
-
-function closeCertModal() {
-    const modal = document.getElementById('certModal');
-    if (modal) modal.style.display = 'none';
-}
-
-function openSizeModal() {
-    const modal = document.getElementById('sizeModal');
-    const img = document.getElementById('size-canvas-img');
-    const tag = document.getElementById('size-dimensions-tag');
-    if (modal) {
-        if (visibleGalleryLinks[currentIndex] && img) {
-            const link = visibleGalleryLinks[currentIndex];
-            const item = link.closest('.gallery-item');
-            const itemId = item ? item.id : '';
-            const artMeta = getArtMeta(itemId);
-            img.src = link.href;
-            if (tag) tag.innerText = artMeta ? artMeta.masse : 'ca. 40 × 50 cm';
-        }
-        modal.style.display = 'flex';
-    }
-}
-
-function closeSizeModal() {
-    const modal = document.getElementById('sizeModal');
-    if (modal) modal.style.display = 'none';
-}
-
-function switchGalleryViewMode(mode) {
-    const grid = document.querySelector('.gallery-grid');
-    if (!grid) return;
-
-    grid.classList.remove('view-masonry', 'view-list');
-    document.querySelectorAll('.view-mode-btn').forEach(btn => btn.classList.remove('active'));
-
-    const btn = document.getElementById(`btn-view-${mode}`);
-    if (btn) btn.classList.add('active');
-
-    if (mode === 'masonry') {
-        grid.classList.add('view-masonry');
-    } else if (mode === 'list') {
-        grid.classList.add('view-list');
-    }
-}
-
 function sortGallery(sortOption) {
     const grid = document.querySelector('.gallery-grid');
     if (!grid) return;
@@ -2107,48 +1945,6 @@ function sortGallery(sortOption) {
     items.forEach(item => grid.appendChild(item));
     updateGalleryLinks();
     showToast(currentLang === 'en' ? 'Gallery re-sorted' : 'Galerie neu sortiert');
-}
-
-/* Room Visualizer Logic with Wall Fitting & Rotation */
-let roomRotationDeg = 0;
-let currentRoomPreset = 'livingroom';
-
-// Vordefinierte Wandpositionen & Blickwinkel je Raumkulisse für realistisches Fitting
-const ROOM_WALL_SPECS = {
-    'livingroom': { scale: 50, posY: -15, posX: 0, rotateY: 0, shadowOffset: '0 20px 40px rgba(0,0,0,0.45)' },
-    'bedroom':    { scale: 44, posY: -28, posX: 0, rotateY: 0, shadowOffset: '0 18px 36px rgba(0,0,0,0.4)' },
-    'gallerywall':{ scale: 58, posY: -5,  posX: 0, rotateY: 0, shadowOffset: '0 25px 45px rgba(0,0,0,0.5)' }
-};
-
-function openRoomVisualizer(imgSrc, imgAlt) {
-    const modal = document.getElementById('roomVisualizerModal');
-    const artworkImg = document.getElementById('room-artwork');
-    if (modal && artworkImg) {
-        if (!imgSrc && visibleGalleryLinks[currentIndex]) {
-            const link = visibleGalleryLinks[currentIndex];
-            imgSrc = link.href;
-            const img = link.querySelector('img');
-            imgAlt = img ? img.alt : '';
-        }
-        artworkImg.src = imgSrc || '';
-        artworkImg.alt = imgAlt || 'Gemälde';
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-
-        roomRotationDeg = 0;
-        const rotSlider = document.getElementById('room-rotation-slider');
-        if (rotSlider) rotSlider.value = 0;
-
-        autoFitToRoomWall();
-    }
-}
-
-function closeRoomVisualizer() {
-    const modal = document.getElementById('roomVisualizerModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
 }
 
 let currentLbScene = 'detail';
@@ -2384,104 +2180,6 @@ function setLightboxViewAngle(angle, btn) {
             badge.style.display = 'inline-flex';
             badge.innerHTML = `<i class="fa-solid fa-palette"></i> Handgemacht im Atelier Bonn`;
         }
-    }
-}
-
-function setRoomBackdrop(preset, btn) {
-    const stage = document.getElementById('room-stage');
-    if (!stage) return;
-
-    currentRoomPreset = preset || 'livingroom';
-    document.querySelectorAll('.room-preset-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-
-    const backdrops = {
-        'livingroom': KI_ROOM_IMAGES.livingroom,
-        'bedroom': KI_ROOM_IMAGES.bedroom,
-        'gallerywall': KI_ROOM_IMAGES.darkloft
-    };
-
-    if (backdrops[preset]) {
-        stage.style.backgroundImage = `url('${backdrops[preset]}')`;
-    }
-
-    autoFitToRoomWall();
-}
-
-function autoFitToRoomWall() {
-    const artworkImg = document.getElementById('room-artwork');
-    const scaleSlider = document.getElementById('room-scale-slider');
-    const rotSlider = document.getElementById('room-rotation-slider');
-
-    const spec = ROOM_WALL_SPECS[currentRoomPreset] || ROOM_WALL_SPECS['livingroom'];
-    let targetScale = spec.scale;
-
-    // Seitenverhältnis-Anpassung: Hochformat / Querformat optimal skalieren
-    if (artworkImg && artworkImg.naturalWidth && artworkImg.naturalHeight) {
-        const ratio = artworkImg.naturalWidth / artworkImg.naturalHeight;
-        if (ratio < 0.8) {
-            // Hochformat: Etwas weniger Höhe damit es nicht über das Sofa ragt
-            targetScale = Math.round(targetScale * 0.88);
-        } else if (ratio > 1.4) {
-            // Querformat / Panorama
-            targetScale = Math.round(targetScale * 1.1);
-        }
-    }
-
-    if (scaleSlider) scaleSlider.value = targetScale;
-    if (rotSlider) rotSlider.value = roomRotationDeg;
-
-    updateRoomArtworkTransform();
-}
-
-function rotateRoomArtwork90() {
-    roomRotationDeg = (roomRotationDeg + 90) % 360;
-    const rotSlider = document.getElementById('room-rotation-slider');
-    if (rotSlider) rotSlider.value = roomRotationDeg > 180 ? roomRotationDeg - 360 : roomRotationDeg;
-    updateRoomArtworkTransform();
-}
-
-function updateRoomArtworkTransform() {
-    const container = document.getElementById('room-artwork-container');
-    const artworkImg = document.getElementById('room-artwork');
-    const scaleSlider = document.getElementById('room-scale-slider');
-    const rotSlider = document.getElementById('room-rotation-slider');
-
-    const scaleValEl = document.getElementById('room-scale-val');
-    const rotateValEl = document.getElementById('room-rotate-val');
-
-    const scale = scaleSlider ? parseInt(scaleSlider.value) : 55;
-    const rotation = rotSlider ? parseInt(rotSlider.value) : 0;
-
-    if (scaleValEl) scaleValEl.innerText = `${scale}%`;
-    if (rotateValEl) rotateValEl.innerText = `${rotation}°`;
-
-    const spec = ROOM_WALL_SPECS[currentRoomPreset] || ROOM_WALL_SPECS['livingroom'];
-
-    if (container) {
-        container.style.transform = `translate(${spec.posX}px, ${spec.posY}px)`;
-    }
-
-    if (artworkImg) {
-        artworkImg.style.maxWidth = `${scale}%`;
-        artworkImg.style.maxHeight = `${scale * 1.2}%`;
-        artworkImg.style.transform = `rotate(${rotation}deg)`;
-        artworkImg.style.boxShadow = spec.shadowOffset;
-    }
-}
-
-function handleCustomWallUpload(input) {
-    if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const stage = document.getElementById('room-stage');
-            if (stage) {
-                stage.style.backgroundImage = `url('${e.target.result}')`;
-                showToast(currentLang === 'en' ? 'Custom wall loaded successfully!' : 'Eigene Wand erfolgreich geladen!');
-            }
-        };
-        reader.readAsDataURL(file);
     }
 }
 
@@ -3353,28 +3051,6 @@ function initGallerySearch() {
     }
 }
 
-// Tag-Chips in Galerie
-function initTagChips() {
-    const tagChips = document.querySelectorAll('.tag-chip');
-    tagChips.forEach(chip => {
-        chip.addEventListener('click', function () {
-            const tagText = this.getAttribute('data-tag') || this.innerText.replace('#', '').trim();
-            const searchInput = document.getElementById('gallery-search');
-            if (searchInput) {
-                if (searchInput.value.toLowerCase() === tagText.toLowerCase()) {
-                    searchInput.value = '';
-                    this.classList.remove('active');
-                } else {
-                    searchInput.value = tagText;
-                    tagChips.forEach(c => c.classList.remove('active'));
-                    this.classList.add('active');
-                }
-                filterGallery();
-            }
-        });
-    });
-}
-
 // Favoriten-Auswahl in Step 1 des Auftrags-Konfigurators
 function initFavoritesInConfigurator() {
     const favContainer = document.getElementById('config-saved-favorites');
@@ -3569,7 +3245,6 @@ runOnDOMReady(function () {
         applyTranslations(currentLang);
     }
     initGallerySearch();
-    initTagChips();
     initFavoritesInConfigurator();
     initPhotoUploadPreview();
     initLightboxInquiry();
