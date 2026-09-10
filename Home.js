@@ -541,12 +541,18 @@ const I18N_DICTIONARY = {
         leist_cta_btn1: 'Auftrag konfigurieren',
         leist_cta_btn2: 'Kontaktiere mich gerne!',
 
-        // Kontakt.html
-        kontakt_vcard_title: 'Digitale Visitenkarte',
-        kontakt_vcard_hint: 'Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.',
+        // Kontakt.html & Über Mich (Visitenkarte & Postkarte)
+        kontakt_vcard_title: 'Digitale Visitenkarte & Kunst-Postkarte',
+        kontakt_vcard_hint: 'Bewege die Maus über die Karten oder tippe sie an, um sie umzudrehen.',
         kontakt_vcard_aria: 'Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.',
+        kontakt_postcard_aria: 'Kunst-Postkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.',
+        kontakt_postcard_badge: 'Kunst-Postkarte',
+        kontakt_vcard_badge: 'Visitenkarte',
+        kontakt_postcard_title: 'Original Kunst-Postkarte',
         kontakt_vcard_role: 'Künstlerin & Inhaberin',
         kontakt_vcard_save: 'Kontakt speichern (.vcf)',
+        kontakt_vcard_pdf: 'Visitenkarte (PDF)',
+        kontakt_postcard_pdf: 'Postkarte (PDF)',
         kontakt_city: 'Bonn, Deutschland',
         kontakt_address: '53175 Bonn, Deutschland',
         social_ig_label: 'Folge mir auf Instagram',
@@ -897,12 +903,18 @@ const I18N_DICTIONARY = {
         leist_cta_btn1: 'Configure Commission',
         leist_cta_btn2: "I'd Love to Hear From You!",
 
-        // Kontakt.html
-        kontakt_vcard_title: 'Digital Business Card',
-        kontakt_vcard_hint: 'Move your mouse over the card or tap it to flip it.',
+        // Kontakt.html & About Me (Business Card & Postcard)
+        kontakt_vcard_title: 'Digital Business Card & Art Postcard',
+        kontakt_vcard_hint: 'Move your mouse over the cards or tap them to flip them.',
         kontakt_vcard_aria: 'Digital business card of Manuela Schenk. Press Enter or Space to flip.',
+        kontakt_postcard_aria: 'Art postcard of Manuela Schenk. Press Enter or Space to flip.',
+        kontakt_postcard_badge: 'Art Postcard',
+        kontakt_vcard_badge: 'Business Card',
+        kontakt_postcard_title: 'Original Art Postcard',
         kontakt_vcard_role: 'Artist & Owner',
         kontakt_vcard_save: 'Save Contact (.vcf)',
+        kontakt_vcard_pdf: 'Business Card (PDF)',
+        kontakt_postcard_pdf: 'Postcard (PDF)',
         kontakt_city: 'Bonn, Germany',
         kontakt_address: '53175 Bonn, Germany',
         social_ig_label: 'Follow me on Instagram',
@@ -2812,19 +2824,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
 
-    // --- F. 3D Visitenkarte Flipping ---
-    const flipCard = document.querySelector('.flip-card');
-    if (flipCard) {
-        flipCard.addEventListener('click', function () {
+    // --- F. 3D Visitenkarte & Postkarte Flipping ---
+    const flipCards = document.querySelectorAll('.flip-card');
+    flipCards.forEach(card => {
+        card.addEventListener('click', function () {
             this.classList.toggle('flipped');
         });
-        flipCard.addEventListener('keydown', function (e) {
+        card.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 this.classList.toggle('flipped');
             }
         });
-    }
+    });
 
     // --- G. Rechtsklick-Schutz (Toast) ---
     document.addEventListener('contextmenu', function (e) {

@@ -38,7 +38,7 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=6">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=7">
   <script>
     (function () {
       try {
@@ -242,36 +242,73 @@
 
     <section class="visitenkarte-section reveal section--margin-top">
       <h2 class="h2--centered"><i class="fa-solid fa-address-card" aria-hidden="true"></i> <span
-          data-i18n="kontakt_vcard_title">Digitale Visitenkarte</span></h2>
-      <p class="intro-text intro-text--subtle" data-i18n="kontakt_vcard_hint">Bewege die Maus über die Karte oder tippe
-        sie an, um sie umzudrehen.</p>
+          data-i18n="kontakt_vcard_title">Digitale Visitenkarte &amp; Kunst-Postkarte</span></h2>
+      <p class="intro-text intro-text--subtle" data-i18n="kontakt_vcard_hint">Bewege die Maus über die Karten oder
+        tippe sie an, um sie umzudrehen.</p>
       <div class="media-row">
-        <div class="flip-card" tabindex="0" data-i18n-aria-label="kontakt_vcard_aria"
-          aria-label="Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <img src="assets/images/logos/logo.png" alt="Logo von ManuFAKTUR Schenk">
-            </div>
-            <div class="flip-card-back">
-              <h2>Manuela Schenk</h2>
-              <span class="title" data-i18n="kontakt_vcard_role">Künstlerin &amp; Inhaberin</span>
-              <ul class="contact-info">
-                <li><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+491632662435">+49 163 2662435</a></li>
-                <li><i class="fa fa-envelope" aria-hidden="true"></i> <a
-                    href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a></li>
-                <li><i class="fa fa-map-marker" aria-hidden="true"></i> <span data-i18n="kontakt_city">Bonn,
-                    Deutschland</span></li>
-                <li class="website-link"><i class="fa fa-globe" aria-hidden="true"></i> manufaktur.shop</li>
-              </ul>
+        <div class="media-card-wrapper">
+          <span class="card-badge"><i class="fa-solid fa-id-card" aria-hidden="true"></i> <span
+              data-i18n="kontakt_vcard_badge">Visitenkarte</span></span>
+          <div class="flip-card" tabindex="0" data-i18n-aria-label="kontakt_vcard_aria"
+            aria-label="Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
+            <div class="flip-card-inner">
+              <div class="flip-card-front flip-card-front--fullimg">
+                <picture>
+                  <source srcset="assets/images/print-media/visitenkarte-p1.webp" type="image/webp">
+                  <img src="assets/images/print-media/visitenkarte-p1.png" loading="lazy"
+                    alt="Vorderseite der Visitenkarte von Manuela Schenk mit Logo">
+                </picture>
+              </div>
+              <div class="flip-card-back flip-card-back--fullimg">
+                <picture>
+                  <source srcset="assets/images/print-media/visitenkarte-p2.webp" type="image/webp">
+                  <img src="assets/images/print-media/visitenkarte-p2.png" loading="lazy"
+                    alt="Rückseite der Visitenkarte mit Kontaktdaten von Manuela Schenk">
+                </picture>
+              </div>
             </div>
           </div>
+          <div class="card-actions">
+            <a href="assets/documents/visitenkarte.vcf" class="btn" download>
+              <i class="fa fa-address-card" aria-hidden="true"></i> <span
+                data-i18n="kontakt_vcard_save">Kontakt speichern (.vcf)</span>
+            </a>
+            <a href="assets/documents/visitenkarte.pdf" class="btn" target="_blank" rel="noopener" download>
+              <i class="fa fa-file-pdf" aria-hidden="true"></i> <span
+                data-i18n="kontakt_vcard_pdf">Visitenkarte (PDF)</span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="text-align-center margin-top-30">
-        <a href="assets/documents/visitenkarte.vcf" class="btn" download>
-          <i class="fa fa-address-card" aria-hidden="true"></i> <span data-i18n="kontakt_vcard_save">Kontakt speichern
-            (.vcf)</span>
-        </a>
+
+        <div class="media-card-wrapper">
+          <span class="card-badge"><i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i> <span
+              data-i18n="kontakt_postcard_badge">Kunst-Postkarte</span></span>
+          <div class="flip-card flip-card--postcard" tabindex="0" data-i18n-aria-label="kontakt_postcard_aria"
+            aria-label="Kunst-Postkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.">
+            <div class="flip-card-inner">
+              <div class="flip-card-front flip-card-front--fullimg">
+                <picture>
+                  <source srcset="assets/images/print-media/postkarte-p1.webp" type="image/webp">
+                  <img src="assets/images/print-media/postkarte-p1.png" loading="lazy"
+                    alt="Vorderseite der Kunst-Postkarte mit fünf Gemälden von Manuela Schenk">
+                </picture>
+              </div>
+              <div class="flip-card-back flip-card-back--fullimg">
+                <picture>
+                  <source srcset="assets/images/print-media/postkarte-p2.webp" type="image/webp">
+                  <img src="assets/images/print-media/postkarte-p2.png" loading="lazy"
+                    alt="Rückseite der Kunst-Postkarte von Manuela Schenk">
+                </picture>
+              </div>
+            </div>
+          </div>
+          <div class="card-actions">
+            <a href="assets/documents/postkarte.pdf" class="btn" target="_blank" rel="noopener" download>
+              <i class="fa fa-file-pdf" aria-hidden="true"></i> <span
+                data-i18n="kontakt_postcard_pdf">Postkarte (PDF)</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -294,7 +331,7 @@
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=6"></script>
+  <script src="Home.min.js?v=7"></script>
 </body>
 
 </html>

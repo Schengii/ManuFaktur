@@ -1082,14 +1082,43 @@ cite {
     margin-top: 30px;
 }
 
-/* 3D Flipping Visitenkarte */
+/* 3D Flipping Karten (Visitenkarte & Kunst-Postkarte) */
+.media-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 100%;
+}
+
+.card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--tag-bg, #edf2f7);
+    color: var(--secondary-color, #1a2d52);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid var(--border-color, #eae5df);
+    letter-spacing: 0.5px;
+}
+
 .flip-card {
     background-color: transparent;
     width: 380px;
-    height: 230px;
-    perspective: 1000px;
+    height: 240px;
+    perspective: 1200px;
     cursor: pointer;
-    max-width: 90vw;
+    max-width: 92vw;
+    border-radius: 16px;
+}
+
+.flip-card--postcard {
+    width: 440px;
+    height: 295px;
+    aspect-ratio: 148 / 105;
 }
 
 .flip-card-inner {
@@ -1099,7 +1128,7 @@ cite {
     text-align: center;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     transform-style: preserve-3d;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
     border-radius: 16px;
 }
 
@@ -1134,16 +1163,47 @@ cite {
 }
 
 .flip-card-front img {
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 85%;
+    max-height: 85%;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
     object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.flip-card-front--fullimg {
+    padding: 0;
+    background: #111;
+}
+
+.flip-card-front--fullimg img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    filter: none;
+    border-radius: 15px;
+}
+
+.flip-card-back--fullimg {
+    padding: 0;
+    background: #fff;
+}
+
+.flip-card-back--fullimg img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: fill;
+    display: block;
+    border-radius: 15px;
 }
 
 .flip-card-back {
     background-color: #ffffff;
     background-image: linear-gradient(135deg, #fdfdfc 0%, #faf8f5 100%);
-    padding: 25px 30px;
+    padding: 24px 28px;
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -1161,11 +1221,13 @@ cite {
     background-color: var(--primary-color);
 }
 
-/* Die Kartenrückseite bleibt bewusst in beiden Themes weiß/cremefarben (physische Visitenkarte).
-   Textfarben werden deshalb fest (nicht themenabhängig) auf dunkle, kontrastreiche Töne gesetzt –
-   sonst würde im Dark Mode heller Theme-Text auf der weißen Karte fast unsichtbar werden. */
+.flip-card-back--fullimg::before {
+    display: none;
+}
+
+/* Die Kartenrückseite bleibt bewusst in beiden Themes weiß/cremefarben (physische Karte). */
 .flip-card-back h2 {
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     margin-bottom: 2px;
     border-bottom: none;
     padding-bottom: 0;
@@ -1182,7 +1244,7 @@ cite {
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 1px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     display: block;
 }
 
@@ -1207,14 +1269,27 @@ cite {
 }
 
 .flip-card-back .website-link {
-    margin-top: 8px;
+    margin-top: 6px;
     border-top: 1px solid #eae5df;
-    padding-top: 8px;
+    padding-top: 6px;
     font-weight: 700;
 }
 
 .flip-card-back .contact-info a:hover {
     color: #7a5a1f;
+}
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.card-actions .btn {
+    margin-top: 0;
+    padding: 10px 18px;
+    font-size: 0.88rem;
 }
 
 /* =========================================
