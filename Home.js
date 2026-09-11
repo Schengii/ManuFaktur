@@ -2286,7 +2286,9 @@ function initLightboxMagnifier() {
     }
 }
 
-function filterSelection(category) {
+let isFilterHistoryPushed = false;
+
+function applyFilterUI(category) {
     activeCategory = category || 'alle';
     const btnContainer = document.getElementById('filter-container');
     if (btnContainer) {
@@ -2302,6 +2304,57 @@ function filterSelection(category) {
     }
     filterGallery();
 }
+
+function filterSelection(category, isPopState = false) {
+    const targetCategory = category || 'alle';
+
+    if (!isPopState && window.history && window.history.pushState) {
+        if (targetCategory !== 'alle') {
+            if (!isFilterHistoryPushed) {
+                window.history.pushState({ galleryFilter: targetCategory }, '', window.location.pathname + window.location.search);
+                isFilterHistoryPushed = true;
+            } else {
+                window.history.replaceState({ galleryFilter: targetCategory }, '', window.location.pathname + window.location.search);
+            }
+        } else if (targetCategory === 'alle' && isFilterHistoryPushed) {
+            isFilterHistoryPushed = false;
+            applyFilterUI('alle');
+            window.history.back();
+            return;
+        }
+    }
+
+    applyFilterUI(targetCategory);
+}
+
+// Browser PopState Event für Zurück-Taste am Smartphone
+window.addEventListener('popstate', function (event) {
+    // 1. Wenn die Lightbox geöffnet ist, schließe sie zuerst
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox && (lightbox.style.display === 'flex' || lightbox.style.display === 'block')) {
+        if (typeof window.closeLightbox === 'function') {
+            window.closeLightbox(false);
+        } else {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        }
+        if (event.state && event.state.galleryFilter) {
+            isFilterHistoryPushed = (event.state.galleryFilter !== 'alle');
+            applyFilterUI(event.state.galleryFilter);
+        }
+        return;
+    }
+
+    // 2. Galerie-Filter auf vorherigen Zustand zurücksetzen (z.B. zurück zu 'alle')
+    const filterContainer = document.getElementById('filter-container');
+    if (filterContainer) {
+        const state = event.state;
+        const targetFilter = (state && state.galleryFilter) ? state.galleryFilter : 'alle';
+        isFilterHistoryPushed = (targetFilter !== 'alle');
+        applyFilterUI(targetFilter);
+    }
+});
 
 function filterGallery() {
     const searchInput = document.getElementById('gallery-search');
@@ -2654,9 +2707,14 @@ document.addEventListener('DOMContentLoaded', function () {
         // Lupe / Magnifier Zoom initialisieren
         initLightboxMagnifier();
 
-        // Hash in URL setzen ohne Neuladen
-        if (itemId && history.replaceState) {
-            history.replaceState(null, null, '#' + itemId);
+        // Hash in URL setzen & History State anpassen
+        const isAlreadyOpen = lightbox && (lightbox.style.display === 'flex' || lightbox.style.display === 'block');
+        if (itemId && history.pushState) {
+            if (!isAlreadyOpen) {
+                history.pushState({ galleryLightbox: true, galleryFilter: activeCategory, itemId: itemId }, '', '#' + itemId);
+            } else if (history.replaceState) {
+                history.replaceState({ galleryLightbox: true, galleryFilter: activeCategory, itemId: itemId }, '', '#' + itemId);
+            }
         }
 
         const closeBtn = lightbox.querySelector('.close');
@@ -2735,15 +2793,20 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Schließen & Scroll-Restaurierung
-    const closeLightboxFn = function () {
+    const closeLightboxFn = function (triggerHistoryBack = true) {
         if (lightbox) lightbox.style.display = 'none';
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
+        if (triggerHistoryBack && window.history.state && window.history.state.galleryLightbox) {
+            window.history.back();
+            return;
+        }
         if (history.replaceState) {
-            history.replaceState(null, null, window.location.pathname);
+            history.replaceState({ galleryFilter: activeCategory }, '', window.location.pathname + window.location.search);
         }
         if (lastFocusedElement) lastFocusedElement.focus();
     };
+    window.closeLightbox = closeLightboxFn;
 
     if (lightbox) {
         const closeBtn = lightbox.querySelector('.close');
@@ -3040,6 +3103,8 @@ function showFormFeedback(type, message) {
     if (!feedback) {
         feedback = document.createElement('div');
         feedback.id = 'form-feedback';
+        feedback.setAttribute('role', 'alert');
+        feedback.setAttribute('aria-live', 'polite');
         const form = document.querySelector('.contact-form');
         if (form) form.insertAdjacentElement('afterend', feedback);
     }
@@ -3270,6 +3335,9 @@ runOnDOMReady(function () {
    ========================================= */
 runOnDOMReady(function () {
     if (document.getElementById('filter-container')) {
-        filterSelection('alle');
+        if (window.history && window.history.replaceState && (!window.history.state || !window.history.state.galleryFilter)) {
+            window.history.replaceState({ galleryFilter: 'alle' }, '', window.location.href);
+        }
+        filterSelection('alle', true);
     }
 });

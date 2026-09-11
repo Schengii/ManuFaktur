@@ -185,7 +185,7 @@ a:hover {
 .btn:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    color: white;
+    color: var(--secondary-color);
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(122, 90, 31, 0.25);
 }
@@ -2199,7 +2199,11 @@ footer {
 
     .flip-card {
         width: 100%;
-        height: 240px;
+        max-width: 360px;
+        min-height: 230px;
+        height: auto;
+        aspect-ratio: 85 / 55;
+        margin: 0 auto;
     }
 
     .flip-card-back {
@@ -2262,6 +2266,24 @@ footer {
 
     h2 {
         font-size: 1.35rem;
+    }
+
+    .flip-card-back {
+        padding: 12px 14px;
+    }
+
+    .flip-card-back h2 {
+        font-size: 1.1rem;
+    }
+
+    .flip-card-back .title {
+        font-size: 0.72rem;
+        margin-bottom: 6px;
+    }
+
+    .flip-card-back .contact-info li {
+        font-size: 0.78rem;
+        margin-bottom: 4px;
     }
 
     .welcome h1 {
@@ -2345,6 +2367,52 @@ footer {
 .page-title--left {
     text-align: left;
     margin-bottom: 2rem;
+}
+
+/* Lesefreundlicher Textbereich für Impressum & Datenschutz (WCAG AAA & Lese-Rechtschreib-Schwäche) */
+.text-content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1rem 0;
+    line-height: 1.75;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.text-content h2 {
+    margin-top: 2.2rem;
+    margin-bottom: 0.9rem;
+    font-size: 1.45rem;
+    line-height: 1.35;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.4rem;
+}
+
+.text-content h3 {
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+    font-size: 1.18rem;
+    line-height: 1.4;
+    color: var(--secondary-color);
+}
+
+[data-theme="dark"] .text-content h3,
+body.dark-mode .text-content h3 {
+    color: #9ac2f8;
+}
+
+.text-content p,
+.text-content ul {
+    margin-bottom: 1.25rem;
+    font-size: 1.02rem;
+}
+
+.text-content ul {
+    padding-left: 1.5rem;
+}
+
+.text-content li {
+    margin-bottom: 0.5rem;
 }
 
 /* h2 centered (Visitenkarte section) */
@@ -2796,7 +2864,7 @@ footer {
     gap: 8px;
     background-color: var(--primary-color);
     border: 2px solid var(--primary-color);
-    color: white;
+    color: var(--secondary-color);
     padding: 12px 28px;
     border-radius: 50px;
     font-size: 0.95rem;
@@ -2809,6 +2877,7 @@ footer {
 .btn-next:hover {
     background-color: var(--accent-color);
     border-color: var(--accent-color);
+    color: white;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(179, 143, 77, 0.35);
 }
@@ -2841,7 +2910,7 @@ footer {
 .btn-submit:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    color: white;
+    color: var(--secondary-color);
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(179, 143, 77, 0.3);
 }
@@ -2981,13 +3050,15 @@ footer {
 .form-feedback--success {
     background: rgba(39, 174, 96, 0.1);
     border: 1px solid rgba(39, 174, 96, 0.4);
+    border-left: 4px solid #1a7a3d;
     color: #1a7a3d;
 }
 
 .form-feedback--error {
     background: rgba(192, 57, 43, 0.08);
     border: 1px solid rgba(192, 57, 43, 0.3);
-    color: #c0392b;
+    border-left: 4px solid #c0392b;
+    color: #a93226;
 }
 
 .form-feedback a {
@@ -4062,7 +4133,7 @@ h2 {
     }
 
     .lightbox-views-grid {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(5, minmax(62px, 1fr));
         overflow-x: auto;
         gap: 6px;
     }
@@ -4521,4 +4592,33 @@ body.dark-mode .lb-tool-btn.active,
 [data-theme="dark"] .btn-subtle-primary,
 body.dark-mode .btn-subtle-primary {
     color: #0b1120 !important;
+}
+
+/* Barrierefreiheit, Kontrast & Rot-Grün-Schwäche im Dark Mode */
+[data-theme="dark"] .selection-hint,
+body.dark-mode .selection-hint {
+    color: #ff9999 !important;
+    background: rgba(255, 118, 117, 0.12) !important;
+    border-left: 3px solid #ff7675 !important;
+}
+
+[data-theme="dark"] .form-feedback--success,
+body.dark-mode .form-feedback--success {
+    background: rgba(46, 204, 113, 0.15) !important;
+    border-color: rgba(74, 222, 128, 0.3) !important;
+    border-left: 4px solid #4ade80 !important;
+    color: #4ade80 !important;
+}
+
+[data-theme="dark"] .form-feedback--error,
+body.dark-mode .form-feedback--error {
+    background: rgba(255, 118, 117, 0.15) !important;
+    border-color: rgba(255, 118, 117, 0.3) !important;
+    border-left: 4px solid #ff7675 !important;
+    color: #ff9999 !important;
+}
+
+[data-theme="dark"] .color-heart,
+body.dark-mode .color-heart {
+    color: #ff7675 !important;
 }

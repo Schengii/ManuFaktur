@@ -39,7 +39,7 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=7">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=9">
   <script>
     (function () {
       try {
@@ -92,18 +92,17 @@
 
     <section class="welcome reveal">
       <img src="assets/images/logos/logo.png" alt="ManuFAKTUR Schenk Logo" class="welcome-logo">
-      <h1>Herzlich Willkommen <i class="fa fa-palette" aria-hidden="true"></i></h1>
-      <p>
+      <h1><span data-i18n="home_welcome_title">Herzlich Willkommen</span> <i class="fa fa-palette" aria-hidden="true"></i></h1>
+      <p data-i18n-html="home_welcome_text">
         Hier entstehen meine Bilder, alle von mir in liebevoller Detailarbeit handgemalt.<br>
         Qualität und Individualität sind mein Markenzeichen. Ich male für Dich Tierportraits oder Landschaften.
       </p>
 
       <div class="hero-trust-badges">
-        <span class="trust-badge"><i class="fa-solid fa-paintbrush" aria-hidden="true"></i> 100% Handgemalt</span>
-        <span class="trust-badge"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Atelier aus Bonn</span>
-        <span class="trust-badge"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Sicherer Versand in
-          DE</span>
-        <span class="trust-badge"><i class="fa-solid fa-heart" aria-hidden="true"></i> Liebevolle Detailarbeit</span>
+        <span class="trust-badge"><i class="fa-solid fa-paintbrush" aria-hidden="true"></i> <span data-i18n="badge_handpainted">100% Handgemalt</span></span>
+        <span class="trust-badge"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span data-i18n="badge_studio">Atelier aus Bonn</span></span>
+        <span class="trust-badge"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> <span data-i18n="badge_shipping">Sicherer Versand in DE</span></span>
+        <span class="trust-badge"><i class="fa-solid fa-heart" aria-hidden="true"></i> <span data-i18n="badge_detail">Liebevolle Detailarbeit</span></span>
       </div>
     </section>
 
@@ -427,7 +426,7 @@
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=7"></script>
+  <script src="Home.min.js?v=9"></script>
 </body>
 
 </html>
