@@ -556,7 +556,6 @@ const I18N_DICTIONARY = {
         kontakt_address: '53175 Bonn, Deutschland',
         social_ig_label: 'Folge mir auf Instagram',
         social_wa_label: 'Schreibe mir auf WhatsApp',
-        social_li_label: 'Verbinde dich auf LinkedIn',
         kontakt_prefill_text: '<strong>Deine Konfiguration wurde übertragen!</strong> Das Formular wurde mit deinen Auswahlen aus dem Konfigurator vorausgefüllt.',
         kontakt_label_name: 'Dein Name',
         kontakt_ph_name: 'Wie dürfen wir dich ansprechen?',
@@ -918,7 +917,6 @@ const I18N_DICTIONARY = {
         kontakt_address: '53175 Bonn, Germany',
         social_ig_label: 'Follow me on Instagram',
         social_wa_label: 'Message me on WhatsApp',
-        social_li_label: 'Connect on LinkedIn',
         kontakt_prefill_text: '<strong>Your configuration has been transferred!</strong> The form has been pre-filled with your selections from the configurator.',
         kontakt_label_name: 'Your Name',
         kontakt_ph_name: 'What should we call you?',
@@ -2327,32 +2325,15 @@ function filterSelection(category, isPopState = false) {
     applyFilterUI(targetCategory);
 }
 
-// Browser PopState Event für Zurück-Taste am Smartphone
+// Browser PopState Event: Nur für Zurück-Taste bei aktivem Filter
 window.addEventListener('popstate', function (event) {
-    // 1. Wenn die Lightbox geöffnet ist, schließe sie zuerst
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox && (lightbox.style.display === 'flex' || lightbox.style.display === 'block')) {
-        if (typeof window.closeLightbox === 'function') {
-            window.closeLightbox(false);
-        } else {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = '';
-            document.documentElement.style.overflow = '';
-        }
-        if (event.state && event.state.galleryFilter) {
-            isFilterHistoryPushed = (event.state.galleryFilter !== 'alle');
-            applyFilterUI(event.state.galleryFilter);
-        }
-        return;
-    }
-
-    // 2. Galerie-Filter auf vorherigen Zustand zurücksetzen (z.B. zurück zu 'alle')
     const filterContainer = document.getElementById('filter-container');
-    if (filterContainer) {
-        const state = event.state;
-        const targetFilter = (state && state.galleryFilter) ? state.galleryFilter : 'alle';
-        isFilterHistoryPushed = (targetFilter !== 'alle');
-        applyFilterUI(targetFilter);
+    if (!filterContainer) return;
+
+    // Nur wenn aktuell ein Filter aktiv ist (nicht 'alle'), wird er bei "Zurück" zurückgesetzt
+    if (activeCategory !== 'alle') {
+        isFilterHistoryPushed = false;
+        applyFilterUI('alle');
     }
 });
 
@@ -2707,14 +2688,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Lupe / Magnifier Zoom initialisieren
         initLightboxMagnifier();
 
-        // Hash in URL setzen & History State anpassen
-        const isAlreadyOpen = lightbox && (lightbox.style.display === 'flex' || lightbox.style.display === 'block');
-        if (itemId && history.pushState) {
-            if (!isAlreadyOpen) {
-                history.pushState({ galleryLightbox: true, galleryFilter: activeCategory, itemId: itemId }, '', '#' + itemId);
-            } else if (history.replaceState) {
-                history.replaceState({ galleryLightbox: true, galleryFilter: activeCategory, itemId: itemId }, '', '#' + itemId);
-            }
+        // Hash in URL setzen ohne Neuladen
+        if (itemId && history.replaceState) {
+            history.replaceState(null, null, '#' + itemId);
         }
 
         const closeBtn = lightbox.querySelector('.close');
@@ -2724,24 +2700,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // Touch Swipe Steuerung für Mobilgeräte in Lightbox
     let touchStartX = 0;
     let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
     if (lightbox) {
         lightbox.addEventListener('touchstart', function(e) {
             touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
         }, { passive: true });
 
         lightbox.addEventListener('touchend', function(e) {
             touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
             handleSwipe();
         }, { passive: true });
     }
 
     function handleSwipe() {
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
         const threshold = 40;
-        if (touchEndX < touchStartX - threshold) {
-            changeSlide(1); // Swipe Links -> Nächstes Bild
-        }
-        if (touchEndX > touchStartX + threshold) {
-            changeSlide(-1); // Swipe Rechts -> Vorheriges Bild
+        // Nur horizontal wischen wenn horizontale Bewegung signifikant größer als vertikale ist
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > threshold) {
+            if (diffX < 0) {
+                changeSlide(1); // Swipe Links -> Nächstes Bild
+            } else {
+                changeSlide(-1); // Swipe Rechts -> Vorheriges Bild
+            }
         }
     }
 
@@ -2793,20 +2777,15 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     // Schließen & Scroll-Restaurierung
-    const closeLightboxFn = function (triggerHistoryBack = true) {
+    const closeLightboxFn = function () {
         if (lightbox) lightbox.style.display = 'none';
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
-        if (triggerHistoryBack && window.history.state && window.history.state.galleryLightbox) {
-            window.history.back();
-            return;
-        }
         if (history.replaceState) {
-            history.replaceState({ galleryFilter: activeCategory }, '', window.location.pathname + window.location.search);
+            history.replaceState(null, null, window.location.pathname + window.location.search);
         }
         if (lastFocusedElement) lastFocusedElement.focus();
     };
-    window.closeLightbox = closeLightboxFn;
 
     if (lightbox) {
         const closeBtn = lightbox.querySelector('.close');
@@ -2879,12 +2858,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- E. Nach oben Button ---
     const backToTopButton = document.querySelector('.back-to-top');
-    window.onscroll = function () {
-        if (backToTopButton) {
-            const show = document.body.scrollTop > 150 || document.documentElement.scrollTop > 150;
+    if (backToTopButton) {
+        const updateBackToTop = function () {
+            const show = document.body.scrollTop > 200 || document.documentElement.scrollTop > 200;
             backToTopButton.style.display = show ? 'flex' : 'none';
-        }
-    };
+        };
+        window.addEventListener('scroll', updateBackToTop, { passive: true });
+        updateBackToTop();
+    }
 
     // --- F. 3D Visitenkarte & Postkarte Flipping ---
     const flipCards = document.querySelectorAll('.flip-card');
