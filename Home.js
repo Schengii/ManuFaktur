@@ -3306,6 +3306,7 @@ runOnDOMReady(function () {
     initPhotoUploadPreview();
     initLightboxInquiry();
     initUrlParamPrefill();
+    initContactForm();
     initTestimonialsCarousel();
     initWallFrameDragLogic();
     registerServiceWorker();

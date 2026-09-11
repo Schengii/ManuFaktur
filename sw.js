@@ -1,4 +1,4 @@
-﻿/* Service Worker für ManuFAKTUR Schenk */
+/* Service Worker für ManuFAKTUR Schenk */
 const CACHE_NAME = 'manufaktur-v13';
 const ASSETS_TO_CACHE = [
   './',
@@ -67,7 +67,11 @@ self.addEventListener('fetch', (event) => {
           }
           return networkResponse;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => {
+          return caches.match(event.request).then((cached) => {
+            return cached || caches.match('./Home.html');
+          });
+        })
     );
     return;
   }
