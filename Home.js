@@ -238,7 +238,7 @@ function getFooterHTML() {
       <h4>ManuFAKTUR</h4>
       <p class="footer-tagline">${isEn ? 'Custom Paintings & Craftsmanship' : 'Individuelle Malerei & Handwerkskunst'}</p>
       <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a></p>
-      <p><i class="fa fa-phone" aria-hidden="true"></i> <span id="footer-phone-text">${isEn ? 'Phone: Upon Request' : 'Telefon: Auf Anfrage'}</span></p>
+      <p><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+491632662435">+49 163 2662435</a></p>
     </div>
     <div class="footer-section">
       <h4>Manuela Schenk</h4>
@@ -246,7 +246,6 @@ function getFooterHTML() {
       <div class="social-icons">
         <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" rel="noopener" class="instagram" aria-label="${isEn ? 'Follow on Instagram' : 'Folge uns auf Instagram'}"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
         <a href="https://wa.me/491632662435" target="_blank" rel="noopener" class="whatsapp" aria-label="${isEn ? 'Contact on WhatsApp' : 'Kontaktiere uns auf WhatsApp'}"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
-        <a href="https://www.linkedin.com/in/manuela-schenk" target="_blank" rel="noopener" class="linkedin" aria-label="${isEn ? 'Connect on LinkedIn' : 'Verbinde dich auf LinkedIn'}"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
       </div>
     </div>
     <div class="footer-section">
