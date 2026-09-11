@@ -1,0 +1,92 @@
+# ==============================================================================
+# .htaccess – ManuFAKTUR Schenk (www.manufaktur-malerei.de)
+# Server-Konfiguration für Apache Webserver (All-Inkl, Strato, IONOS, Hetzner etc.)
+# ==============================================================================
+
+# 1. REWRITE ENGINE & WEITERLEITUNGEN
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # A) HTTP zu HTTPS erzwingen
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # B) Kanonische Domain: manufaktur-malerei.de (ohne www) -> www.manufaktur-malerei.de
+    RewriteCond %{HTTP_HOST} ^manufaktur-malerei\.de$ [NC]
+    RewriteRule ^(.*)$ https://www.manufaktur-malerei.de/$1 [L,R=301]
+</IfModule>
+
+# 2. INDIVIDUELLE FEHLERSEITEN
+ErrorDocument 404 /404.html
+
+# 3. SICHERHEITS-HEADER (SECURITY HEADERS)
+<IfModule mod_headers.c>
+    # Schutz vor MIME-Type Sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Clickjacking-Schutz
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Referrer-Policy zum Schutz von Nutzerdaten
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Berechtigungsrichtlinien für Browser-Features
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+    # HTTP Strict Transport Security (HSTS) – 2 Jahre inkl. Subdomains & Preload
+    Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+    # Dokumente-Verzeichnis vor Suchmaschinen-Indexierung schützen
+    <FilesMatch "\.(pdf|vcf)$">
+        Header set X-Robots-Tag "noindex"
+    </FilesMatch>
+</IfModule>
+
+# 4. KOMPRESSION (GZIP / BROTLI)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json image/svg+xml
+</IfModule>
+
+# 5. BROWSER-CACHING (LADEZEITEN-OPTIMIERUNG)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    # HTML: Kurzer Cache bzw. erneute Validierung für zeitnahe Updates
+    ExpiresByType text/html "access plus 0 seconds"
+
+    # CSS & JavaScript (haben Versionsparameter wie ?v=7)
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+
+    # Web-Fonts (lokal & unveränderlich)
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+
+    # Bilder (WebP, PNG, JPEG, SVG, ICO)
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # Dokumente & Manifest
+    ExpiresByType application/manifest+json "access plus 1 week"
+    ExpiresByType application/pdf "access plus 1 month"
+</IfModule>
+
+# 6. CACHE-CONTROL HEADER FÜR STATISCHE RESSOURCEN
+<IfModule mod_headers.c>
+    <FilesMatch "\.(woff2|woff)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(jpg|jpeg|png|webp|svg|ico)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    <FilesMatch "\.(html)$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
+</IfModule>

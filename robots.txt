@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://manufaktur.shop/sitemap.xml
+Sitemap: https://www.manufaktur-malerei.de/sitemap.xml
 
 # Dokumente und Assets ausschließen
 Disallow: /assets/documents/

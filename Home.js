@@ -541,9 +541,9 @@ const I18N_DICTIONARY = {
         leist_cta_btn1: 'Auftrag konfigurieren',
         leist_cta_btn2: 'Kontaktiere mich gerne!',
 
-        // Kontakt.html & Über Mich (Visitenkarte & Postkarte)
-        kontakt_vcard_title: 'Digitale Visitenkarte & Kunst-Postkarte',
-        kontakt_vcard_hint: 'Bewege die Maus über die Karten oder tippe sie an, um sie umzudrehen.',
+        // Kontakt.html & Über Mich (Visitenkarte)
+        kontakt_vcard_title: 'Digitale Visitenkarte',
+        kontakt_vcard_hint: 'Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.',
         kontakt_vcard_aria: 'Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.',
         kontakt_postcard_aria: 'Kunst-Postkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.',
         kontakt_postcard_badge: 'Kunst-Postkarte',
@@ -903,9 +903,9 @@ const I18N_DICTIONARY = {
         leist_cta_btn1: 'Configure Commission',
         leist_cta_btn2: "I'd Love to Hear From You!",
 
-        // Kontakt.html & About Me (Business Card & Postcard)
-        kontakt_vcard_title: 'Digital Business Card & Art Postcard',
-        kontakt_vcard_hint: 'Move your mouse over the cards or tap them to flip them.',
+        // Kontakt.html & About Me (Business Card)
+        kontakt_vcard_title: 'Digital Business Card',
+        kontakt_vcard_hint: 'Move your mouse over the card or tap it to flip it.',
         kontakt_vcard_aria: 'Digital business card of Manuela Schenk. Press Enter or Space to flip.',
         kontakt_postcard_aria: 'Art postcard of Manuela Schenk. Press Enter or Space to flip.',
         kontakt_postcard_badge: 'Art Postcard',
