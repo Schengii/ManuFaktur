@@ -1201,7 +1201,7 @@ function applyTranslations(lang) {
     const sortLabel = document.querySelector('.gallery-sort-wrapper label');
     if (sortLabel) sortLabel.innerHTML = `<i class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> ${t.sort_label}`;
 
-    // Galerie-Karten (53 Kunstwerke): aria-label, alt/title, Bildunterschrift & "Unikat"-Badge
+    // Galerie-Karten (57 Kunstwerke): aria-label, alt/title, Bildunterschrift & "Unikat"-Badge
     translateGalleryCards(lang);
 
     // Lightbox Buttons
@@ -1577,6 +1577,14 @@ const ARTWORKS_METADATA = {
         "desc": "Elegantes Stillleben des legendären Parfum-Klassikers in pudrigen Rosé- und Goldtönen.",
         "badge": "Unikat"
     },
+    "DSC_6768a": {
+        "title": "Ast mit Zitronen",
+        "technik": "Acryl auf Leinwand",
+        "masse": "18 × 24 cm",
+        "kategorie": "pflanzen",
+        "desc": "Mediterraner Ast mit sonnengereiften Zitronen und frischen grünen Blättern vor leuchtend blauem Himmel.",
+        "badge": "Unikat"
+    },
     "DSC_6769a": {
         "title": "Biene auf Hortensie",
         "technik": "Acryl auf Leinwand",
@@ -1655,6 +1663,30 @@ const ARTWORKS_METADATA = {
         "masse": "18 × 24 cm",
         "kategorie": "sonstiges",
         "desc": "Frisch gezapftes, perlendes Bier mit goldgelber Farbe und dichter weißer Schaumkrone."
+    },
+    "DSC_6793a": {
+        "title": "Traumpfad Kottenforst",
+        "technik": "Acryl auf Leinwand",
+        "masse": "50 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Malerischer Spazierweg im herbstlichen Kottenforst bei Bonn, durchflutet von warmem Sonnenlicht und leuchtenden Blattfarben.",
+        "badge": "Unikat"
+    },
+    "DSC_6796a": {
+        "title": "Boote an der französischen Atlantikküste",
+        "technik": "Acryl auf Leinwand",
+        "masse": "30 × 60 cm",
+        "kategorie": "landschaften",
+        "desc": "Diese kleinen Ruderboote sah ich in einem malerischen Hafen an der französischen Atlantikküste.",
+        "badge": "Unikat"
+    },
+    "DSC_6798a": {
+        "title": "Weg auf Island",
+        "technik": "Öl auf Karton",
+        "masse": "40 × 60 cm",
+        "kategorie": "landschaften",
+        "desc": "Manche Wege auf Island führen über Holzplanken – ein stimmungsvoller Pfad entlang der dramatischen Steilküste.",
+        "badge": "Unikat"
     },
     "bild18-eulen": {
         "title": "Zwei Eulen",
@@ -1735,6 +1767,7 @@ const ARTWORKS_METADATA_EN = {
     "DSC_6763a": { title: "Colorful Rooster", technik: "Acrylic on canvas", desc: "A lively bird portrait with shimmering plumage tones and a characterful pose." },
     "DSC_6765a": { title: "Robin in Winter", technik: "Acrylic on canvas", desc: "A charming robin on a branch with the finest down feathers and a brilliant red breast." },
     "DSC_6767a": { title: "Coco Mademoiselle Perfume", technik: "Acrylic on canvas", desc: "An elegant still life of the legendary perfume classic in powdery rosé and gold tones." },
+    "DSC_6768a": { title: "Branch with Lemons", technik: "Acrylic on canvas", desc: "A Mediterranean branch with sun-ripened lemons and lush green leaves set against a radiant blue sky." },
     "DSC_6769a": { title: "Bee on Hydrangea", technik: "Acrylic on canvas", desc: "A busy honeybee amid a dense sea of sky-blue hydrangea blossoms." },
     "DSC_6771a": { title: "Bee on Lavender", technik: "Acrylic on canvas", desc: "A Mediterranean summer idyll: a bee foraging for nectar on fragrant purple lavender." },
     "DSC_6774a": { title: 'Still Life "Le Petit Déjeuner"', technik: "Acrylic on canvas", desc: "A French breakfast with a fresh butter croissant and coffee in warm morning light." },
@@ -1745,6 +1778,9 @@ const ARTWORKS_METADATA_EN = {
     "DSC_6784a": { title: "Yellow Spring Tulips", technik: "Oil on canvas", desc: "Radiant sun-yellow tulips in delicate layered oil painting with atmospheric depth." },
     "DSC_6788a": { title: "Aperol Spritz", technik: "Acrylic on canvas", desc: "A refreshing Aperol Spritz in a wine glass with an orange slice and clear ice cubes." },
     "DSC_6790a": { title: "Cold Beer in a Glass", technik: "Acrylic on canvas", desc: "Freshly poured, sparkling beer with a golden color and a dense white foam crown." },
+    "DSC_6793a": { title: "Dream Trail in the Kottenforst", technik: "Acrylic on canvas", desc: "A picturesque sunlit walking trail through Bonn's Kottenforst forest, bathed in warm golden autumn light and vibrant foliage." },
+    "DSC_6796a": { title: "Boats on the French Atlantic Coast", technik: "Acrylic on canvas", desc: "A charming harbor scene with small rowing and sailboats moored along the picturesque French Atlantic coastline." },
+    "DSC_6798a": { title: "Path in Iceland", technik: "Oil on cardboard", desc: "A scenic trail along Iceland's dramatic coastal cliffs and turquoise waters, capturing the rugged Nordic atmosphere." },
     "bild18-eulen": { title: "Two Little Owls", technik: "Acrylic on canvas", desc: "Lovingly hand-painted acrylic artwork of two little owls perched on a branch against a blue sky." },
     "bild16-godesburg": { title: "Godesburg Cityscape", technik: "Acrylic on canvas", desc: "Atmospheric painting of historic Godesburg fortress in Bonn during evening twilight." },
     "bild8-rheinaue": { title: "Rheinaue Park Bonn", technik: "Acrylic on canvas", desc: "Autumn impression of the scenic Rheinaue lake in Bonn with reflective waters and golden foliage." },
@@ -1766,7 +1802,7 @@ function getArtMeta(itemId) {
 
 /**
  * Übersetzt die Galerie-Karten (aria-label, alt/title, Bildunterschrift, "Unikat"-Badge)
- * direkt anhand von ARTWORKS_METADATA_EN, ohne auf 53 einzelne data-i18n-Attribute angewiesen zu sein.
+ * direkt anhand von ARTWORKS_METADATA_EN, ohne auf 57 einzelne data-i18n-Attribute angewiesen zu sein.
  */
 function translateGalleryCards(lang) {
     if (typeof ARTWORKS_METADATA === 'undefined') return;

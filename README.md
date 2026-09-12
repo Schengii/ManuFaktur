@@ -10,7 +10,7 @@ Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **M
 ManuFaktur/
 ├── index.html                  # Einstiegsseite (Weiterleitung zu Home.html)
 ├── Home.html                   # Startseite (Hero, Highlights, News, Testimonials-Carousel)
-├── Bildergalerie.html          # Filterbare Galerie (53 Kunstwerke, KI-Wandvorlagen, "Weitere Ansichten", WebP, Lightbox)
+├── Bildergalerie.html          # Filterbare Galerie (57 Kunstwerke, KI-Wandvorlagen, "Weitere Ansichten", WebP, Lightbox)
 ├── Leistungen.html             # Leistungsübersicht & FAQ
 ├── Auftrag.html                # Interaktiver 4-Schritte-Auftragskonfigurator
 ├── UeberMich.html              # Porträt & Steckbrief der Künstlerin, Zeitstrahl, 3D-Visitenkarte
@@ -78,12 +78,12 @@ ManuFaktur/
   - Schema.org JSON-LD Strukturierte Daten (`ArtGallery`).
 
 ### 2. `Bildergalerie.html` & Lightbox-System
-- **Funktion:** Interaktive High-End Kunstgalerie für alle 53 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung & Multiperspektiven.
+- **Funktion:** Interaktive High-End Kunstgalerie für alle 57 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung & Multiperspektiven.
 - **Inhalt & Features:**
-  - **Authentischer Werkkatalog (53 Gemälde):** Vollständige Erfassung aller 53 Originalgemälde mit echten Werkstiteln (*Godesburg modern, Drachenfels, Balou, Siebengebirge, Dünenweg Normandie, Texel Leuchtturm, etc.*), exakten Maßen (*z.B. 40×50 cm, 100×150 cm, 19×19 cm*), Maltechniken (*Öl, Acryl, Multimediatechnik, Ölkreide auf handgerahmtem Birkenholz*) und persönlichen Künstler-Beschreibungen.
-  - **Perfekt ausgerichtete Bildausrichtung (Upright Auto-Orientation):** Sämtliche 53 WebP-Thumbnails und Lightbox-Großansichten wurden anhand ihrer Aufnahmeparameter und Bildachsen automatisch korrigiert und aufgerichtet, sodass jedes Kunstwerk direkt richtig herum nach oben weist.
+  - **Authentischer Werkkatalog (57 Gemälde):** Vollständige Erfassung aller 57 Originalgemälde mit echten Werkstiteln (*Godesburg modern, Drachenfels, Balou, Siebengebirge, Dünenweg Normandie, Texel Leuchtturm, Traumpfad Kottenforst, Ast mit Zitronen, Boote an der französischen Atlantikküste, Weg auf Island, etc.*), exakten Maßen (*z.B. 40×50 cm, 100×150 cm, 19×19 cm*), Maltechniken (*Öl, Acryl, Multimediatechnik, Ölkreide auf handgerahmtem Birkenholz*) und persönlichen Künstler-Beschreibungen.
+  - **Perfekt ausgerichtete Bildausrichtung (Upright Auto-Orientation):** Sämtliche 57 WebP-Thumbnails und Lightbox-Großansichten wurden anhand ihrer Aufnahmeparameter und Bildachsen automatisch korrigiert und aufgerichtet, sodass jedes Kunstwerk direkt richtig herum nach oben weist.
   - **Kompakte Galerie-Filterleiste:** Aufgeräumtes Suchfeld sowie nebeneinander platzierte Kategorie-Filter (*Alle, Tiere, Landschaften, Pflanzen, Sonstiges, Gemerkt/Favoriten*) und direkt rechts folgendem **Sortieren-Dropdown** (*A-Z, Z-A*).
-  - **Detaillierte Werk-IDs & Favoriten-Herz-Buttons (`.fav-toggle-btn`):** Jedes der 53 Kunstwerke besitzt eine explizite HTML `id="DSC_..."` sowie dynamisch initialisierte Herz-Buttons zur Favoriten-Speicherung.
+  - **Detaillierte Werk-IDs & Favoriten-Herz-Buttons (`.fav-toggle-btn`):** Jedes der 57 Kunstwerke besitzt eine explizite HTML `id="DSC_..."` sowie dynamisch initialisierte Herz-Buttons zur Favoriten-Speicherung.
   - **LCP-Ladeoptimierung:** Die ersten 4 Kunstwerke oberhalb des Fold-Bereichs werden mit `loading="eager"` und `fetchpriority="high"` geladen für herausragende Google PageSpeed & Lighthouse LCP-Werte.
   - **Barrierefreie Tastatur- & Input-Schutzsteuerung:** Pfeiltasten-Navigation überspringt aktive Formularfelder, damit Benutzereingaben ungestört bleiben.
   - **Benutzerfreundliche Leerzustände (Empty-State):** Angepasste Hilfetexte bei 0 Treffern oder noch leeren Favoriten.
