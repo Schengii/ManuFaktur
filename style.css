@@ -1730,7 +1730,7 @@ footer {
     width: 100%;
     height: 380px;
     background-color: #eae5df;
-    background-image: linear-gradient(rgba(26, 37, 47, 0.4), rgba(26, 37, 47, 0.5)), url('assets/images/artworks/bild8-rheinaue.jpg');
+    background-image: linear-gradient(rgba(26, 37, 47, 0.4), rgba(26, 37, 47, 0.5)), url('assets/images/artworks/lightbox/bild8-rheinaue.webp');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -1882,6 +1882,27 @@ footer {
 .next:hover {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .prev,
+    .next {
+        width: 42px;
+        height: 42px;
+        font-size: 20px;
+        margin-top: -21px;
+    }
+    .prev {
+        left: 8px;
+    }
+    .next {
+        right: 8px;
+    }
+    .close {
+        top: 12px;
+        right: 16px;
+        font-size: 30px;
+    }
 }
 
 /* Nach oben Button */
@@ -2039,6 +2060,9 @@ footer {
         top: 100%;
         left: 0;
         width: 100%;
+        max-height: calc(100vh - 75px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         background-color: rgba(10, 22, 55, 0.99);
         /* Passt zu --nav-bg */
         padding: 30px 0;
@@ -4144,12 +4168,32 @@ h2 {
     }
 }
 
+@media (max-width: 480px) {
+    .lightbox-media-col {
+        min-height: 270px;
+        padding: 8px;
+    }
+    .lightbox-wall-stage {
+        min-height: 220px;
+    }
+}
+
 /* Gallery Sort Dropdown Selector */
 .gallery-sort-wrapper {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     margin-left: 15px;
+}
+
+@media (max-width: 600px) {
+    .gallery-sort-wrapper {
+        display: flex;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+        justify-content: flex-start;
+    }
 }
 
 .gallery-sort-select {

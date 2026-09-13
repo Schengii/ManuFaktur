@@ -535,7 +535,7 @@ const I18N_DICTIONARY = {
 
         // Leistungen.html (Ergänzungen)
         faq_3_q_ship: 'Versand',
-        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild auf dem Postwege weg. Die genauen Versandkosten stimmen wir individuell vorab ab.',
+        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild sicher per Post. Die genauen Versandkosten stimmen wir individuell vorab ab.',
         leist_cta_text: 'Hast Du noch weitere Fragen oder eigene Wünsche?',
         leist_cta_btn1: 'Auftrag konfigurieren',
         leist_cta_btn2: 'Kontaktiere mich gerne!',
@@ -1667,17 +1667,9 @@ const ARTWORKS_METADATA = {
     "DSC_6793a": {
         "title": "Traumpfad Kottenforst",
         "technik": "Acryl auf Leinwand",
-        "masse": "50 × 50 cm",
+        "masse": "100 × 100 cm",
         "kategorie": "landschaften",
         "desc": "Malerischer Spazierweg im herbstlichen Kottenforst bei Bonn, durchflutet von warmem Sonnenlicht und leuchtenden Blattfarben.",
-        "badge": "Unikat"
-    },
-    "DSC_6796a": {
-        "title": "Boote an der französischen Atlantikküste",
-        "technik": "Acryl auf Leinwand",
-        "masse": "30 × 60 cm",
-        "kategorie": "landschaften",
-        "desc": "Diese kleinen Ruderboote sah ich in einem malerischen Hafen an der französischen Atlantikküste.",
         "badge": "Unikat"
     },
     "DSC_6798a": {
@@ -1779,7 +1771,6 @@ const ARTWORKS_METADATA_EN = {
     "DSC_6788a": { title: "Aperol Spritz", technik: "Acrylic on canvas", desc: "A refreshing Aperol Spritz in a wine glass with an orange slice and clear ice cubes." },
     "DSC_6790a": { title: "Cold Beer in a Glass", technik: "Acrylic on canvas", desc: "Freshly poured, sparkling beer with a golden color and a dense white foam crown." },
     "DSC_6793a": { title: "Dream Trail in the Kottenforst", technik: "Acrylic on canvas", desc: "A picturesque sunlit walking trail through Bonn's Kottenforst forest, bathed in warm golden autumn light and vibrant foliage." },
-    "DSC_6796a": { title: "Boats on the French Atlantic Coast", technik: "Acrylic on canvas", desc: "A charming harbor scene with small rowing and sailboats moored along the picturesque French Atlantic coastline." },
     "DSC_6798a": { title: "Path in Iceland", technik: "Oil on cardboard", desc: "A scenic trail along Iceland's dramatic coastal cliffs and turquoise waters, capturing the rugged Nordic atmosphere." },
     "bild18-eulen": { title: "Two Little Owls", technik: "Acrylic on canvas", desc: "Lovingly hand-painted acrylic artwork of two little owls perched on a branch against a blue sky." },
     "bild16-godesburg": { title: "Godesburg Cityscape", technik: "Acrylic on canvas", desc: "Atmospheric painting of historic Godesburg fortress in Bonn during evening twilight." },
@@ -3160,11 +3151,15 @@ function initFavoritesInConfigurator() {
 
     grid.innerHTML = '';
     favIds.forEach(id => {
-        const title = id.replace('_', ' ');
+        const meta = ARTWORKS_METADATA[id];
+        const title = (meta && meta.title) ? meta.title : id.replace('_', ' ');
+        const thumbSrc = id.startsWith('bild')
+            ? `assets/images/artworks/thumbs/${id}.webp`
+            : `assets/images/img/thumbs/${id}.webp`;
         const card = document.createElement('div');
         card.className = 'fav-card-item';
         card.setAttribute('tabindex', '0');
-        card.innerHTML = `<img src="assets/images/img/thumbs/${id}.webp" alt="${title}" loading="lazy"><div style="padding:4px; font-size:0.75rem; text-align:center; font-weight:bold;">${id}</div>`;
+        card.innerHTML = `<img src="${thumbSrc}" alt="${title}" loading="lazy"><div style="padding:4px; font-size:0.75rem; text-align:center; font-weight:bold;">${title}</div>`;
         
         card.onclick = function() {
             grid.querySelectorAll('.fav-card-item').forEach(c => c.classList.remove('selected'));
@@ -3172,7 +3167,7 @@ function initFavoritesInConfigurator() {
             
             const hintEl = document.getElementById('hint-1');
             if (hintEl) {
-                hintEl.innerHTML = `<i class="fa fa-circle-info"></i> Ausgewählte Lieblingswerk-Referenz: <strong>${id}</strong>`;
+                hintEl.innerHTML = `<i class="fa fa-circle-info"></i> ${currentLang === 'en' ? 'Selected artwork reference' : 'Ausgewählte Lieblingswerk-Referenz'}: <strong>${title}</strong>`;
                 hintEl.style.display = 'block';
                 hintEl.style.color = 'var(--primary-color)';
             }
