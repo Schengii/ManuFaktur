@@ -377,8 +377,10 @@ const I18N_DICTIONARY = {
         faq_2_a: 'Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel einige Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!',
         faq_3_q: 'Wie lange dauert der Versand?',
         faq_3_a: 'Der Versand innerhalb Deutschlands dauert nach Fertigstellung und Durchtrocknung meist 2 bis 4 Werktage (versichert mit Sendungsverfolgung).',
-        faq_4_q: 'Wie läuft die Bezahlung ab?',
-        faq_4_a: 'Nach Fertigstellung sende ich Dir ein hochauflösendes Foto des Bildes. Erst wenn Du vollkommen zufrieden bist, begleichst Du die Rechnung bequem per Überweisung oder PayPal.',
+        faq_3_q_ship: 'Versand',
+        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild sicher per Post. Die genauen Versandkosten stimmen wir individuell vorab ab.',
+        faq_4_q_cancellation: 'Widerrufsrecht bei Auftragsarbeiten',
+        faq_4_a_cancellation: 'Bei individuell nach Deinen persönlichen Wünschen und Vorgaben angefertigten Kunstwerken (wie z.&nbsp;B. Tierportraits nach Fotovorlage) besteht gemäß §&nbsp;312g Abs.&nbsp;2 Nr.&nbsp;1 BGB kein gesetzliches Widerrufsrecht, da das Werk ein eindeutig auf Dich zugeschnittenes Unikat ist. Vor Beginn und während des Malprozesses stimme ich aber alle Details und Zwischenschritte eng mit Dir ab, damit Du mit Deinem Ergebnis wunschlos glücklich bist.',
         gallery_page_title: 'Bildergalerie',
         gallery_intro: 'Entdecke meine handgemalten Unikate aus verschiedenen Schaffensphasen.',
         filter_all: 'Alle Werke',
@@ -389,13 +391,17 @@ const I18N_DICTIONARY = {
         filter_favorites: 'Favoriten',
         search_placeholder: 'Gemälde, Motive oder Techniken durchsuchen...',
         sort_label: 'Sortierung:',
+        sort_aria: 'Galerie sortieren',
         sort_default: 'Standard',
+        sort_newest: 'Neueste zuerst',
         sort_title_asc: 'Titel (A-Z)',
         sort_title_desc: 'Titel (Z-A)',
         gallery_empty_fav_title: 'Noch keine Favoriten gemerkt.',
         gallery_empty_fav_text: 'Klicke auf das Herz-Symbol auf den Kunstwerken, um deine persönlichen Lieblingswerke hier zu speichern.',
         gallery_empty_search_title: 'Keine passenden Gemälde gefunden.',
         gallery_empty_search_text: 'Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.',
+        gallery_counter_all: '{count} Gemälde',
+        gallery_counter_filtered: '{visible} von {total} Gemälden',
         scene_label: 'KI-Wandvorlage:',
         scene_label_short: 'KI-Wandvorlage',
         scene_living: 'Wohnzimmer',
@@ -441,6 +447,9 @@ const I18N_DICTIONARY = {
         lb_btn_room: 'In deinem Raum ansehen',
         lb_btn_fav_add: 'Zu Favoriten hinzufügen',
         lb_btn_fav_remove: 'Aus Favoriten entfernen',
+        lb_share_btn: 'Gemälde teilen',
+        lb_share_aria: 'Gemälde teilen',
+        lb_share_copied: '🔗 Link zum Kunstwerk kopiert!',
         lb_rotate: '90° Drehen',
         lb_zoom: 'Lupe Zoom',
         lb_center: 'Zentrieren',
@@ -736,10 +745,10 @@ const I18N_DICTIONARY = {
         faq_1_a: 'The price depends on the size of the painting. Payment is made in advance (incl. postage and packaging).',
         faq_2_q: 'How long does it take to create a painting?',
         faq_2_a: 'Depending on the technique (acrylic dries faster than oil) and current commissions, completion typically takes a few weeks. Please order well in advance for gifts!',
-        faq_3_q: 'How long does shipping take?',
-        faq_3_a: 'Shipping within Germany takes 2 to 4 business days after full drying and packaging (fully insured with tracking number). International shipping is also available upon request.',
-        faq_4_q: 'How does payment work?',
-        faq_4_a: 'Upon completion, I send you high-resolution photos of the finished painting. You only finalize payment via bank transfer or PayPal once you are completely thrilled with the result.',
+        faq_3_q_ship: 'Shipping',
+        faq_3_a_ship: 'Once completed and fully dried, I will ship your painting safely by post. Exact shipping rates are agreed upon individually beforehand.',
+        faq_4_q_cancellation: 'Right of Withdrawal for Custom Artworks',
+        faq_4_a_cancellation: 'For artworks created individually according to your personal wishes and specifications (such as pet portraits from photo references), there is no statutory right of withdrawal pursuant to § 312g (2) No. 1 German Civil Code (BGB), as the work is clearly tailored to you personally. However, before starting and throughout the painting process, I closely coordinate all details and milestones with you so that you will be completely thrilled with your finished painting.',
         gallery_page_title: 'Art Gallery',
         gallery_intro: 'Discover my hand-painted originals across diverse styles and creative periods.',
         filter_all: 'All Works',
@@ -750,13 +759,17 @@ const I18N_DICTIONARY = {
         filter_favorites: 'Favorites',
         search_placeholder: 'Search paintings, motifs, techniques or sizes...',
         sort_label: 'Sort by:',
+        sort_aria: 'Sort gallery',
         sort_default: 'Default',
+        sort_newest: 'Newest first',
         sort_title_asc: 'Title (A-Z)',
         sort_title_desc: 'Title (Z-A)',
         gallery_empty_fav_title: 'No favorites saved yet.',
         gallery_empty_fav_text: 'Click the heart icon on any artwork to save your personal favorites here.',
         gallery_empty_search_title: 'No matching paintings found.',
         gallery_empty_search_text: 'Try a different search term or reset the category filter.',
+        gallery_counter_all: '{count} paintings',
+        gallery_counter_filtered: '{visible} of {total} paintings',
         scene_label: 'AI Wall Preview:',
         scene_label_short: 'AI Wall Preview',
         scene_living: 'Living Room',
@@ -802,6 +815,9 @@ const I18N_DICTIONARY = {
         lb_btn_room: 'View in Your Room',
         lb_btn_fav_add: 'Add to Favorites',
         lb_btn_fav_remove: 'Remove from Favorites',
+        lb_share_btn: 'Share Artwork',
+        lb_share_aria: 'Share artwork',
+        lb_share_copied: '🔗 Link to artwork copied!',
         lb_rotate: 'Rotate 90°',
         lb_zoom: 'Magnifier Zoom',
         lb_center: 'Center',
@@ -1193,10 +1209,11 @@ function applyTranslations(lang) {
         gallerySearch.setAttribute('aria-label', t.search_placeholder);
     }
     const sortSelect = document.getElementById('gallery-sort-select');
-    if (sortSelect && sortSelect.options.length >= 3) {
+    if (sortSelect && sortSelect.options.length >= 4) {
         sortSelect.options[0].text = t.sort_default;
-        sortSelect.options[1].text = t.sort_title_asc;
-        sortSelect.options[2].text = t.sort_title_desc;
+        sortSelect.options[1].text = t.sort_newest;
+        sortSelect.options[2].text = t.sort_title_asc;
+        sortSelect.options[3].text = t.sort_title_desc;
     }
     const sortLabel = document.querySelector('.gallery-sort-wrapper label');
     if (sortLabel) sortLabel.innerHTML = `<i class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> ${t.sort_label}`;
@@ -1207,6 +1224,7 @@ function applyTranslations(lang) {
     // Lightbox Buttons
     setElemHTML('#lightbox-inquiry-btn', `<i class="fa-solid fa-palette" aria-hidden="true"></i> ${t.lb_btn_inquiry}`);
     setElemHTML('#lightbox-room-btn', `<i class="fa-solid fa-house-chimney" aria-hidden="true"></i> ${t.lb_btn_room}`);
+    setElemHTML('#lightbox-share-btn', `<i class="fa-solid fa-share-nodes" aria-hidden="true"></i> ${t.lb_share_btn}`);
     setElemHTML('#btn-rotate-img', `<i class="fa-solid fa-rotate-right" aria-hidden="true"></i> ${t.lb_rotate}`);
     setElemHTML('#btn-toggle-zoom', `<i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> ${t.lb_zoom}`);
     setElemHTML('#btn-reset-pos', `<i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> ${t.lb_center}`);
@@ -1970,12 +1988,26 @@ function sortGallery(sortOption) {
     if (!grid) return;
 
     const items = Array.from(grid.querySelectorAll('.gallery-item'));
+    if (items.length === 0) return;
+
+    // Ursprüngliche Index-Position für stabiles Zurücksetzen / Neueste zuerst merken
+    items.forEach((item, idx) => {
+        if (!item.hasAttribute('data-original-index')) {
+            item.setAttribute('data-original-index', idx);
+        }
+    });
+
     items.sort((a, b) => {
+        const idxA = parseInt(a.getAttribute('data-original-index') || '0', 10);
+        const idxB = parseInt(b.getAttribute('data-original-index') || '0', 10);
         const titleA = (a.querySelector('.gallery-caption')?.innerText || '').toLowerCase();
         const titleB = (b.querySelector('.gallery-caption')?.innerText || '').toLowerCase();
+
         if (sortOption === 'title-asc') return titleA.localeCompare(titleB, 'de');
         if (sortOption === 'title-desc') return titleB.localeCompare(titleA, 'de');
-        return 0;
+        if (sortOption === 'newest') return idxB - idxA;
+        // 'default': Originale kuratierte Reihenfolge wiederherstellen
+        return idxA - idxB;
     });
 
     items.forEach(item => grid.appendChild(item));
@@ -2471,6 +2503,20 @@ function filterGallery() {
             : `<i class="fa-solid fa-images" aria-hidden="true"></i> Zeige ${visibleCount} von ${items.length} Kunstwerken (${catLabel})`;
     }
 
+    const liveCounterEl = document.getElementById('gallery-counter');
+    if (liveCounterEl) {
+        const isEnCounter = currentLang === 'en';
+        if (visibleCount === items.length) {
+            liveCounterEl.textContent = isEnCounter
+                ? `${items.length} paintings`
+                : `${items.length} Gemälde`;
+        } else {
+            liveCounterEl.textContent = isEnCounter
+                ? `${visibleCount} of ${items.length} paintings`
+                : `${visibleCount} von ${items.length} Gemälden`;
+        }
+    }
+
     updateFavBadgeCount();
     updateGalleryLinks();
 }
@@ -2652,20 +2698,57 @@ document.addEventListener('DOMContentLoaded', function () {
             lbWhatsappBtn.href = `https://wa.me/491632662435?text=${encodeURIComponent(waMsg)}`;
         }
 
-        // Share Link Button
+        // Share Link Button & Web Share API
+        window.shareCurrentArtwork = function() {
+            const shareUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, 'Bildergalerie.html') + (itemId ? '#' + itemId : '');
+            const shareTitle = `${realTitle} – ManuFAKTUR Schenk`;
+            const shareText = isEn
+                ? `Check out this hand-painted artwork "${realTitle}" (${displayTechnik}, ${realMasse}) by Manuela Schenk:`
+                : `Sieh dir dieses handgemalte Kunstwerk "${realTitle}" (${displayTechnik}, ${realMasse}) von Manuela Schenk an:`;
+
+            if (navigator.share && navigator.canShare && navigator.canShare({ url: shareUrl, title: shareTitle, text: shareText })) {
+                navigator.share({
+                    title: shareTitle,
+                    text: shareText,
+                    url: shareUrl
+                }).catch((err) => {
+                    if (err && err.name !== 'AbortError') {
+                        fallbackCopyShareLink(shareUrl);
+                    }
+                });
+            } else {
+                fallbackCopyShareLink(shareUrl);
+            }
+        };
+
+        function fallbackCopyShareLink(url) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showToast(isEn ? '🔗 Direct link to artwork copied!' : '🔗 Direktlink zum Gemälde kopiert!');
+                }).catch(() => {
+                    promptCopyFallback(url);
+                });
+            } else {
+                promptCopyFallback(url);
+            }
+        }
+
+        function promptCopyFallback(url) {
+            try {
+                const tempInput = document.createElement('input');
+                tempInput.value = url;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showToast(isEn ? '🔗 Direct link to artwork copied!' : '🔗 Direktlink zum Gemälde kopiert!');
+            } catch (e) {
+                showToast('Link: ' + url);
+            }
+        }
+
         if (lbShareBtn) {
-            lbShareBtn.onclick = function() {
-                const shareUrl = window.location.origin + window.location.pathname + (itemId ? '#' + itemId : '');
-                if (navigator.clipboard) {
-                    navigator.clipboard.writeText(shareUrl).then(() => {
-                        showToast(isEn ? '🔗 Direct link to artwork copied!' : '🔗 Direktlink zum Gemälde kopiert!');
-                    }).catch(() => {
-                        showToast('Link: ' + shareUrl);
-                    });
-                } else {
-                    showToast('Link: ' + shareUrl);
-                }
-            };
+            lbShareBtn.onclick = window.shareCurrentArtwork;
         }
 
         // Favorit Button in Lightbox
@@ -2802,6 +2885,15 @@ document.addEventListener('DOMContentLoaded', function () {
     window.changeSlide = function (n) {
         openLightbox(currentIndex + n);
     };
+
+    // Default Share-Funktion für den Fall, dass sie vor dem ersten Lightbox-Öffnen aufgerufen wird
+    if (!window.shareCurrentArtwork) {
+        window.shareCurrentArtwork = function() {
+            if (visibleGalleryLinks && visibleGalleryLinks[currentIndex]) {
+                openLightbox(currentIndex);
+            }
+        };
+    }
 
     // Schließen & Scroll-Restaurierung
     const closeLightboxFn = function () {

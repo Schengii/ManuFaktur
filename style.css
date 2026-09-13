@@ -2389,14 +2389,21 @@ footer {
     margin-bottom: 2rem;
 }
 
-/* Lesefreundlicher Textbereich für Impressum & Datenschutz (WCAG AAA & Lese-Rechtschreib-Schwäche) */
+/* Lesefreundlicher Textbereich für Impressum & Datenschutz (WCAG AAA & symmetrische Innenabstände) */
 .text-content {
     max-width: 860px;
-    margin: 0 auto;
-    padding: 1rem 0;
+    margin: 0 auto 2.5rem auto;
+    padding: 40px 45px;
     line-height: 1.75;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .text-content {
+        padding: 24px 20px;
+    }
 }
 
 .text-content h2 {
@@ -4214,6 +4221,31 @@ h2 {
     background: var(--card-bg);
 }
 
+/* Gallery Live Counter Badge */
+.gallery-counter {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: var(--card-bg-subtle);
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 18px;
+    margin-left: auto;
+    white-space: nowrap;
+    transition: var(--transition-smooth);
+}
+
+@media (max-width: 768px) {
+    .gallery-counter {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        margin-top: 4px;
+    }
+}
+
 /* =========================================
    FOOTER STYLING & CONTROLS (THEME & LANG)
    ========================================= */
@@ -4479,6 +4511,13 @@ body.dark-mode .search-input-wrapper input {
 body.dark-mode .gallery-sort-select {
     background: #10192a !important;
     color: #9ac2f8 !important;
+    border-color: #2c3e5c !important;
+}
+
+[data-theme="dark"] .gallery-counter,
+body.dark-mode .gallery-counter {
+    background: #10192a !important;
+    color: var(--primary-color) !important;
     border-color: #2c3e5c !important;
 }
 

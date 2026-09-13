@@ -38,7 +38,7 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=12">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=13">
   <script>
     (function(){
       try{
@@ -122,14 +122,17 @@
 
           <div class="gallery-sort-wrapper display-inline-flex margin-left-10 align-items-center">
             <label for="gallery-sort-select" class="font-size-085rem font-weight-600 color-text-muted margin-right-5"><i
-                class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> Sortieren:</label>
+                class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> <span data-i18n="sort_label">Sortieren:</span></label>
             <select id="gallery-sort-select" class="gallery-sort-select" onchange="sortGallery(this.value)"
-              aria-label="Galerie sortieren">
-              <option value="default">Standard</option>
-              <option value="title-asc">Titel (A-Z)</option>
-              <option value="title-desc">Titel (Z-A)</option>
+              aria-label="Galerie sortieren" data-i18n-aria-label="sort_aria">
+              <option value="default" data-i18n="sort_default">Standard</option>
+              <option value="newest" data-i18n="sort_newest">Neueste zuerst</option>
+              <option value="title-asc" data-i18n="sort_title_asc">Titel (A-Z)</option>
+              <option value="title-desc" data-i18n="sort_title_desc">Titel (Z-A)</option>
             </select>
           </div>
+
+          <span id="gallery-counter" class="gallery-counter" aria-live="polite"></span>
         </div>
       </div>
     </div>
@@ -727,6 +730,10 @@
           <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
             <i class="fa-regular fa-heart" aria-hidden="true"></i> <span data-i18n="lb_fav_default">Zu Favoriten</span>
           </button>
+          <button id="lightbox-share-btn" class="btn-subtle" onclick="shareCurrentArtwork()"
+            data-i18n-aria-label="lb_share_aria" aria-label="Gemälde teilen">
+            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> <span data-i18n="lb_share_btn">Gemälde teilen</span>
+          </button>
         </div>
       </div>
     </div>
@@ -745,7 +752,7 @@
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=12"></script>
+  <script src="Home.min.js?v=13"></script>
 </body>
 
 </html>

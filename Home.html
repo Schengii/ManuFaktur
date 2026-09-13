@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 
 <head>
@@ -39,7 +39,7 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=12">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=13">
   <script>
     (function () {
       try {
@@ -415,6 +415,10 @@
           <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
             <i class="fa-regular fa-heart" aria-hidden="true"></i> <span data-i18n="lb_fav_default">Zu Favoriten</span>
           </button>
+          <button id="lightbox-share-btn" class="btn-subtle" onclick="shareCurrentArtwork()"
+            data-i18n-aria-label="lb_share_aria" aria-label="Gemälde teilen">
+            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> <span data-i18n="lb_share_btn">Gemälde teilen</span>
+          </button>
         </div>
       </div>
     </div>
@@ -426,7 +430,7 @@
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=12"></script>
+  <script src="Home.min.js?v=13"></script>
 </body>
 
 </html>
