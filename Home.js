@@ -2344,6 +2344,12 @@ function initLightboxMagnifier() {
 }
 
 let isFilterHistoryPushed = false;
+let isLightboxOpen = false;
+let savedGalleryScrollY = 0;
+let isClosingLightboxFromPopstate = false;
+let isFlyerModalOpen = false;
+let closeLightboxUI = null;
+let closeFlyerModalUI = null;
 
 function applyFilterUI(category) {
     activeCategory = category || 'alle';
@@ -2384,15 +2390,36 @@ function filterSelection(category, isPopState = false) {
     applyFilterUI(targetCategory);
 }
 
-// Browser PopState Event: Nur für Zurück-Taste bei aktivem Filter
+// Globales PopState Event: Behandelt Zurück-Taste für Modale (Lightbox, Flyer) & Filter
 window.addEventListener('popstate', function (event) {
-    const filterContainer = document.getElementById('filter-container');
-    if (!filterContainer) return;
+    if (isClosingLightboxFromPopstate) {
+        isClosingLightboxFromPopstate = false;
+        return;
+    }
 
-    // Nur wenn aktuell ein Filter aktiv ist (nicht 'alle'), wird er bei "Zurück" zurückgesetzt
-    if (activeCategory !== 'alle') {
-        isFilterHistoryPushed = false;
-        applyFilterUI('alle');
+    // 1. Lightbox ist geöffnet -> Schließen, Scrollposition beibehalten, Filter nicht verändern
+    if (isLightboxOpen && typeof closeLightboxUI === 'function') {
+        closeLightboxUI(false);
+        if (event.state && event.state.galleryFilter && event.state.galleryFilter !== activeCategory) {
+            applyFilterUI(event.state.galleryFilter);
+        }
+        return;
+    }
+
+    // 2. Flyer-Modal ist geöffnet -> Schließen
+    if (isFlyerModalOpen && typeof closeFlyerModalUI === 'function') {
+        closeFlyerModalUI(false);
+        return;
+    }
+
+    // 3. Galerie-Filter Navigation
+    const filterContainer = document.getElementById('filter-container');
+    if (filterContainer) {
+        const targetFilter = (event.state && event.state.galleryFilter) ? event.state.galleryFilter : 'alle';
+        if (activeCategory !== targetFilter) {
+            isFilterHistoryPushed = (targetFilter !== 'alle');
+            applyFilterUI(targetFilter);
+        }
     }
 });
 
@@ -2583,8 +2610,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function openLightbox(index) {
+    function openLightbox(index, isFromPopstate = false) {
         if (!lightbox || visibleGalleryLinks.length === 0) return;
+
+        if (!isLightboxOpen) {
+            savedGalleryScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+            isLightboxOpen = true;
+        }
 
         lastFocusedElement = document.activeElement;
         document.body.style.overflow = 'hidden';
@@ -2798,9 +2830,22 @@ document.addEventListener('DOMContentLoaded', function () {
         // Lupe / Magnifier Zoom initialisieren
         initLightboxMagnifier();
 
-        // Hash in URL setzen ohne Neuladen
-        if (itemId && history.replaceState) {
-            history.replaceState(null, null, '#' + itemId);
+        // History & Hash in URL setzen (pushState beim ersten Öffnen, replaceState beim Weiterschalten/Slideshow)
+        if (!isFromPopstate && window.history) {
+            const stateObj = {
+                modal: 'lightbox',
+                artworkId: itemId,
+                galleryFilter: activeCategory || 'alle'
+            };
+            const targetUrl = itemId ? ('#' + itemId) : (window.location.pathname + window.location.search);
+
+            if (window.history.state && window.history.state.modal === 'lightbox') {
+                if (window.history.replaceState) {
+                    window.history.replaceState(stateObj, '', targetUrl);
+                }
+            } else if (window.history.pushState) {
+                window.history.pushState(stateObj, '', targetUrl);
+            }
         }
 
         const closeBtn = lightbox.querySelector('.close');
@@ -2896,15 +2941,45 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Schließen & Scroll-Restaurierung
-    const closeLightboxFn = function () {
-        if (lightbox) lightbox.style.display = 'none';
+    closeLightboxUI = function (triggerHistoryBack = true) {
+        if (!lightbox || !isLightboxOpen) return;
+
+        lightbox.style.display = 'none';
+        isLightboxOpen = false;
         document.body.style.overflow = '';
         document.documentElement.style.overflow = '';
-        if (history.replaceState) {
-            history.replaceState(null, null, window.location.pathname + window.location.search);
+
+        // Exakte Scrollposition der Galerie wiederherstellen
+        if (typeof savedGalleryScrollY === 'number') {
+            window.scrollTo({
+                top: savedGalleryScrollY,
+                left: 0,
+                behavior: 'instant'
+            });
         }
-        if (lastFocusedElement) lastFocusedElement.focus();
+
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+            lastFocusedElement.focus();
+        }
+
+        if (triggerHistoryBack && window.history) {
+            if (window.history.state && window.history.state.modal === 'lightbox') {
+                isClosingLightboxFromPopstate = true;
+                window.history.back();
+            } else if (window.history.replaceState) {
+                window.history.replaceState(
+                    { galleryFilter: activeCategory || 'alle' },
+                    '',
+                    window.location.pathname + window.location.search
+                );
+            }
+        }
     };
+
+    const closeLightboxFn = function () {
+        closeLightboxUI(true);
+    };
+    window.closeLightbox = closeLightboxFn;
 
     if (lightbox) {
         const closeBtn = lightbox.querySelector('.close');
@@ -3042,6 +3117,20 @@ function reveal() {
 window.addEventListener('scroll', reveal);
 
 // Flyer Modal
+closeFlyerModalUI = function (triggerHistoryBack = true) {
+    const modal = document.getElementById('flyerModal');
+    if (modal && isFlyerModalOpen) {
+        modal.style.display = 'none';
+        isFlyerModalOpen = false;
+        document.body.style.overflow = '';
+
+        if (triggerHistoryBack && window.history && window.history.state && window.history.state.modal === 'flyer') {
+            isClosingLightboxFromPopstate = true;
+            window.history.back();
+        }
+    }
+};
+
 function openFlyerModal(element) {
     const modal = document.getElementById('flyerModal');
     const modalImg = document.getElementById('modalImg');
@@ -3049,23 +3138,25 @@ function openFlyerModal(element) {
         modal.style.display = 'flex';
         modalImg.src = element.src;
         document.body.style.overflow = 'hidden';
+        isFlyerModalOpen = true;
+
+        if (window.history && window.history.pushState) {
+            window.history.pushState({ modal: 'flyer' }, '', window.location.href);
+        }
+
         const closeBtn = modal.querySelector('.close');
         if (closeBtn) closeBtn.focus();
     }
 }
 
 function closeFlyerModal() {
-    const modal = document.getElementById('flyerModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+    closeFlyerModalUI(true);
 }
 
 // Esc-Taste schließt auch das Flyer-Modal
 document.addEventListener('keydown', function (e) {
     const modal = document.getElementById('flyerModal');
-    if (modal && modal.style.display === 'flex') {
+    if (modal && isFlyerModalOpen) {
         if (e.key === 'Escape') closeFlyerModal();
     }
 });
@@ -3440,8 +3531,13 @@ runOnDOMReady(function () {
    ========================================= */
 runOnDOMReady(function () {
     if (document.getElementById('filter-container')) {
+        const hash = window.location.hash ? window.location.hash.substring(1) : '';
         if (window.history && window.history.replaceState && (!window.history.state || !window.history.state.galleryFilter)) {
-            window.history.replaceState({ galleryFilter: 'alle' }, '', window.location.href);
+            if (hash) {
+                window.history.replaceState({ galleryFilter: 'alle' }, '', window.location.pathname + window.location.search);
+            } else {
+                window.history.replaceState({ galleryFilter: 'alle' }, '', window.location.href);
+            }
         }
         filterSelection('alle', true);
     }
