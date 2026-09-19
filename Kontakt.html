@@ -182,10 +182,11 @@
         </span>
       </div>
 
-      <form class="contact-form reveal" action="https://formspree.io/f/DEINE_FORMSPREE_ID" method="POST">
-        <!-- Honeypot-Feld gegen Spam-Bots: für Menschen unsichtbar, Bots füllen es meist automatisch aus.
-             Formspree verwirft Einsendungen mit ausgefülltem _gotcha-Feld automatisch. -->
-        <input type="text" name="_gotcha" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms Access Key -->
+        <input type="hidden" name="access_key" value="aecf1c43-94a8-42e4-9d17-4a858d3d30ec">
+        <!-- Honeypot-Feld gegen Spam-Bots: für Menschen unsichtbar, Bots füllen es meist automatisch aus. -->
+        <input type="checkbox" name="botcheck" class="visually-hidden" style="display: none;">
 
         <div class="form-group">
           <label for="name" data-i18n="kontakt_label_name">Dein Name</label>

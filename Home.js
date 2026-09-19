@@ -614,9 +614,9 @@ const I18N_DICTIONARY = {
         dsgvo_h4: '4. Einwilligungspflichtige Dienste von Drittanbietern',
         dsgvo_h4_1: 'Google Maps (Zwei-Klick-Lösung)',
         dsgvo_h4_1_text: 'Auf unserer Website ist eine Karte von Google Maps eingebunden. Um zu verhindern, dass bereits beim Laden der Seite Ihre IP-Adresse an Google übertragen wird, nutzen wir eine datenschutzfreundliche Zwei-Klick-Lösung. Die Karte ist standardmäßig deaktiviert. Erst wenn Sie aktiv auf die Schaltfläche "Karte laden" klicken, willigen Sie ein, dass eine Verbindung zu den Servern von Google (Google Ireland Limited) aufgebaut wird. Rechtsgrundlage für diese Verarbeitung ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Sie können diese Einwilligung jederzeit für die Zukunft widerrufen.',
-        dsgvo_h5: '5. Datenerfassung über das Kontaktformular & Formspree',
+        dsgvo_h5: '5. Datenerfassung über das Kontaktformular & Web3Forms',
         dsgvo_h5_text1: 'Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Formular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns verarbeitet.',
-        dsgvo_h5_formspree: 'Für die technische Übermittlung von Formularanfragen nutzen wir den Dienst <strong>Formspree</strong> (Formspree Inc., 420 5th Ave, New York, NY 10018, USA). Wenn Sie das Formular absenden, werden Ihre eingegebenen Daten verschlüsselt an die Server von Formspree übertragen und per E-Mail an uns weitergeleitet. Die Datenübertragung in die USA erfolgt auf Grundlage von Standardvertragsklauseln der EU-Kommission (Standard Contractual Clauses, Art. 46 Abs. 2 lit. c DSGVO). Rechtsgrundlage ist die Anbahnung oder Erfüllung eines Vertrags (Art. 6 Abs. 1 lit. b DSGVO) sowie unser berechtigtes Interesse an einer verlässlichen Bearbeitung von Kundenanfragen (Art. 6 Abs. 1 lit. f DSGVO).',
+        dsgvo_h5_formspree: 'Für die technische Übermittlung von Formularanfragen nutzen wir den Dienst <strong>Web3Forms</strong> (Web3Forms, c/o Surjith S M, India / Cloudflare infrastructure). Wenn Sie das Formular absenden, werden Ihre eingegebenen Daten verschlüsselt an die Server von Web3Forms übertragen und per E-Mail an uns weitergeleitet. Web3Forms speichert Ihre Formulardaten nicht dauerhaft in Datenbanken, sondern leitet diese direkt an unsere E-Mail-Adresse weiter. Rechtsgrundlage ist die Anbahnung oder Erfüllung eines Vertrags (Art. 6 Abs. 1 lit. b DSGVO) sowie unser berechtigtes Interesse an einer verlässlichen und spamgeschützten Bearbeitung von Kundenanfragen (Art. 6 Abs. 1 lit. f DSGVO).',
         dsgvo_h6: '6. Lokale Speicherung im Browser (LocalStorage gemäß § 25 Abs. 2 Nr. 2 TDDG)',
         dsgvo_h6_text: 'Diese Website verwendet die lokale Speicherfunktion Ihres Browsers (LocalStorage). Wir speichern darin ausschließlich Ihre gewählte Spracheinstellung (manufaktur_lang), das gewünschte Farbdesign (manufaktur_theme) sowie Ihre persönliche Merkliste von Kunstwerken (manufaktur_favorites). Es werden keine Tracking-Cookies gesetzt und keine personenbezogenen Nutzungsprofile erstellt. Die Speicherung ist technisch erforderlich, um die von Ihnen ausdrücklich gewünschten Anzeigeeinstellungen sitzungsübergreifend bereitzustellen (§ 25 Abs. 2 Nr. 2 TDDG).',
         dsgvo_h7: '7. SSL- bzw. TLS-Verschlüsselung',
@@ -981,9 +981,9 @@ const I18N_DICTIONARY = {
         dsgvo_h4: '4. Third-Party Services Requiring Consent',
         dsgvo_h4_1: 'Google Maps (Two-Click Solution)',
         dsgvo_h4_1_text: 'Our website includes a Google Maps map. To prevent your IP address from being transmitted to Google as soon as the page loads, we use a privacy-friendly two-click solution. The map is disabled by default. Only when you actively click the "Load Map" button do you consent to a connection being established with Google\'s servers (Google Ireland Limited). The legal basis for this processing is your consent pursuant to Art. 6 (1)(a) GDPR. You can revoke this consent at any time for the future.',
-        dsgvo_h5: '5. Data Collection via the Contact Form & Formspree',
+        dsgvo_h5: '5. Data Collection via the Contact Form & Web3Forms',
         dsgvo_h5_text1: 'If you send us inquiries via the contact form, the information you provide there, including any contact details you enter, will be processed by us for the purpose of handling your inquiry and in case of follow-up questions.',
-        dsgvo_h5_formspree: 'For the technical transmission of form inquiries, we use the service <strong>Formspree</strong> (Formspree Inc., 420 5th Ave, New York, NY 10018, USA). When you submit the form, your entered data is transmitted in encrypted form to Formspree\'s servers and forwarded to us by email. Data transfer to the USA is conducted on the basis of the European Commission\'s Standard Contractual Clauses (Art. 46 (2)(c) GDPR). The legal basis is the initiation or performance of a contract (Art. 6 (1)(b) GDPR) and our legitimate interest in the reliable handling of customer inquiries (Art. 6 (1)(f) GDPR).',
+        dsgvo_h5_formspree: 'For the technical transmission of form inquiries, we use the service <strong>Web3Forms</strong> (Web3Forms, c/o Surjith S M, India / Cloudflare infrastructure). When you submit the form, your entered data is transmitted in encrypted form to Web3Forms\' servers and forwarded to us by email. Web3Forms does not permanently store form submissions in databases, forwarding them directly to our email address. The legal basis is the initiation or performance of a contract (Art. 6 (1)(b) GDPR) and our legitimate interest in the reliable and spam-protected handling of customer inquiries (Art. 6 (1)(f) GDPR).',
         dsgvo_h6: '6. Local Storage in Browser (LocalStorage pursuant to § 25 (2) No. 2 TDDG)',
         dsgvo_h6_text: 'This website uses your browser\'s local storage function (LocalStorage). We solely store your chosen language preference (manufaktur_lang), selected color theme (manufaktur_theme), and your personal favorites wishlist of artworks (manufaktur_favorites). No tracking cookies are set and no personal user profiles are created. Storage is technically necessary to provide your explicitly requested display settings across sessions (§ 25 (2) No. 2 TDDG).',
         dsgvo_h7: '7. SSL / TLS Encryption',
@@ -3238,11 +3238,11 @@ function initContactForm() {
         const action = form.getAttribute('action');
         const isEn = currentLang === 'en';
 
-        // Nur abfangen wenn echte Formspree-ID noch nicht konfiguriert
-        if (!action || action.includes('DEINE_FORMSPREE_ID')) {
+        const accessKey = form.querySelector('input[name="access_key"]');
+        if (!action || !accessKey || !accessKey.value || accessKey.value === 'DEIN_WEB3FORMS_KEY') {
             e.preventDefault();
             const msg = isEn
-                ? '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The contact form is not yet configured with an endpoint ID. Please email directly to <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>'
+                ? '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The contact form is not yet configured with an access key. Please email directly to <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>'
                 : '<i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Das Formular ist noch nicht vollständig konfiguriert. Bitte schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>';
             showFormFeedback('error', msg);
             return;
@@ -3263,16 +3263,19 @@ function initContactForm() {
                 headers: { 'Accept': 'application/json' }
             });
 
-            if (response.ok) {
+            const result = await response.json().catch(() => null);
+
+            if (response.ok && (!result || result.success !== false)) {
                 form.reset();
                 const successMsg = isEn
                     ? '<i class="fa fa-check-circle" aria-hidden="true"></i> Thank you! Your inquiry has been sent successfully. I will get back to you shortly.'
                     : '<i class="fa fa-check-circle" aria-hidden="true"></i> Vielen Dank! Deine Nachricht wurde gesendet. Ich melde mich bald bei dir.';
                 showFormFeedback('success', successMsg);
             } else {
+                const errorDetail = result && result.message ? ` (${result.message})` : '';
                 const errorMsg = isEn
-                    ? '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> An error occurred while sending. Please try again or contact me directly at <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>'
-                    : '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>';
+                    ? `<i class="fa fa-exclamation-circle" aria-hidden="true"></i> An error occurred while sending${errorDetail}. Please try again or contact me directly at <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>`
+                    : `<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Es ist ein Fehler aufgetreten${errorDetail}. Bitte versuche es erneut oder schreibe direkt an <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a>`;
                 showFormFeedback('error', errorMsg);
             }
         } catch {
