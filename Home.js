@@ -3232,7 +3232,8 @@ function prefillContactForm() {
    ========================================= */
 function initContactForm() {
     const form = document.querySelector('.contact-form');
-    if (!form) return;
+    if (!form || form.dataset.initContactForm) return;
+    form.dataset.initContactForm = 'true';
 
     form.addEventListener('submit', async function (e) {
         const action = form.getAttribute('action');
