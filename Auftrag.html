@@ -543,6 +543,7 @@
         clearSavedConfig();
       }, { once: true });
     }
+    window.buildSummary = buildSummary;
 
     // ── Tastaturunterstützung für Karten ─────────────────────────────────────
     document.addEventListener('keydown', function (e) {

@@ -37,6 +37,9 @@ ErrorDocument 404 /404.html
     # HTTP Strict Transport Security (HSTS) – 2 Jahre inkl. Subdomains & Preload
     Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
 
+    # Content Security Policy (CSP) – schützt vor XSS, Formjacking und Datendiebstahl
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.web3forms.com; frame-ancestors 'self'; upgrade-insecure-requests"
+
     # Dokumente-Verzeichnis vor Suchmaschinen-Indexierung schützen
     <FilesMatch "\.(pdf|vcf)$">
         Header set X-Robots-Tag "noindex"
