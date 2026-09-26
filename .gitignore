@@ -5,7 +5,6 @@ assets/imgTxt/
 
 # Node (nur für den optionalen Minify-Build genutzt, siehe package.json)
 node_modules/
-package-lock.json
 
 # Editor-/OS-Artefakte
 .DS_Store
