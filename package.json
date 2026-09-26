@@ -6,6 +6,13 @@
   "scripts": {
     "build:css": "npx --yes clean-css-cli -o style.min.css style.css",
     "build:js": "npx --yes terser Home.js -o Home.min.js --compress --mangle --comments false",
-    "build": "npm run build:css && npm run build:js"
+    "build:analytics": "esbuild analytics.js --bundle --minify --outfile=analytics.min.js",
+    "build": "npm run build:css && npm run build:js && npm run build:analytics"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
   }
 }
