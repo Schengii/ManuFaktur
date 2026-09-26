@@ -7,5 +7,8 @@
     "build:css": "npx --yes clean-css-cli -o style.min.css style.css",
     "build:js": "npx --yes terser Home.js -o Home.min.js --compress --mangle --comments false",
     "build": "npm run build:css && npm run build:js"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
   }
 }
