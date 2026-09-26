@@ -14,7 +14,7 @@ ManuFaktur/
 ├── Leistungen.html             # Leistungsübersicht & FAQ
 ├── Auftrag.html                # Interaktiver 4-Schritte-Auftragskonfigurator
 ├── UeberMich.html              # Porträt & Steckbrief der Künstlerin, Zeitstrahl, 3D-Visitenkarte
-├── Kontakt.html                # Kontaktformular mit Formspree-Integration & Direktkontakt
+├── Kontakt.html                # Kontaktformular mit Web3Forms-Integration & Direktkontakt
 ├── Impressum.html              # Rechtliches Impressum mit 2-Klick DSGVO-Kartenlösung (Anbieterkennzeichnung)
 ├── Datenschutz.html            # DSGVO-Datenschutzerklärung
 │
@@ -123,7 +123,7 @@ ManuFaktur/
 
 ### 6. `Kontakt.html`
 - **Funktion:** Kontaktseite mit Anfragen-Formular & Direktkontakt.
-- **Inhalt:** Formular mit Formspree-Integration, Kontaktdaten, Social-Media-Links (Instagram, WhatsApp, LinkedIn) und Vorab-Hinweis-Banner bei Weiterleitungen aus dem Konfigurator.
+- **Inhalt:** Formular mit Web3Forms-Integration, Kontaktdaten, Social-Media-Links (Instagram, WhatsApp, LinkedIn) und Vorab-Hinweis-Banner bei Weiterleitungen aus dem Konfigurator.
 
 ### 7. `Impressum.html` & `Datenschutz.html`
 - **Funktion:** Rechtssichere Pflichtangaben nach deutschem Recht und DSGVO inklusive DSGVO-konformer 2-Klick Google Maps Karte im Impressum (`#map-container`).
@@ -162,13 +162,13 @@ ManuFaktur/
 - **Responsive Design & Touch-Targets:** Flüssige Typografie (`clamp()`), kein horizontales Scrollen auf Smartphones, Touch-Targets mit mindestens 44px Höhe.
 - **Micro-Animations:** Button-Shimmer-Effekt (`.btn::before`), Card Hover Elevation (`translateY(-6px)`), sanfte Scroll-Reveals und Puls-Effekte.
 - **Performance & SEO:** WebP-Bildformate (99% Ersparnis), LCP-Optimierung, minifizierte CSS/JS-Produktions-Builds, Font-Preloading, Schema.org JSON-LD strukturierte Daten (inkl. `BreadcrumbList`), kanonische URLs (`rel="canonical"`), Open Graph Meta-Tags, PWA Web App Manifest & Service Worker, individuelle 404-Fehlerseite.
-- **Formular-Spamschutz:** Verstecktes Honeypot-Feld (`_gotcha`) im Kontaktformular gegen automatisierte Bot-Einsendungen.
+- **Formular-Spamschutz:** Verstecktes Botcheck-Honeypot-Feld (`botcheck`) im Kontaktformular gegen automatisierte Bot-Einsendungen.
 
 ---
 
 ## 🚀 Veröffentlichungs-Checkliste (Release Readiness)
 
-1. **Formspree E-Mail-ID (`Kontakt.html`):** Ersetzen der Formspree-ID `DEINE_FORMSPREE_ID` durch deine echte ID vor der Live-Schaltung. Formspree-Honeypot-Feld (`_gotcha`) ist bereits als Spam-Schutz eingebaut.
+1. **Web3Forms E-Mail-Key (`Kontakt.html`):** Echter Web3Forms Access-Key ist bereits hinterlegt und konfiguriert. Spam-Schutz per Honeypot-Feld (`botcheck`) ist aktiv.
 2. **HTTPS-Verschlüsselung:** Aktivierung eines SSL-Zertifikats beim Hoster für PWA Service Worker Funktionalität (`sw.js`).
 3. **XML-Sitemap:** Datumsangaben in `sitemap.xml` unmittelbar vor dem tatsächlichen Go-Live nochmal aktualisieren.
 4. **Produktions-Build:** Vor dem Deploy `npm run build` ausführen, damit `style.min.css`/`Home.min.js` den aktuellen Stand von `style.css`/`Home.js` enthalten (siehe unten).

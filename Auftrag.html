@@ -40,7 +40,7 @@
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
   <!-- CSS: alle Konfigurator-Styles jetzt in style.css (Abschnitt 10) -->
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=13">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=14">
   <script>
     (function () {
       try {
@@ -543,6 +543,7 @@
         clearSavedConfig();
       }, { once: true });
     }
+    window.buildSummary = buildSummary;
 
     // ── Tastaturunterstützung für Karten ─────────────────────────────────────
     document.addEventListener('keydown', function (e) {
