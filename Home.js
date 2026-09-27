@@ -124,7 +124,7 @@ function updateLanguageButtonUI() {
     if (text) {
         text.textContent = currentLang === 'de' ? 'EN (English)' : 'DE (Deutsch)';
     }
-    btn.setAttribute('aria-label', currentLang === 'de' ? 'Sprache zu Englisch wechseln' : 'Switch language to German');
+    btn.setAttribute('aria-label', currentLang === 'de' ? 'EN (English) – Sprache zu Englisch wechseln' : 'DE (Deutsch) – Switch to German');
 }
 
 /* =========================================
@@ -235,13 +235,13 @@ function getFooterHTML() {
     return `
   <footer>
     <div class="footer-section">
-      <h4>ManuFAKTUR</h4>
+      <h3>ManuFAKTUR</h3>
       <p class="footer-tagline">${isEn ? 'Custom Paintings & Craftsmanship' : 'Individuelle Malerei & Handwerkskunst'}</p>
       <p><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a></p>
       <p><i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+491632662435">+49 163 2662435</a></p>
     </div>
     <div class="footer-section">
-      <h4>Manuela Schenk</h4>
+      <h3>Manuela Schenk</h3>
       <p>53175 Bonn &bull; ${isEn ? 'Germany' : 'Deutschland'}</p>
       <div class="social-icons">
         <a href="https://www.instagram.com/manufakturmalerei?igsh=MXVncGlnZDNpeWc4ag==" target="_blank" rel="noopener" class="instagram" aria-label="${isEn ? 'Follow on Instagram' : 'Folge uns auf Instagram'}"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
@@ -249,7 +249,7 @@ function getFooterHTML() {
       </div>
     </div>
     <div class="footer-section">
-      <h4>${isEn ? 'Legal' : 'Rechtliches'}</h4>
+      <h3>${isEn ? 'Legal' : 'Rechtliches'}</h3>
       <p>&copy; ${new Date().getFullYear()} ManuFAKTUR Schenk</p>
       <p class="font-size-09rem">
         <a href="Impressum.html">${isEn ? 'Imprint' : 'Impressum'}</a> |
@@ -257,13 +257,13 @@ function getFooterHTML() {
       </p>
     </div>
     <div class="footer-section footer-settings">
-      <h4>${isEn ? 'Preferences' : 'Einstellungen'}</h4>
+      <h3>${isEn ? 'Preferences' : 'Einstellungen'}</h3>
       <div class="footer-controls-group">
         <button type="button" id="theme-toggle-btn" class="footer-toggle-btn" onclick="toggleTheme()" aria-label="${isDark ? (isEn ? 'Switch to Light Mode' : 'Zu Hellmodus wechseln') : (isEn ? 'Switch to Dark Mode' : 'Zu Dunkelmodus wechseln')}" title="${isEn ? 'Toggle Dark / Light Mode' : 'Dark / Light Mode wechseln'}">
           <i class="${isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon'}" id="theme-toggle-icon" aria-hidden="true"></i>
           <span id="theme-toggle-text">${isDark ? (isEn ? 'Light Mode' : 'Hellmodus') : (isEn ? 'Dark Mode' : 'Dunkelmodus')}</span>
         </button>
-        <button type="button" id="lang-toggle-btn" class="footer-toggle-btn" onclick="toggleLanguage()" aria-label="${isEn ? 'Switch to German' : 'Sprache zu Englisch wechseln'}" title="${isEn ? 'Switch to German' : 'Auf Englisch wechseln'}">
+        <button type="button" id="lang-toggle-btn" class="footer-toggle-btn" onclick="toggleLanguage()" aria-label="${isEn ? 'DE (Deutsch) – Switch to German' : 'EN (English) – Sprache zu Englisch wechseln'}" title="${isEn ? 'Switch to German' : 'Auf Englisch wechseln'}">
           <i class="fa-solid fa-globe" aria-hidden="true"></i>
           <span id="lang-toggle-text">${isEn ? 'DE (Deutsch)' : 'EN (English)'}</span>
         </button>
