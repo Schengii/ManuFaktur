@@ -35,18 +35,8 @@
     <link rel="manifest" href="manifest.json">
     <!-- Lokales Font Awesome für DSGVO-Konformität -->
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="style.min.css?v=14">
-    <script>
-      (function(){
-        try{
-          var t=localStorage.getItem('manufaktur_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-          document.documentElement.setAttribute('data-theme',t);
-          if(t==='dark')document.documentElement.classList.add('dark-mode');
-          var l=localStorage.getItem('manufaktur_lang')||'de';
-          document.documentElement.setAttribute('lang',l);
-        }catch(e){}
-      })();
-    </script>
+    <link rel="stylesheet" type="text/css" href="style.min.css?v=16">
+  <script src="assets/js/theme-init.js"></script>
 
     <!-- SEO Breadcrumb Strukturierte Daten -->
     <script type="application/ld+json">
@@ -122,12 +112,12 @@
   <!-- Footer wird via Home.js injiziert -->
   <footer></footer>
 
-  <button onclick="topFunction()" class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+  <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=14"></script>
+  <script src="Home.min.js?v=16"></script>
 </body>
 </html>

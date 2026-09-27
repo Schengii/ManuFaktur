@@ -1918,7 +1918,7 @@ function updateFavButtonsUI(itemId, isAdded) {
         const currentItem = visibleGalleryLinks[currentIndex].closest('.gallery-item');
         if (currentItem && currentItem.id === itemId) {
             lbFavBtn.classList.toggle('active', isAdded);
-            const heartIcon = isAdded ? '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i>' : '<i class="fa-regular fa-heart"></i>';
+            const heartIcon = isAdded ? '<i class="fa-solid fa-heart color-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
             lbFavBtn.innerHTML = `${heartIcon} ${favButtonLabel(isAdded)}`;
         }
     }
@@ -2024,10 +2024,10 @@ let dragStartX = 0;
 let dragStartY = 0;
 
 const KI_ROOM_IMAGES = {
-    'livingroom': 'assets/images/rooms/livingroom.png',
-    'bedroom': 'assets/images/rooms/bedroom.png',
-    'darkloft': 'assets/images/rooms/darkloft.png',
-    'beigelounge': 'assets/images/rooms/beigelounge.png',
+    'livingroom': 'assets/images/rooms/livingroom.webp',
+    'bedroom': 'assets/images/rooms/bedroom.webp',
+    'darkloft': 'assets/images/rooms/darkloft.webp',
+    'beigelounge': 'assets/images/rooms/beigelounge.webp',
     'detail': ''
 };
 
@@ -2218,7 +2218,7 @@ function setLightboxViewAngle(angle, btn) {
             stage.style.backgroundImage = 'none';
             stage.style.backgroundColor = '#0f172a';
         }
-        img.src = 'assets/images/rooms/canvas_back.png';
+        img.src = 'assets/images/rooms/canvas_back.webp';
         if (badge) {
             badge.style.display = 'inline-flex';
             badge.innerHTML = `<i class="fa-solid fa-square-check"></i> Keilrahmen & Rückseite (Solid Fichtenholz)`;
@@ -2238,7 +2238,7 @@ function setLightboxViewAngle(angle, btn) {
         }
     } else if (currentViewAngle === 'artist') {
         if (stage) {
-            stage.style.backgroundImage = "url('assets/images/rooms/artist_studio.png')";
+            stage.style.backgroundImage = "url('assets/images/rooms/artist_studio.webp')";
             stage.style.backgroundColor = 'transparent';
         }
         if (visibleGalleryLinks[currentIndex]) {
@@ -2788,7 +2788,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const isFav = getFavorites().includes(itemId);
             lbFavBtn.classList.toggle('active', isFav);
             lbFavBtn.innerHTML = isFav 
-                ? (isEn ? '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Remove from Favorites' : '<i class="fa-solid fa-heart" style="color:#e74c3c;"></i> Aus Favoriten entfernen')
+                ? (isEn ? '<i class="fa-solid fa-heart color-heart"></i> Remove from Favorites' : '<i class="fa-solid fa-heart color-heart"></i> Aus Favoriten entfernen')
                 : (isEn ? '<i class="fa-regular fa-heart"></i> Add to Favorites' : '<i class="fa-regular fa-heart"></i> Zu Favoriten hinzufügen');
             lbFavBtn.onclick = function(e) {
                 toggleFavorite(itemId, e);
@@ -3175,9 +3175,51 @@ function showToast(message) {
 window.loadGoogleMap = function () {
     const container = document.getElementById('map-container');
     if (container) {
-        container.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2527.233853688376!2d7.134801276840789!3d50.69704476957748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bee3f119f2ffc1%3A0xc9c318a1fed01d18!2sR%C3%BCdesheimer%20Str.%2014%2C%2053175%20Bonn!5e0!3m2!1sde!2sde!4v1766414742106!5m2!1sde!2sde" width="100%" height="380" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps Karte vom Standort von ManuFAKTUR Schenk in Bonn"></iframe>';
+        container.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2527.233853688376!2d7.134801276840789!3d50.69704476957748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bee3f119f2ffc1%3A0xc9c318a1fed01d18!2sR%C3%BCdesheimer%20Str.%2014%2C%2053175%20Bonn!5e0!3m2!1sde!2sde!4v1766414742106!5m2!1sde!2sde" width="100%" height="380" class="gmap-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps Karte vom Standort von ManuFAKTUR Schenk in Bonn"></iframe>';
     }
 };
+
+/* =========================================
+   4b. KLICK-DELEGATION (ersetzt vormalige inline
+   onclick/oninput/onchange/oncontextmenu-Attribute für CSP)
+   ========================================= */
+document.addEventListener('contextmenu', function (e) {
+    if (e.target.matches('img[draggable="false"]')) e.preventDefault();
+});
+
+document.addEventListener('click', function (e) {
+    if (e.target.closest('.back-to-top')) { topFunction(); return; }
+    if (e.target.closest('#load-map-btn')) { window.loadGoogleMap(); return; }
+
+    if (e.target.closest('#lightbox .prev')) { window.changeSlide(-1); return; }
+    if (e.target.closest('#lightbox .next')) { window.changeSlide(1); return; }
+
+    const sceneBtn = e.target.closest('.scene-btn[data-scene]');
+    if (sceneBtn) { setLightboxScene(sceneBtn.dataset.scene, sceneBtn); return; }
+
+    const viewBtn = e.target.closest('.view-thumb-btn[data-view]');
+    if (viewBtn) { setLightboxViewAngle(viewBtn.dataset.view, viewBtn); return; }
+
+    if (e.target.closest('#btn-rotate-img')) { rotateLightboxImage(90); return; }
+    if (e.target.closest('#btn-toggle-zoom')) { toggleLightboxZoom(); return; }
+    if (e.target.closest('#btn-reset-pos')) { resetWallFramePosition(); return; }
+    if (e.target.closest('#lightbox-share-btn')) { window.shareCurrentArtwork(); return; }
+
+    if (e.target.closest('.flyer-image')) { openFlyerModal(e.target.closest('.flyer-image')); return; }
+    if (e.target.closest('#flyerModal')) { closeFlyerModal(); return; }
+
+    if (e.target.closest('#clear-search-btn')) { clearGallerySearch(); return; }
+    const filterBtn = e.target.closest('.filter-btn[data-filter]');
+    if (filterBtn) { filterSelection(filterBtn.dataset.filter); return; }
+});
+
+document.addEventListener('input', function (e) {
+    if (e.target.id === 'lb-scale-slider') updateLbWallScale(e.target.value);
+});
+
+document.addEventListener('change', function (e) {
+    if (e.target.id === 'gallery-sort-select') sortGallery(e.target.value);
+});
 
 /* =========================================
    5. KONTAKTFORMULAR: URL-PARAMETER AUSLESEN
@@ -3346,7 +3388,7 @@ function initFavoritesInConfigurator() {
         const card = document.createElement('div');
         card.className = 'fav-card-item';
         card.setAttribute('tabindex', '0');
-        card.innerHTML = `<img src="${thumbSrc}" alt="${title}" loading="lazy"><div style="padding:4px; font-size:0.75rem; text-align:center; font-weight:bold;">${title}</div>`;
+        card.innerHTML = `<img src="${thumbSrc}" alt="${title}" loading="lazy"><div class="fav-thumb-caption">${title}</div>`;
         
         card.onclick = function() {
             grid.querySelectorAll('.fav-card-item').forEach(c => c.classList.remove('selected'));

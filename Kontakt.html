@@ -38,18 +38,8 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität (kein externes Google Fonts) -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=14">
-  <script>
-    (function () {
-      try {
-        var t = localStorage.getItem('manufaktur_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-theme', t);
-        if (t === 'dark') document.documentElement.classList.add('dark-mode');
-        var l = localStorage.getItem('manufaktur_lang') || 'de';
-        document.documentElement.setAttribute('lang', l);
-      } catch (e) { }
-    })();
-  </script>
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=16">
+  <script src="assets/js/theme-init.js"></script>
 
   <!-- SEO Schema.org Strukturierte Daten -->
   <script type="application/ld+json">
@@ -116,14 +106,14 @@
               <div class="flip-card-front flip-card-front--fullimg">
                 <picture>
                   <source srcset="assets/images/print-media/visitenkarte-p1.webp" type="image/webp">
-                  <img src="assets/images/print-media/visitenkarte-p1.png" loading="lazy"
+                  <img src="assets/images/print-media/visitenkarte-p1.webp" loading="lazy"
                     alt="Vorderseite der Visitenkarte von Manuela Schenk mit Logo">
                 </picture>
               </div>
               <div class="flip-card-back flip-card-back--fullimg">
                 <picture>
                   <source srcset="assets/images/print-media/visitenkarte-p2.webp" type="image/webp">
-                  <img src="assets/images/print-media/visitenkarte-p2.png" loading="lazy"
+                  <img src="assets/images/print-media/visitenkarte-p2.webp" loading="lazy"
                     alt="Rückseite der Visitenkarte mit Kontaktdaten von Manuela Schenk">
                 </picture>
               </div>
@@ -186,7 +176,7 @@
         <!-- Web3Forms Access Key -->
         <input type="hidden" name="access_key" value="aecf1c43-94a8-42e4-9d17-4a858d3d30ec">
         <!-- Honeypot-Feld gegen Spam-Bots: für Menschen unsichtbar, Bots füllen es meist automatisch aus. -->
-        <input type="checkbox" name="botcheck" class="visually-hidden" style="display: none;">
+        <input type="checkbox" name="botcheck" class="visually-hidden">
 
         <div class="form-group">
           <label for="name" data-i18n="kontakt_label_name">Dein Name</label>
@@ -237,13 +227,13 @@
   <!-- Footer wird via Home.js injiziert -->
   <footer></footer>
 
-  <button onclick="topFunction()" class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+  <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=14"></script>
+  <script src="Home.min.js?v=16"></script>
 </body>
 
 </html>

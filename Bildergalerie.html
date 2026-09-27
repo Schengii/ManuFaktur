@@ -38,18 +38,8 @@
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
   <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=14">
-  <script>
-    (function(){
-      try{
-        var t=localStorage.getItem('manufaktur_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-        document.documentElement.setAttribute('data-theme',t);
-        if(t==='dark')document.documentElement.classList.add('dark-mode');
-        var l=localStorage.getItem('manufaktur_lang')||'de';
-        document.documentElement.setAttribute('lang',l);
-      }catch(e){}
-    })();
-  </script>
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=16">
+  <script src="assets/js/theme-init.js"></script>
 
   <!-- SEO Schema.org Strukturierte Daten -->
   <script type="application/ld+json">
@@ -105,25 +95,25 @@
           <input type="search" id="gallery-search"
             placeholder="Gemälde suchen (z.B. Landschaften, Hund, Blumen, Acryl)..."
             aria-label="Bildergalerie durchsuchen">
-          <button type="button" id="clear-search-btn" class="clear-search-btn" onclick="clearGallerySearch()"
+          <button type="button" id="clear-search-btn" class="clear-search-btn"
             data-i18n-aria-label="clear_search_aria" aria-label="Suche zurücksetzen"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
       </div>
 
       <div id="filter-container" class="filter-container-row">
         <div class="filter-group-category">
-          <button class="filter-btn active" onclick="filterSelection('alle')">Alle</button>
-          <button class="filter-btn" onclick="filterSelection('tiere')">Tiere</button>
-          <button class="filter-btn" onclick="filterSelection('landschaften')">Landschaften</button>
-          <button class="filter-btn" onclick="filterSelection('pflanzen')">Pflanzen</button>
-          <button class="filter-btn" onclick="filterSelection('sonstiges')">Sonstiges</button>
-          <button class="filter-btn" onclick="filterSelection('favoriten')"><i class="fa-solid fa-heart color-heart"
+          <button class="filter-btn active" data-filter="alle">Alle</button>
+          <button class="filter-btn" data-filter="tiere">Tiere</button>
+          <button class="filter-btn" data-filter="landschaften">Landschaften</button>
+          <button class="filter-btn" data-filter="pflanzen">Pflanzen</button>
+          <button class="filter-btn" data-filter="sonstiges">Sonstiges</button>
+          <button class="filter-btn" data-filter="favoriten"><i class="fa-solid fa-heart color-heart"
               aria-hidden="true"></i> Gemerkt (<span id="fav-count">0</span>)</button>
 
           <div class="gallery-sort-wrapper display-inline-flex margin-left-10 align-items-center">
             <label for="gallery-sort-select" class="font-size-085rem font-weight-600 color-text-muted margin-right-5"><i
                 class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> <span data-i18n="sort_label">Sortieren:</span></label>
-            <select id="gallery-sort-select" class="gallery-sort-select" onchange="sortGallery(this.value)"
+            <select id="gallery-sort-select" class="gallery-sort-select"
               aria-label="Galerie sortieren" data-i18n-aria-label="sort_aria">
               <option value="default" data-i18n="sort_default">Standard</option>
               <option value="newest" data-i18n="sort_newest">Neueste zuerst</option>
@@ -542,10 +532,8 @@
       <p>Klicke auf eine Seite für die Großansicht des Informationsflyers oder lade das PDF direkt herunter.</p>
       <hr class="divider-short">
       <div class="flyer-row">
-        <img src="assets/images/flyer/flyer-page1.png" alt="Informationsflyer Seite 1" class="flyer-image"
-          onclick="openFlyerModal(this)">
-        <img src="assets/images/flyer/flyer-page2.png" alt="Informationsflyer Seite 2" class="flyer-image"
-          onclick="openFlyerModal(this)">
+        <img src="assets/images/flyer/flyer-page1.webp" alt="Informationsflyer Seite 1" class="flyer-image">
+        <img src="assets/images/flyer/flyer-page2.webp" alt="Informationsflyer Seite 2" class="flyer-image">
       </div>
       <br>
       <a href="assets/documents/flyer.pdf" class="btn" target="_blank" rel="noopener" download>
@@ -560,8 +548,8 @@
   <!-- Lightbox für Galeriebilder (Redesigned Split Layout) -->
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" data-i18n-aria-label="ui_lightbox_label" aria-label="Bilder-Großansicht">
     <span class="close" tabindex="0" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
-    <a class="prev" onclick="changeSlide(-1)" data-i18n-aria-label="ui_prev_image" aria-label="Vorheriges Bild">&#10094;</a>
-    <a class="next" onclick="changeSlide(1)" data-i18n-aria-label="ui_next_image" aria-label="Nächstes Bild">&#10095;</a>
+    <a class="prev" data-i18n-aria-label="ui_prev_image" aria-label="Vorheriges Bild">&#10094;</a>
+    <a class="next" data-i18n-aria-label="ui_next_image" aria-label="Nächstes Bild">&#10095;</a>
 
     <div class="lightbox-split-container">
       <!-- Linke Spalte: Bild, KI-Wandvorlage & Werkzeuge -->
@@ -570,23 +558,21 @@
           <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 57</div>
           <div id="lightbox-scene-bar" class="lightbox-scene-bar hidden">
             <span class="scene-label"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="scene_label">KI-Wandvorlage:</span></span>
-            <button type="button" class="scene-btn active" data-scene="livingroom"
-              onclick="setLightboxScene('livingroom', this)" data-i18n-title="scene_living_title" title="Wohnzimmer-Wand">
+            <button type="button" class="scene-btn active" data-scene="livingroom" data-i18n-title="scene_living_title" title="Wohnzimmer-Wand">
               <i class="fa-solid fa-couch"></i> <span data-i18n="scene_living">Wohnzimmer</span>
             </button>
-            <button type="button" class="scene-btn" data-scene="bedroom" onclick="setLightboxScene('bedroom', this)"
+            <button type="button" class="scene-btn" data-scene="bedroom"
               data-i18n-title="scene_bedroom_title" title="Schlafzimmer-Wand">
               <i class="fa-solid fa-bed"></i> <span data-i18n="scene_bedroom">Schlafzimmer</span>
             </button>
-            <button type="button" class="scene-btn" data-scene="darkloft" onclick="setLightboxScene('darkloft', this)"
+            <button type="button" class="scene-btn" data-scene="darkloft"
               data-i18n-title="scene_loft_title" title="Dark Loft Wand">
               <i class="fa-solid fa-building-user"></i> <span data-i18n="scene_loft">Loft / Beton</span>
             </button>
-            <button type="button" class="scene-btn" data-scene="beigelounge"
-              onclick="setLightboxScene('beigelounge', this)" data-i18n-title="scene_lounge_title" title="Beige Lounge Wand">
+            <button type="button" class="scene-btn" data-scene="beigelounge" data-i18n-title="scene_lounge_title" title="Beige Lounge Wand">
               <i class="fa-solid fa-sun"></i> <span data-i18n="scene_lounge">Beige Lounge</span>
             </button>
-            <button type="button" class="scene-btn" data-scene="detail" onclick="setLightboxScene('detail', this)"
+            <button type="button" class="scene-btn" data-scene="detail"
               data-i18n-title="scene_pure_title" title="Pur ohne Hintergrund">
               <i class="fa-solid fa-expand"></i> <span data-i18n="scene_pure">Pur (Detail)</span>
             </button>
@@ -599,7 +585,7 @@
         <div id="lightbox-wall-stage" class="lightbox-wall-stage scene-detail">
           <div class="wall-frame-container" id="wall-frame-container"
             title="Gemälde auf der Wand verschieben (Drag & Drop)">
-            <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde" draggable="false" oncontextmenu="return false;">
+            <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde" draggable="false">
             <div class="artwork-watermark" id="lb-watermark" aria-hidden="true">
               <div class="watermark-pattern"></div>
               <div class="watermark-brand">@ManuFAKTUR</div>
@@ -613,11 +599,11 @@
 
         <!-- Bild-Werkzeuge: Drehen, Lupe, Wandskalierung & Zentrierung -->
         <div class="lightbox-toolbar">
-          <button id="btn-rotate-img" class="lb-tool-btn" onclick="rotateLightboxImage(90)" data-i18n-title="lb_rotate_title" title="Um 90° drehen"
+          <button id="btn-rotate-img" class="lb-tool-btn" data-i18n-title="lb_rotate_title" title="Um 90° drehen"
             data-i18n-aria-label="lb_rotate_aria" aria-label="Bild um 90 Grad drehen">
             <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 90° Drehen
           </button>
-          <button id="btn-toggle-zoom" class="lb-tool-btn" onclick="toggleLightboxZoom()"
+          <button id="btn-toggle-zoom" class="lb-tool-btn"
             data-i18n-title="lb_zoom_title" title="Lupe aktivieren/deaktivieren" data-i18n-aria-label="lb_zoom_aria" aria-label="Lupe aktivieren">
             <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Lupe Zoom
           </button>
@@ -626,11 +612,9 @@
           <div id="lb-wall-scale-control" class="lb-scale-control hidden">
             <label for="lb-scale-slider" class="lb-scale-label"><i
                 class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> <span data-i18n="lb_scale_label">Skalierung:</span></label>
-            <input type="range" id="lb-scale-slider" min="25" max="90" value="55"
-              oninput="updateLbWallScale(this.value)" data-i18n-aria-label="lb_scale_aria" aria-label="Gemäldegröße an der Wand skalieren">
+            <input type="range" id="lb-scale-slider" min="25" max="90" value="55" data-i18n-aria-label="lb_scale_aria" aria-label="Gemäldegröße an der Wand skalieren">
             <span id="lb-scale-val" class="lb-scale-val">55%</span>
-            <button type="button" id="btn-reset-pos" class="lb-tool-btn lb-btn-subtle-sm"
-              onclick="resetWallFramePosition()" data-i18n-title="lb_center_title" title="Gemäldeposition auf der Wand zentrieren">
+            <button type="button" id="btn-reset-pos" class="lb-tool-btn lb-btn-subtle-sm" data-i18n-title="lb_center_title" title="Gemäldeposition auf der Wand zentrieren">
               <i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> Zentrieren
             </button>
           </div>
@@ -674,42 +658,39 @@
         <div class="lightbox-views-section">
           <h3 class="lightbox-views-title"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="lb_views_title">Weitere Ansichten:</span></h3>
           <div class="lightbox-views-grid">
-            <button type="button" class="view-thumb-btn active" data-view="front"
-              onclick="setLightboxViewAngle('front', this)" data-i18n-title="lb_view_front_title" title="Frontansicht Pur">
+            <button type="button" class="view-thumb-btn active" data-view="front" data-i18n-title="lb_view_front_title" title="Frontansicht Pur">
               <div class="thumb-img-wrapper">
                 <img id="thumb-img-front" src="" data-i18n-alt="lb_view_front" alt="Frontansicht">
               </div>
               <span class="thumb-label" data-i18n="lb_view_front">Frontansicht</span>
             </button>
 
-            <button type="button" class="view-thumb-btn" data-view="room" onclick="setLightboxViewAngle('room', this)"
+            <button type="button" class="view-thumb-btn" data-view="room"
               data-i18n-title="lb_view_room_title" title="Wand & Raumansicht">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/livingroom.png" data-i18n-alt="lb_view_room_title" alt="Wand & Raumansicht">
+                <img src="assets/images/rooms/livingroom.webp" data-i18n-alt="lb_view_room_title" alt="Wand & Raumansicht">
               </div>
               <span class="thumb-label" data-i18n="lb_view_room">Wandansicht</span>
             </button>
 
-            <button type="button" class="view-thumb-btn" data-view="back" onclick="setLightboxViewAngle('back', this)"
+            <button type="button" class="view-thumb-btn" data-view="back"
               data-i18n-title="lb_view_back_title" title="Rückseite & Keilrahmen">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/canvas_back.png" data-i18n-alt="lb_view_back_title" alt="Rückseite & Keilrahmen">
+                <img src="assets/images/rooms/canvas_back.webp" data-i18n-alt="lb_view_back_title" alt="Rückseite & Keilrahmen">
               </div>
               <span class="thumb-label" data-i18n="lb_view_back">Keilrahmen</span>
             </button>
 
-            <button type="button" class="view-thumb-btn" data-view="side3d"
-              onclick="setLightboxViewAngle('side3d', this)" data-i18n-title="lb_view_side_title" title="3D-Seitenansicht & Textur">
+            <button type="button" class="view-thumb-btn" data-view="side3d" data-i18n-title="lb_view_side_title" title="3D-Seitenansicht & Textur">
               <div class="thumb-img-wrapper thumb-3d-preview">
                 <img id="thumb-img-side" src="" data-i18n-alt="lb_view_side" alt="3D Seitenansicht">
               </div>
               <span class="thumb-label" data-i18n="lb_view_side">3D-Perspektive</span>
             </button>
 
-            <button type="button" class="view-thumb-btn" data-view="artist"
-              onclick="setLightboxViewAngle('artist', this)" data-i18n-title="lb_view_artist_title" title="Künstlerin & Atelier">
+            <button type="button" class="view-thumb-btn" data-view="artist" data-i18n-title="lb_view_artist_title" title="Künstlerin & Atelier">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/artist_studio.png" data-i18n-alt="lb_view_artist_title" alt="Künstlerin & Atelier">
+                <img src="assets/images/rooms/artist_studio.webp" data-i18n-alt="lb_view_artist_title" alt="Künstlerin & Atelier">
               </div>
               <span class="thumb-label" data-i18n="lb_view_artist">Atelier</span>
             </button>
@@ -730,7 +711,7 @@
           <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
             <i class="fa-regular fa-heart" aria-hidden="true"></i> <span data-i18n="lb_fav_default">Zu Favoriten</span>
           </button>
-          <button id="lightbox-share-btn" class="btn-subtle" onclick="shareCurrentArtwork()"
+          <button id="lightbox-share-btn" class="btn-subtle"
             data-i18n-aria-label="lb_share_aria" aria-label="Gemälde teilen">
             <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> <span data-i18n="lb_share_btn">Gemälde teilen</span>
           </button>
@@ -740,19 +721,19 @@
   </div>
 
   <!-- Modal für Flyer -->
-  <div id="flyerModal" class="modal" onclick="closeFlyerModal()" role="dialog" aria-modal="true"
+  <div id="flyerModal" class="modal" role="dialog" aria-modal="true"
     aria-label="Flyer Großansicht">
-    <span class="close" tabindex="0" onclick="closeFlyerModal()" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
+    <span class="close" tabindex="0" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
     <img class="modal-content" id="modalImg" alt="Vergrößerte Flyer-Seite">
   </div>
 
-  <button onclick="topFunction()" class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+  <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
 
   <div id="toast" role="alert" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=14"></script>
+  <script src="Home.min.js?v=16"></script>
 </body>
 
 </html>

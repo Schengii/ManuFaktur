@@ -9,7 +9,7 @@
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="ManuFAKTUR Schenk – Individuelle Malerei">
     <meta property="og:description" content="Handgemalte Tierportraits und Landschaften aus Bonn. Jedes Bild ein Unikat.">
-    <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild18-eulen.jpg">
+    <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild18-eulen.webp">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.manufaktur-malerei.de/">
     <meta property="og:locale" content="de_DE">
@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ManuFAKTUR Schenk – Individuelle Malerei">
     <meta name="twitter:description" content="Handgemalte Tierportraits und Landschaften aus Bonn. Jedes Bild ein Unikat.">
-    <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild18-eulen.jpg">
+    <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild18-eulen.webp">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
@@ -35,18 +35,8 @@
     <link rel="manifest" href="manifest.json">
     <!-- Lokales Font Awesome für DSGVO-Konformität -->
     <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="style.min.css?v=14">
-    <script>
-      (function(){
-        try{
-          var t=localStorage.getItem('manufaktur_theme')||(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
-          document.documentElement.setAttribute('data-theme',t);
-          if(t==='dark')document.documentElement.classList.add('dark-mode');
-          var l=localStorage.getItem('manufaktur_lang')||'de';
-          document.documentElement.setAttribute('lang',l);
-        }catch(e){}
-      })();
-    </script>
+    <link rel="stylesheet" type="text/css" href="style.min.css?v=16">
+  <script src="assets/js/theme-init.js"></script>
     <!-- SEO Schema.org Strukturierte Daten -->
     <script type="application/ld+json">
     {
@@ -74,30 +64,10 @@
         </div>
     </main>
 
-    <button onclick="topFunction()" class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+    <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
         <i class="fa fa-angle-up" aria-hidden="true"></i>
     </button>
 
-    <!-- Nur topFunction und reveal werden benötigt, keine Nav/Footer-Injektion.
-         Minimaler eigenständiger Sprachwechsel (ohne Home.js), damit die gespeicherte
-         Spracheinstellung auch auf dieser Einstiegsseite respektiert wird. -->
-    <script>
-        function topFunction() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        window.onscroll = function() {
-            const btn = document.querySelector('.back-to-top');
-            if (btn) btn.style.display = (document.documentElement.scrollTop > 150) ? 'flex' : 'none';
-        };
-        (function () {
-            try {
-                var lang = localStorage.getItem('manufaktur_lang') || 'de';
-                if (lang === 'en') {
-                    document.querySelectorAll('[data-i18n-en]').forEach(function (el) {
-                        var icon = el.querySelector('i');
-                        el.innerHTML = el.getAttribute('data-i18n-en') + (icon ? ' ' + icon.outerHTML : '');
-                    });
-                }
-            } catch (e) {}
-        })();
-    </script>
+    <script src="assets/js/index-page.js"></script>
 </body>
 </html>
