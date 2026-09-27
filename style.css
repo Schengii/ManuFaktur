@@ -927,7 +927,7 @@ cite {
     border-bottom: 1px solid var(--border-color);
 }
 
-.about-content h3 {
+.about-content h2 {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     margin-bottom: 20px;
@@ -949,7 +949,7 @@ cite {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
 }
 
-.info-card h3 {
+.info-card h2 {
     font-family: 'Playfair Display', serif;
     font-size: 1.35rem;
     color: var(--secondary-color);
@@ -959,7 +959,7 @@ cite {
     gap: 8px;
 }
 
-.info-card h3 i {
+.info-card h2 i {
     color: var(--primary-color);
 }
 
@@ -1671,7 +1671,7 @@ footer {
     color: #cbd5e1;
 }
 
-.footer-section h3 {
+.footer-section h2 {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
     color: white;
@@ -1680,7 +1680,7 @@ footer {
     padding-bottom: 8px;
 }
 
-.footer-section h3::after {
+.footer-section h2::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -1690,7 +1690,7 @@ footer {
     background-color: var(--primary-color);
 }
 
-.footer-section:last-child h3::after {
+.footer-section:last-child h2::after {
     left: auto;
     right: 0;
 }
@@ -1770,7 +1770,7 @@ footer {
     color: var(--secondary-color);
 }
 
-.map-placeholder-content h4 {
+.map-placeholder-content h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.25rem;
     margin-bottom: 10px;
@@ -2200,7 +2200,7 @@ footer {
         text-align: left;
     }
 
-    .footer-section:last-child h3::after {
+    .footer-section:last-child h2::after {
         left: 0;
         right: auto;
     }

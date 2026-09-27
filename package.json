@@ -6,8 +6,9 @@
   "scripts": {
     "build:css": "npx --yes clean-css-cli -o style.min.css style.css",
     "build:js": "npx --yes terser Home.js -o Home.min.js --compress --mangle --comments false",
-    "build": "npm run build:css && npm run build:js",
-    "images:srcset": "node scripts/gen-srcset.js"
+    "build": "npm run build:css && npm run build:js && npm run csp:update",
+    "images:srcset": "node scripts/gen-srcset.js",
+    "csp:update": "node scripts/update-csp-hashes.js"
   },
   "devDependencies": {
     "sharp": "^0.35.5"
