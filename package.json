@@ -4,13 +4,18 @@
   "private": true,
   "description": "Build-Skripte für ManuFAKTUR Schenk – minifiziert style.css und Home.js für die Produktion.",
   "scripts": {
-    "build:css": "npx --yes clean-css-cli -o style.min.css style.css",
-    "build:js": "npx --yes terser Home.js -o Home.min.js --compress --mangle --comments false",
+    "build:css": "cleancss -o style.min.css style.css",
+    "build:js": "terser Home.js -o Home.min.js --compress --mangle --comments false",
     "build": "npm run build:css && npm run build:js && npm run csp:update",
+    "start": "node scripts/serve.js 3000",
+    "test": "node --test --test-concurrency=1 \"tests/*.test.js\"",
     "images:srcset": "node scripts/gen-srcset.js",
     "csp:update": "node scripts/update-csp-hashes.js"
   },
   "devDependencies": {
-    "sharp": "^0.35.5"
+    "clean-css-cli": "5.6.3",
+    "playwright-core": "1.63.0",
+    "sharp": "^0.35.5",
+    "terser": "5.51.2"
   }
 }

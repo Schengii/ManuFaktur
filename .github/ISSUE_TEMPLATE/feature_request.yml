@@ -1,0 +1,34 @@
+name: ✨ Funktionsvorschlag (Feature Request)
+description: Schlage eine neue Funktion, Verbesserung oder Design-Idee vor
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vielen Dank für deinen Vorschlag zur Weiterentwicklung von ManuFAKTUR Schenk!
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem oder Motivation
+      description: Welches Problem soll gelöst werden oder welcher Anwendungsfall fehlt aktuell?
+      placeholder: Mir fällt auf, dass... / Für Kunden wäre es nützlich, wenn...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Vorgeschlagene Lösung
+      description: Eine genaue Beschreibung, wie das neue Feature aussehen oder funktionieren sollte.
+      placeholder: Ich stelle mir folgendes vor...
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Betrachtete Alternativen
+      description: Gibt es alternative Ansätze oder Umgehungsmöglichkeiten?
+    validations:
+      required: false

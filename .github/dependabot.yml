@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # Aktualisiert npm-Abhängigkeiten (clean-css-cli, terser, sharp, playwright)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # Aktualisiert GitHub Actions Workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 3

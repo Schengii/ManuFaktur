@@ -1,0 +1,63 @@
+name: 🐛 Fehlerbericht (Bug Report)
+description: Melde ein Problem oder unerwartetes Verhalten auf der Webseite
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vielen Dank für die Fehlermeldung! Bitte fülle die folgenden Felder möglichst genau aus.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Beschreibung des Fehlers
+      description: Eine klare und prägnante Beschreibung des Problems.
+      placeholder: Was ist passiert und was sollte stattdessen passieren?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: page
+    attributes:
+      label: Betroffene Seite
+      options:
+        - Startseite (Home.html)
+        - Bildergalerie (Bildergalerie.html)
+        - Auftragskonfigurator (Auftrag.html)
+        - Leistungen (Leistungen.html)
+        - Über mich (UeberMich.html)
+        - Kontakt (Kontakt.html)
+        - Impressum / Datenschutz
+        - Alle / Übergreifend
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Schritte zur Reproduktion
+      description: Wie lässt sich der Fehler nachstellen?
+      placeholder: |
+        1. Öffne '...'
+        2. Klicke auf '...'
+        3. Scrolle runter zu '...'
+        4. Siehe Fehler
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Browser & Gerät
+      description: In welchem Browser und Betriebssystem tritt das Problem auf?
+      placeholder: z. B. Chrome 128 auf Windows 11 / Safari auf iOS 17
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots oder Konsolenausgaben
+      description: Falls vorhanden, füge Fehlermeldungen aus den Browser-DevTools oder Screenshots ein.
+    validations:
+      required: false

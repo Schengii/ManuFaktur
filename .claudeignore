@@ -1,0 +1,39 @@
+# .claudeignore – Ignorierte Dateien und Verzeichnisse für Claude Code
+# Verhindert Token-Verschwendung und irrelevante Suchergebnisse
+
+# 1. Schwere Archive & Rohdaten (über 500 MB)
+archive_sources/
+assets/imgTxt/
+
+# 2. Abhängigkeiten & Lockfiles
+node_modules/
+package-lock.json
+
+# 3. Minifizierte Produktions-Builds (Quellcode liegt in style.css und Home.js)
+style.min.css
+Home.min.js
+
+# 4. Binäre Medienressourcen (Bilder, Schriften, Dokumente)
+assets/images/
+assets/fonts/
+assets/documents/
+assets/vendor/font-awesome/webfonts/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.ico
+*.pdf
+*.vcf
+*.woff
+*.woff2
+*.ttf
+*.eot
+
+# 5. OS- und Editor-Artefakte
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+.vscode/

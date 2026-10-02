@@ -3,10 +3,25 @@
 archive_sources/
 assets/imgTxt/
 
-# Node (nur für den optionalen Minify-Build genutzt, siehe package.json)
+# Node (Build & Tests)
 node_modules/
-package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# Editor-/OS-Artefakte
+# Test-Artefakte (Playwright)
+test-results/
+playwright-report/
+.playwright/
+
+# Editor- & OS-Artefakte
 .DS_Store
 Thumbs.db
+*.log
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

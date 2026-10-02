@@ -1,0 +1,37 @@
+name: CI & Build-Prüfung
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Produktions-Build & CSP-Hashes generieren
+        run: npm run build
+
+      - name: Prüfen, ob minifizierte Dateien & CSP synchron sind
+        run: |
+          git diff --exit-code style.min.css Home.min.js .htaccess vercel.json || (echo "Fehler: Die minifizierten Dateien oder CSP-Hashes sind nicht synchron mit dem Quellcode! Bitte 'npm run build' lokal ausführen und committen." && exit 1)
+
+      - name: Playwright Browser-Binaries installieren
+        run: npx playwright install --with-deps chromium
+
+      - name: Funktionstests ausführen
+        run: npm test
