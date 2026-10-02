@@ -2,6 +2,12 @@
 
 Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **ManuFAKTUR Schenk** (Manuela Schenk aus Bonn). Die Webseite präsentiert handgemalte Kunstwerke (Tierportraits, Landschaften, Stillleben) und bietet Besuchern einen interaktiven 4-Schritte-Auftragskonfigurator, eine hochoptimierte Bildergalerie mit KI-Raumhintergründen, multiperspektivischer "Weitere Ansichten"-Galerie, Live-Suche sowie ein Kundenstimmen-Karussell.
 
+> **In short (EN):** Production website for an art studio in Bonn, built with plain HTML5, CSS3 and vanilla JavaScript (no framework, no tracker). Features a 4-step order configurator, a filterable gallery of 57 artworks with AI room previews, DE/EN i18n, dark/light mode, PWA with service worker, WCAG-minded accessibility, and a strict CSP with auto-generated hashes. Fonts and icons are self-hosted for GDPR compliance.
+>
+> 🌐 **Live:** [manufaktur-malerei.de](https://www.manufaktur-malerei.de/)
+
+<!-- Screenshot: ![ManuFaktur](docs/screenshots/home.png) -->
+
 ---
 
 ## 📁 Ordnerstruktur
