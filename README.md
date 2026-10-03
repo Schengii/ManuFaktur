@@ -2,7 +2,7 @@
 
 Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **ManuFAKTUR Schenk** (Manuela Schenk aus Bonn). Die Webseite präsentiert handgemalte Kunstwerke (Tierportraits, Landschaften, Stillleben) und bietet Besuchern einen interaktiven 4-Schritte-Auftragskonfigurator, eine hochoptimierte Bildergalerie mit KI-Raumhintergründen, multiperspektivischer "Weitere Ansichten"-Galerie, Live-Suche sowie ein Kundenstimmen-Karussell.
 
-> **In short (EN):** Production website for an art studio in Bonn, built with plain HTML5, CSS3 and vanilla JavaScript (no framework, no tracker). Features a 4-step order configurator, a filterable gallery of 57 artworks with AI room previews, DE/EN i18n, dark/light mode, PWA with service worker, WCAG-minded accessibility, and a strict CSP with auto-generated hashes. Fonts and icons are self-hosted for GDPR compliance.
+> **In short (EN):** Production website for an art studio in Bonn, built with plain HTML5, CSS3 and vanilla JavaScript (no framework, no tracker). Features a 4-step order configurator, a filterable gallery of 56 artworks with AI room previews, DE/EN i18n, dark/light mode, PWA with service worker, WCAG-minded accessibility, and a strict CSP with auto-generated hashes. Fonts and icons are self-hosted for GDPR compliance.
 >
 > 🌐 **Live:** [manufaktur-malerei.de](https://www.manufaktur-malerei.de/)
 
@@ -14,61 +14,37 @@ Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **M
 
 ```text
 ManuFaktur/
-├── index.html                  # Einstiegsseite (Weiterleitung zu Home.html)
-├── Home.html                   # Startseite (Hero, Highlights, News, Testimonials-Carousel)
-├── Bildergalerie.html          # Filterbare Galerie (57 Kunstwerke, KI-Wandvorlagen, "Weitere Ansichten", WebP, Lightbox)
+├── index.html                  # Hero-Einstiegsseite (eigenes Mini-Skript, lädt Home.js nicht)
+├── Home.html                   # Startseite (Willkommen, Highlights, Kundenstimmen-Karussell)
+├── Bildergalerie.html          # Filterbare Galerie (56 Werke, KI-Wandvorlagen, Lightbox)
 ├── Leistungen.html             # Leistungsübersicht & FAQ
 ├── Auftrag.html                # Interaktiver 4-Schritte-Auftragskonfigurator
-├── UeberMich.html              # Porträt & Steckbrief der Künstlerin, Zeitstrahl, 3D-Visitenkarte
-├── Kontakt.html                # Kontaktformular mit Web3Forms-Integration & Direktkontakt
-├── Impressum.html              # Rechtliches Impressum mit 2-Klick DSGVO-Kartenlösung (Anbieterkennzeichnung)
+├── UeberMich.html              # Porträt & Steckbrief der Künstlerin, Werdegang, 3D-Visitenkarte
+├── Kontakt.html                # Kontaktformular (Web3Forms) & Direktkontakt
+├── Impressum.html              # Anbieterkennzeichnung mit 2-Klick-Google-Maps
 ├── Datenschutz.html            # DSGVO-Datenschutzerklärung
+├── 404.html                    # Fehlerseite
 │
-├── style.css                   # Zentrales CSS-Designsystem & Stylesheet (Tokens, 3D-Perspektiven, Layout, Animationen)
-├── Home.js                     # Zentrale JS-Logik (Shared Components, Galerie, KI-Raumbühne, Konfigurator, Features)
-├── style.min.css               # Minifizierter Produktions-Build von style.css (per `npm run build` erzeugt)
-├── Home.min.js                 # Minifizierter Produktions-Build von Home.js (per `npm run build` erzeugt)
-├── package.json                # Build-Skripte für die Minifizierung (siehe Abschnitt "Build für Produktion")
-├── 404.html                    # Individuelle Fehlerseite für ungültige/verschobene Links
+├── style.css / style.min.css   # Designsystem (Quelle) / minifizierter Build
+├── Home.js / Home.min.js       # Zentrale Logik (Quelle) / minifizierter Build
+├── sw.js                       # Service Worker (Offline-Cache)
+├── partials/lightbox.html      # Gemeinsame Lightbox – wird per Build in Home.html & Bildergalerie.html kopiert
+├── scripts/                    # Build-, Prüf- und Hilfsskripte (siehe „Build für Produktion“)
+├── tests/                      # Browser-Tests (node:test + playwright-core)
+├── robots.txt / sitemap.xml    # SEO (Sitemap wird von npm run sitemap erzeugt)
 │
-├── robots.txt                  # SEO-Indexierungsanweisungen für Suchmaschinen-Crawler
-├── sitemap.xml                 # XML-Sitemap mit allen Seitenpfaden
-│
-├── remove-bg.ps1               # PowerShell-Skript zur automatischen Logo-Freistellung
-├── trim-logo.ps1               # PowerShell-Skript zum Ränder-Beschneiden von Logos
-│
-└── assets/                     # Medien & Statische Ressourcen
-    ├── documents/              # Dokumente & Downloads (Flyer PDF, Visitenkarte VCF)
-    │   ├── flyer.pdf
-    │   └── visitenkarte.vcf
-    │
-    ├── fonts/                  # Lokale Schriftarten für 100% DSGVO-Konformität
-    │   ├── dancingscript-700-normal.woff2
-    │   ├── playfairdisplay-400-normal.woff2
-    │   ├── playfairdisplay-700-normal.woff2
-    │   ├── lato-300-normal.woff2
-    │   ├── lato-400-normal.woff2
-    │   └── lato-700-normal.woff2
-    │
-    ├── vendor/                 # Drittanbieter-Bibliotheken (lokal)
-    │   └── font-awesome/       # Font Awesome Icons (CSS & Webfonts)
-    │
-    └── images/                 # Bildressourcen
-        ├── logos/              # Atelier-Logos & Favicons (.png, .svg)
-        ├── flyer/              # Flyer-Vorschauseiten (.png)
-        ├── manuela-balou.png   # Künstlerin & Hund Balou
-        ├── rooms/              # KI-generierte Raumkulissen & Ansichten
-        │   ├── livingroom.png  # KI-Wohnzimmer Wandvorlage
-        │   ├── bedroom.png     # KI-Schlafzimmer Wandvorlage
-        │   ├── darkloft.png    # KI-Dark Loft Betonwand
-        │   ├── beigelounge.png # KI-Beige Lounge
-        │   ├── canvas_back.png # Keilrahmen-Rückseite mit Aufhängung
-        │   └── artist_studio.png # Atelier-Atmosphäre von Manuela Schenk
-        │
-        └── img/                # Hochauflösende Gemälde & WebP-Formate
-            ├── DSC_6622a.jpg ... DSC_6790a.jpg (Originale Kamerafotos)
-            ├── thumbs/          # WebP-Grid-Thumbnails (~40-80 KB, max. 600px)
-            └── lightbox/        # WebP-Lightbox-Großansichten (~200-350 KB, max. 1600px)
+└── assets/
+    ├── js/                     # theme-init.js, index-page.js, auftrag.js, artworks-data.js (Werkdaten)
+    ├── documents/              # Flyer (PDF), Visitenkarte (PDF, VCF)
+    ├── fonts/                  # Lokale Schriften (Lato, Playfair Display, Dancing Script)
+    ├── vendor/font-awesome/    # Font Awesome lokal; ausgeliefert wird nur das Subset icons.min.css
+    └── images/
+        ├── logos/              # Logos & Favicons
+        ├── og/                 # Link-Vorschaubilder 1200 × 630 (npm run images:og)
+        ├── flyer/, print-media/ # Flyer- und Visitenkarten-Ansichten
+        ├── rooms/              # KI-Raumkulissen für die Wandvorschau
+        ├── img/, artworks/     # Werke: lightbox/ID.webp (1600 px) und thumbs/ID-{400,700,1000}w.webp
+        └── manuela-balou.webp  # Künstlerin & Hund Balou
 ```
 
 ---
@@ -84,12 +60,12 @@ ManuFaktur/
   - Schema.org JSON-LD Strukturierte Daten (`ArtGallery`).
 
 ### 2. `Bildergalerie.html` & Lightbox-System
-- **Funktion:** Interaktive High-End Kunstgalerie für alle 57 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung & Multiperspektiven.
+- **Funktion:** Interaktive High-End Kunstgalerie für alle 56 Gemälde mit KI-Wandvorlagen, Drag & Drop Positionierung, Skalierung & Multiperspektiven.
 - **Inhalt & Features:**
-  - **Authentischer Werkkatalog (57 Gemälde):** Vollständige Erfassung aller 57 Originalgemälde mit echten Werkstiteln (*Godesburg modern, Drachenfels, Balou, Siebengebirge, Dünenweg Normandie, Texel Leuchtturm, Traumpfad Kottenforst, Ast mit Zitronen, Boote an der französischen Atlantikküste, Weg auf Island, etc.*), exakten Maßen (*z.B. 40×50 cm, 100×150 cm, 19×19 cm*), Maltechniken (*Öl, Acryl, Multimediatechnik, Ölkreide auf handgerahmtem Birkenholz*) und persönlichen Künstler-Beschreibungen.
-  - **Perfekt ausgerichtete Bildausrichtung (Upright Auto-Orientation):** Sämtliche 57 WebP-Thumbnails und Lightbox-Großansichten wurden anhand ihrer Aufnahmeparameter und Bildachsen automatisch korrigiert und aufgerichtet, sodass jedes Kunstwerk direkt richtig herum nach oben weist.
+  - **Authentischer Werkkatalog (56 Gemälde):** Vollständige Erfassung aller 56 Originalgemälde mit echten Werkstiteln (*Godesburg modern, Drachenfels, Balou, Siebengebirge, Dünenweg Normandie, Texel Leuchtturm, Traumpfad Kottenforst, Ast mit Zitronen, Boote an der französischen Atlantikküste, Weg auf Island, etc.*), exakten Maßen (*z.B. 40×50 cm, 100×150 cm, 19×19 cm*), Maltechniken (*Öl, Acryl, Multimediatechnik, Ölkreide auf handgerahmtem Birkenholz*) und persönlichen Künstler-Beschreibungen.
+  - **Perfekt ausgerichtete Bildausrichtung (Upright Auto-Orientation):** Sämtliche 56 WebP-Thumbnails und Lightbox-Großansichten wurden anhand ihrer Aufnahmeparameter und Bildachsen automatisch korrigiert und aufgerichtet, sodass jedes Kunstwerk direkt richtig herum nach oben weist.
   - **Kompakte Galerie-Filterleiste:** Aufgeräumtes Suchfeld sowie nebeneinander platzierte Kategorie-Filter (*Alle, Tiere, Landschaften, Pflanzen, Sonstiges, Gemerkt/Favoriten*) und direkt rechts folgendem **Sortieren-Dropdown** (*A-Z, Z-A*).
-  - **Detaillierte Werk-IDs & Favoriten-Herz-Buttons (`.fav-toggle-btn`):** Jedes der 57 Kunstwerke besitzt eine explizite HTML `id="DSC_..."` sowie dynamisch initialisierte Herz-Buttons zur Favoriten-Speicherung.
+  - **Detaillierte Werk-IDs & Favoriten-Herz-Buttons (`.fav-toggle-btn`):** Jedes der 56 Kunstwerke besitzt eine explizite HTML `id="DSC_..."` sowie dynamisch initialisierte Herz-Buttons zur Favoriten-Speicherung.
   - **LCP-Ladeoptimierung:** Die ersten 4 Kunstwerke oberhalb des Fold-Bereichs werden mit `loading="eager"` und `fetchpriority="high"` geladen für herausragende Google PageSpeed & Lighthouse LCP-Werte.
   - **Barrierefreie Tastatur- & Input-Schutzsteuerung:** Pfeiltasten-Navigation überspringt aktive Formularfelder, damit Benutzereingaben ungestört bleiben.
   - **Benutzerfreundliche Leerzustände (Empty-State):** Angepasste Hilfetexte bei 0 Treffern oder noch leeren Favoriten.
@@ -100,7 +76,7 @@ ManuFaktur/
   - **Interaktive Wand-Skalierung (`25% - 90%` Slider):** Stufenloses Skalieren der Bildgröße für das perfekte Maßverhältnis zum Raumhintergrund.
   - **„Weitere Ansichten:“ (Multiperspektivische Galerie):** 5 interaktive Blickwinkel (*Frontansicht, Wandansicht, Keilrahmen-Rückseite, 3D-Seitenansicht, Atelier*).
   - **Clean Galerie-Karten:** Übersichtliche Galerie-Karten mit ungestörtem Herz-Favoriten-Button oben rechts (`.fav-toggle-btn`).
-  - Schema.org JSON-LD Strukturierte Daten (`ImageGallery`).
+  - Schema.org JSON-LD Strukturierte Daten (`ImageGallery`, je Werk `VisualArtwork` – generiert per `npm run jsonld`).
 
 ### 3. `Auftrag.html`
 - **Funktion:** Interaktiver 4-Schritte-Auftragskonfigurator.
@@ -116,7 +92,7 @@ ManuFaktur/
 - **Inhalt:**
   - Dienstleistungskarten für Hundeportraits, Haustiere, Lieblingsorte & Formate.
   - FAQ-Akkordeon für häufige Fragen zu Fotovorlagen, Lieferzeiten und Versand.
-  - Schema.org JSON-LD Strukturierte Daten (`Service`).
+  - Schema.org JSON-LD Strukturierte Daten (`Service`, `FAQPage`).
 
 ### 5. `UeberMich.html`
 - **Funktion:** persönliche Vorstellung & künstlerischer Werdegang von Manuela Schenk.
@@ -142,16 +118,16 @@ ManuFaktur/
 - **Funktion:** Zentrale JavaScript-Architektur.
 - **Inhalt:**
   - Automatische Injektion von shared `<header>` Navigation und `<footer>`.
-  - **Zweisprachige Lokalisierung (DE/EN):** Integriertes i18n-Übersetzungssystem (`I18N_DICTIONARY`) mit Live-Sprachumschalter und LocalStorage-Merkfunktion.
+  - **Zweisprachige Lokalisierung (DE/EN):** Deutsch steht im HTML, Englisch kommt aus `I18N_DICTIONARY` über `data-i18n*`-Attribute; beim Zurückschalten werden die deutschen HTML-Originale wiederhergestellt.
   - **Dark/Light Mode Theme Toggle:** Umschaltung zwischen hellem und dunklem Design mit automatischer Systempräferenz-Erkennung und LocalStorage-Speicherung.
   - **Urheberrechtsschutz & Wasserzeichen:** Copyright-Wasserzeichen-Badge in der Lightbox-Großansicht und Rechtsklick-Schutz mit Hinweis-Toast.
   - Hamburger-Mobilmenü-Steuerung.
-  - Galerie-Filterung, Format-Chips, Farb-Chips, Schnell-Tag-Chips, Live-Suche & Sortierung.
+  - Galerie-Filterung nach Kategorie, Live-Suche & Sortierung.
   - Dynamisches Favoriten-Management (`initFavButtonsUI`, `toggleFavorite`, Badge-Counter & LocalStorage).
   - DSGVO 2-Klick Google Maps Ladefunktion (`loadGoogleMap` für Impressum).
   - Lightbox-Slideshow, Tastatursteuerung & Touch-Swipe-Gesten.
   - Multiperspektivische KI-Wandbühnen-Steuerung (`setLightboxScene` & `setLightboxViewAngle`).
-  - Testimonial-Carousel Zeit- & Klicksteuerung.
+  - Kundenstimmen-Karussell mit Pause-Schalter (pausiert auch bei Hover/Fokus und bei „Bewegung reduzieren“).
   - LocalStorage State-Persistence & URL-Parameter-Parsing (`runOnDOMReady`).
 
 ---
@@ -174,40 +150,40 @@ ManuFaktur/
 
 ## 🚀 Veröffentlichungs-Checkliste (Release Readiness)
 
-1. **Web3Forms E-Mail-Key (`Kontakt.html`):** Echter Web3Forms Access-Key ist bereits hinterlegt und konfiguriert. Spam-Schutz per Honeypot-Feld (`botcheck`) ist aktiv.
-2. **HTTPS-Verschlüsselung:** Aktivierung eines SSL-Zertifikats beim Hoster für PWA Service Worker Funktionalität (`sw.js`).
-3. **XML-Sitemap:** Datumsangaben in `sitemap.xml` unmittelbar vor dem tatsächlichen Go-Live nochmal aktualisieren.
-4. **Produktions-Build:** Vor dem Deploy `npm run build` ausführen, damit `style.min.css`/`Home.min.js` den aktuellen Stand von `style.css`/`Home.js` enthalten (siehe unten).
-5. **Deploy-Ausschlüsse:** `archive_sources/` und `assets/imgTxt/` (Rohdaten/interne Arbeitsdateien, ca. 580 MB) sind per `.gitignore` von der Versionierung ausgeschlossen und dürfen auch beim manuellen Hochladen zum Hoster nicht mitkopiert werden.
-6. **Impressum-Angaben prüfen:** Die Kleinunternehmer-Formulierung (§ 19 UStG) im Impressum stimmt nur, solange tatsächlich keine Umsatzsteuer ausgewiesen wird – bei Änderung des steuerlichen Status entsprechend anpassen.
+1. **Release bauen:** `npm run release` zählt die Asset-Version (`?v=N` in allen Seiten und `sw.js`, `CACHE_NAME`) hoch, erzeugt die Sitemap neu und führt `npm run build` aus. Ergebnis inklusive der generierten Dateien committen.
+2. **Prüfen:** `npm test` (Browser-Tests) und `npm run check:gallery` (Werkdaten ↔ HTML ↔ Bilddateien). Die CI prüft zusätzlich, ob alle generierten Dateien zum Quellstand passen.
+3. **Web3Forms-Key (`Kontakt.html`):** Access-Key ist hinterlegt; Spam-Schutz per Honeypot-Feld (`botcheck`) ist aktiv.
+4. **Deploy-Ausschlüsse:** `archive_sources/` und `assets/imgTxt/` (Rohdaten, ca. 560 MB) sind per `.gitignore` ausgeschlossen und dürfen auch beim manuellen Hochladen nicht mitkopiert werden.
+5. **Rechtstexte prüfen:** Kleinunternehmer-Formulierung (§ 19 UStG) im Impressum und die Hoster-Angabe in der Datenschutzerklärung müssen zum tatsächlichen Stand passen.
 
 ---
 
 ## 💻 Lokale Entwicklung
 
-Zum Ausführen der Webseite auf einem lokalen Testserver im Projektverzeichnis ausführen:
-
 ```bash
-# Mit Python 3:
-python -m http.server 8080
+npm install   # einmalig: Build- und Test-Werkzeuge
+npm start     # http://localhost:3000 – mit derselben Content-Security-Policy wie live
 ```
 
-Anschließend im Browser öffnen: `http://localhost:8080`
+`npm start` sendet die Header aus `vercel.json` mit, sodass CSP-Verstöße schon lokal in der Konsole auffallen (`python -m http.server` oder `npx serve` tun das nicht).
 
-Da alle Seiten `style.min.css`/`Home.min.js` einbinden, während inhaltlich bearbeitet wird `style.css`/`Home.js` – nach jeder Änderung an einer der beiden Quelldateien `npm run build` ausführen (siehe unten), damit die im Browser sichtbare Version aktuell bleibt.
+Alle Seiten binden die generierten Dateien (`style.min.css`, `Home.min.js`, Icon-Subset, Lightbox-Partial …) ein. Nach Änderungen an den Quellen deshalb `npm run build` ausführen.
 
 ---
 
 ## 📦 Build für Produktion
 
-`style.css` (Quelle, kommentiert, gut lesbar) und `Home.js` (Quelle) werden im laufenden Betrieb geladen als `style.min.css` / `Home.min.js` – minifizierte Varianten, die Ladezeit und PageSpeed-Werte verbessern. Die Quelldateien bleiben die alleinige Grundlage für Änderungen; die `.min`-Dateien werden nie von Hand bearbeitet, sondern ausschließlich generiert.
+Bearbeitet werden nur die Quellen; alles andere erzeugt `npm run build` und wird mit eingecheckt (beim Deploy gibt es keinen Build-Schritt):
 
-```bash
-npm run build       # baut style.min.css UND Home.min.js
-npm run build:css   # nur CSS
-npm run build:js    # nur JS
-```
+| Befehl | Aufgabe |
+| :--- | :--- |
+| `npm run build` | alles unten in dieser Reihenfolge |
+| `npm run partials` | kopiert `partials/lightbox.html` in Home.html und Bildergalerie.html |
+| `npm run jsonld` | erzeugt die VisualArtwork-Strukturdaten in Bildergalerie.html aus `assets/js/artworks-data.js` |
+| `npm run icons` | baut das Font-Awesome-Subset (`icons.min.css` + `*-subset.woff2`) aus den tatsächlich benutzten Icons |
+| `npm run build:css` / `build:js` | minifiziert `style.css` / `Home.js` |
+| `npm run csp:update` | berechnet die CSP-Hashes der JSON-LD-Blöcke und schreibt sie in `vercel.json` **und** `.htaccess` |
 
-Die Skripte nutzen `npx` (clean-css-cli / terser) und benötigen daher einmalig eine Internetverbindung sowie Node.js. Es gibt kein `node_modules`-Verzeichnis im Repo (per `.gitignore` ausgeschlossen) – die Tools werden bei jedem Build-Lauf über `npx` bezogen.
+Weitere Skripte: `npm run release` (Version hochzählen + Sitemap + Build), `npm run version:check`, `npm run check:gallery`, `npm run sitemap`, `npm run images:srcset` (Thumbnails), `npm run images:og` (Link-Vorschaubilder).
 
-**Wichtig:** Nach jeder inhaltlichen Änderung an `style.css` oder `Home.js` muss `npm run build` erneut ausgeführt werden, bevor deployed wird – sonst sehen Live-Besucher eine veraltete `.min`-Version.
+**Wichtig:** Die `.min`-Dateien, das Icon-Subset und die Bereiche zwischen `<!-- partial:… -->`/`<!-- generated:… -->` nie von Hand bearbeiten – sie werden beim nächsten Build überschrieben.

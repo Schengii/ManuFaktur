@@ -9,7 +9,10 @@
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Datenschutz – ManuFAKTUR Schenk">
     <meta property="og:description" content="Datenschutzerklärung von ManuFAKTUR Schenk, Bonn.">
-    <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/logos/logo.png">
+    <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-logo.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.manufaktur-malerei.de/Datenschutz.html">
     <meta property="og:locale" content="de_DE">
@@ -17,7 +20,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Datenschutz – ManuFAKTUR Schenk">
     <meta name="twitter:description" content="Datenschutzerklärung von ManuFAKTUR Schenk, Bonn.">
-    <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/logos/logo.png">
+    <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-logo.jpg">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
@@ -34,9 +37,9 @@
 
     <link rel="manifest" href="manifest.json">
     <!-- Lokales Font Awesome für DSGVO-Konformität -->
-    <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="style.min.css?v=20">
-  <script src="assets/js/theme-init.js"></script>
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/icons.min.css?v=21">
+    <link rel="stylesheet" type="text/css" href="style.min.css?v=21">
+  <script src="assets/js/theme-init.js?v=21"></script>
 
     <!-- SEO Breadcrumb Strukturierte Daten -->
     <script type="application/ld+json">
@@ -53,14 +56,14 @@
 
 <body>
 
-  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip_link">Zum Hauptinhalt springen</a>
 
   <!-- Navigation wird via Home.js injiziert -->
   <header></header>
 
   <main id="main-content">
     <div class="text-content">
-        <h1 class="page-title page-title--left">Datenschutzerklärung</h1>
+        <h1 class="page-title page-title--left" data-i18n="privacy_page_title">Datenschutzerklärung</h1>
 
         <h2 data-i18n="dsgvo_h1">1. Datenschutz auf einen Blick</h2>
         <h3 data-i18n="dsgvo_h1_1">Allgemeine Hinweise</h3>
@@ -112,12 +115,12 @@
   <!-- Footer wird via Home.js injiziert -->
   <footer></footer>
 
-  <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+  <button class="back-to-top" title="Nach oben" data-i18n-title="back_to_top" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
 
-  <div id="toast" role="alert" aria-live="polite"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=20"></script>
+  <script src="Home.min.js?v=21"></script>
 </body>
 </html>

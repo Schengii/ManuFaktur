@@ -1,5 +1,9 @@
 /* Service Worker für ManuFAKTUR Schenk */
-const CACHE_NAME = 'manufaktur-v26';
+// CACHE_NAME und die ?v=N-Parameter werden von `npm run release` hochgezählt
+// (scripts/bump-version.js) – nicht von Hand ändern.
+const CACHE_NAME = 'manufaktur-v27';
+const RUNTIME_CACHE = 'manufaktur-runtime';
+const RUNTIME_MAX_ENTRIES = 80;
 const ASSETS_TO_CACHE = [
   './',
   './Home.html',
@@ -11,8 +15,11 @@ const ASSETS_TO_CACHE = [
   './Impressum.html',
   './Datenschutz.html',
   './404.html',
-  './style.min.css?v=16',
-  './Home.min.js?v=16',
+  './style.min.css?v=21',
+  './Home.min.js?v=21',
+  './assets/js/artworks-data.js?v=21',
+  './assets/js/theme-init.js?v=21',
+  './assets/js/auftrag.js?v=21',
   './manifest.json',
   './assets/images/logos/logo-transparent.png',
   './assets/images/logos/favicon.png',
@@ -20,9 +27,10 @@ const ASSETS_TO_CACHE = [
   './assets/images/logos/apple-touch-icon.png',
   './assets/images/logos/icon-192.png',
   './assets/images/logos/icon-512.png',
-  './assets/vendor/font-awesome/css/all.min.css',
-  './assets/vendor/font-awesome/webfonts/fa-solid-900.woff2',
-  './assets/vendor/font-awesome/webfonts/fa-brands-400.woff2',
+  './assets/vendor/font-awesome/css/icons.min.css?v=21',
+  './assets/vendor/font-awesome/webfonts/fa-solid-900-subset.woff2?h=c820cd70bb',
+  './assets/vendor/font-awesome/webfonts/fa-regular-400-subset.woff2?h=70f52b82e6',
+  './assets/vendor/font-awesome/webfonts/fa-brands-400-subset.woff2?h=e348b57609',
   './assets/fonts/lato-400-normal.woff2',
   './assets/fonts/playfairdisplay-700-normal.woff2',
   './assets/fonts/dancingscript-700-normal.woff2'
@@ -41,7 +49,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
-          if (key !== CACHE_NAME) {
+          if (key !== CACHE_NAME && key !== RUNTIME_CACHE) {
             return caches.delete(key);
           }
         })
@@ -50,10 +58,24 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Hält den Laufzeit-Cache klein: älteste Einträge zuerst verwerfen.
+function trimRuntimeCache() {
+  return caches.open(RUNTIME_CACHE).then((cache) => {
+    return cache.keys().then((keys) => {
+      const surplus = keys.length - RUNTIME_MAX_ENTRIES;
+      if (surplus <= 0) return;
+      return Promise.all(keys.slice(0, surplus).map((key) => cache.delete(key)));
+    });
+  });
+}
+
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
-  const isHtml = event.request.mode === 'navigate' || 
+  const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
+
+  const isHtml = event.request.mode === 'navigate' ||
                  (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html'));
 
   if (isHtml) {
@@ -68,7 +90,8 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          return caches.match(event.request).then((cached) => {
+          // ignoreSearch: Kontakt.html?motiv=… soll offline die gecachte Kontakt.html treffen
+          return caches.match(event.request, { ignoreSearch: true }).then((cached) => {
             return cached || caches.match('./Home.html');
           });
         })
@@ -89,7 +112,16 @@ self.addEventListener('fetch', (event) => {
         }).catch(() => {});
         return cachedResponse;
       }
-      return fetch(event.request);
+      return fetch(event.request).then((networkResponse) => {
+        // Bereits angesehene Bilder auch offline zeigen
+        if (networkResponse && networkResponse.status === 200 && event.request.destination === 'image') {
+          const copy = networkResponse.clone();
+          event.waitUntil(
+            caches.open(RUNTIME_CACHE).then((cache) => cache.put(event.request, copy)).then(trimRuntimeCache)
+          );
+        }
+        return networkResponse;
+      });
     })
   );
 });

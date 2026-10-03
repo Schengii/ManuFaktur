@@ -17,7 +17,7 @@ jobs:
       - name: Node.js einrichten
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Abhängigkeiten installieren
@@ -26,12 +26,17 @@ jobs:
       - name: Produktions-Build & CSP-Hashes generieren
         run: npm run build
 
+      - name: Prüfen, ob die Asset-Version in HTML und sw.js übereinstimmt
+        run: npm run version:check
+
+      - name: Galerie-Daten, HTML und Bilddateien auf Konsistenz prüfen
+        run: npm run check:gallery
+
       - name: Prüfen, ob minifizierte Dateien & CSP synchron sind
         run: |
-          git diff --exit-code style.min.css Home.min.js .htaccess vercel.json || (echo "Fehler: Die minifizierten Dateien oder CSP-Hashes sind nicht synchron mit dem Quellcode! Bitte 'npm run build' lokal ausführen und committen." && exit 1)
+          git diff --exit-code style.min.css Home.min.js .htaccess vercel.json sw.js assets/vendor/font-awesome '*.html' || (echo "Fehler: Die minifizierten Dateien oder CSP-Hashes sind nicht synchron mit dem Quellcode! Bitte 'npm run build' lokal ausführen und committen." && exit 1)
 
-      - name: Playwright Browser-Binaries installieren
-        run: npx playwright install --with-deps chromium
-
+      # Die Tests nutzen das auf dem Runner vorinstallierte Google Chrome (channel: 'chrome'),
+      # ein Browser-Download ist nicht nötig.
       - name: Funktionstests ausführen
         run: npm test

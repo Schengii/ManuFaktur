@@ -12,7 +12,10 @@
   <meta property="og:title" content="Über mich – Manuela Schenk | ManuFAKTUR">
   <meta property="og:description"
     content="Lerne die Künstlerin kennen: Manuela Schenk malt handgemalte Tierportraits und Landschaften aus Bonn.">
-  <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/manuela-balou.webp">
+  <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-manuela.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.manufaktur-malerei.de/UeberMich.html">
   <meta property="og:locale" content="de_DE">
@@ -21,7 +24,7 @@
   <meta name="twitter:title" content="Über mich – Manuela Schenk | ManuFAKTUR">
   <meta name="twitter:description"
     content="Lerne die Künstlerin kennen: Manuela Schenk malt handgemalte Tierportraits und Landschaften aus Bonn.">
-  <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/manuela-balou.webp">
+  <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-manuela.jpg">
 
   <!-- Favicon -->
   <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
@@ -38,9 +41,9 @@
 
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
-  <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=20">
-  <script src="assets/js/theme-init.js"></script>
+  <link rel="stylesheet" href="assets/vendor/font-awesome/css/icons.min.css?v=21">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=21">
+  <script src="assets/js/theme-init.js?v=21"></script>
 
   <!-- SEO Schema.org Strukturierte Daten -->
   <script type="application/ld+json">
@@ -83,56 +86,56 @@
 
 <body>
 
-  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip_link">Zum Hauptinhalt springen</a>
 
   <!-- Navigation wird via Home.js injiziert -->
   <header></header>
 
   <main id="main-content">
-    <h1 class="page-title">Über mich</h1>
-    <p class="intro-text">Lerne die Künstlerin hinter den Bildern kennen.</p>
+    <h1 class="page-title" data-i18n="about_page_title">Über mich</h1>
+    <p class="intro-text" data-i18n="about_intro">Lerne die Künstlerin hinter den Bildern kennen.</p>
 
     <div class="about-container reveal">
 
       <div class="about-image">
-        <img src="assets/images/manuela-balou.webp"
+        <img width="606" height="712" src="assets/images/manuela-balou.webp"
           alt="Die Künstlerin Manuela Schenk lächelnd zusammen mit ihrem Hund Balou im Gras" loading="lazy">
       </div>
 
       <div class="info-card">
-        <h2><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Steckbrief</h2>
+        <h2><i class="fa-solid fa-circle-info" aria-hidden="true"></i> <span data-i18n="about_profile_title">Steckbrief</span></h2>
         <ul>
-          <li><strong>Wohnort:</strong> Bonn (Bad Godesberg)</li>
-          <li><strong>Frauchen von:</strong> Balou</li>
-          <li><strong>Motive:</strong> Tierportraits, Lieblingsorte &amp; Landschaften</li>
-          <li><strong>Techniken:</strong> Acryl, Öl, Ölkreide, Mischtechniken</li>
-          <li><strong>Ausbildung:</strong> Alanus Hochschule Alfter, Studio M. Bonn-Friesdorf</li>
-          <li><strong>Motivation:</strong> Freude am Festhalten lebendiger Emotionen &amp; Momente</li>
+          <li><strong data-i18n="about_lbl_loc">Wohnort:</strong> <span data-i18n="about_profile_loc">Bonn (Bad Godesberg)</span></li>
+          <li><strong data-i18n="about_lbl_dog">Frauchen von:</strong> <span data-i18n="about_profile_dog">Balou</span></li>
+          <li><strong data-i18n="about_lbl_motifs">Motive:</strong> <span data-i18n="about_profile_motifs">Tierportraits, Lieblingsorte &amp; Landschaften</span></li>
+          <li><strong data-i18n="about_lbl_tech">Techniken:</strong> <span data-i18n="about_profile_tech">Acryl, Öl, Ölkreide, Mischtechniken</span></li>
+          <li><strong data-i18n="about_lbl_edu">Ausbildung:</strong> <span data-i18n="about_profile_edu">Alanus Hochschule Alfter, Studio M. Bonn-Friesdorf</span></li>
+          <li><strong data-i18n="about_lbl_motive">Motivation:</strong> <span data-i18n="about_profile_motive">Freude am Festhalten lebendiger Emotionen &amp; Momente</span></li>
         </ul>
       </div>
 
       <div class="about-content">
-        <h2>Hallo, ich bin Manuela, </h2>
+        <h2 data-i18n="about_greeting">Hallo, ich bin Manuela, </h2>
         <i>
           <p data-i18n="about_subtitle">...Künstlerin aus Bonn, Hundeliebhaberin und Frauchen von Balou</p>
         </i>
-        <p>
+        <p data-i18n-html="about_p1">
           Ich liebe es, <strong>besondere Momente</strong>, <strong>Tiere</strong> oder <strong>Landschaften</strong>
           mit Pinsel und lebendigen Farben auf Leinwand oder Papier festzuhalten.
         </p>
-        <p>
+        <p data-i18n-html="about_p2">
           Meine Werke erzählen Geschichten: sei es der treue Blick eines Hundes, die Weite der französischen
           Atlantikküste oder historische Impressionen meiner Heimat Bonn und des Siebengebirges.
         </p>
-        <p>
+        <p data-i18n-html="about_p3">
           Ich male das, was mich berührt und fasziniert – in traditioneller <strong>Ölmalerei</strong>, leuchtenden
           <strong>Acrylfarben</strong> sowie feinen <strong>Ölkreide- und Multimediatechniken</strong>.
         </p>
-        <p>
+        <p data-i18n-html="about_p4">
           Jedes Bild ist ein handgemaltes Unikat, welches mit viel Liebe zum Detail und fundiertem künstlerischen
           Handwerk entsteht.
         </p>
-        <p>
+        <p data-i18n-html="about_p5">
           Gerne male ich auch Dein persönliches Wunschmotiv! Schau Dir meine <a href="Leistungen.html"
             title="Leistungen"><strong>Leistungen</strong></a> an
           oder stöbere durch die <a href="Bildergalerie.html" title="Galerie"><strong>Bildergalerie</strong></a>.
@@ -223,9 +226,9 @@
       <p data-i18n="flyer_text">Klicke auf ein Bild für die Großansicht oder lade dir den Flyer als PDF herunter.</p>
       <hr class="divider-short">
       <div class="flyer-row">
-        <img src="assets/images/flyer/flyer-page1.webp" data-i18n-alt="flyer_front_alt"
+        <img loading="lazy" width="1952" height="1384" src="assets/images/flyer/flyer-page1.webp" data-i18n-alt="flyer_front_alt"
           alt="Vorderseite des Informationsflyers von ManuFAKTUR Schenk" class="flyer-image">
-        <img src="assets/images/flyer/flyer-page2.webp" data-i18n-alt="flyer_back_alt"
+        <img loading="lazy" width="1982" height="1402" src="assets/images/flyer/flyer-page2.webp" data-i18n-alt="flyer_back_alt"
           alt="Rückseite des Informationsflyers von ManuFAKTUR Schenk" class="flyer-image">
       </div>
       <br>
@@ -249,14 +252,14 @@
               <div class="flip-card-front flip-card-front--fullimg">
                 <picture>
                   <source srcset="assets/images/print-media/visitenkarte-p1.webp" type="image/webp">
-                  <img src="assets/images/print-media/visitenkarte-p1.webp" loading="lazy"
+                  <img width="1075" height="721" src="assets/images/print-media/visitenkarte-p1.webp" loading="lazy"
                     alt="Vorderseite der Visitenkarte von Manuela Schenk mit Logo">
                 </picture>
               </div>
               <div class="flip-card-back flip-card-back--fullimg">
                 <picture>
                   <source srcset="assets/images/print-media/visitenkarte-p2.webp" type="image/webp">
-                  <img src="assets/images/print-media/visitenkarte-p2.webp" loading="lazy"
+                  <img width="1075" height="721" src="assets/images/print-media/visitenkarte-p2.webp" loading="lazy"
                     alt="Rückseite der Visitenkarte mit Kontaktdaten von Manuela Schenk">
                 </picture>
               </div>
@@ -284,18 +287,17 @@
   <!-- Modal für Flyer Großansicht -->
   <div id="flyerModal" class="modal" role="dialog" aria-modal="true"
     aria-label="Flyer Großansicht">
-    <span class="close" tabindex="0" data-i18n-aria-label="ui_close"
-      aria-label="Schließen">&times;</span>
+    <button type="button" class="close" data-i18n-aria-label="ui_close" aria-label="Schließen"><span aria-hidden="true">&times;</span></button>
     <img class="modal-content" id="modalImg" alt="Vergrößerte Ansicht des Flyers">
   </div>
 
-  <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+  <button class="back-to-top" title="Nach oben" data-i18n-title="back_to_top" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
 
-  <div id="toast" role="alert" aria-live="polite"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=20"></script>
+  <script src="Home.min.js?v=21"></script>
 </body>
 
 </html>

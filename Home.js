@@ -277,11 +277,11 @@ function getFooterHTML() {
     <div class="footer-section footer-settings">
       <h2>${isEn ? 'Preferences' : 'Einstellungen'}</h2>
       <div class="footer-controls-group">
-        <button type="button" id="theme-toggle-btn" class="footer-toggle-btn" onclick="toggleTheme()" aria-label="${TOGGLE_BUTTON_LABELS.theme[isDark ? 'dark' : 'light'].aria[currentLang]}" title="${isEn ? 'Toggle Dark / Light Mode' : 'Dark / Light Mode wechseln'}">
+        <button type="button" id="theme-toggle-btn" class="footer-toggle-btn" aria-label="${TOGGLE_BUTTON_LABELS.theme[isDark ? 'dark' : 'light'].aria[currentLang]}" title="${isEn ? 'Toggle Dark / Light Mode' : 'Dark / Light Mode wechseln'}">
           <i class="${isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon'}" id="theme-toggle-icon" aria-hidden="true"></i>
           <span id="theme-toggle-text">${TOGGLE_BUTTON_LABELS.theme[isDark ? 'dark' : 'light'].text[currentLang]}</span>
         </button>
-        <button type="button" id="lang-toggle-btn" class="footer-toggle-btn" onclick="toggleLanguage()" aria-label="${TOGGLE_BUTTON_LABELS.lang[currentLang].aria}" title="${isEn ? 'Switch to German' : 'Auf Englisch wechseln'}">
+        <button type="button" id="lang-toggle-btn" class="footer-toggle-btn" aria-label="${TOGGLE_BUTTON_LABELS.lang[currentLang].aria}" title="${isEn ? 'Switch to German' : 'Auf Englisch wechseln'}">
           <i class="fa-solid fa-globe" aria-hidden="true"></i>
           <span id="lang-toggle-text">${TOGGLE_BUTTON_LABELS.lang[currentLang].text}</span>
         </button>
@@ -325,36 +325,26 @@ const I18N_DICTIONARY = {
     de: {
         skip_link: 'Zum Hauptinhalt springen',
         back_to_top: 'Nach oben',
-        hero_title: 'ManuFAKTUR',
-        hero_subtitle: 'Individuelle Malerei & Handwerkskunst',
-        hero_btn: 'Entdecke mehr!',
         home_welcome_title: 'Herzlich Willkommen',
         home_welcome_text: 'Hier entstehen meine Bilder, alle von mir in liebevoller Detailarbeit handgemalt.<br>Qualität und Individualität sind mein Markenzeichen. Ich male für Dich Tierportraits oder Landschaften.',
         badge_handpainted: '100% Handgemalt',
         badge_studio: 'Atelier aus Bonn',
         badge_shipping: 'Sicherer Versand in DE',
         badge_detail: 'Liebevolle Detailarbeit',
-        news_title: 'Neuigkeiten',
-        news_1_date: '01. Dezember 2025',
-        news_1_title: 'Adventszeit',
-        news_1_text: 'Ab sofort male ich auch individuelle Motive für den Advent.',
-        news_2_date: '22. November 2025',
-        news_2_title: 'Weihnachtskarten jetzt verfügbar!',
-        news_2_text: 'Ab sofort male ich auch individuelle Motive für Weihnachtskarten.',
-        news_3_date: '10. Oktober 2025',
-        news_3_title: 'Neue Tierportraits in der Galerie',
-        news_3_text: 'Meine Bildergalerie wurde um viele neue Werke erweitert. Schau gerne vorbei und lass Dich inspirieren!',
         highlights_title: 'Aktuelle Highlights',
-        highlights_intro: 'Eine kleine Auswahl meiner neuesten Gemälde aus dem Jahr 2025.',
+        highlights_intro: 'Eine kleine Auswahl meiner neuesten Gemälde.',
         testimonials_title: 'Das sagen meine Kunden',
         testimonials_intro: 'Echte Erfahrungen & Rückmeldungen von begeisterten Meistbestellern:',
-        cta_title: 'Bereit für Dein individuelles Kunstwerk?',
         cta_text: 'Entdecke die Vielfalt handgemalter Originale oder lass Dein ganz persönliches Wunschmotiv anfertigen.',
-        cta_btn_order: 'Jetzt Auftrag anfragen',
-        cta_btn_gallery: 'Galerie entdecken',
         about_page_title: 'Über mich',
         about_intro: 'Lerne die Künstlerin hinter den Bildern kennen.',
         about_profile_title: 'Steckbrief',
+        about_lbl_loc: 'Wohnort:',
+        about_lbl_dog: 'Frauchen von:',
+        about_lbl_motifs: 'Motive:',
+        about_lbl_tech: 'Techniken:',
+        about_lbl_edu: 'Ausbildung:',
+        about_lbl_motive: 'Motivation:',
         about_profile_loc: 'Bonn (Bad Godesberg)',
         about_profile_dog: 'Balou',
         about_profile_motifs: 'Tierportraits, Lieblingsorte & Landschaften',
@@ -379,24 +369,11 @@ const I18N_DICTIONARY = {
         service_places_desc: 'Besondere Landschaften und Orte haben eine ganz eigene Magie. Wenn du solche Lieblingsorte hast, zaubere ich sie Dir als dauerhaftes Erinnerungsstück auf Leinwand.',
         service_formats_title: 'Mögliche Formate',
         service_formats_desc: 'Für Dein einzigartiges Kunstwerk biete ich verschiedene Größen und Formate an. Da alle Bilder mit viel Zeit und Liebe gemalt werden, mache ich Dir auf Anfrage gerne ein individuelles Angebot.',
-        steps_title: 'In 4 einfachen Schritten zu Deinem Kunstwerk',
-        step_1_title: '1. Fotovorlage senden',
-        step_1_desc: 'Sende mir ein oder mehrere Fotos Deines Tieres oder Deines Lieblingsortes.',
-        step_2_title: '2. Format & Technik abstimmen',
-        step_2_desc: 'Gemeinsam wählen wir die ideale Größe und Maltechnik (Acryl, Öl oder Mischtechnik).',
-        step_3_title: '3. Entstehung im Atelier',
-        step_3_desc: 'Mit viel Liebe zum Detail und hochwertigen Künstlerfarben entsteht Dein Unikat.',
-        step_4_title: '4. Sicherer Versand',
-        step_4_desc: 'Sorgfältig verpackt und versichert kommt Dein Bild direkt zu Dir nach Hause.',
         faq_title: 'Häufig gestellte Fragen (FAQ)',
         faq_1_q: 'Was kostet ein Bild?',
         faq_1_a: 'Der Preis gestaltet sich nach Größe des Bildes. Die Bezahlung erfolgt gegen Vorkasse (inkl. Porto und Verpackung).',
         faq_2_q: 'Wie lange dauert die Erstellung eines Bildes?',
         faq_2_a: 'Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel einige Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!',
-        faq_3_q: 'Wie lange dauert der Versand?',
-        faq_3_a: 'Der Versand innerhalb Deutschlands dauert nach Fertigstellung und Durchtrocknung meist 2 bis 4 Werktage (versichert mit Sendungsverfolgung).',
-        faq_3_q_ship: 'Versand',
-        faq_3_a_ship: 'Nach Fertigstellung und Trocknung verschicke ich Dein Bild sicher per Post. Die genauen Versandkosten stimmen wir individuell vorab ab.',
         faq_4_q_cancellation: 'Widerrufsrecht bei Auftragsarbeiten',
         faq_4_a_cancellation: 'Bei individuell nach Deinen persönlichen Wünschen und Vorgaben angefertigten Kunstwerken (wie z.&nbsp;B. Tierportraits nach Fotovorlage) besteht gemäß §&nbsp;312g Abs.&nbsp;2 Nr.&nbsp;1 BGB kein gesetzliches Widerrufsrecht, da das Werk ein eindeutig auf Dich zugeschnittenes Unikat ist. Vor Beginn und während des Malprozesses stimme ich aber alle Details und Zwischenschritte eng mit Dir ab, damit Du mit Deinem Ergebnis wunschlos glücklich bist.',
         gallery_page_title: 'Bildergalerie',
@@ -418,8 +395,6 @@ const I18N_DICTIONARY = {
         gallery_empty_fav_text: 'Klicke auf das Herz-Symbol auf den Kunstwerken, um deine persönlichen Lieblingswerke hier zu speichern.',
         gallery_empty_search_title: 'Keine passenden Gemälde gefunden.',
         gallery_empty_search_text: 'Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.',
-        gallery_counter_all: '{count} Gemälde',
-        gallery_counter_filtered: '{visible} von {total} Gemälden',
         scene_label: 'KI-Wandvorlage:',
         scene_label_short: 'KI-Wandvorlage',
         scene_living: 'Wohnzimmer',
@@ -446,6 +421,10 @@ const I18N_DICTIONARY = {
         lb_label_herkunft: 'Herkunft:',
         lb_val_herkunft: 'Atelier Bonn',
         lb_label_rahmung: 'Rahmung:',
+        lb_label_status: 'Verfügbarkeit:',
+        status_verfuegbar: 'Verfügbar',
+        status_reserviert: 'Reserviert',
+        status_verkauft: 'Verkauft – gerne male ich Dir ein ähnliches Motiv',
         lb_val_rahmung: 'Sofort aufhängbar (Keilrahmen)',
         lb_views_title: 'Weitere Ansichten:',
         lb_view_front: 'Frontansicht',
@@ -467,7 +446,6 @@ const I18N_DICTIONARY = {
         lb_btn_fav_remove: 'Aus Favoriten entfernen',
         lb_share_btn: 'Gemälde teilen',
         lb_share_aria: 'Gemälde teilen',
-        lb_share_copied: '🔗 Link zum Kunstwerk kopiert!',
         lb_rotate: '90° Drehen',
         lb_zoom: 'Lupe Zoom',
         lb_center: 'Zentrieren',
@@ -487,18 +465,12 @@ const I18N_DICTIONARY = {
         step_4_sub: 'Überprüfe deine Konfiguration und sende deine unverbindliche Anfrage an Manuela ab.',
         contact_page_title: 'Kontakt',
         contact_intro: 'Ich freue mich über Deine Nachricht, Fragen zu meinen Werken oder Auftragsanfragen.',
-        contact_direct_title: 'Direkter Kontakt',
-        contact_studio_title: 'Atelier Standort',
-        contact_studio_desc: 'Bonn, Deutschland (Besuche nach Absprache)',
-        contact_form_title: 'Nachricht schreiben',
         contact_btn_send: 'Nachricht senden',
         map_title: 'Google Maps Karte aktivieren',
         map_text: 'Aus Datenschutzgründen wird die interaktive Karte erst nach einem Klick geladen.',
         map_btn: 'Karte laden',
         imprint_page_title: 'Impressum',
-        imprint_intro: 'Gesetzliche Anbieterkennzeichnung und Angaben gemäß § 5 DDG.',
         privacy_page_title: 'Datenschutzerklärung',
-        privacy_intro: 'Informationen über die Verarbeitung deiner personenbezogenen Daten.',
         notfound_title: '404 – Seite nicht gefunden',
         notfound_text: 'Diese Leinwand ist noch leer. Die gesuchte Seite existiert nicht (mehr) oder wurde verschoben.',
         notfound_btn: 'Zur Startseite',
@@ -534,6 +506,11 @@ const I18N_DICTIONARY = {
         testi3_location: 'Köln · Hundeportrait & Stillleben',
         testi_prev_aria: 'Vorherige Kundenstimme',
         testi_next_aria: 'Nächste Kundenstimme',
+        testi_pause_aria: 'Automatischen Wechsel anhalten',
+        testi_stars_aria: '5 von 5 Sternen',
+        testi_dot_1: 'Kundenstimme 1 anzeigen',
+        testi_dot_2: 'Kundenstimme 2 anzeigen',
+        testi_dot_3: 'Kundenstimme 3 anzeigen',
         home_btn_gallery: 'Zur Galerie',
         home_btn_flyer: 'Flyer Download',
 
@@ -574,14 +551,10 @@ const I18N_DICTIONARY = {
         kontakt_vcard_title: 'Digitale Visitenkarte',
         kontakt_vcard_hint: 'Bewege die Maus über die Karte oder tippe sie an, um sie umzudrehen.',
         kontakt_vcard_aria: 'Digitale Visitenkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.',
-        kontakt_postcard_aria: 'Kunst-Postkarte von Manuela Schenk. Drücke Enter oder die Leertaste zum Umdrehen.',
-        kontakt_postcard_badge: 'Kunst-Postkarte',
         kontakt_vcard_badge: 'Visitenkarte',
-        kontakt_postcard_title: 'Original Kunst-Postkarte',
         kontakt_vcard_role: 'Künstlerin & Inhaberin',
         kontakt_vcard_save: 'Kontakt speichern (.vcf)',
         kontakt_vcard_pdf: 'Visitenkarte (PDF)',
-        kontakt_postcard_pdf: 'Postkarte (PDF)',
         kontakt_city: 'Bonn, Deutschland',
         kontakt_address: '53175 Bonn, Deutschland',
         social_ig_label: 'Folge mir auf Instagram',
@@ -605,7 +578,6 @@ const I18N_DICTIONARY = {
         impressum_map_text: 'Um die interaktive Karte anzuzeigen, klicken Sie bitte auf "Karte laden". Dadurch stimmen Sie der Übertragung Ihrer IP-Adresse an Google und der Verarbeitung von Cookies gemäß der Datenschutzrichtlinien von Google zu. (Details in unserer <a href="Datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>)',
         impressum_map_btn: 'Karte laden',
         impressum_h_ddg: 'Angaben gemäß § 5 DDG',
-        impressum_h_tmg: 'Angaben gemäß § 5 DDG',
         impressum_h_contact: 'Kontakt',
         impressum_contact_block: 'Telefon: +49 (0) 163 2662435<br>E-Mail: <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a><br>Anschrift: Rüdesheimer Straße 14, 53175 Bonn',
         impressum_h_vat: 'Umsatzsteuer',
@@ -646,18 +618,15 @@ const I18N_DICTIONARY = {
         dsgvo_h8_text: 'Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit folgende Rechte:<br>• <strong>Recht auf Auskunft (Art. 15 DSGVO):</strong> Sie können Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten verlangen.<br>• <strong>Recht auf Berichtigung (Art. 16 DSGVO):</strong> Sie können die Berichtigung unrichtiger Daten verlangen.<br>• <strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Sie können die Löschung Ihrer bei uns gespeicherten personenbezogenen Daten verlangen.<br>• <strong>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO):</strong> Sie können die Einschränkung der Datenverarbeitung verlangen.<br>• <strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Sie können verlangen, Ihre Daten in einem strukturierten, gängigen Format zu erhalten.<br>• <strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Sie haben das Recht, jederzeit gegen die Verarbeitung Ihrer personenbezogenen Daten Widerspruch einzulegen.<br>• <strong>Widerruf Ihrer Einwilligung (Art. 7 Abs. 3 DSGVO):</strong> Sie können erteilte Einwilligungen jederzeit für die Zukunft per E-Mail widerrufen.<br>• <strong>Beschwerderecht bei der zuständigen Aufsichtsbehörde (Art. 77 DSGVO):</strong> Zuständige Aufsichtsbehörde ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), Kavalleriestraße 2–4, 40213 Düsseldorf.',
 
         // Auftrag.html Konfigurator (data-i18n)
-        auftrag_restore_text: 'Du hast eine gespeicherte Konfiguration. <button onclick="restoreSavedConfig()" id="restore-btn">Wiederherstellen</button> oder <button onclick="clearSavedConfig()" id="clear-btn">Neu starten</button>.',
+        auftrag_restore_text: 'Du hast eine gespeicherte Konfiguration. <button type="button" id="restore-btn">Wiederherstellen</button> oder <button type="button" id="clear-btn">Neu starten</button>.',
         auftrag_fav_title: 'Aus deinen gemerkten Favoriten wählen',
         auftrag_fav_hint: 'Klicke auf eines deiner gemerkten Lieblingswerke, um es als Motiv-Inspiration zu übernehmen:',
         auftrag_motiv1_title: 'Tierportrait',
         auftrag_motiv1_desc: 'Hund, Katze, Pferd oder jedes andere Tier – als unvergängliches Gemälde.',
-        auftrag_motiv1_price: 'ab 120 €',
         auftrag_motiv2_title: 'Landschaft',
         auftrag_motiv2_desc: 'Ein besonderer Ort, eine Urlaubserinnerung oder eine traumhafte Szene.',
-        auftrag_motiv2_price: 'ab 100 €',
         auftrag_motiv3_title: 'Stillleben / Pflanzen',
         auftrag_motiv3_desc: 'Blumen, Früchte oder andere Objekte als dekoratives Gemälde.',
-        auftrag_motiv3_price: 'ab 90 €',
         auftrag_motiv4_title: 'Sonstiges / Eigene Idee',
         auftrag_motiv4_desc: 'Du hast eine ganz eigene Idee? Ich male nach deinem Wunschmotiv.',
         auftrag_motiv4_price: 'Auf Anfrage',
@@ -681,53 +650,43 @@ const I18N_DICTIONARY = {
         auftrag_tech2_delivery: 'Lieferung in einigen Wochen',
         auftrag_hint3: 'Bitte wähle eine Technik, um fortzufahren.',
         auftrag_next_summary: 'Zur Zusammenfassung',
-        auftrag_summary_h3: 'Dein Traumgemälde ✨',
         auftrag_summary_motiv: 'Motiv',
         auftrag_summary_format: 'Format',
         auftrag_summary_technik: 'Technik',
         auftrag_summary_lieferzeit: 'Lieferzeit',
         auftrag_price_note: '* Endpreis nach individueller Absprache. Versand innerhalb DE kostenpflichtig.',
         auftrag_photo_h4: 'Eigenes Fotovorlage-Bild auswählen (Optional)',
-        auftrag_photo_hint: 'Du kannst hier dein Haustier- oder Landschaftsfoto auswählen, um die Vorlage direkt zu prüfen:',
+        auftrag_photo_hint: 'Wähle hier dein Haustier- oder Landschaftsfoto aus, um es als Vorschau zu prüfen. Das Foto bleibt auf deinem Gerät und wird nicht mit der Anfrage übertragen.',
         auftrag_photo_input_label: 'Fotovorlage auswählen',
         auftrag_photo_preview_alt: 'Fotovorlage Vorschau',
         auftrag_photo_loaded: 'Fotovorlage geladen',
-        auftrag_photo_ready: 'Bereit für die Anfrage',
+        auftrag_photo_ready: 'Bitte sende das Foto nach deiner Anfrage per E-Mail oder WhatsApp.',
+        auftrag_summary_referenz: 'Referenz',
         auftrag_submit: 'Jetzt unverbindlich anfragen'
     },
     en: {
         skip_link: 'Skip to main content',
         back_to_top: 'Back to top',
-        hero_title: 'ManuFAKTUR',
-        hero_subtitle: 'Custom Paintings & Craftsmanship',
-        hero_btn: 'Discover More!',
         home_welcome_title: 'Welcome',
         home_welcome_text: 'Here my paintings come to life, all lovingly hand-painted by me in exquisite detail.<br>Quality and individuality are my hallmarks. I create custom animal portraits and landscapes for you.',
         badge_handpainted: '100% Hand-painted',
         badge_studio: 'Studio in Bonn, Germany',
         badge_shipping: 'Insured Shipping in DE',
         badge_detail: 'Loving Attention to Detail',
-        news_title: 'Latest News',
-        news_1_date: 'December 01, 2025',
-        news_1_title: 'Advent Season',
-        news_1_text: 'Custom holiday and winter motifs are now available upon request.',
-        news_2_date: 'November 22, 2025',
-        news_2_title: 'Christmas Cards Available Now!',
-        news_2_text: 'I am now painting individual custom motifs for fine art Christmas cards.',
-        news_3_date: 'October 10, 2025',
-        news_3_title: 'New Animal Portraits in Gallery',
-        news_3_text: 'My art gallery has been enriched with many new original works. Come explore and get inspired!',
         highlights_title: 'Current Highlights',
-        highlights_intro: 'A curated selection of my newest original paintings from 2025.',
+        highlights_intro: 'A curated selection of my newest original paintings.',
         testimonials_title: 'What My Clients Say',
         testimonials_intro: 'Genuine experiences & feedback from happy art enthusiasts:',
-        cta_title: 'Ready for Your Custom Artwork?',
         cta_text: 'Discover the collection of hand-painted originals or commission your very own personal motif.',
-        cta_btn_order: 'Request Commission Now',
-        cta_btn_gallery: 'Explore Gallery',
         about_page_title: 'About Me',
         about_intro: 'Get to know the artist behind the canvas.',
         about_profile_title: 'Profile',
+        about_lbl_loc: 'Location:',
+        about_lbl_dog: 'Owner of:',
+        about_lbl_motifs: 'Motifs:',
+        about_lbl_tech: 'Techniques:',
+        about_lbl_edu: 'Education:',
+        about_lbl_motive: 'Motivation:',
         about_profile_loc: 'Bonn (Bad Godesberg), Germany',
         about_profile_dog: 'Balou',
         about_profile_motifs: 'Animal portraits, favorite places & landscapes',
@@ -752,22 +711,11 @@ const I18N_DICTIONARY = {
         service_places_desc: 'Special landscapes and cherished places hold their own magic. If you have such memories, I will transform them into lasting art on canvas.',
         service_formats_title: 'Available Formats',
         service_formats_desc: 'I offer a wide variety of custom sizes and proportions. Since every piece is painted with time and passion, I gladly provide a personal non-binding offer.',
-        steps_title: 'In 4 Simple Steps to Your Artwork',
-        step_1_title: '1. Send Photo Reference',
-        step_1_desc: 'Send me one or more clear photos of your pet, landscape or favorite place.',
-        step_2_title: '2. Select Format & Technique',
-        step_2_desc: 'Together we choose the perfect size and medium (acrylic, oil, or mixed media).',
-        step_3_title: '3. Creation in Studio',
-        step_3_desc: 'Your unique original is hand-crafted with premium artist pigments in my Bonn studio.',
-        step_4_title: '4. Safe Delivery',
-        step_4_desc: 'Carefully cushioned, safely packaged and insured right to your doorstep.',
         faq_title: 'Frequently Asked Questions (FAQ)',
         faq_1_q: 'What does a painting cost?',
         faq_1_a: 'The price depends on the size of the painting. Payment is made in advance (incl. postage and packaging).',
         faq_2_q: 'How long does it take to create a painting?',
         faq_2_a: 'Depending on the technique (acrylic dries faster than oil) and current commissions, completion typically takes a few weeks. Please order well in advance for gifts!',
-        faq_3_q_ship: 'Shipping',
-        faq_3_a_ship: 'Once completed and fully dried, I will ship your painting safely by post. Exact shipping rates are agreed upon individually beforehand.',
         faq_4_q_cancellation: 'Right of Withdrawal for Custom Artworks',
         faq_4_a_cancellation: 'For artworks created individually according to your personal wishes and specifications (such as pet portraits from photo references), there is no statutory right of withdrawal pursuant to § 312g (2) No. 1 German Civil Code (BGB), as the work is clearly tailored to you personally. However, before starting and throughout the painting process, I closely coordinate all details and milestones with you so that you will be completely thrilled with your finished painting.',
         gallery_page_title: 'Art Gallery',
@@ -789,8 +737,6 @@ const I18N_DICTIONARY = {
         gallery_empty_fav_text: 'Click the heart icon on any artwork to save your personal favorites here.',
         gallery_empty_search_title: 'No matching paintings found.',
         gallery_empty_search_text: 'Try a different search term or reset the category filter.',
-        gallery_counter_all: '{count} paintings',
-        gallery_counter_filtered: '{visible} of {total} paintings',
         scene_label: 'AI Wall Preview:',
         scene_label_short: 'AI Wall Preview',
         scene_living: 'Living Room',
@@ -817,6 +763,10 @@ const I18N_DICTIONARY = {
         lb_label_herkunft: 'Origin:',
         lb_val_herkunft: 'Studio Bonn',
         lb_label_rahmung: 'Framing:',
+        lb_label_status: 'Availability:',
+        status_verfuegbar: 'Available',
+        status_reserviert: 'Reserved',
+        status_verkauft: 'Sold – I am happy to paint a similar motif for you',
         lb_val_rahmung: 'Ready to Hang (Stretcher Frame)',
         lb_views_title: 'More Views:',
         lb_view_front: 'Front View',
@@ -838,7 +788,6 @@ const I18N_DICTIONARY = {
         lb_btn_fav_remove: 'Remove from Favorites',
         lb_share_btn: 'Share Artwork',
         lb_share_aria: 'Share artwork',
-        lb_share_copied: '🔗 Link to artwork copied!',
         lb_rotate: 'Rotate 90°',
         lb_zoom: 'Magnifier Zoom',
         lb_center: 'Center',
@@ -858,18 +807,12 @@ const I18N_DICTIONARY = {
         step_4_sub: 'Review your selected configuration and submit your non-binding inquiry directly to Manuela.',
         contact_page_title: 'Contact',
         contact_intro: 'I look forward to hearing from you, whether with questions regarding existing artworks or commission requests.',
-        contact_direct_title: 'Direct Contact',
-        contact_studio_title: 'Studio Location',
-        contact_studio_desc: 'Bonn, Germany (Studio visits by appointment)',
-        contact_form_title: 'Send a Message',
         contact_btn_send: 'Send Message',
         map_title: 'Activate Google Maps',
         map_text: 'For privacy reasons, the interactive map is only loaded after your consent click.',
         map_btn: 'Load Map',
         imprint_page_title: 'Imprint',
-        imprint_intro: 'Legal provider identification and statutory information pursuant to German law (§ 5 DDG).',
         privacy_page_title: 'Privacy Policy',
-        privacy_intro: 'Information regarding the processing of your personal data according to GDPR regulations.',
         notfound_title: '404 – Page Not Found',
         notfound_text: 'This canvas is still empty. The page you are looking for does not exist (anymore) or has been moved.',
         notfound_btn: 'Back to Home',
@@ -905,6 +848,11 @@ const I18N_DICTIONARY = {
         testi3_location: 'Cologne · Dog Portrait & Still Life',
         testi_prev_aria: 'Previous testimonial',
         testi_next_aria: 'Next testimonial',
+        testi_pause_aria: 'Pause automatic rotation',
+        testi_stars_aria: '5 out of 5 stars',
+        testi_dot_1: 'Show testimonial 1',
+        testi_dot_2: 'Show testimonial 2',
+        testi_dot_3: 'Show testimonial 3',
         home_btn_gallery: 'View Gallery',
         home_btn_flyer: 'Flyer Download',
 
@@ -945,14 +893,10 @@ const I18N_DICTIONARY = {
         kontakt_vcard_title: 'Digital Business Card',
         kontakt_vcard_hint: 'Move your mouse over the card or tap it to flip it.',
         kontakt_vcard_aria: 'Digital business card of Manuela Schenk. Press Enter or Space to flip.',
-        kontakt_postcard_aria: 'Art postcard of Manuela Schenk. Press Enter or Space to flip.',
-        kontakt_postcard_badge: 'Art Postcard',
         kontakt_vcard_badge: 'Business Card',
-        kontakt_postcard_title: 'Original Art Postcard',
         kontakt_vcard_role: 'Artist & Owner',
         kontakt_vcard_save: 'Save Contact (.vcf)',
         kontakt_vcard_pdf: 'Business Card (PDF)',
-        kontakt_postcard_pdf: 'Postcard (PDF)',
         kontakt_city: 'Bonn, Germany',
         kontakt_address: '53175 Bonn, Germany',
         social_ig_label: 'Follow me on Instagram',
@@ -976,7 +920,6 @@ const I18N_DICTIONARY = {
         impressum_map_text: 'To display the interactive map, please click "Load Map". By doing so, you consent to the transmission of your IP address to Google and the processing of cookies in accordance with Google\'s privacy policies. (Details in our <a href="Datenschutz.html" target="_blank" rel="noopener">Privacy Policy</a>)',
         impressum_map_btn: 'Load Map',
         impressum_h_ddg: 'Information pursuant to § 5 DDG (Digital Services Act)',
-        impressum_h_tmg: 'Information pursuant to § 5 DDG (Digital Services Act)',
         impressum_h_contact: 'Contact',
         impressum_contact_block: 'Phone: +49 (0) 163 2662435<br>Email: <a href="mailto:manufaktur-malerei@web.de">manufaktur-malerei@web.de</a><br>Address: Rüdesheimer Straße 14, 53175 Bonn, Germany',
         impressum_h_vat: 'VAT',
@@ -1016,18 +959,15 @@ const I18N_DICTIONARY = {
         dsgvo_h8_text: 'Under applicable statutory provisions, you have the following rights at any time:<br>• <strong>Right of access (Art. 15 GDPR):</strong> You can request information about your personal data processed by us.<br>• <strong>Right to rectification (Art. 16 GDPR):</strong> You can request the correction of inaccurate data.<br>• <strong>Right to erasure (Art. 17 GDPR):</strong> You can request the deletion of your personal data stored with us.<br>• <strong>Right to restriction of processing (Art. 18 GDPR):</strong> You can request the restriction of data processing.<br>• <strong>Right to data portability (Art. 20 GDPR):</strong> You can request to receive your data in a structured, commonly used format.<br>• <strong>Right to object (Art. 21 GDPR):</strong> You have the right to object at any time to the processing of your personal data.<br>• <strong>Revocation of your consent (Art. 7 (3) GDPR):</strong> You can revoke given consent at any time for the future via email.<br>• <strong>Right to lodge a complaint with a supervisory authority (Art. 77 GDPR):</strong> The competent supervisory authority is the State Commissioner for Data Protection and Freedom of Information of North Rhine-Westphalia (LDI NRW), Kavalleriestraße 2–4, 40213 Düsseldorf, Germany.',
 
         // Auftrag.html Configurator (data-i18n)
-        auftrag_restore_text: 'You have a saved configuration. <button onclick="restoreSavedConfig()" id="restore-btn">Restore</button> or <button onclick="clearSavedConfig()" id="clear-btn">Start Over</button>.',
+        auftrag_restore_text: 'You have a saved configuration. <button type="button" id="restore-btn">Restore</button> or <button type="button" id="clear-btn">Start Over</button>.',
         auftrag_fav_title: 'Choose from Your Saved Favorites',
         auftrag_fav_hint: 'Click one of your saved favorite artworks to use it as motif inspiration:',
         auftrag_motiv1_title: 'Animal Portrait',
         auftrag_motiv1_desc: 'Dog, cat, horse or any other animal – as an everlasting painting.',
-        auftrag_motiv1_price: 'from €120',
         auftrag_motiv2_title: 'Landscape',
         auftrag_motiv2_desc: 'A special place, a holiday memory, or a dreamlike scene.',
-        auftrag_motiv2_price: 'from €100',
         auftrag_motiv3_title: 'Still Life / Plants',
         auftrag_motiv3_desc: 'Flowers, fruit, or other objects as a decorative painting.',
-        auftrag_motiv3_price: 'from €90',
         auftrag_motiv4_title: 'Other / Custom Idea',
         auftrag_motiv4_desc: 'Do you have your own idea? I paint according to your desired motif.',
         auftrag_motiv4_price: 'Upon Request',
@@ -1051,774 +991,95 @@ const I18N_DICTIONARY = {
         auftrag_tech2_delivery: 'Delivery in a few weeks',
         auftrag_hint3: 'Please choose a technique to continue.',
         auftrag_next_summary: 'To the Summary',
-        auftrag_summary_h3: 'Your Dream Painting ✨',
         auftrag_summary_motiv: 'Motif',
         auftrag_summary_format: 'Format',
         auftrag_summary_technik: 'Technique',
         auftrag_summary_lieferzeit: 'Delivery Time',
         auftrag_price_note: '* Final price subject to individual agreement. Shipping within Germany subject to charge.',
         auftrag_photo_h4: 'Select Your Own Photo Reference (Optional)',
-        auftrag_photo_hint: 'You can select your pet or landscape photo here to check the reference directly:',
+        auftrag_photo_hint: 'Select your pet or landscape photo here to preview it. The photo stays on your device and is not transmitted with the inquiry.',
         auftrag_photo_input_label: 'Select photo reference',
         auftrag_photo_preview_alt: 'Photo reference preview',
         auftrag_photo_loaded: 'Photo reference loaded',
-        auftrag_photo_ready: 'Ready for the inquiry',
+        auftrag_photo_ready: 'Please send the photo by email or WhatsApp after your inquiry.',
+        auftrag_summary_referenz: 'Reference',
         auftrag_submit: 'Send Non-Binding Inquiry Now'
     }
 };
 
+/*
+ * Deutsch steht im HTML. Damit HTML und I18N_DICTIONARY.de nicht auseinanderlaufen können,
+ * merkt sich applyTranslations beim ersten Aufruf die deutschen Originale aller statischen
+ * data-i18n*-Elemente und setzt beim Zurückschalten auf Deutsch genau diese wieder ein.
+ * I18N_DICTIONARY.de wird nur noch für per JS erzeugte Inhalte (Navigation, Footer,
+ * Meldungen) gebraucht.
+ */
+const I18N_BINDINGS = [
+    ['data-i18n', 'text'],
+    ['data-i18n-html', 'html'],
+    ['data-i18n-placeholder', 'placeholder'],
+    ['data-i18n-aria-label', 'aria-label'],
+    ['data-i18n-title', 'title'],
+    ['data-i18n-alt', 'alt']
+];
+const i18nOriginals = new WeakMap();
+let i18nOriginalsCaptured = false;
+
+function readI18nSlot(el, slot) {
+    if (slot === 'text') return el.textContent;
+    if (slot === 'html') return el.innerHTML;
+    return el.getAttribute(slot);
+}
+
+function writeI18nSlot(el, slot, value) {
+    if (slot === 'text') el.textContent = value;
+    else if (slot === 'html') el.innerHTML = value;
+    else el.setAttribute(slot, value);
+}
+
+function rememberI18nOriginal(el, slot) {
+    let store = i18nOriginals.get(el);
+    if (!store) { store = {}; i18nOriginals.set(el, store); }
+    if (!(slot in store)) store[slot] = readI18nSlot(el, slot);
+}
+
+// Einmalig vor der ersten Übersetzung: Header und Footer werden per JS sprachabhängig neu gebaut
+// und brauchen deshalb keine Originale.
+function captureI18nOriginals() {
+    if (i18nOriginalsCaptured) return;
+    i18nOriginalsCaptured = true;
+    I18N_BINDINGS.forEach(([attr, slot]) => {
+        document.querySelectorAll(`[${attr}]`).forEach(el => {
+            if (!el.closest('header, footer')) rememberI18nOriginal(el, slot);
+        });
+    });
+}
+
 function applyTranslations(lang) {
     const t = I18N_DICTIONARY[lang] || I18N_DICTIONARY.de;
-    const isEn = lang === 'en';
+    captureI18nOriginals();
 
-    const setElemText = (selector, text) => {
-        const el = document.querySelector(selector);
-        if (el && text !== undefined) el.textContent = text;
-    };
-    const setElemHTML = (selector, html) => {
-        const el = document.querySelector(selector);
-        if (el && html !== undefined) el.innerHTML = html;
-    };
-
-    // Generischer data-i18n Mechanismus: robust gegenüber DOM-Änderungen,
-    // da er direkt am Element hängt statt an fragilen CSS-Selektoren/Indizes.
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key] !== undefined) el.textContent = t[key];
-    });
-    document.querySelectorAll('[data-i18n-html]').forEach(el => {
-        const key = el.getAttribute('data-i18n-html');
-        if (t[key] !== undefined) el.innerHTML = t[key];
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (t[key] !== undefined) el.setAttribute('placeholder', t[key]);
-    });
-    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
-        const key = el.getAttribute('data-i18n-aria-label');
-        if (t[key] !== undefined) el.setAttribute('aria-label', t[key]);
-    });
-    document.querySelectorAll('[data-i18n-title]').forEach(el => {
-        const key = el.getAttribute('data-i18n-title');
-        if (t[key] !== undefined) el.setAttribute('title', t[key]);
-    });
-    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
-        const key = el.getAttribute('data-i18n-alt');
-        if (t[key] !== undefined) el.setAttribute('alt', t[key]);
+    I18N_BINDINGS.forEach(([attr, slot]) => {
+        document.querySelectorAll(`[${attr}]`).forEach(el => {
+            const store = i18nOriginals.get(el);
+            const value = (lang === 'de' && store && slot in store) ? store[slot] : t[el.getAttribute(attr)];
+            if (value !== undefined && value !== null) writeI18nSlot(el, slot, value);
+        });
     });
 
-    // Skip Link & Back to top
-    const skipLink = document.querySelector('.skip-link');
-    if (skipLink) skipLink.textContent = t.skip_link;
-    const backToTop = document.querySelector('.back-to-top');
-    if (backToTop) backToTop.setAttribute('title', t.back_to_top);
-
-    // Hero / Index
-    setElemText('.hero-content h1', t.hero_title);
-    setElemText('.hero-content p', t.hero_subtitle);
-    const heroBtn = document.querySelector('.hero-btn');
-    if (heroBtn) heroBtn.innerHTML = `${t.hero_btn} <i class="fa fa-angle-right" aria-hidden="true"></i>`;
-
-    // Global Page Title & Intro
-    const pageTitle = document.querySelector('h1.page-title');
-    if (pageTitle) {
-        const raw = pageTitle.textContent.trim();
-        if (raw.includes('Über mich') || raw.includes('About Me')) pageTitle.textContent = t.about_page_title;
-        else if (raw.includes('Leistungen') || raw.includes('Services')) pageTitle.textContent = t.services_page_title;
-        else if (raw.includes('Bildergalerie') || raw.includes('Gallery') || raw.includes('Art Gallery')) pageTitle.textContent = t.gallery_page_title;
-        else if (raw.includes('Auftrag') || raw.includes('Commission')) pageTitle.textContent = t.order_page_title;
-        else if (raw.includes('Kontakt') || raw.includes('Contact')) pageTitle.textContent = t.contact_page_title;
-        else if (raw.includes('Impressum') || raw.includes('Imprint')) pageTitle.textContent = t.imprint_page_title;
-        else if (raw.includes('Datenschutz') || raw.includes('Privacy')) pageTitle.textContent = t.privacy_page_title;
-    }
-
-    const introText = document.querySelector('p.intro-text:not(.intro-text--subtle)');
-    if (introText) {
-        const path = window.location.pathname.toLowerCase();
-        if (path.includes('uebermich')) introText.textContent = t.about_intro;
-        else if (path.includes('leistungen')) introText.textContent = t.services_intro;
-        else if (path.includes('bildergalerie')) introText.textContent = t.gallery_intro;
-        else if (path.includes('auftrag')) introText.textContent = t.order_intro;
-        else if (path.includes('kontakt')) introText.textContent = t.contact_intro;
-        else if (path.includes('impressum')) introText.textContent = t.imprint_intro;
-        else if (path.includes('datenschutz')) introText.textContent = t.privacy_intro;
-    }
-
-    // Home.html Elements
-    setElemHTML('.welcome h1', `${t.home_welcome_title} <i class="fa fa-palette" aria-hidden="true"></i>`);
-    setElemHTML('.welcome p', t.home_welcome_text);
-    const badges = document.querySelectorAll('.hero-trust-badges .trust-badge');
-    if (badges.length >= 4) {
-        badges[0].innerHTML = `<i class="fa-solid fa-paintbrush" aria-hidden="true"></i> ${t.badge_handpainted}`;
-        badges[1].innerHTML = `<i class="fa-solid fa-location-dot" aria-hidden="true"></i> ${t.badge_studio}`;
-        badges[2].innerHTML = `<i class="fa-solid fa-truck-fast" aria-hidden="true"></i> ${t.badge_shipping}`;
-        badges[3].innerHTML = `<i class="fa-solid fa-heart" aria-hidden="true"></i> ${t.badge_detail}`;
-    }
-
-    setElemHTML('.news h2', `<i class="fa fa-bell" aria-hidden="true"></i> ${t.news_title}`);
-    const newsBoxes = document.querySelectorAll('.news-box');
-    if (newsBoxes.length >= 3) {
-        const d1 = newsBoxes[0].querySelector('.news-date'); if (d1) d1.textContent = t.news_1_date;
-        const h1 = newsBoxes[0].querySelector('h3'); if (h1) h1.textContent = t.news_1_title;
-        const p1 = newsBoxes[0].querySelector('p'); if (p1) p1.textContent = t.news_1_text;
-        const d2 = newsBoxes[1].querySelector('.news-date'); if (d2) d2.textContent = t.news_2_date;
-        const h2 = newsBoxes[1].querySelector('h3'); if (h2) h2.textContent = t.news_2_title;
-        const p2 = newsBoxes[1].querySelector('p'); if (p2) p2.textContent = t.news_2_text;
-        const d3 = newsBoxes[2].querySelector('.news-date'); if (d3) d3.textContent = t.news_3_date;
-        const h3 = newsBoxes[2].querySelector('h3'); if (h3) h3.textContent = t.news_3_title;
-        const p3 = newsBoxes[2].querySelector('p'); if (p3) p3.textContent = t.news_3_text;
-    }
-
-    setElemHTML('.latest-work h2', `<i class="fa-solid fa-paintbrush" aria-hidden="true"></i> ${t.highlights_title}`);
-    setElemText('.latest-work .intro-text', t.highlights_intro);
-    setElemHTML('.testimonials-section h2', `<i class="fa-solid fa-comments" aria-hidden="true"></i> ${t.testimonials_title}`);
-    setElemText('.testimonials-section .intro-text', t.testimonials_intro);
-
-    setElemText('.cta-content h2', t.cta_title);
-    setElemText('.cta-content p', t.cta_text);
-    const ctaBtns = document.querySelectorAll('.cta-buttons .btn');
-    if (ctaBtns.length >= 2) {
-        ctaBtns[0].innerHTML = `<i class="fa fa-pen-ruler" aria-hidden="true"></i> ${t.cta_btn_order}`;
-        ctaBtns[1].innerHTML = `<i class="fa fa-images" aria-hidden="true"></i> ${t.cta_btn_gallery}`;
-    }
-
-    // UeberMich.html Elements
-    setElemHTML('.info-card h3', `<i class="fa-solid fa-circle-info" aria-hidden="true"></i> ${t.about_profile_title}`);
-    const profileList = document.querySelectorAll('.info-card ul li');
-    if (profileList.length >= 6) {
-        profileList[0].innerHTML = `<strong>${isEn ? 'Location:' : 'Wohnort:'}</strong> ${t.about_profile_loc}`;
-        profileList[1].innerHTML = `<strong>${isEn ? 'Owner of:' : 'Frauchen von:'}</strong> ${t.about_profile_dog}`;
-        profileList[2].innerHTML = `<strong>${isEn ? 'Motifs:' : 'Motive:'}</strong> ${t.about_profile_motifs}`;
-        profileList[3].innerHTML = `<strong>${isEn ? 'Techniques:' : 'Techniken:'}</strong> ${t.about_profile_tech}`;
-        profileList[4].innerHTML = `<strong>${isEn ? 'Education:' : 'Ausbildung:'}</strong> ${t.about_profile_edu}`;
-        profileList[5].innerHTML = `<strong>${isEn ? 'Motivation:' : 'Motivation:'}</strong> ${t.about_profile_motive}`;
-    }
-    setElemText('.about-content h4', t.about_greeting);
-    setElemText('.about-content i p', t.about_subtitle);
-    const aboutPs = document.querySelectorAll('.about-content > p');
-    if (aboutPs.length >= 5) {
-        aboutPs[0].innerHTML = t.about_p1;
-        aboutPs[1].innerHTML = t.about_p2;
-        aboutPs[2].innerHTML = t.about_p3;
-        aboutPs[3].innerHTML = t.about_p4;
-        aboutPs[4].innerHTML = t.about_p5;
-    }
-
-    // Leistungen.html Elements
-    setElemHTML('.services h2', `<i class="fa fa-palette" aria-hidden="true"></i> ${t.services_offer_title}`);
-    const serviceCards = document.querySelectorAll('.service-card');
-    if (serviceCards.length >= 4) {
-        serviceCards[0].querySelector('h3').textContent = t.service_dog_title;
-        serviceCards[0].querySelector('p').textContent = t.service_dog_desc;
-        serviceCards[1].querySelector('h3').textContent = t.service_pets_title;
-        serviceCards[1].querySelector('p').textContent = t.service_pets_desc;
-        serviceCards[2].querySelector('h3').textContent = t.service_places_title;
-        serviceCards[2].querySelector('p').textContent = t.service_places_desc;
-        serviceCards[3].querySelector('h3').textContent = t.service_formats_title;
-        serviceCards[3].querySelector('p').textContent = t.service_formats_desc;
-    }
-    // Bildergalerie.html Filters & UI
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    if (filterBtns.length >= 6) {
-        filterBtns[0].textContent = t.filter_all;
-        filterBtns[1].textContent = t.filter_animals;
-        filterBtns[2].textContent = t.filter_landscapes;
-        filterBtns[3].textContent = t.filter_plants;
-        filterBtns[4].textContent = t.filter_other;
-        filterBtns[5].innerHTML = `<i class="fa-solid fa-heart" aria-hidden="true"></i> ${t.filter_favorites} (<span id="fav-count">${getFavorites().length}</span>)`;
-    }
-    const gallerySearch = document.getElementById('gallery-search');
-    if (gallerySearch) {
-        gallerySearch.setAttribute('placeholder', t.search_placeholder);
-        gallerySearch.setAttribute('aria-label', t.search_placeholder);
-    }
-    const sortSelect = document.getElementById('gallery-sort-select');
-    if (sortSelect && sortSelect.options.length >= 4) {
-        sortSelect.options[0].text = t.sort_default;
-        sortSelect.options[1].text = t.sort_newest;
-        sortSelect.options[2].text = t.sort_title_asc;
-        sortSelect.options[3].text = t.sort_title_desc;
-    }
-    const sortLabel = document.querySelector('.gallery-sort-wrapper label');
-    if (sortLabel) sortLabel.innerHTML = `<i class="fa-solid fa-arrow-down-a-z" aria-hidden="true"></i> ${t.sort_label}`;
-
-    // Galerie-Karten (57 Kunstwerke): aria-label, alt/title, Bildunterschrift & "Unikat"-Badge
+    // Galerie-Karten (Titel, Technik, Maße aus artworks-data.js)
     translateGalleryCards(lang);
 
-    // Lightbox Buttons
-    setElemHTML('#lightbox-inquiry-btn', `<i class="fa-solid fa-palette" aria-hidden="true"></i> ${t.lb_btn_inquiry}`);
-    setElemHTML('#lightbox-room-btn', `<i class="fa-solid fa-house-chimney" aria-hidden="true"></i> ${t.lb_btn_room}`);
-    setElemHTML('#lightbox-share-btn', `<i class="fa-solid fa-share-nodes" aria-hidden="true"></i> ${t.lb_share_btn}`);
-    setElemHTML('#btn-rotate-img', `<i class="fa-solid fa-rotate-right" aria-hidden="true"></i> ${t.lb_rotate}`);
-    setElemHTML('#btn-toggle-zoom', `<i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> ${t.lb_zoom}`);
-    setElemHTML('#btn-reset-pos', `<i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> ${t.lb_center}`);
-
-    // Auftrag.html Configurator
-    const stepIndicators = document.querySelectorAll('.progress-step .step-label');
-    if (stepIndicators.length >= 4) {
-        stepIndicators[0].textContent = t.step_1_lbl;
-        stepIndicators[1].textContent = t.step_2_lbl;
-        stepIndicators[2].textContent = t.step_3_lbl;
-        stepIndicators[3].textContent = t.step_4_lbl;
-    }
-    setElemHTML('#panel-1 h2', `<i class="fa fa-paw" aria-hidden="true"></i> ${t.step_1_heading}`);
-    setElemText('#panel-1 .config-subtitle', t.step_1_sub);
-    setElemHTML('#panel-2 h2', `<i class="fa fa-ruler-combined" aria-hidden="true"></i> ${t.step_2_heading}`);
-    setElemText('#panel-2 .config-subtitle', t.step_2_sub);
-    setElemHTML('#panel-3 h2', `<i class="fa fa-palette" aria-hidden="true"></i> ${t.step_3_heading}`);
-    setElemText('#panel-3 .config-subtitle', t.step_3_sub);
-    setElemHTML('#panel-4 h2', `<i class="fa fa-clipboard-check" aria-hidden="true"></i> ${t.step_4_heading}`);
-    setElemText('#panel-4 .config-subtitle', t.step_4_sub);
+    // Konfigurator: Fortschrittsanzeige (aria-valuetext) folgt den Schrittnamen
+    if (typeof updateProgressAria === 'function') updateProgressAria();
 }
 
 /* =========================================
    2. GALERIE: FILTER, LIVE-SUCHE, FAVORITEN & DATEN
    ========================================= */
-const ARTWORKS_METADATA = {
-    "DSC_6622a": {
-        "title": "Godesburg modern",
-        "technik": "Multimediatechnik auf Papier",
-        "masse": "40 × 50 cm",
-        "kategorie": "landschaften",
-        "desc": "Eines meiner Lieblingsmotive ist die Godesburg in Bad Godesberg. Hier habe ich sie in einer modernen, ausdrucksstarken Multimediatechnik dargestellt.",
-        "badge": "Unikat"
-    },
-    "DSC_6624a": {
-        "title": "Siebengebirge Panorama",
-        "technik": "Acryl auf Leinwand",
-        "masse": "60 × 70 cm",
-        "kategorie": "landschaften",
-        "desc": "Auf einer ausgedehnten Wanderung durch das Siebengebirge musste ich diese stimmungsvolle Wald- und Weitblick-Ansicht auf Leinwand festhalten.",
-        "badge": "Unikat"
-    },
-    "DSC_6626a": {
-        "title": "Bad Godesberg City mit Godesburg",
-        "technik": "Öl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "landschaften",
-        "desc": "Diese Ansicht zeigt die historische Godesburg in Bad Godesberg, gesehen vom blühenden Stadtpark aus.",
-        "badge": "Unikat"
-    },
-    "DSC_6628a": {
-        "title": "Pförtnerhäuschen am Klufterhof Friesdorf",
-        "technik": "Öl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "sonstiges",
-        "desc": "Das malerische Pförtnerhäuschen in Bad Godesberg-Friesdorf gehört zum denkmalgeschützten Klufterhof-Ensemble.",
-        "badge": "Unikat"
-    },
-    "DSC_6630a": {
-        "title": "Friesdorf Annaberger Straße",
-        "technik": "Öl auf Leinwand",
-        "masse": "30 × 24 cm",
-        "kategorie": "landschaften",
-        "desc": "Das historische Turmhaus aus dem 12. Jahrhundert und die Annaberger Straße im Herzen von Bad Godesberg-Friesdorf.",
-        "badge": "Unikat"
-    },
-    "DSC_6632a": {
-        "title": "Der Klufterhof Friesdorf",
-        "technik": "Öl auf Leinwand",
-        "masse": "30 × 40 cm",
-        "kategorie": "landschaften",
-        "desc": "Der Klufterhof in Friesdorf ist eines der ältesten und schönsten Fachwerkhäuser der Region aus dem frühen 17. Jahrhundert.",
-        "badge": "Unikat"
-    },
-    "DSC_6634a": {
-        "title": "Drachenfels am Rhein (Ansicht Nähe Mehlem)",
-        "technik": "Öl auf Leinwand",
-        "masse": "60 × 70 cm",
-        "kategorie": "landschaften",
-        "desc": "Bei meinen zahlreichen Spaziergängen entlang der Rheinpromenade kann ich diesen wunderbaren Anblick auf den Drachenfels genießen.",
-        "badge": "Unikat"
-    },
-    "DSC_6636a": {
-        "title": "Drachenfels am Rhein im Sommer",
-        "technik": "Acryl auf Leinwand",
-        "masse": "60 × 70 cm",
-        "kategorie": "landschaften",
-        "desc": "Diesen herrlichen Anblick auf den geschichtsträchtigen Drachenfels kann man von einer sonnigen Bank in Bad Godesberg-Mehlem genießen.",
-        "badge": "Unikat"
-    },
-    "DSC_6638a": {
-        "title": "Godesburg im Sommerlicht",
-        "technik": "Acryl auf Leinwand",
-        "masse": "30 × 24 cm",
-        "kategorie": "landschaften",
-        "desc": "Die Godesburg in Bad Godesberg unter strahlend blauem Sommerhimmel mit lebhaften Grünschattierungen.",
-        "badge": "Unikat"
-    },
-    "DSC_6640a": {
-        "title": "Gasthaus „Zur Lindenwirtin“ mit Godesburg",
-        "technik": "Öl auf Leinwand",
-        "masse": "30 × 40 cm",
-        "kategorie": "landschaften",
-        "desc": "Dieses Werk zeigt eine historische Ansicht des traditionsreichen Gasthauses „Zur Lindenwirtin“ mit der majestätischen Godesburg im Hintergrund.",
-        "badge": "Unikat"
-    },
-    "DSC_6642a": {
-        "title": "Spazierweg Rheinaue Bonn",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "landschaften",
-        "desc": "Ein idyllischer Spazierweg im Bonner Rheinauenpark führt an diesen wunderschönen, knorrigen alten Parkbäumen vorbei.",
-        "badge": "Unikat"
-    },
-    "DSC_6644a": {
-        "title": "Historische Godesburg Ansicht",
-        "technik": "Acryl auf Leinwand",
-        "masse": "30 × 40 cm",
-        "kategorie": "landschaften",
-        "desc": "Vertikale Architekturstudie der Godesburg mit sanft geschwungenen Hangwegen und warmen Steinfarben.",
-        "badge": "Unikat"
-    },
-    "DSC_6688a": {
-        "title": "Blumenbouquet",
-        "technik": "Acryl auf Karton",
-        "masse": "30 × 30 cm",
-        "kategorie": "pflanzen",
-        "desc": "Farbenfrohes, lebensfrohes Blumenbouquet mit kontrastreichen Blütenarrangements in geschichteter Acryltechnik.",
-        "badge": "Unikat"
-    },
-    "DSC_6689a": {
-        "title": "Kleines Blumenbouquet",
-        "technik": "Öl auf Karton",
-        "masse": "30 × 30 cm",
-        "kategorie": "pflanzen",
-        "desc": "Zartes und detailreiches Blumenbouquet in feiner Ölmalerei mit weichen Übergängen und warmen Blütennuancen.",
-        "badge": "Unikat"
-    },
-    "DSC_6693a": {
-        "title": "Schafe auf Texel",
-        "technik": "Öl auf Leinwand",
-        "masse": "30 × 40 cm",
-        "kategorie": "tiere",
-        "desc": "Im Urlaub auf der Nordseeinsel Texel begegneten uns diese neugierigen, liebenswerten Schafe auf den grünen Deichen.",
-        "badge": "Unikat"
-    },
-    "DSC_6696a": {
-        "title": "Eulen im Kottenforst",
-        "technik": "Öl auf Leinwand",
-        "masse": "30 × 40 cm",
-        "kategorie": "tiere",
-        "desc": "Zwei kleine Eulen nebeneinander auf einem Ast im dämmrigen Kottenforst Bad Godesberg vor geheimnisvoll blauem Hintergrund.",
-        "badge": "Unikat"
-    },
-    "DSC_6698a": {
-        "title": "Blumen modern",
-        "technik": "Acryl auf Leinwand",
-        "masse": "60 × 70 cm",
-        "kategorie": "pflanzen",
-        "desc": "Moderne florale Abstraktion mit dynamischen Pinselstrichen und kräftigen Farbflächen auf großzügigem Leinwandformat.",
-        "badge": "Unikat"
-    },
-    "DSC_6700a": {
-        "title": "Blütenharmonie im Garten",
-        "technik": "Acryl auf Leinwand",
-        "masse": "50 × 60 cm",
-        "kategorie": "pflanzen",
-        "desc": "Frische Blütenkomposition voller Leuchtkraft und natürlicher Eleganz.",
-        "badge": "Unikat"
-    },
-    "DSC_6702a": {
-        "title": "Lustige Hühner",
-        "technik": "Acryl auf Leinwand",
-        "masse": "30 × 60 cm",
-        "kategorie": "tiere",
-        "desc": "Eine heitere Reihe bunter Hühner im charmanten Breitwand-Querformat – voller Lebensfreude und Witz.",
-        "badge": "Unikat"
-    },
-    "DSC_6703a": {
-        "title": "Mohnblumenwiese",
-        "technik": "Acryl auf Leinwand",
-        "masse": "60 × 70 cm",
-        "kategorie": "pflanzen",
-        "desc": "Leuchtend rote Sommer-Mohnblumen wiegen sich im Wind auf einer sonnendurchfluteten Wiese.",
-        "badge": "Unikat"
-    },
-    "DSC_6705a": {
-        "title": "Bunte Tulpenpracht",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 40 cm",
-        "kategorie": "pflanzen",
-        "desc": "Farbenfrohe Frühlings-Tulpen in leuchtenden Acrylfarben im quadratischen Format.",
-        "badge": "Unikat"
-    },
-    "DSC_6707a": {
-        "title": "Heuballen an der französischen Atlantikküste",
-        "technik": "Öl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "landschaften",
-        "desc": "Der Duft der frischen Heuballen an der französischen Atlantikküste inspirierte mich zu diesem Bild – man kann die Sommerbrise förmlich spüren.",
-        "badge": "Unikat"
-    },
-    "DSC_6710a": {
-        "title": "Dünenweg an der französischen Atlantikküste",
-        "technik": "Acryl auf Leinwand",
-        "masse": "100 × 150 cm",
-        "kategorie": "landschaften",
-        "desc": "Dünenwege laden zur vollkommenen Entspannung ein. Dieser zauberhafte Pfad führt durch den weichen Dünensand direkt ans Meer.",
-        "badge": "Unikat"
-    },
-    "DSC_6711a": {
-        "title": "Muschel am Strand",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "sonstiges",
-        "desc": "Eine einsame Meeresmuschel im warmen Küstensand mit sanften Licht- und Schattenspielen des Meeres.",
-        "badge": "Unikat"
-    },
-    "DSC_6713a": {
-        "title": "Leuchtturm auf Texel",
-        "technik": "Acryl auf Leinwand",
-        "masse": "24 × 30 cm",
-        "kategorie": "landschaften",
-        "desc": "Zahlreiche Urlaube führten uns nach Texel – der weithin sichtbare rote Leuchtturm im Norden der Insel durfte als Motiv nicht fehlen.",
-        "badge": "Unikat"
-    },
-    "DSC_6715a": {
-        "title": "Spazierweg Friedhof Dottendorf (I)",
-        "technik": "Ölkreide auf Papier, Rahmen aus Birkenholz",
-        "masse": "33 × 43 cm",
-        "kategorie": "landschaften",
-        "desc": "Auf Parkbänken kann man wunderbar entspannen und diese friedliche Lieblingsansicht mit sanfter Ölkreide festhalten.",
-        "badge": "Unikat"
-    },
-    "DSC_6717a": {
-        "title": "Spazierweg am Blausteinsee Eschweiler",
-        "technik": "Ölkreide auf Papier, Rahmen aus Birkenholz",
-        "masse": "33 × 43 cm",
-        "kategorie": "landschaften",
-        "desc": "Ein beliebtes Ausflugsziel in der Natur nahe Aachen: Der friedliche Uferweg am Blausteinsee.",
-        "badge": "Unikat"
-    },
-    "DSC_6719a": {
-        "title": "Spazierweg Friedhof Dottendorf (II)",
-        "technik": "Ölkreide auf Papier, Rahmen aus Birkenholz",
-        "masse": "33 × 43 cm",
-        "kategorie": "landschaften",
-        "desc": "Zarte Birkenbäume und herbstliche Stille in Bonn-Dottendorf – handgerahmt in edlem Birkenholz.",
-        "badge": "Unikat"
-    },
-    "DSC_6722a": {
-        "title": "Waldweg Kottenforst Bonn",
-        "technik": "Acryl auf Leinwand",
-        "masse": "30 × 90 cm",
-        "kategorie": "landschaften",
-        "desc": "Dieser sonnendurchflutete Waldweg im Bonner Kottenforst ist einer meiner absoluten Lieblingswege zu jeder Jahreszeit.",
-        "badge": "Unikat"
-    },
-    "DSC_6740a": {
-        "title": "Tulpenbouquet in Öl",
-        "technik": "Öl auf Leinwand",
-        "masse": "40 × 40 cm",
-        "kategorie": "pflanzen",
-        "desc": "Klassische botanische Ölmalerei mit feinen Farbabstufungen und samtigem Glanz.",
-        "badge": "Unikat"
-    },
-    "DSC_6742a": {
-        "title": "Balou – Hundeportrait in Öl",
-        "technik": "Öl auf Leinwand",
-        "masse": "40 × 40 cm",
-        "kategorie": "tiere",
-        "desc": "Unser Familienhund Balou mit seinem treuen Blick und samtweichem Fell in klassischer Ölmalerei verewigt.",
-        "badge": "Unikat"
-    },
-    "DSC_6744a": {
-        "title": "Balou – Hundeportrait modern",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "tiere",
-        "desc": "Moderne Porträtstudie von Balou mit mutigen Farbkontrasten und ausdrucksstarkem Charakter.",
-        "badge": "Unikat"
-    },
-    "DSC_6747a": {
-        "title": "Balou – Hundeportrait Acryl",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "tiere",
-        "desc": "Fein ausgearbeitetes Acrylportrait von Balou mit lebendigen Lichtreflexen in den Augen.",
-        "badge": "Unikat"
-    },
-    "DSC_6749a": {
-        "title": "Magnolientraum",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "pflanzen",
-        "desc": "So eine traumhafte Ansicht erhält man, wenn man im Frühling von unten in einen blühenden rosa Magnolienbaum schaut.",
-        "badge": "Unikat"
-    },
-    "DSC_6751a": {
-        "title": "Klassisches Stillleben",
-        "technik": "Öl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "sonstiges",
-        "desc": "Meisterhaft ausgeleuchtetes Stillleben in traditioneller Schichtölmalerei mit harmonischer Raumtiefe.",
-        "badge": "Unikat"
-    },
-    "DSC_6753a": {
-        "title": "Rote Paprikaschote",
-        "technik": "Acryl auf Leinwand",
-        "masse": "19 × 19 cm",
-        "kategorie": "sonstiges",
-        "desc": "Frische, glänzende Paprikaschote im modernen Kleinformat mit knackigen Glanzlichtern.",
-        "badge": "Unikat"
-    },
-    "DSC_6754a": {
-        "title": "Zitronen",
-        "technik": "Öl auf Leinwand",
-        "masse": "19 × 19 cm",
-        "kategorie": "sonstiges",
-        "desc": "Sonnengereifte Zitronen mit samtiger Schalenstruktur in leuchtendem Zitronengelb.",
-        "badge": "Unikat"
-    },
-    "DSC_6757a": {
-        "title": "Der gallische Hahn",
-        "technik": "Acryl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "tiere",
-        "desc": "Stolzer gallischer Hahn mit feurigem Kamm und stolzem Blick in lebendigem Farbauftrag.",
-        "badge": "Unikat"
-    },
-    "DSC_6759a": {
-        "title": "Frische Erdbeeren",
-        "technik": "Acryl auf Leinwand",
-        "masse": "19 × 19 cm",
-        "kategorie": "sonstiges",
-        "desc": "Sommerlich frische Erdbeeren im quadratischen Miniatur-Format – zum Anbeißen schön.",
-        "badge": "Unikat"
-    },
-    "DSC_6760a": {
-        "title": "Erdbeeren auf blauem Teller",
-        "technik": "Acryl auf Leinwand",
-        "masse": "19 × 19 cm",
-        "kategorie": "sonstiges",
-        "desc": "Satte rote Erdbeeren im wirkungsvollen Farbkontrast auf einem kobaltblauen Keramikteller.",
-        "badge": "Unikat"
-    },
-    "DSC_6763a": {
-        "title": "Bunter Hahn",
-        "technik": "Acryl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "tiere",
-        "desc": "Lebhaftes Vogelportrait mit schillernden Gefiedertönen und charaktervoller Pose.",
-        "badge": "Unikat"
-    },
-    "DSC_6765a": {
-        "title": "Rotkehlchen im Winter",
-        "technik": "Acryl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "tiere",
-        "desc": "Ein bezauberndes Rotkehlchen auf einem Ast mit feinsten Daunen und leuchtend roter Brust.",
-        "badge": "Unikat"
-    },
-    "DSC_6767a": {
-        "title": "Parfum Coco Mademoiselle",
-        "technik": "Acryl auf Leinwand",
-        "masse": "19 × 19 cm",
-        "kategorie": "sonstiges",
-        "desc": "Elegantes Stillleben des legendären Parfum-Klassikers in pudrigen Rosé- und Goldtönen.",
-        "badge": "Unikat"
-    },
-    "DSC_6768a": {
-        "title": "Ast mit Zitronen",
-        "technik": "Acryl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "pflanzen",
-        "desc": "Mediterraner Ast mit sonnengereiften Zitronen und frischen grünen Blättern vor leuchtend blauem Himmel.",
-        "badge": "Unikat"
-    },
-    "DSC_6769a": {
-        "title": "Biene auf Hortensie",
-        "technik": "Acryl auf Leinwand",
-        "masse": "19 × 19 cm",
-        "kategorie": "tiere",
-        "desc": "Eine fleißige Honigbiene inmitten eines dichten Meeres himmelblauer Hortensienblüten.",
-        "badge": "Unikat"
-    },
-    "DSC_6771a": {
-        "title": "Biene auf Lavendel",
-        "technik": "Acryl auf Leinwand",
-        "masse": "19 × 19 cm",
-        "kategorie": "tiere",
-        "desc": "Mediterrane Sommeridylle: Eine Biene bei der Nektarsuche auf duftendem violettem Lavendel.",
-        "badge": "Unikat"
-    },
-    "DSC_6774a": {
-        "title": "Stillleben „Le petit déjeuner“",
-        "technik": "Acryl auf Leinwand",
-        "masse": "19 × 19 cm",
-        "kategorie": "sonstiges",
-        "desc": "Französisches Frühstück mit frischem Buttercroissant und Kaffee in warmem Morgenlicht.",
-        "badge": "Unikat"
-    },
-    "DSC_6775a": {
-        "title": "Kühe in der Normandie (I)",
-        "technik": "Acryl auf Leinwand",
-        "masse": "24 × 30 cm",
-        "kategorie": "tiere",
-        "desc": "Diese beiden neugierigen Kühe begegneten uns bei einem erholsamen Sommerspaziergang in der Normandie.",
-        "badge": "Unikat"
-    },
-    "DSC_6778a": {
-        "title": "Kühe in der Normandie (II)",
-        "technik": "Acryl auf Leinwand",
-        "masse": "24 × 30 cm",
-        "kategorie": "tiere",
-        "desc": "Typische normannische Weidekühe mit ihrer markanten Fleckung in herrlicher Küstenlandschaft.",
-        "badge": "Unikat"
-    },
-    "DSC_6780a": {
-        "title": "Burger & Fries Pop-Art",
-        "technik": "Acryl auf Leinwand",
-        "masse": "24 × 30 cm",
-        "kategorie": "sonstiges",
-        "desc": "Köstlicher Burger mit knusprigen Pommes Frites als modernes, farbintensives Pop-Art Stillleben.",
-        "badge": "Unikat"
-    },
-    "DSC_6782a": {
-        "title": "Seerose im Botanischen Garten Bonn",
-        "technik": "Öl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "pflanzen",
-        "desc": "Zauberhafte weiße Seerose auf ruhigem Teichwasser im historischen Botanischen Garten Bonn.",
-        "badge": "Unikat"
-    },
-    "DSC_6784a": {
-        "title": "Gelbe Frühlings-Tulpen",
-        "technik": "Öl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "pflanzen",
-        "desc": "Strahlend sonnengelbe Tulpen in zarter Schichtölmalerei mit stimmungsvoller Tiefenwirkung.",
-        "badge": "Unikat"
-    },
-    "DSC_6788a": {
-        "title": "Aperol Spritz",
-        "technik": "Acryl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "sonstiges",
-        "desc": "Erfrischender Aperol Spritz im Weinglas mit Orangenscheibe und klaren Eiswürfeln.",
-        "badge": "Unikat"
-    },
-    "DSC_6790a": {
-        "title": "Kühles Bier im Glas",
-        "technik": "Acryl auf Leinwand",
-        "masse": "18 × 24 cm",
-        "kategorie": "sonstiges",
-        "desc": "Frisch gezapftes, perlendes Bier mit goldgelber Farbe und dichter weißer Schaumkrone."
-    },
-    "DSC_6793a": {
-        "title": "Traumpfad Kottenforst",
-        "technik": "Acryl auf Leinwand",
-        "masse": "100 × 100 cm",
-        "kategorie": "landschaften",
-        "desc": "Malerischer Spazierweg im herbstlichen Kottenforst bei Bonn, durchflutet von warmem Sonnenlicht und leuchtenden Blattfarben.",
-        "badge": "Unikat"
-    },
-    "DSC_6798a": {
-        "title": "Weg auf Island",
-        "technik": "Öl auf Karton",
-        "masse": "40 × 60 cm",
-        "kategorie": "landschaften",
-        "desc": "Manche Wege auf Island führen über Holzplanken – ein stimmungsvoller Pfad entlang der dramatischen Steilküste.",
-        "badge": "Unikat"
-    },
-    "bild18-eulen": {
-        "title": "Zwei Eulen",
-        "technik": "Acryl auf Leinwand",
-        "masse": "30 × 40 cm",
-        "kategorie": "tiere",
-        "desc": "Liebevoll handgemaltes Acrylbild mit zwei kleinen Eulen auf einem Ast vor blauem Hintergrund."
-    },
-    "bild16-godesburg": {
-        "title": "Godesburg Stadtansicht",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "landschaften",
-        "desc": "Malerische Stadtansicht der historischen Godesburg in Bonn bei abendlicher Dämmerung."
-    },
-    "bild8-rheinaue": {
-        "title": "Rheinaue Bonn",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "landschaften",
-        "desc": "Herbstliche Impression des Rheinaue-Sees in Bonn mit spiegelnden Bäumen und stimmungsvollem Licht."
-    },
-    "bild9-feld": {
-        "title": "Feldweg im Sommer",
-        "technik": "Acryl auf Leinwand",
-        "masse": "40 × 50 cm",
-        "kategorie": "landschaften",
-        "desc": "Idyllischer sonniger Feldweg im Sommer unter weitem blauem Himmel."
-    }
-};
+// ARTWORKS_METADATA und ARTWORKS_METADATA_EN liegen in assets/js/artworks-data.js
+// (nur auf Seiten mit Galerie/Lightbox/Favoriten eingebunden).
 
-/* =========================================
-   ENGLISCHE ÜBERSETZUNG DER GALERIE-WERKE
-   Enthält nur die zu übersetzenden Felder (title/technik/desc) je Werk-ID.
-   Maße, Kategorie und Badge bleiben sprachunabhängig (Zahlen/interne Werte).
-   ========================================= */
-const ARTWORKS_METADATA_EN = {
-    "DSC_6622a": { title: "Godesburg Modern", technik: "Mixed media on paper", desc: "One of my favorite motifs is Godesburg Castle in Bad Godesberg. Here I depicted it in a modern, expressive mixed-media technique." },
-    "DSC_6624a": { title: "Siebengebirge Panorama", technik: "Acrylic on canvas", desc: "On an extensive hike through the Siebengebirge hills, I had to capture this atmospheric forest and panoramic view on canvas." },
-    "DSC_6626a": { title: "Bad Godesberg City with Godesburg", technik: "Oil on canvas", desc: "This view shows the historic Godesburg Castle in Bad Godesberg, seen from the blooming city park." },
-    "DSC_6628a": { title: "Gatehouse at Klufterhof Friesdorf", technik: "Oil on canvas", desc: "The picturesque gatehouse in Bad Godesberg-Friesdorf belongs to the listed Klufterhof ensemble." },
-    "DSC_6630a": { title: "Friesdorf Annaberger Straße", technik: "Oil on canvas", desc: "The historic tower house from the 12th century and Annaberger Straße in the heart of Bad Godesberg-Friesdorf." },
-    "DSC_6632a": { title: "The Klufterhof Friesdorf", technik: "Oil on canvas", desc: "The Klufterhof in Friesdorf is one of the oldest and most beautiful half-timbered houses in the region, dating from the early 17th century." },
-    "DSC_6634a": { title: "Drachenfels on the Rhine (View near Mehlem)", technik: "Oil on canvas", desc: "On my many walks along the Rhine promenade, I get to enjoy this wonderful view of the Drachenfels." },
-    "DSC_6636a": { title: "Drachenfels on the Rhine in Summer", technik: "Acrylic on canvas", desc: "This magnificent view of the historic Drachenfels can be enjoyed from a sunny bench in Bad Godesberg-Mehlem." },
-    "DSC_6638a": { title: "Godesburg in Summer Light", technik: "Acrylic on canvas", desc: "Godesburg Castle in Bad Godesberg under a radiant blue summer sky with vivid shades of green." },
-    "DSC_6640a": { title: '"Zur Lindenwirtin" Inn with Godesburg', technik: "Oil on canvas", desc: 'This work shows a historic view of the traditional "Zur Lindenwirtin" inn with the majestic Godesburg Castle in the background.' },
-    "DSC_6642a": { title: "Rheinaue Park Path, Bonn", technik: "Acrylic on canvas", desc: "An idyllic path in Bonn's Rheinaue Park leads past these beautiful, gnarled old park trees." },
-    "DSC_6644a": { title: "Historic View of Godesburg", technik: "Acrylic on canvas", desc: "A vertical architectural study of Godesburg Castle with gently curving hillside paths and warm stone tones." },
-    "DSC_6688a": { title: "Flower Bouquet", technik: "Acrylic on cardboard", desc: "A colorful, vibrant flower bouquet with high-contrast floral arrangements in layered acrylic technique." },
-    "DSC_6689a": { title: "Small Flower Bouquet", technik: "Oil on cardboard", desc: "A delicate, detailed flower bouquet in fine oil painting with soft transitions and warm floral hues." },
-    "DSC_6693a": { title: "Sheep on Texel", technik: "Oil on canvas", desc: "While on vacation on the North Sea island of Texel, we encountered these curious, lovable sheep on the green dikes." },
-    "DSC_6696a": { title: "Owls in the Kottenforst", technik: "Oil on canvas", desc: "Two small owls side by side on a branch in the dusky Kottenforst forest of Bad Godesberg, set against a mysterious blue background." },
-    "DSC_6698a": { title: "Modern Flowers", technik: "Acrylic on canvas", desc: "A modern floral abstraction with dynamic brushstrokes and bold color fields on a generously sized canvas." },
-    "DSC_6700a": { title: "Blossom Harmony in the Garden", technik: "Acrylic on canvas", desc: "A fresh floral composition full of radiance and natural elegance." },
-    "DSC_6702a": { title: "Funny Chickens", technik: "Acrylic on canvas", desc: "A cheerful row of colorful chickens in a charming wide landscape format – full of joy and wit." },
-    "DSC_6703a": { title: "Poppy Meadow", technik: "Acrylic on canvas", desc: "Bright red summer poppies sway in the wind in a sun-drenched meadow." },
-    "DSC_6705a": { title: "Colorful Tulip Splendor", technik: "Acrylic on canvas", desc: "Vibrant spring tulips in brilliant acrylic colors in a square format." },
-    "DSC_6707a": { title: "Hay Bales on the French Atlantic Coast", technik: "Oil on canvas", desc: "The scent of fresh hay bales on the French Atlantic coast inspired this painting – you can almost feel the summer breeze." },
-    "DSC_6710a": { title: "Dune Path on the French Atlantic Coast", technik: "Acrylic on canvas", desc: "Dune paths invite complete relaxation. This enchanting trail leads through soft dune sand straight to the sea." },
-    "DSC_6711a": { title: "Seashell on the Beach", technik: "Acrylic on canvas", desc: "A lone seashell in warm coastal sand with gentle plays of light and shadow from the sea." },
-    "DSC_6713a": { title: "Lighthouse on Texel", technik: "Acrylic on canvas", desc: "Numerous vacations have taken us to Texel – the red lighthouse, visible from afar in the north of the island, simply had to become a motif." },
-    "DSC_6715a": { title: "Cemetery Path, Dottendorf (I)", technik: "Oil pastel on paper, birch wood frame", desc: "Park benches are wonderful places to relax and capture this peaceful favorite view in soft oil pastel." },
-    "DSC_6717a": { title: "Path at Lake Blausteinsee, Eschweiler", technik: "Oil pastel on paper, birch wood frame", desc: "A popular nature excursion destination near Aachen: the peaceful shoreline path at Lake Blausteinsee." },
-    "DSC_6719a": { title: "Cemetery Path, Dottendorf (II)", technik: "Oil pastel on paper, birch wood frame", desc: "Delicate birch trees and autumnal stillness in Bonn-Dottendorf – hand-framed in fine birch wood." },
-    "DSC_6722a": { title: "Forest Path in the Kottenforst, Bonn", technik: "Acrylic on canvas", desc: "This sun-drenched forest path in Bonn's Kottenforst is one of my absolute favorite trails in every season." },
-    "DSC_6740a": { title: "Tulip Bouquet in Oil", technik: "Oil on canvas", desc: "A classic botanical oil painting with fine color gradations and a velvety sheen." },
-    "DSC_6742a": { title: "Balou – Dog Portrait in Oil", technik: "Oil on canvas", desc: "Our family dog Balou, with his loyal gaze and velvety-soft coat, immortalized in classic oil painting." },
-    "DSC_6744a": { title: "Balou – Modern Dog Portrait", technik: "Acrylic on canvas", desc: "A modern portrait study of Balou with bold color contrasts and expressive character." },
-    "DSC_6747a": { title: "Balou – Dog Portrait in Acrylic", technik: "Acrylic on canvas", desc: "A finely detailed acrylic portrait of Balou with vivid highlights in the eyes." },
-    "DSC_6749a": { title: "Magnolia Dream", technik: "Acrylic on canvas", desc: "This dreamlike view appears when you look up in spring into a blooming pink magnolia tree from below." },
-    "DSC_6751a": { title: "Classic Still Life", technik: "Oil on canvas", desc: "A masterfully lit still life in traditional layered oil painting with harmonious depth." },
-    "DSC_6753a": { title: "Red Bell Pepper", technik: "Acrylic on canvas", desc: "A fresh, glossy bell pepper in a modern small format with crisp highlights." },
-    "DSC_6754a": { title: "Lemons", technik: "Oil on canvas", desc: "Sun-ripened lemons with a velvety peel texture in brilliant lemon yellow." },
-    "DSC_6757a": { title: "The Gallic Rooster", technik: "Acrylic on canvas", desc: "A proud Gallic rooster with a fiery comb and proud gaze in vivid brushwork." },
-    "DSC_6759a": { title: "Fresh Strawberries", technik: "Acrylic on canvas", desc: "Summer-fresh strawberries in a square miniature format – almost good enough to eat." },
-    "DSC_6760a": { title: "Strawberries on a Blue Plate", technik: "Acrylic on canvas", desc: "Rich red strawberries in striking color contrast on a cobalt blue ceramic plate." },
-    "DSC_6763a": { title: "Colorful Rooster", technik: "Acrylic on canvas", desc: "A lively bird portrait with shimmering plumage tones and a characterful pose." },
-    "DSC_6765a": { title: "Robin in Winter", technik: "Acrylic on canvas", desc: "A charming robin on a branch with the finest down feathers and a brilliant red breast." },
-    "DSC_6767a": { title: "Coco Mademoiselle Perfume", technik: "Acrylic on canvas", desc: "An elegant still life of the legendary perfume classic in powdery rosé and gold tones." },
-    "DSC_6768a": { title: "Branch with Lemons", technik: "Acrylic on canvas", desc: "A Mediterranean branch with sun-ripened lemons and lush green leaves set against a radiant blue sky." },
-    "DSC_6769a": { title: "Bee on Hydrangea", technik: "Acrylic on canvas", desc: "A busy honeybee amid a dense sea of sky-blue hydrangea blossoms." },
-    "DSC_6771a": { title: "Bee on Lavender", technik: "Acrylic on canvas", desc: "A Mediterranean summer idyll: a bee foraging for nectar on fragrant purple lavender." },
-    "DSC_6774a": { title: 'Still Life "Le Petit Déjeuner"', technik: "Acrylic on canvas", desc: "A French breakfast with a fresh butter croissant and coffee in warm morning light." },
-    "DSC_6775a": { title: "Cows in Normandy (I)", technik: "Acrylic on canvas", desc: "These two curious cows crossed our path on a relaxing summer walk in Normandy." },
-    "DSC_6778a": { title: "Cows in Normandy (II)", technik: "Acrylic on canvas", desc: "Typical Normandy pasture cows with their distinctive markings in a beautiful coastal landscape." },
-    "DSC_6780a": { title: "Burger & Fries Pop Art", technik: "Acrylic on canvas", desc: "A delicious burger with crispy fries as a modern, vividly colored pop-art still life." },
-    "DSC_6782a": { title: "Water Lily at Bonn Botanical Garden", technik: "Oil on canvas", desc: "An enchanting white water lily on calm pond water at Bonn's historic Botanical Garden." },
-    "DSC_6784a": { title: "Yellow Spring Tulips", technik: "Oil on canvas", desc: "Radiant sun-yellow tulips in delicate layered oil painting with atmospheric depth." },
-    "DSC_6788a": { title: "Aperol Spritz", technik: "Acrylic on canvas", desc: "A refreshing Aperol Spritz in a wine glass with an orange slice and clear ice cubes." },
-    "DSC_6790a": { title: "Cold Beer in a Glass", technik: "Acrylic on canvas", desc: "Freshly poured, sparkling beer with a golden color and a dense white foam crown." },
-    "DSC_6793a": { title: "Dream Trail in the Kottenforst", technik: "Acrylic on canvas", desc: "A picturesque sunlit walking trail through Bonn's Kottenforst forest, bathed in warm golden autumn light and vibrant foliage." },
-    "DSC_6798a": { title: "Path in Iceland", technik: "Oil on cardboard", desc: "A scenic trail along Iceland's dramatic coastal cliffs and turquoise waters, capturing the rugged Nordic atmosphere." },
-    "bild18-eulen": { title: "Two Little Owls", technik: "Acrylic on canvas", desc: "Lovingly hand-painted acrylic artwork of two little owls perched on a branch against a blue sky." },
-    "bild16-godesburg": { title: "Godesburg Cityscape", technik: "Acrylic on canvas", desc: "Atmospheric painting of historic Godesburg fortress in Bonn during evening twilight." },
-    "bild8-rheinaue": { title: "Rheinaue Park Bonn", technik: "Acrylic on canvas", desc: "Autumn impression of the scenic Rheinaue lake in Bonn with reflective waters and golden foliage." },
-    "bild9-feld": { title: "Summer Field Path", technik: "Acrylic on canvas", desc: "Idyllic sunlit country field path in summer under a bright open sky." }
-};
 
 /**
  * Liefert die Metadaten eines Kunstwerks in der aktuell aktiven Sprache.
@@ -1834,8 +1095,8 @@ function getArtMeta(itemId) {
 }
 
 /**
- * Übersetzt die Galerie-Karten (aria-label, alt/title, Bildunterschrift, "Unikat"-Badge)
- * direkt anhand von ARTWORKS_METADATA_EN, ohne auf 57 einzelne data-i18n-Attribute angewiesen zu sein.
+ * Übersetzt die Galerie-Karten (aria-label, alt/title, Bildunterschrift) anhand von
+ * ARTWORKS_METADATA_EN. Auf Deutsch werden die Originale aus dem HTML wiederhergestellt.
  */
 function translateGalleryCards(lang) {
     if (typeof ARTWORKS_METADATA === 'undefined') return;
@@ -1843,21 +1104,28 @@ function translateGalleryCards(lang) {
     document.querySelectorAll('.gallery-item[id]').forEach(item => {
         const meta = ARTWORKS_METADATA[item.id];
         if (!meta) return;
-        const metaEn = (isEn && typeof ARTWORKS_METADATA_EN !== 'undefined') ? ARTWORKS_METADATA_EN[item.id] : null;
-        const title = (metaEn && metaEn.title) || meta.title;
-        const technik = (metaEn && metaEn.technik) || meta.technik;
-        const masse = meta.masse;
         const link = item.querySelector('a');
         const img = item.querySelector('img');
         const caption = item.querySelector('.gallery-caption');
-        if (link) {
-            link.setAttribute('aria-label', `${isEn ? 'Enlarge' : 'Großansicht'}: ${title} (${technik}, ${masse})`);
+        const targets = [[link, 'aria-label'], [img, 'alt'], [img, 'title'], [caption, 'text']].filter(([el]) => el);
+        targets.forEach(([el, slot]) => rememberI18nOriginal(el, slot));
+
+        if (!isEn) {
+            targets.forEach(([el, slot]) => {
+                const original = i18nOriginals.get(el)[slot];
+                if (original === null) el.removeAttribute(slot);
+                else writeI18nSlot(el, slot, original);
+            });
+            return;
         }
+
+        const metaEn = typeof ARTWORKS_METADATA_EN !== 'undefined' ? ARTWORKS_METADATA_EN[item.id] : null;
+        const title = (metaEn && metaEn.title) || meta.title;
+        const technik = (metaEn && metaEn.technik) || meta.technik;
+        const masse = meta.masse;
+        if (link) link.setAttribute('aria-label', `Enlarge: ${title} (${technik}, ${masse})`);
         if (img) {
-            const altText = isEn
-                ? `Hand-painted artwork "${title}" – ${technik}, ${masse}, by Manuela Schenk`
-                : `Handgemaltes Gemälde „${title}“ – ${technik}, ${masse} von Manuela Schenk`;
-            img.setAttribute('alt', altText);
+            img.setAttribute('alt', `Hand-painted artwork "${title}" – ${technik}, ${masse}, by Manuela Schenk`);
             img.setAttribute('title', title);
         }
         if (caption) caption.textContent = `${title} (${technik}, ${masse})`;
@@ -2004,8 +1272,6 @@ function clearGallerySearch() {
     }
 }
 
-let activeFormat = 'alle';
-let activeColor = 'alle';
 
 function sortGallery(sortOption) {
     const grid = document.querySelector('.gallery-grid');
@@ -2160,7 +1426,7 @@ function setLightboxScene(scene, btn) {
             stage.className = 'lightbox-wall-stage scene-detail';
             stage.style.backgroundImage = 'none';
             stage.style.backgroundColor = '#0f172a';
-            if (badge) badge.style.display = 'none';
+            if (badge) badge.classList.add('hidden');
         }
     } else {
         if (sceneBar) sceneBar.classList.remove('hidden');
@@ -2172,14 +1438,20 @@ function setLightboxScene(scene, btn) {
             stage.style.backgroundImage = `url('${bgUrl}')`;
             stage.style.backgroundColor = 'transparent';
             if (badge) {
-                badge.style.display = 'inline-flex';
-                const labelMap = {
+                badge.classList.remove('hidden');
+                const isEn = currentLang === 'en';
+                const labelMap = isEn ? {
+                    'livingroom': 'Living Room',
+                    'bedroom': 'Bedroom',
+                    'darkloft': 'Loft / Concrete',
+                    'beigelounge': 'Beige Lounge'
+                } : {
                     'livingroom': 'Wohnzimmer',
                     'bedroom': 'Schlafzimmer',
                     'darkloft': 'Loft / Beton',
                     'beigelounge': 'Beige Lounge'
                 };
-                badge.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> KI-Wandvorlage (${labelMap[currentLbScene] || 'Wohnzimmer'})`;
+                badge.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> ${isEn ? 'AI wall preview' : 'KI-Wandvorlage'} (${labelMap[currentLbScene] || labelMap.livingroom})`;
             }
         }
     }
@@ -2204,6 +1476,25 @@ function adjustWallFrameScale() {
 }
 
 let currentViewAngle = 'front';
+
+/**
+ * Pfad zur verkleinerten Fassung eines Werks (…/lightbox/ID.webp → …/thumbs/ID-{width}w.webp).
+ * Links, die nicht dem Schema folgen, bleiben unverändert.
+ */
+function artworkVariantSrc(link, width) {
+    const href = link.getAttribute('href') || '';
+    const m = href.match(/^(.*)\/lightbox\/([^/]+)\.webp$/);
+    return m ? `${m[1]}/thumbs/${m[2]}-${width}w.webp` : link.href;
+}
+
+/**
+ * Großansicht passend zum Bildschirm: Schmale Geräte bekommen die 1000-px-Fassung
+ * (≈ ein Drittel der Dateigröße), alle anderen das 1600-px-Original.
+ */
+function lightboxImageSrc(link) {
+    const devicePixels = window.innerWidth * (window.devicePixelRatio || 1);
+    return devicePixels <= 1100 ? artworkVariantSrc(link, 1000) : link.href;
+}
 
 function setLightboxViewAngle(angle, btn) {
     currentViewAngle = angle || 'front';
@@ -2230,12 +1521,12 @@ function setLightboxViewAngle(angle, btn) {
     if (currentViewAngle === 'front') {
         setLightboxScene('detail');
         if (visibleGalleryLinks[currentIndex]) {
-            img.src = visibleGalleryLinks[currentIndex].href;
+            img.src = lightboxImageSrc(visibleGalleryLinks[currentIndex]);
         }
     } else if (currentViewAngle === 'room') {
         setLightboxScene('livingroom');
         if (visibleGalleryLinks[currentIndex]) {
-            img.src = visibleGalleryLinks[currentIndex].href;
+            img.src = lightboxImageSrc(visibleGalleryLinks[currentIndex]);
         }
     } else if (currentViewAngle === 'back') {
         if (stage) {
@@ -2244,21 +1535,21 @@ function setLightboxViewAngle(angle, btn) {
         }
         img.src = 'assets/images/rooms/canvas_back.webp';
         if (badge) {
-            badge.style.display = 'inline-flex';
-            badge.innerHTML = `<i class="fa-solid fa-square-check"></i> Keilrahmen & Rückseite (Solid Fichtenholz)`;
+            badge.classList.remove('hidden');
+            badge.innerHTML = `<i class="fa-solid fa-square-check" aria-hidden="true"></i> ${currentLang === 'en' ? 'Stretcher frame & back (solid spruce)' : 'Keilrahmen & Rückseite (massives Fichtenholz)'}`;
         }
         container.style.maxWidth = '75%';
         container.style.maxHeight = '52vh';
     } else if (currentViewAngle === 'side3d') {
         setLightboxScene('detail');
         if (visibleGalleryLinks[currentIndex]) {
-            img.src = visibleGalleryLinks[currentIndex].href;
+            img.src = lightboxImageSrc(visibleGalleryLinks[currentIndex]);
         }
         container.style.transform = 'perspective(900px) rotateY(-26deg) rotateX(6deg) scale(0.92)';
         container.style.boxShadow = '-20px 25px 50px rgba(0, 0, 0, 0.65), -5px 8px 15px rgba(0, 0, 0, 0.4)';
         if (badge) {
-            badge.style.display = 'inline-flex';
-            badge.innerHTML = `<i class="fa-solid fa-cube"></i> 3D-Seitenansicht (Gemalter Rand)`;
+            badge.classList.remove('hidden');
+            badge.innerHTML = `<i class="fa-solid fa-cube" aria-hidden="true"></i> ${currentLang === 'en' ? '3D side view (painted edge)' : '3D-Seitenansicht (gemalter Rand)'}`;
         }
     } else if (currentViewAngle === 'artist') {
         if (stage) {
@@ -2266,11 +1557,11 @@ function setLightboxViewAngle(angle, btn) {
             stage.style.backgroundColor = 'transparent';
         }
         if (visibleGalleryLinks[currentIndex]) {
-            img.src = visibleGalleryLinks[currentIndex].href;
+            img.src = lightboxImageSrc(visibleGalleryLinks[currentIndex]);
         }
         if (badge) {
-            badge.style.display = 'inline-flex';
-            badge.innerHTML = `<i class="fa-solid fa-palette"></i> Handgemacht im Atelier Bonn`;
+            badge.classList.remove('hidden');
+            badge.innerHTML = `<i class="fa-solid fa-palette" aria-hidden="true"></i> ${currentLang === 'en' ? 'Handmade in the Bonn studio' : 'Handgemacht im Atelier Bonn'}`;
         }
     }
 }
@@ -2381,12 +1672,9 @@ function applyFilterUI(category) {
     if (btnContainer) {
         const btns = btnContainer.getElementsByClassName('filter-btn');
         for (let i = 0; i < btns.length; i++) {
-            const onclickAttr = btns[i].getAttribute('onclick') || '';
-            if (onclickAttr.includes(`'${activeCategory}'`)) {
-                btns[i].classList.add('active');
-            } else {
-                btns[i].classList.remove('active');
-            }
+            const isActive = btns[i].dataset.filter === activeCategory;
+            btns[i].classList.toggle('active', isActive);
+            btns[i].setAttribute('aria-pressed', isActive ? 'true' : 'false');
         }
     }
     filterGallery();
@@ -2463,16 +1751,6 @@ function filterGallery() {
         const captionEl = item.querySelector('.gallery-caption');
         const itemText = (captionEl ? captionEl.innerText : '') + ' ' + (imgEl ? imgEl.alt : '');
 
-        const imgWidth = imgEl ? (parseInt(imgEl.getAttribute('width')) || 600) : 600;
-        const imgHeight = imgEl ? (parseInt(imgEl.getAttribute('height')) || 500) : 500;
-        const ratio = imgWidth / imgHeight;
-
-        let detectedFormat = 'querformat';
-        if (ratio > 1.8 || ratio < 0.55) detectedFormat = 'panorama';
-        else if (ratio > 1.15) detectedFormat = 'querformat';
-        else if (ratio < 0.85) detectedFormat = 'hochformat';
-        else detectedFormat = 'quadratisch';
-
         let matchesCategory = false;
         if (activeCategory === 'alle') {
             matchesCategory = true;
@@ -2482,23 +1760,9 @@ function filterGallery() {
             matchesCategory = dataKat.includes(activeCategory);
         }
 
-        let matchesColor = true;
-        if (activeColor !== 'alle') {
-            const colorKeywords = {
-                'warm': ['rot', 'orange', 'warm', 'feuer', 'sonne', 'herbst', 'herz', 'rosen'],
-                'gold': ['gold', 'gelb', 'sonne', 'glanz'],
-                'kuehl': ['blau', 'türkis', 'wasser', 'meer', 'schiff', 'fluss', 'see'],
-                'gruen': ['grün', 'wald', 'natur', 'wiese', 'blatt', 'baum', 'pflanzen'],
-                'neutral': ['grau', 'weiß', 'schwarz', 'braun', 'sand', 'stein', 'stillleben']
-            };
-            const kwList = colorKeywords[activeColor] || [];
-            matchesColor = kwList.some(kw => itemText.toLowerCase().includes(kw));
-        }
-
         const matchesSearch = (!searchTerm || itemText.toLowerCase().includes(searchTerm));
-        const matchesFormat = (activeFormat === 'alle' || detectedFormat === activeFormat);
 
-        if (matchesCategory && matchesSearch && matchesFormat && matchesColor) {
+        if (matchesCategory && matchesSearch) {
             item.style.display = 'block';
             visibleCount++;
         } else {
@@ -2509,7 +1773,7 @@ function filterGallery() {
     const noResults = document.getElementById('no-gallery-results');
     if (noResults) {
         if (visibleCount === 0) {
-            noResults.style.display = 'block';
+            noResults.classList.remove('hidden');
             const titleEl = noResults.querySelector('p');
             const subEl = noResults.querySelector('small');
             const dict = (typeof I18N_DICTIONARY !== 'undefined' && I18N_DICTIONARY[currentLang]) ? I18N_DICTIONARY[currentLang] : null;
@@ -2521,7 +1785,7 @@ function filterGallery() {
                 if (subEl) subEl.innerText = dict ? dict.gallery_empty_search_text : 'Versuche es mit einem anderen Suchbegriff oder setze den Kategorie-Filter zurück.';
             }
         } else {
-            noResults.style.display = 'none';
+            noResults.classList.add('hidden');
         }
     }
 
@@ -2583,26 +1847,8 @@ function updateGalleryLinks() {
    ========================================= */
 document.addEventListener('DOMContentLoaded', function () {
 
-    // --- A. Filter Buttons ---
-    const btnContainer = document.getElementById('filter-container');
-    if (btnContainer) {
-        const btns = btnContainer.getElementsByClassName('filter-btn');
-        for (let i = 0; i < btns.length; i++) {
-            btns[i].addEventListener('click', function () {
-                const current = btnContainer.getElementsByClassName('active');
-                if (current.length > 0) {
-                    current[0].classList.remove('active');
-                }
-                this.classList.add('active');
-            });
-        }
-    }
-
-    // Galerie Live-Suche Event Listener
-    const searchInput = document.getElementById('gallery-search');
-    if (searchInput) {
-        searchInput.addEventListener('input', filterGallery);
-    }
+    // --- A. Filter Buttons & Live-Suche ---
+    // Laufen über die Delegation in Abschnitt 4b (applyFilterUI setzt den aktiven Button).
 
     // Favoriten UI & Links initialisieren
     initFavButtonsUI();
@@ -2629,7 +1875,7 @@ document.addEventListener('DOMContentLoaded', function () {
         [nextIdx, prevIdx].forEach(i => {
             if (visibleGalleryLinks[i]) {
                 const img = new Image();
-                img.src = visibleGalleryLinks[i].href;
+                img.src = lightboxImageSrc(visibleGalleryLinks[i]);
             }
         });
     }
@@ -2659,7 +1905,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const titleText = captionDiv ? captionDiv.innerText : (imgInside ? imgInside.alt : '');
 
         if (lightboxImg) {
-            lightboxImg.src = link.href;
+            lightboxImg.src = lightboxImageSrc(link);
             lightboxImg.alt = titleText;
             lightboxImg.onload = function() {
                 adjustWallFrameScale();
@@ -2669,8 +1915,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Populiere Thumbnails in "Weitere Ansichten"
         const thumbFront = document.getElementById('thumb-img-front');
         const thumbSide = document.getElementById('thumb-img-side');
-        if (thumbFront) thumbFront.src = link.href;
-        if (thumbSide) thumbSide.src = link.href;
+        // Kleine Vorschaukacheln brauchen nicht das 1600-px-Original.
+        if (thumbFront) thumbFront.src = artworkVariantSrc(link, 400);
+        if (thumbSide) thumbSide.src = artworkVariantSrc(link, 400);
 
         // Beim ersten Öffnen: Erstmal nur das reine Bild mit der Beschreibung anzeigen
         setLightboxViewAngle('front');
@@ -2695,7 +1942,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const detailTechnik = document.getElementById('lb-detail-technik');
         const detailMasse = document.getElementById('lb-detail-masse');
         const detailKat = document.getElementById('lb-detail-kat');
-        const statusBadge = document.getElementById('lightbox-status-badge');
+        const statusRow = document.getElementById('lb-detail-status-row');
+        const statusVal = document.getElementById('lb-detail-status');
 
         const artMeta = getArtMeta(itemId);
 
@@ -2704,7 +1952,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const realTechnik = artMeta ? artMeta.technik : 'Acryl / Öl auf Leinwand';
         const realMasse = artMeta ? artMeta.masse : 'Unikatmaß';
         const realKat = artMeta ? artMeta.kategorie : (item ? (item.getAttribute('data-kategorie') || 'Kunstwerk') : 'Kunstwerk');
-        const realBadge = artMeta ? artMeta.badge : (item && item.querySelector('.gallery-badge') ? item.querySelector('.gallery-badge').innerText : 'Unikat');
 
         const isEn = currentLang === 'en';
         const techniqueTranslations = {
@@ -2723,18 +1970,19 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         const displayTechnik = isEn ? (techniqueTranslations[realTechnik] || realTechnik) : realTechnik;
         const displayKat = isEn ? (categoryTranslations[realKat.toLowerCase()] || (realKat.charAt(0).toUpperCase() + realKat.slice(1))) : (realKat.charAt(0).toUpperCase() + realKat.slice(1));
-        const displayBadge = isEn ? 'Unique Original' : realBadge;
-
         if (infoTitle) infoTitle.innerText = realTitle;
         if (infoDesc) infoDesc.innerText = realDesc;
         if (detailTechnik) detailTechnik.innerText = displayTechnik;
         if (detailMasse) detailMasse.innerText = realMasse;
         if (detailKat) detailKat.innerText = displayKat;
 
-        if (statusBadge) {
-            statusBadge.innerText = displayBadge;
-            statusBadge.className = 'gallery-badge badge-unikat lightbox-meta-badge';
-            statusBadge.style.display = 'inline-block';
+        // Verfügbarkeit (optionales Feld "status" in artworks-data.js).
+        // Schlüssel: status_verfuegbar, status_reserviert, status_verkauft
+        if (statusRow && statusVal) {
+            const dict = I18N_DICTIONARY[currentLang] || I18N_DICTIONARY.de;
+            const statusText = (artMeta && artMeta.status) ? dict['status_' + artMeta.status] : '';
+            statusVal.textContent = statusText || '';
+            statusRow.classList.toggle('hidden', !statusText);
         }
 
         if (captionText) {
@@ -2829,28 +2077,6 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         }
 
-        // Customer Testimonial Card in Lightbox
-        const testimonials = {
-            'DSC_6622a': '„Die Farbdynamik in diesem Landschaftsbild verzaubert unseren Flur jeden Tag aufs Neue.“ – Stefan K., Bonn',
-            'DSC_6626a': '„Manuela hat das Wesen unseres Hundes mit unglaublicher Liebe zum Detail eingefangen.“ – Elena M., Bad Godesberg',
-            'DSC_6689a': '„Wunderschöne Pfingstrosen! Ein Meisterwerk aus Acryl, das voller Leben steckt.“ – Karin S., Köln'
-        };
-        const testimonialsEn = {
-            'DSC_6622a': '"The color dynamics in this landscape enchant our hallway anew every day." – Stefan K., Bonn',
-            'DSC_6626a': '"Manuela captured the essence of our dog with incredible attention to detail." – Elena M., Bad Godesberg',
-            'DSC_6689a': '"Beautiful peonies! A masterpiece in acrylic, brimming with life." – Karin S., Cologne'
-        };
-        const lbTestimonialBox = document.getElementById('lightbox-testimonial-box');
-        if (lbTestimonialBox) {
-            const testimonialText = (currentLang === 'en' ? testimonialsEn[itemId] : null) || testimonials[itemId];
-            if (testimonialText) {
-                lbTestimonialBox.innerHTML = `<i class="fa-solid fa-quote-left" aria-hidden="true"></i> ${testimonialText}`;
-                lbTestimonialBox.style.display = 'block';
-            } else {
-                lbTestimonialBox.style.display = 'none';
-            }
-        }
-
         // Lupe / Magnifier Zoom initialisieren
         initLightboxMagnifier();
 
@@ -2940,10 +2166,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (visibleGalleryLinks.length > 0 && visibleGalleryLinks[currentIndex]) {
                 const link = visibleGalleryLinks[currentIndex];
                 const img = link.querySelector('img');
-                const altText = img ? (img.alt || img.title || '') : '';
                 const item = link.closest('.gallery-item');
                 const kat = item ? (item.getAttribute('data-kategorie') || '') : '';
-                window.location.href = `Auftrag.html?ref=${encodeURIComponent(altText)}&kat=${encodeURIComponent(kat)}`;
+                // URL-Parameter bleiben deutsch: Titel aus den Basisdaten, nicht aus der Übersetzung.
+                const meta = (item && typeof ARTWORKS_METADATA !== 'undefined') ? ARTWORKS_METADATA[item.id] : null;
+                const refTitle = meta ? meta.title : (img ? (img.title || img.alt || '') : '');
+                window.location.href = `Auftrag.html?ref=${encodeURIComponent(refTitle)}&kat=${encodeURIComponent(kat)}`;
             } else {
                 window.location.href = 'Auftrag.html';
             }
@@ -3007,15 +2235,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (lightbox) {
         const closeBtn = lightbox.querySelector('.close');
-        if (closeBtn) {
-            closeBtn.onclick = closeLightboxFn;
-            closeBtn.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    closeLightboxFn();
-                }
-            });
-        }
+        // <button>: Enter/Leertaste lösen bereits nativ einen Klick aus.
+        if (closeBtn) closeBtn.addEventListener('click', closeLightboxFn);
 
         lightbox.addEventListener('click', function (event) {
             if (event.target === lightbox) {
@@ -3027,6 +2248,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Tastaturbedienung für die Lightbox (ignoriert Texteingaben)
     document.addEventListener('keydown', function (e) {
         if (lightbox && (lightbox.style.display === 'flex' || lightbox.style.display === 'block')) {
+            if (e.key === 'Tab') {
+                trapFocus(lightbox, e);
+                return;
+            }
             const activeTag = document.activeElement ? document.activeElement.tagName : '';
             if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
             if (e.key === 'Escape') {
@@ -3110,10 +2335,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- H. Kontaktformular: URL-Parameter auslesen & Formular vorausfüllen ---
     prefillContactForm();
 
-    // --- I. Kontaktformular: Erfolgsmeldung nach Absenden ---
-    initContactForm();
+    // (Kontaktformular-Versand wird in runOnDOMReady über initContactForm eingerichtet.)
 
-    reveal();
+    initReveal();
 
 }); // Ende DOMContentLoaded
 
@@ -3124,21 +2348,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Nach oben scrollen
 function topFunction() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
 }
 
-// Reveal Animation beim Scrollen
-function reveal() {
-    const reveals = document.querySelectorAll('.reveal');
-    for (let i = 0; i < reveals.length; i++) {
-        const windowHeight = window.innerHeight;
-        const revealTop = reveals[i].getBoundingClientRect().top;
-        if (revealTop < windowHeight - 80) {
-            reveals[i].classList.add('active');
-        }
+// Reveal-Animation: Abschnitte einblenden, sobald sie ins Bild kommen.
+// IntersectionObserver statt Scroll-Listener – kein Layout-Lesen bei jedem Scroll-Ereignis.
+function initReveal() {
+    const reveals = document.querySelectorAll('.reveal:not(.active)');
+    if (reveals.length === 0) return;
+
+    if (!('IntersectionObserver' in window)) {
+        reveals.forEach(el => el.classList.add('active'));
+        return;
     }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: '0px 0px -80px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
 }
-window.addEventListener('scroll', reveal);
 
 // Flyer Modal
 closeFlyerModalUI = function (triggerHistoryBack = true) {
@@ -3177,21 +2410,56 @@ function closeFlyerModal() {
     closeFlyerModalUI(true);
 }
 
-// Esc-Taste schließt auch das Flyer-Modal
+// Esc-Taste schließt auch das Flyer-Modal; Tab bleibt im Dialog
 document.addEventListener('keydown', function (e) {
     const modal = document.getElementById('flyerModal');
     if (modal && isFlyerModalOpen) {
         if (e.key === 'Escape') closeFlyerModal();
+        else if (e.key === 'Tab') trapFocus(modal, e);
     }
 });
 
+/**
+ * Fokusfalle für modale Dialoge (WCAG 2.4.3): Tab/Umschalt+Tab springen
+ * vom letzten zum ersten bedienbaren Element des Dialogs und umgekehrt.
+ */
+function trapFocus(container, e) {
+    const focusable = Array.from(container.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(el => el.getClientRects().length > 0 && !el.closest('.hidden'));
+    if (focusable.length === 0) { e.preventDefault(); return; }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+    if (!container.contains(active)) {
+        e.preventDefault();
+        first.focus();
+    } else if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+    } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+    }
+}
+
 // Toast Nachricht anzeigen
+let toastTimer = null;
 function showToast(message) {
     const x = document.getElementById('toast');
     if (x) {
-        if (message) x.innerHTML = `<i class="fa fa-info-circle" aria-hidden="true"></i> ${message}`;
+        if (message) {
+            // Nur als Text einsetzen – Meldungen können URLs oder andere Nutzerdaten enthalten.
+            const icon = document.createElement('i');
+            icon.className = 'fa fa-info-circle';
+            icon.setAttribute('aria-hidden', 'true');
+            x.replaceChildren(icon, ' ' + message);
+        }
         x.className = 'show';
-        setTimeout(function () { x.className = x.className.replace('show', ''); }, 3000);
+        // Schnell aufeinanderfolgende Meldungen sollen sich nicht gegenseitig vorzeitig ausblenden.
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { x.className = ''; }, 3000);
     }
 }
 
@@ -3214,6 +2482,10 @@ document.addEventListener('contextmenu', function (e) {
 document.addEventListener('click', function (e) {
     if (e.target.closest('.back-to-top')) { topFunction(); return; }
     if (e.target.closest('#load-map-btn')) { window.loadGoogleMap(); return; }
+
+    // Footer wird bei jedem Sprachwechsel neu aufgebaut – deshalb delegiert.
+    if (e.target.closest('#theme-toggle-btn')) { toggleTheme(); return; }
+    if (e.target.closest('#lang-toggle-btn')) { toggleLanguage(); return; }
 
     if (e.target.closest('#lightbox .prev')) { window.changeSlide(-1); return; }
     if (e.target.closest('#lightbox .next')) { window.changeSlide(1); return; }
@@ -3239,6 +2511,7 @@ document.addEventListener('click', function (e) {
 
 document.addEventListener('input', function (e) {
     if (e.target.id === 'lb-scale-slider') updateLbWallScale(e.target.value);
+    if (e.target.id === 'gallery-search') filterGallery();
 });
 
 document.addEventListener('change', function (e) {
@@ -3254,6 +2527,7 @@ function prefillContactForm() {
     const format = params.get('format');
     const technik = params.get('technik');
     const preis = params.get('preis');
+    const referenz = params.get('ref');
 
     if (!motiv && !format && !technik) return; // Keine Parameter → nichts tun
 
@@ -3278,11 +2552,12 @@ function prefillContactForm() {
     const messageField = document.getElementById('message');
     if (messageField) {
         const preisText = preis ? `\n• Geschätzter Preis: ${preis}` : '';
+        const referenzText = referenz ? `\n• Referenz-Gemälde aus der Galerie: ${referenz.slice(0, 200)}` : '';
         messageField.value =
             `Hallo Manuela,\n\nüber den Auftrags-Konfigurator habe ich folgende Auswahl getroffen:\n\n` +
             `• Motiv: ${motiv || '–'}\n` +
             `• Format: ${format || '–'}\n` +
-            `• Technik: ${technik || '–'}${preisText}\n\n` +
+            `• Technik: ${technik || '–'}${referenzText}${preisText}\n\n` +
             `Bitte melde dich bei mir für die genaue Abstimmung.\n\nViele Grüße`;
     }
 
@@ -3371,22 +2646,12 @@ function showFormFeedback(type, message) {
     }
     feedback.className = `form-feedback form-feedback--${type}`;
     feedback.innerHTML = message;
-    feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    feedback.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'center' });
 }
 
 /* =========================================
    7. NEUE FEATURES INITIALISIERUNG
    ========================================= */
-
-// Live-Suche in Galerie
-function initGallerySearch() {
-    const searchInput = document.getElementById('gallery-search');
-    if (searchInput) {
-        searchInput.addEventListener('input', function () {
-            filterGallery();
-        });
-    }
-}
 
 // Favoriten-Auswahl in Step 1 des Auftrags-Konfigurators
 function initFavoritesInConfigurator() {
@@ -3395,40 +2660,79 @@ function initFavoritesInConfigurator() {
 
     const favIds = getFavorites();
     if (favIds.length === 0) {
-        favContainer.style.display = 'none';
+        favContainer.classList.add('hidden');
         return;
     }
 
     const grid = favContainer.querySelector('.fav-cards-grid');
-    if (!grid) return;
+    if (!grid || typeof ARTWORKS_METADATA === 'undefined') return;
 
-    grid.innerHTML = '';
+    grid.replaceChildren();
     favIds.forEach(id => {
-        const meta = ARTWORKS_METADATA[id];
-        const title = (meta && meta.title) ? meta.title : id.replace('_', ' ');
-        const thumbSrc = id.startsWith('bild')
-            ? `assets/images/artworks/thumbs/${id}.webp`
-            : `assets/images/img/thumbs/${id}.webp`;
+        // Favoriten stammen aus localStorage: nur bekannte Werk-IDs anzeigen.
+        const baseMeta = Object.prototype.hasOwnProperty.call(ARTWORKS_METADATA, id) ? ARTWORKS_METADATA[id] : null;
+        if (!baseMeta) return;
+        const title = getArtMeta(id).title;
+        const folder = id.startsWith('bild') ? 'artworks' : 'img';
+
         const card = document.createElement('div');
         card.className = 'fav-card-item';
         card.setAttribute('tabindex', '0');
-        card.innerHTML = `<img src="${thumbSrc}" alt="${title}" loading="lazy"><div class="fav-thumb-caption">${title}</div>`;
-        
-        card.onclick = function() {
-            grid.querySelectorAll('.fav-card-item').forEach(c => c.classList.remove('selected'));
-            this.classList.add('selected');
-            
-            const hintEl = document.getElementById('hint-1');
-            if (hintEl) {
-                hintEl.innerHTML = `<i class="fa fa-circle-info"></i> ${currentLang === 'en' ? 'Selected artwork reference' : 'Ausgewählte Lieblingswerk-Referenz'}: <strong>${title}</strong>`;
-                hintEl.style.display = 'block';
-                hintEl.style.color = 'var(--primary-color)';
-            }
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-pressed', 'false');
+
+        const img = document.createElement('img');
+        img.src = `assets/images/${folder}/thumbs/${id}-400w.webp`;
+        img.alt = '';
+        img.loading = 'lazy';
+        const caption = document.createElement('div');
+        caption.className = 'fav-thumb-caption';
+        caption.textContent = title;
+        card.append(img, caption);
+
+        const select = function () {
+            grid.querySelectorAll('.fav-card-item').forEach(c => {
+                c.classList.remove('selected');
+                c.setAttribute('aria-pressed', 'false');
+            });
+            card.classList.add('selected');
+            card.setAttribute('aria-pressed', 'true');
+            // Intern bleibt der deutsche Titel gespeichert, angezeigt wird die aktive Sprache.
+            showConfigReference(baseMeta.title, title);
         };
+        card.addEventListener('click', select);
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                select();
+            }
+        });
         grid.appendChild(card);
     });
 
-    favContainer.style.display = 'block';
+    favContainer.classList.toggle('hidden', grid.children.length === 0);
+}
+
+/**
+ * Merkt das Referenz-Gemälde im Konfigurator-Zustand und zeigt es in Schritt 1 an.
+ * Der Titel kann aus der URL stammen und wird deshalb nur als Text eingefügt.
+ */
+function showConfigReference(refTitle, displayTitle) {
+    if (typeof state !== 'undefined' && state) {
+        state.referenz = refTitle;
+        if (typeof saveConfig === 'function') saveConfig();
+    }
+    const hintEl = document.getElementById('hint-1');
+    if (!hintEl) return;
+    const icon = document.createElement('i');
+    icon.className = 'fa fa-circle-info';
+    icon.setAttribute('aria-hidden', 'true');
+    const strong = document.createElement('strong');
+    strong.textContent = displayTitle || refTitle;
+    const label = currentLang === 'en' ? 'Selected reference painting' : 'Ausgewählte Motiv-Referenz';
+    hintEl.replaceChildren(icon, ` ${label}: `, strong);
+    hintEl.style.display = 'block';
+    hintEl.style.color = 'var(--primary-color)';
 }
 
 // Client Foto Upload Vorschau in Step 4 des Konfigurators
@@ -3470,23 +2774,6 @@ function registerServiceWorker() {
     }
 }
 
-// Lightbox Anfrage-Button
-function initLightboxInquiry() {
-    const inquiryBtn = document.getElementById('lightbox-inquiry-btn');
-    if (inquiryBtn) {
-        inquiryBtn.addEventListener('click', function () {
-            if (visibleGalleryLinks.length > 0 && visibleGalleryLinks[currentIndex]) {
-                const link = visibleGalleryLinks[currentIndex];
-                const img = link.querySelector('img');
-                const altText = img ? img.alt : '';
-                const item = link.closest('.gallery-item');
-                const kat = item ? item.getAttribute('data-kategorie') : '';
-                window.location.href = `Auftrag.html?ref=${encodeURIComponent(altText)}&kat=${encodeURIComponent(kat)}`;
-            }
-        });
-    }
-}
-
 // URL-Parameter für Auftrag.html verarbeiten
 function initUrlParamPrefill() {
     const params = new URLSearchParams(window.location.search);
@@ -3512,11 +2799,8 @@ function initUrlParamPrefill() {
             });
         }
         
-        const hintEl = document.getElementById('hint-1');
-        if (hintEl && ref) {
-            hintEl.innerHTML = `<i class="fa fa-circle-info"></i> Ausgewählte Motiv-Referenz: <strong>${ref}</strong>`;
-            hintEl.style.display = 'block';
-            hintEl.style.color = 'var(--primary-color)';
+        if (ref && document.getElementById('hint-1')) {
+            showConfigReference(ref.slice(0, 200));
         }
     }
 }
@@ -3528,46 +2812,71 @@ function initTestimonialsCarousel() {
     const prevBtn = document.getElementById('testi-prev');
     const nextBtn = document.getElementById('testi-next');
 
+    const pauseBtn = document.getElementById('testi-pause');
+    const container = document.getElementById('testimonial-container');
+    const section = document.getElementById('testimonials-carousel');
+
     if (slides.length === 0) return;
 
     let currentSlide = 0;
     let timer = null;
+    // WCAG 2.2.2: Automatischer Wechsel ist abschaltbar; bei „Bewegung reduzieren“ startet er gar nicht.
+    let userPaused = prefersReducedMotion();
+    let hoverPaused = false;
 
     function showSlide(index) {
-        slides.forEach(s => s.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active'));
-
         currentSlide = (index + slides.length) % slides.length;
-        slides[currentSlide].classList.add('active');
-        if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+        slides.forEach((s, i) => {
+            s.classList.toggle('active', i === currentSlide);
+            s.setAttribute('aria-hidden', i === currentSlide ? 'false' : 'true');
+        });
+        dots.forEach((d, i) => {
+            d.classList.toggle('active', i === currentSlide);
+            if (i === currentSlide) d.setAttribute('aria-current', 'true');
+            else d.removeAttribute('aria-current');
+        });
     }
 
-    function nextSlide() {
-        showSlide(currentSlide + 1);
+    function updateTimer() {
+        clearInterval(timer);
+        timer = null;
+        const running = !userPaused && !hoverPaused;
+        if (running) timer = setInterval(() => showSlide(currentSlide + 1), 6000);
+        // Während des automatischen Wechsels nicht jede Folie vorlesen, sonst schon.
+        if (container) container.setAttribute('aria-live', running ? 'off' : 'polite');
+        if (pauseBtn) {
+            pauseBtn.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
+            const icon = pauseBtn.querySelector('i');
+            if (icon) icon.className = userPaused ? 'fa fa-play' : 'fa fa-pause';
+        }
     }
 
-    function prevSlide() {
-        showSlide(currentSlide - 1);
-    }
-
-    if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetTimer(); });
-    if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetTimer(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { showSlide(currentSlide + 1); updateTimer(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { showSlide(currentSlide - 1); updateTimer(); });
+    if (pauseBtn) pauseBtn.addEventListener('click', () => { userPaused = !userPaused; updateTimer(); });
 
     dots.forEach((dot, idx) => {
-        dot.addEventListener('click', () => { showSlide(idx); resetTimer(); });
+        dot.addEventListener('click', () => { showSlide(idx); updateTimer(); });
     });
 
-    function startTimer() {
-        timer = setInterval(nextSlide, 6000);
-    }
-
-    function resetTimer() {
-        clearInterval(timer);
-        startTimer();
+    // Beim Lesen (Maus darüber oder Tastaturfokus im Bereich) nicht weiterblättern.
+    if (section) {
+        const pause = () => { hoverPaused = true; updateTimer(); };
+        const resume = () => { hoverPaused = false; updateTimer(); };
+        section.addEventListener('mouseenter', pause);
+        section.addEventListener('mouseleave', resume);
+        section.addEventListener('focusin', pause);
+        section.addEventListener('focusout', (e) => {
+            if (!section.contains(e.relatedTarget)) resume();
+        });
     }
 
     showSlide(0);
-    startTimer();
+    updateTimer();
+}
+
+function prefersReducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 }
 
 function runOnDOMReady(fn) {
@@ -3585,10 +2894,8 @@ runOnDOMReady(function () {
     if (currentLang !== 'de') {
         applyTranslations(currentLang);
     }
-    initGallerySearch();
     initFavoritesInConfigurator();
     initPhotoUploadPreview();
-    initLightboxInquiry();
     initUrlParamPrefill();
     initContactForm();
     initTestimonialsCarousel();

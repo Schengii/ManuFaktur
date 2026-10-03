@@ -9,18 +9,12 @@
     src: url('assets/fonts/dancingscript-700-normal.woff2') format('woff2');
 }
 
+/* Eine Datei für 400 und 700 – die frühere -400-Datei war byte-identisch
+   und wurde sonst ein zweites Mal heruntergeladen. */
 @font-face {
     font-family: 'Playfair Display';
     font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('assets/fonts/playfairdisplay-400-normal.woff2') format('woff2');
-}
-
-@font-face {
-    font-family: 'Playfair Display';
-    font-style: normal;
-    font-weight: 700;
+    font-weight: 400 700;
     font-display: swap;
     src: url('assets/fonts/playfairdisplay-700-normal.woff2') format('woff2');
 }
@@ -1857,6 +1851,19 @@ footer {
     cursor: pointer;
     z-index: 10000;
     transition: var(--transition-smooth);
+    /* Button-Standardstil des Browsers zurücksetzen */
+    background: none;
+    border: none;
+    padding: 0 6px;
+    line-height: 1;
+    font-family: inherit;
+}
+
+.close:focus-visible,
+.prev:focus-visible,
+.next:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
 }
 
 .close:hover {
@@ -1886,6 +1893,8 @@ footer {
     align-items: center;
     justify-content: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: inherit;
+    line-height: 1;
 }
 
 .prev {
@@ -3342,6 +3351,14 @@ body.dark-mode .text-content h3 {
     background: var(--border-color);
     cursor: pointer;
     transition: var(--transition-smooth);
+    border: none;
+    padding: 0;
+}
+
+.testimonial-dot:focus-visible,
+.testimonial-arrow:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
 }
 
 .testimonial-dot.active {
@@ -3512,10 +3529,6 @@ h2 {
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
-}
-
-.badge-unikat {
-    background: linear-gradient(135deg, #7a5a1f, #b38f4d);
 }
 
 /* Configurator Step 1: Favoriten Selection */
@@ -3967,17 +3980,6 @@ h2 {
     font-weight: 700;
     color: var(--secondary-color);
     margin-bottom: 6px;
-}
-
-.lightbox-meta-badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #ffffff;
-    margin-bottom: 12px;
 }
 
 .lightbox-description-text {
@@ -4749,4 +4751,29 @@ body.dark-mode .form-feedback--error {
 [data-theme="dark"] .color-heart,
 body.dark-mode .color-heart {
     color: #ff7675 !important;
+}
+
+/* =========================================
+   BEWEGUNG REDUZIEREN (WCAG 2.3.3)
+   Nutzer mit „Bewegung reduzieren“ im Betriebssystem bekommen
+   keine Einblend-, Zoom- und Scroll-Animationen.
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal {
+        transform: none;
+        opacity: 1;
+    }
 }

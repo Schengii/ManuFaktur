@@ -1,0 +1,180 @@
+<!-- Gemeinsame Lightbox für Home.html und Bildergalerie.html.
+     Nur hier bearbeiten – npm run build kopiert sie in die Seiten (scripts/sync-partials.js). -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" data-i18n-aria-label="ui_lightbox_label" aria-label="Bilder-Großansicht">
+  <button type="button" class="close" data-i18n-aria-label="ui_close" aria-label="Schließen"><span aria-hidden="true">&times;</span></button>
+  <button type="button" class="prev" data-i18n-aria-label="ui_prev_image" aria-label="Vorheriges Bild"><span aria-hidden="true">&#10094;</span></button>
+  <button type="button" class="next" data-i18n-aria-label="ui_next_image" aria-label="Nächstes Bild"><span aria-hidden="true">&#10095;</span></button>
+
+  <div class="lightbox-split-container">
+    <!-- Linke Spalte: Bild, KI-Wandvorlage & Werkzeuge -->
+    <div class="lightbox-media-col">
+      <div class="lightbox-top-bar">
+        <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 1</div>
+        <div id="lightbox-scene-bar" class="lightbox-scene-bar hidden">
+          <span class="scene-label"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="scene_label">KI-Wandvorlage:</span></span>
+          <button type="button" class="scene-btn active" data-scene="livingroom" data-i18n-title="scene_living_title" title="Wohnzimmer-Wand">
+            <i class="fa-solid fa-couch"></i> <span data-i18n="scene_living">Wohnzimmer</span>
+          </button>
+          <button type="button" class="scene-btn" data-scene="bedroom"
+            data-i18n-title="scene_bedroom_title" title="Schlafzimmer-Wand">
+            <i class="fa-solid fa-bed"></i> <span data-i18n="scene_bedroom">Schlafzimmer</span>
+          </button>
+          <button type="button" class="scene-btn" data-scene="darkloft"
+            data-i18n-title="scene_loft_title" title="Dark Loft Wand">
+            <i class="fa-solid fa-building-user"></i> <span data-i18n="scene_loft">Loft / Beton</span>
+          </button>
+          <button type="button" class="scene-btn" data-scene="beigelounge" data-i18n-title="scene_lounge_title" title="Beige Lounge Wand">
+            <i class="fa-solid fa-sun"></i> <span data-i18n="scene_lounge">Beige Lounge</span>
+          </button>
+          <button type="button" class="scene-btn" data-scene="detail"
+            data-i18n-title="scene_pure_title" title="Pur ohne Hintergrund">
+            <i class="fa-solid fa-expand"></i> <span data-i18n="scene_pure">Pur (Detail)</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="lightbox-magnifier" class="lightbox-magnifier-lens"></div>
+
+      <!-- Wand-Bühne für KI-Hintergrund Vorlage -->
+      <div id="lightbox-wall-stage" class="lightbox-wall-stage scene-detail">
+        <div class="wall-frame-container" id="wall-frame-container"
+          title="Gemälde auf der Wand verschieben (Drag & Drop)">
+          <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde" draggable="false">
+          <div class="artwork-watermark" id="lb-watermark" aria-hidden="true">
+            <div class="watermark-pattern"></div>
+            <div class="watermark-brand">@ManuFAKTUR</div>
+          </div>
+          <div id="wall-badge-tag" class="wall-badge-tag hidden"><i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span data-i18n="scene_label_short">KI-Wandvorlage</span></div>
+          <div id="wall-drag-hint" class="wall-drag-hint hidden"><i class="fa-solid fa-up-down-left-right"
+              aria-hidden="true"></i> <span data-i18n="wall_drag_hint">Ziehen zum Verschieben</span></div>
+        </div>
+      </div>
+
+      <!-- Bild-Werkzeuge: Drehen, Lupe, Wandskalierung & Zentrierung -->
+      <div class="lightbox-toolbar">
+        <button id="btn-rotate-img" class="lb-tool-btn" data-i18n-title="lb_rotate_title" title="Um 90° drehen"
+          data-i18n-aria-label="lb_rotate_aria" aria-label="Bild um 90 Grad drehen">
+          <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> <span data-i18n="lb_rotate">90° Drehen</span>
+        </button>
+        <button id="btn-toggle-zoom" class="lb-tool-btn"
+          data-i18n-title="lb_zoom_title" title="Lupe aktivieren/deaktivieren" data-i18n-aria-label="lb_zoom_aria" aria-label="Lupe aktivieren">
+          <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="lb_zoom">Lupe Zoom</span>
+        </button>
+
+        <!-- Interaktive Größen-Skalierung & Zentrieren für Wand-Hintergrund -->
+        <div id="lb-wall-scale-control" class="lb-scale-control hidden">
+          <label for="lb-scale-slider" class="lb-scale-label"><i
+              class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> <span data-i18n="lb_scale_label">Skalierung:</span></label>
+          <input type="range" id="lb-scale-slider" min="25" max="90" value="55" data-i18n-aria-label="lb_scale_aria" aria-label="Gemäldegröße an der Wand skalieren">
+          <span id="lb-scale-val" class="lb-scale-val">55%</span>
+          <button type="button" id="btn-reset-pos" class="lb-tool-btn lb-btn-subtle-sm" data-i18n-title="lb_center_title" title="Gemäldeposition auf der Wand zentrieren">
+            <i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> <span data-i18n="lb_center">Zentrieren</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rechte Spalte: Details, Beschreibung & Unaufdringliche Buttons -->
+    <div class="lightbox-info-col">
+      <div class="lightbox-info-header">
+        <h2 id="lightbox-info-title" class="lightbox-info-title">Gemälde</h2>
+      </div>
+
+      <div id="lightbox-info-description" class="lightbox-description-text">
+        Handgemaltes Kunstwerk von Manuela Schenk mit hochwertigen Farbpigmenten auf feiner Leinwand.
+      </div>
+
+      <div class="lightbox-details-list">
+        <div class="lightbox-detail-row">
+          <span class="lightbox-detail-label" data-i18n="lb_label_technik">Technik:</span>
+          <span id="lb-detail-technik" class="lightbox-detail-val">Acryl auf Leinwand</span>
+        </div>
+        <div class="lightbox-detail-row">
+          <span class="lightbox-detail-label" data-i18n="lb_label_masse">Maße / Format:</span>
+          <span id="lb-detail-masse" class="lightbox-detail-val">40 × 50 cm</span>
+        </div>
+        <div class="lightbox-detail-row">
+          <span class="lightbox-detail-label" data-i18n="lb_label_kat">Kategorie:</span>
+          <span id="lb-detail-kat" class="lightbox-detail-val">Kunstwerk</span>
+        </div>
+        <div class="lightbox-detail-row">
+          <span class="lightbox-detail-label" data-i18n="lb_label_herkunft">Herkunft:</span>
+          <span class="lightbox-detail-val" data-i18n="lb_val_herkunft">Atelier Bonn</span>
+        </div>
+        <div class="lightbox-detail-row">
+          <span class="lightbox-detail-label" data-i18n="lb_label_rahmung">Rahmung:</span>
+          <span class="lightbox-detail-val" data-i18n="lb_val_rahmung">Sofort aufhängbar (Keilrahmen)</span>
+        </div>
+        <!-- Nur sichtbar, wenn das Werk in artworks-data.js ein "status"-Feld hat -->
+        <div class="lightbox-detail-row hidden" id="lb-detail-status-row">
+          <span class="lightbox-detail-label" data-i18n="lb_label_status">Verfügbarkeit:</span>
+          <span id="lb-detail-status" class="lightbox-detail-val"></span>
+        </div>
+      </div>
+
+      <!-- Weitere Ansichten Grid (Multiperspektivische Galerie) -->
+      <div class="lightbox-views-section">
+        <h3 class="lightbox-views-title"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="lb_views_title">Weitere Ansichten:</span></h3>
+        <div class="lightbox-views-grid">
+          <button type="button" class="view-thumb-btn active" data-view="front" data-i18n-title="lb_view_front_title" title="Frontansicht Pur">
+            <div class="thumb-img-wrapper">
+              <img id="thumb-img-front" src="" data-i18n-alt="lb_view_front" alt="Frontansicht">
+            </div>
+            <span class="thumb-label" data-i18n="lb_view_front">Frontansicht</span>
+          </button>
+
+          <button type="button" class="view-thumb-btn" data-view="room"
+            data-i18n-title="lb_view_room_title" title="Wand & Raumansicht">
+            <div class="thumb-img-wrapper">
+              <img loading="lazy" width="1024" height="1024" src="assets/images/rooms/livingroom.webp" data-i18n-alt="lb_view_room_title" alt="Wand & Raumansicht">
+            </div>
+            <span class="thumb-label" data-i18n="lb_view_room">Wandansicht</span>
+          </button>
+
+          <button type="button" class="view-thumb-btn" data-view="back"
+            data-i18n-title="lb_view_back_title" title="Rückseite & Keilrahmen">
+            <div class="thumb-img-wrapper">
+              <img loading="lazy" width="1024" height="1024" src="assets/images/rooms/canvas_back.webp" data-i18n-alt="lb_view_back_title" alt="Rückseite & Keilrahmen">
+            </div>
+            <span class="thumb-label" data-i18n="lb_view_back">Keilrahmen</span>
+          </button>
+
+          <button type="button" class="view-thumb-btn" data-view="side3d" data-i18n-title="lb_view_side_title" title="3D-Seitenansicht & Textur">
+            <div class="thumb-img-wrapper thumb-3d-preview">
+              <img id="thumb-img-side" src="" data-i18n-alt="lb_view_side" alt="3D Seitenansicht">
+            </div>
+            <span class="thumb-label" data-i18n="lb_view_side">3D-Perspektive</span>
+          </button>
+
+          <button type="button" class="view-thumb-btn" data-view="artist" data-i18n-title="lb_view_artist_title" title="Künstlerin & Atelier">
+            <div class="thumb-img-wrapper">
+              <img loading="lazy" width="1024" height="1024" src="assets/images/rooms/artist_studio.webp" data-i18n-alt="lb_view_artist_title" alt="Künstlerin & Atelier">
+            </div>
+            <span class="thumb-label" data-i18n="lb_view_artist">Atelier</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="lightbox-testimonial-box" class="lightbox-testimonial hidden"></div>
+
+      <!-- Dezentere, unaufdringliche Aktions-Buttons an der Seite -->
+      <div class="lightbox-actions-panel">
+        <button id="lightbox-inquiry-btn" class="btn-subtle btn-subtle-primary"
+          data-i18n-aria-label="lb_inquiry_aria" aria-label="Dieses Motiv als Auftrag anfragen">
+          <i class="fa-solid fa-palette" aria-hidden="true"></i> <span data-i18n="lb_btn_inquiry">Motiv als Auftrag anfragen</span>
+        </button>
+        <button id="lightbox-room-btn" class="btn-subtle" data-i18n-aria-label="lb_btn_room" aria-label="In deinem Raum ansehen">
+          <i class="fa-solid fa-house-chimney" aria-hidden="true"></i> <span data-i18n="lb_btn_room">In deinem Raum ansehen</span>
+        </button>
+        <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
+          <i class="fa-regular fa-heart" aria-hidden="true"></i> <span data-i18n="lb_fav_default">Zu Favoriten</span>
+        </button>
+        <button id="lightbox-share-btn" class="btn-subtle"
+          data-i18n-aria-label="lb_share_aria" aria-label="Gemälde teilen">
+          <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> <span data-i18n="lb_share_btn">Gemälde teilen</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

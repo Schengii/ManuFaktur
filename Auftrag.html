@@ -12,7 +12,10 @@
   <meta property="og:title" content="Auftrag konfigurieren – ManuFAKTUR Schenk">
   <meta property="og:description"
     content="Konfiguriere in 4 Schritten dein individuelles handgemaltes Kunstwerk und erhalte eine unverbindliche Preisschätzung.">
-  <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild18-eulen.webp">
+  <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-eulen.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.manufaktur-malerei.de/Auftrag.html">
   <meta property="og:locale" content="de_DE">
@@ -21,7 +24,7 @@
   <meta name="twitter:title" content="Auftrag konfigurieren – ManuFAKTUR Schenk">
   <meta name="twitter:description"
     content="Konfiguriere in 4 Schritten dein individuelles handgemaltes Kunstwerk und erhalte eine unverbindliche Preisschätzung.">
-  <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild18-eulen.webp">
+  <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-eulen.jpg">
 
   <!-- Favicon -->
   <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
@@ -38,10 +41,10 @@
 
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
-  <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="assets/vendor/font-awesome/css/icons.min.css?v=21">
   <!-- CSS: alle Konfigurator-Styles jetzt in style.css (Abschnitt 10) -->
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=20">
-  <script src="assets/js/theme-init.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=21">
+  <script src="assets/js/theme-init.js?v=21"></script>
 
   <!-- SEO Schema.org Strukturierte Daten -->
   <script type="application/ld+json">
@@ -69,14 +72,14 @@
 
 <body>
 
-  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip_link">Zum Hauptinhalt springen</a>
 
   <!-- Navigation wird via Home.js injiziert -->
   <header></header>
 
   <main id="main-content">
-    <h1 class="page-title">Auftrag konfigurieren</h1>
-    <p class="intro-text">In nur 4 Schritten zu deinem individuellen Kunstwerk – erhalte eine unverbindliche
+    <h1 class="page-title" data-i18n="order_page_title">Auftrag konfigurieren</h1>
+    <p class="intro-text" data-i18n="order_intro">In nur 4 Schritten zu deinem individuellen Kunstwerk – erhalte eine unverbindliche
       Preisschätzung und sende deine Anfrage direkt ab.</p>
 
     <div class="configurator-wrapper">
@@ -84,33 +87,34 @@
       <!-- Restore-Banner: wird via JS eingeblendet, wenn gespeicherter State vorhanden -->
       <div id="restore-banner" class="config-restore-banner hidden">
         <i class="fa fa-history" aria-hidden="true"></i>
-        <span data-i18n-html="auftrag_restore_text">Du hast eine gespeicherte Konfiguration. <button id="restore-btn">Wiederherstellen</button> oder <button id="clear-btn">Neu starten</button>.</span>
+        <span data-i18n-html="auftrag_restore_text">Du hast eine gespeicherte Konfiguration. <button type="button" id="restore-btn">Wiederherstellen</button> oder <button type="button" id="clear-btn">Neu starten</button>.</span>
       </div>
 
       <!-- Progress Bar -->
-      <div class="progress-bar-container" role="progressbar" aria-label="Konfigurationsfortschritt">
+      <div class="progress-bar-container" role="progressbar" aria-label="Konfigurationsfortschritt"
+        aria-valuemin="1" aria-valuemax="4" aria-valuenow="1" aria-valuetext="Schritt 1 von 4: Motiv">
         <div class="progress-step active" id="step-indicator-1">
           <div class="step-circle">1</div>
-          <span class="step-label">Motiv</span>
+          <span class="step-label" data-i18n="step_1_lbl">Motiv</span>
         </div>
         <div class="progress-step" id="step-indicator-2">
           <div class="step-circle">2</div>
-          <span class="step-label">Format</span>
+          <span class="step-label" data-i18n="step_2_lbl">Format</span>
         </div>
         <div class="progress-step" id="step-indicator-3">
           <div class="step-circle">3</div>
-          <span class="step-label">Technik</span>
+          <span class="step-label" data-i18n="step_3_lbl">Technik</span>
         </div>
         <div class="progress-step" id="step-indicator-4">
           <div class="step-circle">4</div>
-          <span class="step-label">Zusammenfassung</span>
+          <span class="step-label" data-i18n="step_4_lbl">Zusammenfassung</span>
         </div>
       </div>
 
       <!-- ====== SCHRITT 1: MOTIV ====== -->
       <section class="config-panel active" id="panel-1" aria-labelledby="step1-title">
-        <h2 id="step1-title"><i class="fa fa-paw" aria-hidden="true"></i> Schritt 1: Wähle dein Motiv</h2>
-        <span class="config-subtitle">Was soll auf deinem einzigartigen Kunstwerk zu sehen sein?</span>
+        <h2 id="step1-title"><i class="fa fa-paw" aria-hidden="true"></i> <span data-i18n="step_1_heading">Schritt 1: Wähle dein Motiv</span></h2>
+        <span class="config-subtitle" data-i18n="step_1_sub">Was soll auf deinem einzigartigen Kunstwerk zu sehen sein?</span>
 
         <!-- Gemerkte Favoriten aus Galerie -->
         <div id="config-saved-favorites" class="saved-favorites-container hidden">
@@ -166,8 +170,8 @@
 
       <!-- ====== SCHRITT 2: FORMAT ====== -->
       <section class="config-panel" id="panel-2" aria-labelledby="step2-title">
-        <h2 id="step2-title"><i class="fa fa-ruler-combined" aria-hidden="true"></i> Schritt 2: Wähle das Format</h2>
-        <span class="config-subtitle">Jedes Motiv passt nicht auf jedes Format. Die gewünschte Größe für dein Motiv
+        <h2 id="step2-title"><i class="fa fa-ruler-combined" aria-hidden="true"></i> <span data-i18n="step_2_heading">Schritt 2: Wähle das Format</span></h2>
+        <span class="config-subtitle" data-i18n="step_2_sub">Jedes Motiv passt nicht auf jedes Format. Die gewünschte Größe für dein Motiv
           sprechen wir individuell ab.</span>
 
         <div class="format-grid">
@@ -223,8 +227,8 @@
 
       <!-- ====== SCHRITT 3: TECHNIK ====== -->
       <section class="config-panel" id="panel-3" aria-labelledby="step3-title">
-        <h2 id="step3-title"><i class="fa fa-paintbrush" aria-hidden="true"></i> Schritt 3: Wähle die Maltechnik</h2>
-        <span class="config-subtitle">Beide Techniken ergeben wunderschöne, langlebige Unikate.</span>
+        <h2 id="step3-title"><i class="fa fa-paintbrush" aria-hidden="true"></i> <span data-i18n="step_3_heading">Schritt 3: Wähle die Maltechnik</span></h2>
+        <span class="config-subtitle" data-i18n="step_3_sub">Beide Techniken ergeben wunderschöne, langlebige Unikate.</span>
 
         <div class="technique-row">
           <div class="technique-card" data-value="Acryl" tabindex="0" role="button"
@@ -259,9 +263,9 @@
 
       <!-- ====== SCHRITT 4: ZUSAMMENFASSUNG ====== -->
       <section class="config-panel" id="panel-4" aria-labelledby="step4-title">
-        <h2 id="step4-title"><i class="fa fa-clipboard-check" aria-hidden="true"></i> Schritt 4: Deine Zusammenfassung
+        <h2 id="step4-title"><i class="fa fa-clipboard-check" aria-hidden="true"></i> <span data-i18n="step_4_heading">Schritt 4: Deine Zusammenfassung</span>
         </h2>
-        <span class="config-subtitle">Überprüfe deine Auswahl und sende deine unverbindliche Anfrage direkt an
+        <span class="config-subtitle" data-i18n="step_4_sub">Überprüfe deine Auswahl und sende deine unverbindliche Anfrage direkt an
           mich.</span>
 
         <div class="summary-card">
@@ -285,6 +289,11 @@
                 data-i18n="auftrag_summary_lieferzeit">Lieferzeit</span></span>
             <span class="value" id="summary-lieferzeit">–</span>
           </div>
+          <div class="summary-row hidden" id="summary-referenz-row">
+            <span class="label"><i class="fa fa-images" aria-hidden="true"></i> <span
+                data-i18n="auftrag_summary_referenz">Referenz</span></span>
+            <span class="value" id="summary-referenz">–</span>
+          </div>
 
           <div class="price-estimate-box">
             <div>
@@ -296,10 +305,9 @@
 
           <!-- Photo Upload Preview Field -->
           <div class="photo-upload-wrapper">
-            <h3><i class="fa fa-cloud-arrow-up" aria-hidden="true"></i> <span data-i18n="auftrag_photo_h4">Eigenes
+            <h3><i class="fa fa-image" aria-hidden="true"></i> <span data-i18n="auftrag_photo_h4">Eigenes
                 Fotovorlage-Bild auswählen (Optional)</span></h3>
-            <p><small data-i18n="auftrag_photo_hint">Du kannst hier dein Haustier- oder Landschaftsfoto auswählen, um
-                die Vorlage direkt zu prüfen:</small></p>
+            <p><small data-i18n="auftrag_photo_hint">Wähle hier dein Haustier- oder Landschaftsfoto aus, um es als Vorschau zu prüfen. Das Foto bleibt auf deinem Gerät und wird nicht mit der Anfrage übertragen.</small></p>
             <input type="file" id="client-photo-input" accept="image/*" class="margin-top-10"
               data-i18n-aria-label="auftrag_photo_input_label" aria-label="Fotovorlage auswählen"
               data-i18n-title="auftrag_photo_input_label" title="Fotovorlage auswählen">
@@ -308,8 +316,8 @@
                 alt="Fotovorlage Vorschau">
               <div>
                 <strong id="photo-file-name" data-i18n="auftrag_photo_loaded">Fotovorlage geladen</strong>
-                <div class="color-primary font-size-085rem"><i class="fa fa-check-circle" aria-hidden="true"></i> <span
-                    data-i18n="auftrag_photo_ready">Bereit für die Anfrage</span></div>
+                <div class="color-primary font-size-085rem"><i class="fa fa-circle-info" aria-hidden="true"></i> <span
+                    data-i18n="auftrag_photo_ready">Bitte sende das Foto nach deiner Anfrage per E-Mail oder WhatsApp.</span></div>
               </div>
             </div>
           </div>
@@ -331,14 +339,15 @@
   <!-- Footer wird via Home.js injiziert -->
   <footer></footer>
 
-  <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+  <button class="back-to-top" title="Nach oben" data-i18n-title="back_to_top" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
 
-  <div id="toast" role="alert" aria-live="polite"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=20"></script>
-  <script src="assets/js/auftrag.js"></script>
+  <script src="assets/js/artworks-data.js?v=21"></script>
+  <script src="Home.min.js?v=21"></script>
+  <script src="assets/js/auftrag.js?v=21"></script>
 </body>
 
 </html>

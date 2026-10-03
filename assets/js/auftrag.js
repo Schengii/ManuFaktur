@@ -6,7 +6,8 @@ const state = {
   motiv: null,
   format: null,
   technik: null,
-  lieferzeit: null
+  lieferzeit: null,
+  referenz: null
 };
 
 // ── localStorage: Speichern & Laden ──────────────────────────────────────
@@ -19,18 +20,29 @@ function saveConfig() {
 
 function loadSavedConfig() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : null;
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return (saved && typeof saved === 'object') ? saved : null;
   } catch (e) { return null; }
+}
+
+// Das Banner trägt im HTML die Klasse .hidden (display: none !important).
+function setRestoreBannerVisible(visible) {
+  const banner = document.getElementById('restore-banner');
+  if (banner) banner.classList.toggle('hidden', !visible);
 }
 
 function restoreSavedConfig() {
   const saved = loadSavedConfig();
   if (!saved) return;
 
-  // Zustand wiederherstellen
-  Object.assign(state, saved);
-  document.getElementById('restore-banner').style.display = 'none';
+  // Zustand wiederherstellen – nur bekannte Felder und nur Werte, zu denen es eine Karte gibt
+  ['motiv', 'format', 'technik'].forEach((key, i) => {
+    const value = typeof saved[key] === 'string' ? saved[key] : null;
+    state[key] = (value && findCardByValue(CARD_SELECTORS[i], value)) ? value : null;
+  });
+  state.lieferzeit = state.technik ? lieferzeitFor(state.technik) : null;
+  state.referenz = typeof saved.referenz === 'string' ? saved.referenz.slice(0, 200) : null;
+  setRestoreBannerVisible(false);
 
   // Auswahl visuell wiederherstellen
   if (state.motiv) {
@@ -49,12 +61,22 @@ function restoreSavedConfig() {
     document.getElementById('next-3').disabled = false;
   }
 
-  goToStep(state.step);
+  // Höchstens bis zu dem Schritt springen, dessen Vorgänger vollständig ausgefüllt sind
+  const maxStep = !state.motiv ? 1 : !state.format ? 2 : !state.technik ? 3 : 4;
+  const targetStep = Math.min(Math.max(parseInt(saved.step, 10) || 1, 1), maxStep);
+  if (targetStep === 4) buildSummary();
+  goToStep(targetStep);
 }
 
 function clearSavedConfig() {
   try { localStorage.removeItem(STORAGE_KEY); } catch (e) { /* */ }
-  document.getElementById('restore-banner').style.display = 'none';
+  setRestoreBannerVisible(false);
+}
+
+const CARD_SELECTORS = ['#panel-1 .option-card', '#panel-2 .format-card', '#panel-3 .technique-card'];
+
+function lieferzeitFor(technik) {
+  return technik === 'Öl' ? 'ca. 4–6 Wochen' : 'ca. 2–3 Wochen';
 }
 
 function findCardByValue(selector, value) {
@@ -66,7 +88,7 @@ function findCardByValue(selector, value) {
 (function checkSavedState() {
   const saved = loadSavedConfig();
   if (saved && (saved.motiv || saved.format || saved.technik)) {
-    document.getElementById('restore-banner').style.display = 'flex';
+    setRestoreBannerVisible(true);
   }
 })();
 
@@ -106,7 +128,7 @@ function selectTechnique(card) {
   card.classList.add('selected');
   card.setAttribute('aria-pressed', 'true');
   state.technik = card.dataset.value;
-  state.lieferzeit = state.technik === 'Öl' ? 'ca. 4–6 Wochen' : 'ca. 2–3 Wochen';
+  state.lieferzeit = lieferzeitFor(state.technik);
   document.getElementById('next-3').disabled = false;
   document.getElementById('hint-3').classList.remove('visible');
   saveConfig();
@@ -124,6 +146,19 @@ function nextStep(current) {
   goToStep(current + 1);
 }
 
+// Kinder einer progressbar sind für Screenreader unsichtbar – der Schritt steht deshalb in aria-valuetext.
+function updateProgressAria() {
+  const bar = document.querySelector('.progress-bar-container');
+  if (!bar) return;
+  const step = state.step || 1;
+  const labels = document.querySelectorAll('.progress-step .step-label');
+  const label = labels[step - 1] ? labels[step - 1].textContent.trim() : '';
+  const isEn = typeof currentLang !== 'undefined' && currentLang === 'en';
+  bar.setAttribute('aria-valuenow', String(step));
+  bar.setAttribute('aria-valuetext', isEn ? `Step ${step} of 4: ${label}` : `Schritt ${step} von 4: ${label}`);
+  bar.setAttribute('aria-label', isEn ? 'Configuration progress' : 'Konfigurationsfortschritt');
+}
+
 function prevStep(current) {
   goToStep(current - 1);
 }
@@ -137,8 +172,9 @@ function goToStep(step) {
   });
   document.getElementById('panel-' + step).classList.add('active');
   state.step = step;
+  updateProgressAria();
   saveConfig();
-  document.querySelector('.progress-bar-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelector('.progress-bar-container').scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
 }
 
 // ── Zusammenfassung ───────────────────────────────────────────────────────
@@ -177,18 +213,21 @@ function buildSummary() {
   document.getElementById('summary-technik').textContent = localizedLabel(VALUE_LABELS.technik, state.technik);
   document.getElementById('summary-lieferzeit').textContent = localizedLabel(VALUE_LABELS.lieferzeit, state.lieferzeit);
 
+  // Referenz-Gemälde aus Galerie/Favoriten (kann aus der URL stammen → nur als Text)
+  const refRow = document.getElementById('summary-referenz-row');
+  if (refRow) {
+    refRow.classList.toggle('hidden', !state.referenz);
+    document.getElementById('summary-referenz').textContent = state.referenz || '–';
+  }
+
   // Prefilled Kontakt-Link mit allen Parametern für Formular-Vorausfüllung
   const params = new URLSearchParams({
     motiv: state.motiv || '',
     format: state.format || '',
     technik: state.technik || ''
   });
+  if (state.referenz) params.set('ref', state.referenz);
   document.getElementById('anfrage-link').href = `Kontakt.html?${params.toString()}`;
-
-  // State nach Anfrage-Klick löschen
-  document.getElementById('anfrage-link').addEventListener('click', function () {
-    clearSavedConfig();
-  }, { once: true });
 }
 window.buildSummary = buildSummary;
 
@@ -218,6 +257,9 @@ document.addEventListener('click', function (e) {
 
   const backBtn = e.target.closest('.btn-back[data-step]');
   if (backBtn) { prevStep(parseInt(backBtn.dataset.step, 10)); return; }
+
+  // State nach Anfrage-Klick löschen (Navigation zu Kontakt.html läuft normal weiter)
+  if (e.target.closest('#anfrage-link')) { clearSavedConfig(); return; }
 
   if (e.target.closest('#restore-btn')) { restoreSavedConfig(); return; }
   if (e.target.closest('#clear-btn')) { clearSavedConfig(); return; }

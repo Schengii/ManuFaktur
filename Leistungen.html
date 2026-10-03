@@ -12,7 +12,10 @@
   <meta property="og:title" content="Leistungen – ManuFAKTUR Schenk">
   <meta property="og:description"
     content="Tierportraits, Landschaften und individuelle Gemälde – handgemalt nach deinen Wünschen aus Bonn.">
-  <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild13-hahn.webp">
+  <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-hahn.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.manufaktur-malerei.de/Leistungen.html">
   <meta property="og:locale" content="de_DE">
@@ -21,7 +24,7 @@
   <meta name="twitter:title" content="Leistungen – ManuFAKTUR Schenk">
   <meta name="twitter:description"
     content="Tierportraits, Landschaften und individuelle Gemälde – handgemalt nach deinen Wünschen aus Bonn.">
-  <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild13-hahn.webp">
+  <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-hahn.jpg">
 
   <!-- Favicon -->
   <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
@@ -38,9 +41,9 @@
 
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
-  <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=20">
-  <script src="assets/js/theme-init.js"></script>
+  <link rel="stylesheet" href="assets/vendor/font-awesome/css/icons.min.css?v=21">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=21">
+  <script src="assets/js/theme-init.js?v=21"></script>
 
   <!-- SEO Schema.org Strukturierte Daten -->
   <script type="application/ld+json">
@@ -81,52 +84,82 @@
     ]
   }
   </script>
+
+  <!-- FAQ Strukturierte Daten (muss inhaltlich dem sichtbaren FAQ-Bereich entsprechen) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Was kostet ein Bild?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Der Preis gestaltet sich nach Größe des Bildes. Die Bezahlung erfolgt gegen Vorkasse (inkl. Porto und Verpackung)." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie lange dauert die Erstellung eines Bildes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Je nach Technik (Acryl trocknet schneller als Öl) und aktueller Auftragslage dauert die Fertigstellung in der Regel einige Wochen. Bitte bestelle rechtzeitig, wenn es ein Geschenk sein soll!" }
+      },
+      {
+        "@type": "Question",
+        "name": "Versand",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nach Fertigstellung und Trocknung verschicke ich Dein Bild sicher per Post. Die genauen Versandkosten stimmen wir individuell vorab ab." }
+      },
+      {
+        "@type": "Question",
+        "name": "Widerrufsrecht bei Auftragsarbeiten",
+        "acceptedAnswer": { "@type": "Answer", "text": "Bei individuell nach Deinen persönlichen Wünschen und Vorgaben angefertigten Kunstwerken (wie z. B. Tierportraits nach Fotovorlage) besteht gemäß § 312g Abs. 2 Nr. 1 BGB kein gesetzliches Widerrufsrecht, da das Werk ein eindeutig auf Dich zugeschnittenes Unikat ist. Vor Beginn und während des Malprozesses stimme ich aber alle Details und Zwischenschritte eng mit Dir ab, damit Du mit Deinem Ergebnis wunschlos glücklich bist." }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
 
-  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip_link">Zum Hauptinhalt springen</a>
 
   <!-- Navigation wird via Home.js injiziert -->
   <header></header>
 
   <main id="main-content">
-    <h1 class="page-title">Leistungen</h1>
-    <p class="intro-text">Individuelle Kunstwerke, ganz nach deinen Vorstellungen gestaltet.</p>
+    <h1 class="page-title" data-i18n="services_page_title">Leistungen</h1>
+    <p class="intro-text" data-i18n="services_intro">Individuelle Kunstwerke, ganz nach deinen Vorstellungen gestaltet.</p>
 
     <section class="services">
-      <h2><i class="fa fa-palette" aria-hidden="true"></i> Was ich anbiete</h2>
+      <h2><i class="fa fa-palette" aria-hidden="true"></i> <span data-i18n="services_offer_title">Was ich anbiete</span></h2>
       <div class="service-grid">
         <div class="service-card reveal">
           <div class="service-icon-container">
             <i class="fa fa-dog service-icon" aria-hidden="true"></i>
           </div>
-          <h3>Dein Hund auf Leinwand</h3>
-          <p>Du hast Dir schon immer mal ein einzigartiges Portrait Deines treuen Begleiters gewünscht? Egal ob weißer
+          <h3 data-i18n="service_dog_title">Dein Hund auf Leinwand</h3>
+          <p data-i18n="service_dog_desc">Du hast Dir schon immer mal ein einzigartiges Portrait Deines treuen Begleiters gewünscht? Egal ob weißer
             Malteser oder schwarzer Labrador - jeder Hund ist ein besonderes Motiv.</p>
         </div>
         <div class="service-card reveal">
           <div class="service-icon-container">
             <i class="fa fa-cat service-icon" aria-hidden="true"></i>
           </div>
-          <h3>Weitere tierische Freunde</h3>
-          <p>Natürlich male ich nicht nur Hunde! Auch andere tierische Familienmitglieder wie Papageien, Katzen oder
+          <h3 data-i18n="service_pets_title">Weitere tierische Freunde</h3>
+          <p data-i18n="service_pets_desc">Natürlich male ich nicht nur Hunde! Auch andere tierische Familienmitglieder wie Papageien, Katzen oder
             auch Wildtiere sind wunderbare Motive für ausdrucksstarke Gemälde.</p>
         </div>
         <div class="service-card reveal">
           <div class="service-icon-container">
             <i class="fa fa-camera-retro service-icon" aria-hidden="true"></i>
           </div>
-          <h3>Deine Lieblingsorte</h3>
-          <p>Besondere Landschaften und Orte haben eine ganz eigene Magie. Wenn du solche Lieblingsorte hast, zaubere
+          <h3 data-i18n="service_places_title">Deine Lieblingsorte</h3>
+          <p data-i18n="service_places_desc">Besondere Landschaften und Orte haben eine ganz eigene Magie. Wenn du solche Lieblingsorte hast, zaubere
             ich sie Dir als dauerhaftes Erinnerungsstück auf Leinwand.</p>
         </div>
         <div class="service-card reveal">
           <div class="service-icon-container">
             <i class="fa fa-object-group service-icon" aria-hidden="true"></i>
           </div>
-          <h3>Mögliche Formate</h3>
-          <p>Für Dein einzigartiges Kunstwerk biete ich verschiedene Größen und Formate an. Da alle Bilder mit viel Zeit
+          <h3 data-i18n="service_formats_title">Mögliche Formate</h3>
+          <p data-i18n="service_formats_desc">Für Dein einzigartiges Kunstwerk biete ich verschiedene Größen und Formate an. Da alle Bilder mit viel Zeit
             und Liebe gemalt werden, mache ich Dir auf Anfrage gerne ein individuelles Angebot.</p>
         </div>
       </div>
@@ -194,13 +227,13 @@
   <!-- Footer wird via Home.js injiziert -->
   <footer></footer>
 
-  <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+  <button class="back-to-top" title="Nach oben" data-i18n-title="back_to_top" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
 
-  <div id="toast" role="alert" aria-live="polite"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=20"></script>
+  <script src="Home.min.js?v=21"></script>
 </body>
 
 </html>

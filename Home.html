@@ -12,7 +12,10 @@
   <meta property="og:title" content="ManuFAKTUR Schenk – Individuelle Malerei">
   <meta property="og:description"
     content="Handgemalte Tierportraits und Landschaften aus Bonn. Jedes Bild ein Unikat – auf Wunsch für dich gemalt.">
-  <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild18-eulen.webp">
+  <meta property="og:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-eulen.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.manufaktur-malerei.de/Home.html">
   <meta property="og:locale" content="de_DE">
@@ -21,7 +24,7 @@
   <meta name="twitter:title" content="ManuFAKTUR Schenk – Individuelle Malerei">
   <meta name="twitter:description"
     content="Handgemalte Tierportraits und Landschaften aus Bonn. Jedes Bild ein Unikat – auf Wunsch für dich gemalt.">
-  <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/artworks/bild18-eulen.webp">
+  <meta name="twitter:image" content="https://www.manufaktur-malerei.de/assets/images/og/og-eulen.jpg">
 
   <!-- Favicon -->
   <link rel="icon" href="assets/images/logos/favicon.png" type="image/png">
@@ -38,9 +41,9 @@
 
   <link rel="manifest" href="manifest.json">
   <!-- Lokales Font Awesome für DSGVO-Konformität -->
-  <link rel="stylesheet" href="assets/vendor/font-awesome/css/all.min.css">
-  <link rel="stylesheet" type="text/css" href="style.min.css?v=20">
-  <script src="assets/js/theme-init.js"></script>
+  <link rel="stylesheet" href="assets/vendor/font-awesome/css/icons.min.css?v=21">
+  <link rel="stylesheet" type="text/css" href="style.min.css?v=21">
+  <script src="assets/js/theme-init.js?v=21"></script>
 
   <!-- SEO Schema.org Strukturierte Daten -->
   <script type="application/ld+json">
@@ -73,7 +76,7 @@
 
 <body>
 
-  <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+  <a href="#main-content" class="skip-link" data-i18n="skip_link">Zum Hauptinhalt springen</a>
 
   <!-- Navigation wird via Home.js injiziert -->
   <header></header>
@@ -81,7 +84,7 @@
   <main id="main-content">
 
     <section class="welcome reveal">
-      <img src="assets/images/logos/logo.png" alt="ManuFAKTUR Schenk Logo" class="welcome-logo">
+      <img width="666" height="396" src="assets/images/logos/logo.png" alt="ManuFAKTUR Schenk Logo" class="welcome-logo">
       <h1><span data-i18n="home_welcome_title">Herzlich Willkommen</span> <i class="fa fa-palette" aria-hidden="true"></i></h1>
       <p data-i18n-html="home_welcome_text">
         Hier entstehen meine Bilder, alle von mir in liebevoller Detailarbeit handgemalt.<br>
@@ -100,7 +103,7 @@
     <section class="latest-work">
       <h2><i class="fa-solid fa-paintbrush" aria-hidden="true"></i> <span data-i18n="highlights_title">Aktuelle
           Highlights</span></h2>
-      <p class="intro-text" data-i18n="highlights_intro">Eine kleine Auswahl meiner neuesten Gemälde aus dem Jahr 2025.
+      <p class="intro-text" data-i18n="highlights_intro">Eine kleine Auswahl meiner neuesten Gemälde.
       </p>
       <div class="gallery-grid">
         <div class="gallery-item reveal" data-kategorie="tiere" id="bild18-eulen">
@@ -153,10 +156,10 @@
       <p class="intro-text intro-text--subtle" data-i18n="testimonials_intro">Echte Erfahrungen & Rückmeldungen von
         begeisterten Meistbestellern:</p>
 
-      <div class="testimonial-container">
+      <div class="testimonial-container" id="testimonial-container" aria-live="off">
         <div class="testimonial-slide active">
-          <div class="testimonial-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-              class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <div class="testimonial-stars" role="img" data-i18n-aria-label="testi_stars_aria" aria-label="5 von 5 Sternen"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
+              class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></div>
           <blockquote class="testimonial-quote" data-i18n="testi1_quote">„Das Portrait von unserem Schäferhund Balou ist
             einfach fantastisch geworden. Manuela hat seinen treuen Blick exakt eingefangen. Wir sind überglücklich!“
           </blockquote>
@@ -165,8 +168,8 @@
         </div>
 
         <div class="testimonial-slide">
-          <div class="testimonial-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-              class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <div class="testimonial-stars" role="img" data-i18n-aria-label="testi_stars_aria" aria-label="5 von 5 Sternen"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
+              class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></div>
           <blockquote class="testimonial-quote" data-i18n="testi2_quote">„Ich habe ein Landschaftsbild der Rheinaue als
             Geschenk zur Hochzeit bestellt. Die Abstimmung war super unkompliziert und das Brautpaar war zu Tränen
             gerührt.“</blockquote>
@@ -175,8 +178,8 @@
         </div>
 
         <div class="testimonial-slide">
-          <div class="testimonial-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
-              class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <div class="testimonial-stars" role="img" data-i18n-aria-label="testi_stars_aria" aria-label="5 von 5 Sternen"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
+              class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></div>
           <blockquote class="testimonial-quote" data-i18n="testi3_quote">„Wunderschöne Arbeit! Man merkt bei jedem
             Pinselstrich die Liebe zum Detail. Das Bild hat jetzt einen zentralen Ehrenplatz in unserem Wohnzimmer.“
           </blockquote>
@@ -186,15 +189,17 @@
       </div>
 
       <div class="testimonial-controls">
-        <button class="testimonial-arrow" id="testi-prev" data-i18n-aria-label="testi_prev_aria"
-          aria-label="Vorherige Kundenstimme"><i class="fa fa-chevron-left"></i></button>
+        <button type="button" class="testimonial-arrow" id="testi-pause" aria-pressed="false" data-i18n-aria-label="testi_pause_aria"
+          aria-label="Automatischen Wechsel anhalten"><i class="fa fa-pause" aria-hidden="true"></i></button>
+        <button type="button" class="testimonial-arrow" id="testi-prev" data-i18n-aria-label="testi_prev_aria"
+          aria-label="Vorherige Kundenstimme"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
         <div class="testimonial-dots">
-          <span class="testimonial-dot active"></span>
-          <span class="testimonial-dot"></span>
-          <span class="testimonial-dot"></span>
+          <button type="button" class="testimonial-dot active" data-i18n-aria-label="testi_dot_1" aria-label="Kundenstimme 1 anzeigen" aria-current="true"></button>
+          <button type="button" class="testimonial-dot" data-i18n-aria-label="testi_dot_2" aria-label="Kundenstimme 2 anzeigen"></button>
+          <button type="button" class="testimonial-dot" data-i18n-aria-label="testi_dot_3" aria-label="Kundenstimme 3 anzeigen"></button>
         </div>
-        <button class="testimonial-arrow" id="testi-next" data-i18n-aria-label="testi_next_aria"
-          aria-label="Nächste Kundenstimme"><i class="fa fa-chevron-right"></i></button>
+        <button type="button" class="testimonial-arrow" id="testi-next" data-i18n-aria-label="testi_next_aria"
+          aria-label="Nächste Kundenstimme"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
       </div>
     </section>
 
@@ -212,24 +217,22 @@
   <footer></footer>
 
   <!-- Lightbox für die Bilder (identisch zur Bildergalerie mit @ManuFAKTUR Wasserzeichen) -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" data-i18n-aria-label="ui_lightbox_label"
-    aria-label="Bilder-Großansicht">
-    <span class="close" tabindex="0" data-i18n-aria-label="ui_close" aria-label="Schließen">&times;</span>
-    <a class="prev" data-i18n-aria-label="ui_prev_image"
-      aria-label="Vorheriges Bild">&#10094;</a>
-    <a class="next" data-i18n-aria-label="ui_next_image"
-      aria-label="Nächstes Bild">&#10095;</a>
+  <!-- partial:lightbox -->
+  <!-- Gemeinsame Lightbox für Home.html und Bildergalerie.html.
+       Nur hier bearbeiten – npm run build kopiert sie in die Seiten (scripts/sync-partials.js). -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" data-i18n-aria-label="ui_lightbox_label" aria-label="Bilder-Großansicht">
+    <button type="button" class="close" data-i18n-aria-label="ui_close" aria-label="Schließen"><span aria-hidden="true">&times;</span></button>
+    <button type="button" class="prev" data-i18n-aria-label="ui_prev_image" aria-label="Vorheriges Bild"><span aria-hidden="true">&#10094;</span></button>
+    <button type="button" class="next" data-i18n-aria-label="ui_next_image" aria-label="Nächstes Bild"><span aria-hidden="true">&#10095;</span></button>
 
     <div class="lightbox-split-container">
       <!-- Linke Spalte: Bild, KI-Wandvorlage & Werkzeuge -->
       <div class="lightbox-media-col">
         <div class="lightbox-top-bar">
-          <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 4</div>
+          <div id="lightbox-counter" class="lightbox-counter">Bild 1 von 1</div>
           <div id="lightbox-scene-bar" class="lightbox-scene-bar hidden">
-            <span class="scene-label"><i class="fa-solid fa-wand-magic-sparkles"></i> <span
-                data-i18n="scene_label">KI-Wandvorlage:</span></span>
-            <button type="button" class="scene-btn active" data-scene="livingroom" data-i18n-title="scene_living_title"
-              title="Wohnzimmer-Wand">
+            <span class="scene-label"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="scene_label">KI-Wandvorlage:</span></span>
+            <button type="button" class="scene-btn active" data-scene="livingroom" data-i18n-title="scene_living_title" title="Wohnzimmer-Wand">
               <i class="fa-solid fa-couch"></i> <span data-i18n="scene_living">Wohnzimmer</span>
             </button>
             <button type="button" class="scene-btn" data-scene="bedroom"
@@ -240,8 +243,7 @@
               data-i18n-title="scene_loft_title" title="Dark Loft Wand">
               <i class="fa-solid fa-building-user"></i> <span data-i18n="scene_loft">Loft / Beton</span>
             </button>
-            <button type="button" class="scene-btn" data-scene="beigelounge" data-i18n-title="scene_lounge_title"
-              title="Beige Lounge Wand">
+            <button type="button" class="scene-btn" data-scene="beigelounge" data-i18n-title="scene_lounge_title" title="Beige Lounge Wand">
               <i class="fa-solid fa-sun"></i> <span data-i18n="scene_lounge">Beige Lounge</span>
             </button>
             <button type="button" class="scene-btn" data-scene="detail"
@@ -263,8 +265,7 @@
               <div class="watermark-brand">@ManuFAKTUR</div>
             </div>
             <div id="wall-badge-tag" class="wall-badge-tag hidden"><i class="fa-solid fa-wand-magic-sparkles"></i>
-              <span data-i18n="scene_label_short">KI-Wandvorlage</span>
-            </div>
+              <span data-i18n="scene_label_short">KI-Wandvorlage</span></div>
             <div id="wall-drag-hint" class="wall-drag-hint hidden"><i class="fa-solid fa-up-down-left-right"
                 aria-hidden="true"></i> <span data-i18n="wall_drag_hint">Ziehen zum Verschieben</span></div>
           </div>
@@ -272,28 +273,23 @@
 
         <!-- Bild-Werkzeuge: Drehen, Lupe, Wandskalierung & Zentrierung -->
         <div class="lightbox-toolbar">
-          <button id="btn-rotate-img" class="lb-tool-btn"
-            data-i18n-title="lb_rotate_title" title="Um 90° drehen" data-i18n-aria-label="lb_rotate_aria"
-            aria-label="Bild um 90 Grad drehen">
-            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> 90° Drehen
+          <button id="btn-rotate-img" class="lb-tool-btn" data-i18n-title="lb_rotate_title" title="Um 90° drehen"
+            data-i18n-aria-label="lb_rotate_aria" aria-label="Bild um 90 Grad drehen">
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> <span data-i18n="lb_rotate">90° Drehen</span>
           </button>
           <button id="btn-toggle-zoom" class="lb-tool-btn"
-            data-i18n-title="lb_zoom_title" title="Lupe aktivieren/deaktivieren" data-i18n-aria-label="lb_zoom_aria"
-            aria-label="Lupe aktivieren">
-            <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Lupe Zoom
+            data-i18n-title="lb_zoom_title" title="Lupe aktivieren/deaktivieren" data-i18n-aria-label="lb_zoom_aria" aria-label="Lupe aktivieren">
+            <i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> <span data-i18n="lb_zoom">Lupe Zoom</span>
           </button>
 
           <!-- Interaktive Größen-Skalierung & Zentrieren für Wand-Hintergrund -->
           <div id="lb-wall-scale-control" class="lb-scale-control hidden">
             <label for="lb-scale-slider" class="lb-scale-label"><i
-                class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> <span
-                data-i18n="lb_scale_label">Skalierung:</span></label>
-            <input type="range" id="lb-scale-slider" min="25" max="90" value="55" data-i18n-aria-label="lb_scale_aria"
-              aria-label="Gemäldegröße an der Wand skalieren">
+                class="fa-solid fa-up-right-and-down-left-from-center" aria-hidden="true"></i> <span data-i18n="lb_scale_label">Skalierung:</span></label>
+            <input type="range" id="lb-scale-slider" min="25" max="90" value="55" data-i18n-aria-label="lb_scale_aria" aria-label="Gemäldegröße an der Wand skalieren">
             <span id="lb-scale-val" class="lb-scale-val">55%</span>
-            <button type="button" id="btn-reset-pos" class="lb-tool-btn lb-btn-subtle-sm" data-i18n-title="lb_center_title"
-              title="Gemäldeposition auf der Wand zentrieren">
-              <i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> Zentrieren
+            <button type="button" id="btn-reset-pos" class="lb-tool-btn lb-btn-subtle-sm" data-i18n-title="lb_center_title" title="Gemäldeposition auf der Wand zentrieren">
+              <i class="fa-solid fa-arrows-to-dot" aria-hidden="true"></i> <span data-i18n="lb_center">Zentrieren</span>
             </button>
           </div>
         </div>
@@ -330,15 +326,18 @@
             <span class="lightbox-detail-label" data-i18n="lb_label_rahmung">Rahmung:</span>
             <span class="lightbox-detail-val" data-i18n="lb_val_rahmung">Sofort aufhängbar (Keilrahmen)</span>
           </div>
+          <!-- Nur sichtbar, wenn das Werk in artworks-data.js ein "status"-Feld hat -->
+          <div class="lightbox-detail-row hidden" id="lb-detail-status-row">
+            <span class="lightbox-detail-label" data-i18n="lb_label_status">Verfügbarkeit:</span>
+            <span id="lb-detail-status" class="lightbox-detail-val"></span>
+          </div>
         </div>
 
         <!-- Weitere Ansichten Grid (Multiperspektivische Galerie) -->
         <div class="lightbox-views-section">
-          <h3 class="lightbox-views-title"><i class="fa-solid fa-images" aria-hidden="true"></i> <span
-              data-i18n="lb_views_title">Weitere Ansichten:</span></h3>
+          <h3 class="lightbox-views-title"><i class="fa-solid fa-images" aria-hidden="true"></i> <span data-i18n="lb_views_title">Weitere Ansichten:</span></h3>
           <div class="lightbox-views-grid">
-            <button type="button" class="view-thumb-btn active" data-view="front" data-i18n-title="lb_view_front_title"
-              title="Frontansicht Pur">
+            <button type="button" class="view-thumb-btn active" data-view="front" data-i18n-title="lb_view_front_title" title="Frontansicht Pur">
               <div class="thumb-img-wrapper">
                 <img id="thumb-img-front" src="" data-i18n-alt="lb_view_front" alt="Frontansicht">
               </div>
@@ -348,8 +347,7 @@
             <button type="button" class="view-thumb-btn" data-view="room"
               data-i18n-title="lb_view_room_title" title="Wand & Raumansicht">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/livingroom.webp" data-i18n-alt="lb_view_room_title"
-                  alt="Wand & Raumansicht">
+                <img loading="lazy" width="1024" height="1024" src="assets/images/rooms/livingroom.webp" data-i18n-alt="lb_view_room_title" alt="Wand & Raumansicht">
               </div>
               <span class="thumb-label" data-i18n="lb_view_room">Wandansicht</span>
             </button>
@@ -357,25 +355,21 @@
             <button type="button" class="view-thumb-btn" data-view="back"
               data-i18n-title="lb_view_back_title" title="Rückseite & Keilrahmen">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/canvas_back.webp" data-i18n-alt="lb_view_back_title"
-                  alt="Rückseite & Keilrahmen">
+                <img loading="lazy" width="1024" height="1024" src="assets/images/rooms/canvas_back.webp" data-i18n-alt="lb_view_back_title" alt="Rückseite & Keilrahmen">
               </div>
               <span class="thumb-label" data-i18n="lb_view_back">Keilrahmen</span>
             </button>
 
-            <button type="button" class="view-thumb-btn" data-view="side3d" data-i18n-title="lb_view_side_title"
-              title="3D-Seitenansicht & Textur">
+            <button type="button" class="view-thumb-btn" data-view="side3d" data-i18n-title="lb_view_side_title" title="3D-Seitenansicht & Textur">
               <div class="thumb-img-wrapper thumb-3d-preview">
                 <img id="thumb-img-side" src="" data-i18n-alt="lb_view_side" alt="3D Seitenansicht">
               </div>
               <span class="thumb-label" data-i18n="lb_view_side">3D-Perspektive</span>
             </button>
 
-            <button type="button" class="view-thumb-btn" data-view="artist" data-i18n-title="lb_view_artist_title"
-              title="Künstlerin & Atelier">
+            <button type="button" class="view-thumb-btn" data-view="artist" data-i18n-title="lb_view_artist_title" title="Künstlerin & Atelier">
               <div class="thumb-img-wrapper">
-                <img src="assets/images/rooms/artist_studio.webp" data-i18n-alt="lb_view_artist_title"
-                  alt="Künstlerin & Atelier">
+                <img loading="lazy" width="1024" height="1024" src="assets/images/rooms/artist_studio.webp" data-i18n-alt="lb_view_artist_title" alt="Künstlerin & Atelier">
               </div>
               <span class="thumb-label" data-i18n="lb_view_artist">Atelier</span>
             </button>
@@ -386,13 +380,12 @@
 
         <!-- Dezentere, unaufdringliche Aktions-Buttons an der Seite -->
         <div class="lightbox-actions-panel">
-          <button id="lightbox-inquiry-btn" class="btn-subtle btn-subtle-primary" data-i18n-aria-label="lb_inquiry_aria"
-            aria-label="Dieses Motiv als Auftrag anfragen">
-            <i class="fa-solid fa-palette" aria-hidden="true"></i> Motiv als Auftrag anfragen
+          <button id="lightbox-inquiry-btn" class="btn-subtle btn-subtle-primary"
+            data-i18n-aria-label="lb_inquiry_aria" aria-label="Dieses Motiv als Auftrag anfragen">
+            <i class="fa-solid fa-palette" aria-hidden="true"></i> <span data-i18n="lb_btn_inquiry">Motiv als Auftrag anfragen</span>
           </button>
-          <button id="lightbox-room-btn" class="btn-subtle" data-i18n-aria-label="lb_btn_room"
-            aria-label="In deinem Raum ansehen">
-            <i class="fa-solid fa-house-chimney" aria-hidden="true"></i> In deinem Raum ansehen
+          <button id="lightbox-room-btn" class="btn-subtle" data-i18n-aria-label="lb_btn_room" aria-label="In deinem Raum ansehen">
+            <i class="fa-solid fa-house-chimney" aria-hidden="true"></i> <span data-i18n="lb_btn_room">In deinem Raum ansehen</span>
           </button>
           <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
             <i class="fa-regular fa-heart" aria-hidden="true"></i> <span data-i18n="lb_fav_default">Zu Favoriten</span>
@@ -405,14 +398,16 @@
       </div>
     </div>
   </div>
+  <!-- /partial:lightbox -->
 
-  <button class="back-to-top" title="Nach oben" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
+  <button class="back-to-top" title="Nach oben" data-i18n-title="back_to_top" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">
     <i class="fa fa-angle-up" aria-hidden="true"></i>
   </button>
 
-  <div id="toast" role="alert" aria-live="polite"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
 
-  <script src="Home.min.js?v=20"></script>
+  <script src="assets/js/artworks-data.js?v=21"></script>
+  <script src="Home.min.js?v=21"></script>
 </body>
 
 </html>

@@ -8,17 +8,40 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 
 ## [Unreleased]
 
-### Geplant
-- Weitere KI-Wandvorlagen für die Kunstwerk-Präsentation
-- Erweiterung der Filterkategorien in der Bildergalerie
+### Behoben
+- Dunkelmodus- und Sprach-Umschalter im Footer funktionierten wegen der CSP nicht (Inline-`onclick`) – jetzt per Event-Delegation.
+- Offline-Modus: Service Worker cachte veraltete Asset-Versionen; `?v=N` und `CACHE_NAME` werden jetzt per `npm run release` gemeinsam hochgezählt, `npm run version:check` prüft das in der CI.
+- `?ref=`-Parameter im Konfigurator wurde als HTML eingefügt (Einschleusen von Markup möglich) – jetzt nur als Text.
+- Mehrere Bedienelemente blieben unsichtbar, weil `.hidden` (`!important`) Inline-Styles überstimmte (Keine-Treffer-Meldung, Wand-Badge, Favoriten im Konfigurator).
+- Nach dem Wechsel Englisch → Deutsch standen teils andere deutsche Texte als im HTML; jetzt werden die HTML-Originale wiederhergestellt.
+- Erfundene Kundenstimmen in der Lightbox entfernt.
+- `.htaccess` enthielt eine veraltete CSP-Kopie; `npm run csp:update` schreibt die Policy jetzt in beide Dateien.
+
+### Hinzugefügt
+- Barrierefreiheit: Fokusfalle in Lightbox und Flyer-Modal, echte Buttons für Schließen/Vor/Zurück, Pause-Schalter und Tastaturbedienung im Kundenstimmen-Karussell, `prefers-reduced-motion`, `aria-valuenow`/`aria-valuetext` an der Konfigurator-Fortschrittsanzeige, Toast als `role="status"`.
+- Motiv-Referenz aus der Galerie wird im Konfigurator gemerkt und in die Kontaktanfrage übernommen.
+- Optionales Feld `status` je Werk (verfügbar/reserviert/verkauft) mit Anzeige in der Lightbox.
+- Strukturierte Daten: `FAQPage` (Leistungen) und `VisualArtwork` je Werk (generiert).
+- Link-Vorschaubilder 1200 × 630 als JPEG (`assets/images/og/`).
+- Skripte: `release`, `version:check`, `icons`, `partials`, `jsonld`, `check:gallery`, `sitemap`, `images:og`.
+
+### Geändert
+- Font Awesome: statt `all.min.css` und kompletter Webfonts (≈ 390 KB) nur noch ein automatisch erzeugtes Subset der benutzten Icons (≈ 28 KB).
+- Galerie-Daten (`ARTWORKS_METADATA`) in `assets/js/artworks-data.js` ausgelagert und nur auf Seiten mit Galerie geladen; das veraltete `artworks_data.json` entfällt.
+- Lightbox-Markup existiert nur noch einmal (`partials/lightbox.html`).
+- Lightbox lädt auf schmalen Bildschirmen die 1000-px-Fassung, Vorschaukacheln die 400-px-Fassung; versteckte Raumbilder laden erst bei Bedarf.
+- Reveal-Animation per IntersectionObserver statt Scroll-Listener; doppelte Playfair-Display-Schriftdatei entfernt.
+- Bilder werden 30 Tage statt „immutable“ ein Jahr gecacht; Icon-Fonts tragen einen Inhalts-Hash in der URL.
+- Übersetzung vollständig über `data-i18n*`-Attribute; 43 ungenutzte Wörterbuch-Einträge und toter Filtercode entfernt.
 
 ---
 
 ## [1.3.0] - 2026-09-27
 
+
 ### Hinzugefügt
-- **Automatisierte CSP-Hash-Generierung:** Skript `scripts/update-csp-hashes.js` zur dynamischen Berechnung und Aktualisierung von SHA-256-Inline-Skript-Hashes in `.htaccess` und `vercel.json`.
-- **Responsive Bildauslieferung (`srcset`):** Skript `scripts/gen-srcset.js` und `scripts/apply-srcset.js` zur Erzeugung von responsiven Thumbnails (`-300w`, `-600w`, `-900w`) für optimale Ladezeiten auf Mobilgeräten.
+- **Automatisierte CSP-Hash-Generierung:** Skript `scripts/update-csp-hashes.js` zur dynamischen Berechnung und Aktualisierung von SHA-256-Inline-Skript-Hashes in `vercel.json` (`.htaccess` wurde damals noch nicht automatisch aktualisiert).
+- **Responsive Bildauslieferung (`srcset`):** Skript `scripts/gen-srcset.js` und `scripts/apply-srcset.js` zur Erzeugung von responsiven Thumbnails (`-400w`, `-700w`, `-1000w`) für optimale Ladezeiten auf Mobilgeräten.
 - Flyer-Assets und semantische Überschriftenstruktur (`h1`-`h4`) für verbesserte Zugänglichkeit (A11y) und SEO.
 - Automatisierte Playwright-basierte Funktions- und Regressions-Tests in `tests/funktionen.test.js`.
 

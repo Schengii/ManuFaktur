@@ -85,6 +85,137 @@ test('Lightbox: zeigt keine erfundenen Kundenstimmen zu einzelnen Werken', async
   await context.close();
 });
 
+test('Lightbox: Schließen und Pfeile sind Buttons, der Tastaturfokus bleibt im Dialog', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  await page.click('.gallery-item a');
+  await page.waitForSelector('#lightbox', { state: 'visible' });
+  assert.deepEqual(
+    await page.$$eval('#lightbox > .close, #lightbox > .prev, #lightbox > .next', els => els.map(el => el.tagName)),
+    ['BUTTON', 'BUTTON', 'BUTTON']
+  );
+  assert.equal(await page.evaluate(() => document.activeElement.className), 'close');
+  for (let i = 0; i < 40; i++) {
+    await page.keyboard.press('Tab');
+    assert.ok(await page.evaluate(() => document.getElementById('lightbox').contains(document.activeElement)),
+      `Fokus hat die Lightbox nach ${i + 1}× Tab verlassen`);
+  }
+  await page.keyboard.press('Shift+Tab');
+  assert.ok(await page.evaluate(() => document.getElementById('lightbox').contains(document.activeElement)));
+  await page.keyboard.press('Escape');
+  assert.equal(await isDisplayed(page, '#lightbox'), false);
+  await context.close();
+});
+
+test('Kundenstimmen: Karussell lässt sich anhalten und ist per Tastatur bedienbar', async () => {
+  const { page, context } = await open('/Home.html');
+  assert.equal(await page.$$eval('.testimonial-dot', dots => dots.filter(d => d.tagName === 'BUTTON').length), 3);
+  assert.equal(await page.getAttribute('.testimonial-stars', 'role'), 'img');
+  assert.equal(await page.getAttribute('#testi-pause', 'aria-pressed'), 'false');
+  await page.click('#testi-pause');
+  assert.equal(await page.getAttribute('#testi-pause', 'aria-pressed'), 'true');
+  await page.click('.testimonial-dot:nth-child(3)');
+  assert.equal(await page.getAttribute('.testimonial-dot:nth-child(3)', 'aria-current'), 'true');
+  assert.equal(await page.$$eval('.testimonial-slide', s => s.findIndex(el => el.classList.contains('active'))), 2);
+  await context.close();
+});
+
+test('Kundenstimmen: bei „Bewegung reduzieren“ startet kein automatischer Wechsel', async () => {
+  const { page, context } = await open('/Home.html');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.reload();
+  assert.equal(await page.getAttribute('#testi-pause', 'aria-pressed'), 'true');
+  await context.close();
+});
+
+test('Toast-Meldungen sind eine Statusmeldung und unterbrechen den Screenreader nicht', async () => {
+  const { page, context } = await open('/Home.html');
+  assert.equal(await page.getAttribute('#toast', 'role'), 'status');
+  await context.close();
+});
+
+test('Sprachwechsel: nach Englisch und zurück steht wieder exakt der deutsche HTML-Text da', async () => {
+  for (const path of ['/Bildergalerie.html', '/UeberMich.html', '/Auftrag.html']) {
+    const { page, context } = await open(path);
+    // Text und übersetzbare Attribute (innerHTML ändert sich nebenbei durch Bild-Ladezustände)
+    const snapshot = () => page.evaluate(() => {
+      const main = document.querySelector('main');
+      const attrs = Array.from(main.querySelectorAll('[aria-label], [alt], [title], [placeholder]'))
+        .map(el => ['aria-label', 'alt', 'title', 'placeholder'].map(a => el.getAttribute(a)).join('|'));
+      return { text: main.textContent, attrs };
+    });
+    const before = await snapshot();
+    await page.click('#lang-toggle-btn');
+    const english = await snapshot();
+    assert.notEqual(english.text, before.text, `${path}: Englisch unterscheidet sich nicht`);
+    await page.click('#lang-toggle-btn');
+    assert.deepEqual(await snapshot(), before, `${path}: deutscher Text hat sich verändert`);
+    await context.close();
+  }
+});
+
+test('Lightbox: Verfügbarkeit erscheint nur bei Werken mit status-Feld', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  await page.click('#DSC_6622a a');
+  await page.waitForSelector('#lightbox', { state: 'visible' });
+  assert.equal(await isDisplayed(page, '#lb-detail-status-row'), false);
+  await page.keyboard.press('Escape');
+  await page.evaluate(() => { ARTWORKS_METADATA.DSC_6622a.status = 'verkauft'; });
+  await page.click('#DSC_6622a a');
+  assert.equal(await isDisplayed(page, '#lb-detail-status-row'), true);
+  assert.match(await page.textContent('#lb-detail-status'), /^Verkauft/);
+  await context.close();
+});
+
+test('SEO: strukturierte Daten sind gültiges JSON, Vorschaubilder existieren', async () => {
+  const fs = require('fs');
+  const path = require('path');
+  const root = path.join(__dirname, '..');
+  for (const file of fs.readdirSync(root).filter(f => f.endsWith('.html'))) {
+    const html = fs.readFileSync(path.join(root, file), 'utf8');
+    for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      assert.doesNotThrow(() => JSON.parse(m[1]), `${file}: ungültiges JSON-LD`);
+    }
+    for (const m of html.matchAll(/<meta (?:property="og:image"|name="twitter:image") content="https:\/\/www\.manufaktur-malerei\.de\/([^"]+)"/g)) {
+      assert.ok(fs.existsSync(path.join(root, m[1])), `${file}: ${m[1]} fehlt`);
+    }
+  }
+});
+
+test('Performance: Seiten laden nur das Icon-Subset, nicht das komplette Font Awesome', async () => {
+  const { page, context } = await open('/Kontakt.html');
+  const requested = [];
+  page.on('request', req => requested.push(req.url()));
+  await page.reload();
+  await page.evaluate(() => document.fonts.ready);
+  assert.ok(requested.some(u => u.includes('icons.min.css')));
+  assert.ok(!requested.some(u => /all\.min\.css|fa-(solid-900|brands-400|regular-400)\.woff2/.test(u)));
+  // Brand-Icon (WhatsApp) und Solid-Icon (Brief) haben eine Glyphe im Subset. Fehlt eine Glyphe,
+  // zeichnet Chrome das Ersatzzeichen (.notdef) der Icon-Font – erkennbar an dessen Breite,
+  // gemessen an einem Zeichen aus dem Private-Use-Bereich, das Font Awesome nicht belegt.
+  const hasGlyph = (font, char) => page.evaluate(async ([font, char]) => {
+    await document.fonts.load(font, char);
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.font = font;
+    return ctx.measureText(char).width !== ctx.measureText('').width;
+  }, [font, char]);
+  assert.ok(await hasGlyph('400 40px "Font Awesome 6 Brands"', ''), 'WhatsApp-Icon fehlt im Subset');
+  assert.ok(await hasGlyph('900 40px "Font Awesome 6 Free"', ''), 'Brief-Icon fehlt im Subset');
+  assert.equal(await hasGlyph('900 40px "Font Awesome 6 Free"', ''), false, 'Gegenprobe: nicht benutztes Icon darf fehlen');
+  // Seiten ohne Galerie laden die Werkdaten nicht
+  assert.equal(await page.evaluate(() => typeof ARTWORKS_METADATA), 'undefined');
+  await context.close();
+});
+
+test('Performance: schmale Bildschirme bekommen in der Lightbox die 1000-px-Fassung', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.click('.gallery-item a');
+  await page.waitForSelector('#lightbox', { state: 'visible' });
+  assert.match(await page.getAttribute('#lightbox-img', 'src'), /\/thumbs\/[^/]+-1000w\.webp$/);
+  assert.match(await page.getAttribute('#thumb-img-front', 'src'), /-400w\.webp$/);
+  await context.close();
+});
+
 const SAVED_CONFIG = JSON.stringify({
   step: 4, motiv: 'Tierportrait', format: '30×40 cm', technik: 'Acryl', lieferzeit: 'ca. 2–3 Wochen'
 });
@@ -121,6 +252,18 @@ test('Konfigurator: gemerkte Favoriten werden in Schritt 1 angeboten', async () 
   });
   assert.equal(await isDisplayed(page, '#config-saved-favorites'), true);
   assert.equal(await page.$$eval('.fav-card-item', cards => cards.length), 2);
+  // Vorschaubilder müssen tatsächlich laden (Pfad zu den Thumbnails)
+  await page.waitForFunction(() => Array.from(document.querySelectorAll('.fav-card-item img')).every(img => img.complete));
+  assert.ok(await page.$$eval('.fav-card-item img', imgs => imgs.every(img => img.naturalWidth > 0)));
+  await context.close();
+});
+
+test('Konfigurator: Fortschrittsanzeige meldet den aktuellen Schritt', async () => {
+  const { page, context } = await open('/Auftrag.html', { storage: { manufaktur_konfigurator_state: SAVED_CONFIG } });
+  assert.equal(await page.getAttribute('.progress-bar-container', 'aria-valuenow'), '1');
+  await page.click('#restore-btn');
+  assert.equal(await page.getAttribute('.progress-bar-container', 'aria-valuenow'), '4');
+  assert.match(await page.getAttribute('.progress-bar-container', 'aria-valuetext'), /^Schritt 4 von 4/);
   await context.close();
 });
 

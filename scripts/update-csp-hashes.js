@@ -1,8 +1,8 @@
 /**
  * Berechnet SHA-256-Hashes für alle Inline-<script>-Blöcke (z.B. JSON-LD
  * Strukturdaten) in den HTML-Seiten und schreibt sie automatisch in die
- * Content-Security-Policy von vercel.json. Verhindert manuelles, fehleran-
- * fälliges Neuberechnen der Hashes bei jeder Änderung an Inline-Scripts.
+ * Content-Security-Policy von vercel.json. Die fertige Policy wird anschließend
+ * unverändert nach .htaccess übernommen, damit Vercel und Apache nie auseinanderlaufen.
  *
  * Nutzung: node scripts/update-csp-hashes.js   (oder: npm run csp:update)
  */
@@ -12,6 +12,8 @@ const crypto = require('crypto');
 
 const ROOT = path.join(__dirname, '..');
 const VERCEL_JSON = path.join(ROOT, 'vercel.json');
+const HTACCESS = path.join(ROOT, '.htaccess');
+const HTACCESS_CSP_RE = /(Header set Content-Security-Policy ")[^"]*(")/;
 
 const SCRIPT_TAG_RE = /<script(\s[^>]*)?>([\s\S]*?)<\/script>/gi;
 const SRC_ATTR_RE = /\ssrc\s*=/i;
@@ -42,7 +44,7 @@ function updateVercelJson(hashes) {
   const directives = cspHeader.value.split(';').map(d => d.trim()).filter(Boolean);
   const scriptSrcIndex = directives.findIndex(d => d.startsWith('script-src'));
 
-  const newScriptSrc = `script-src 'self' ${hashes.join(' ')}`;
+  const newScriptSrc = ['script-src', "'self'", ...hashes].join(' ');
   if (scriptSrcIndex === -1) {
     directives.unshift(newScriptSrc);
   } else {
@@ -52,9 +54,17 @@ function updateVercelJson(hashes) {
   cspHeader.value = directives.join('; ');
 
   fs.writeFileSync(VERCEL_JSON, JSON.stringify(config, null, 2) + '\n', 'utf8');
+  return cspHeader.value;
+}
+
+function updateHtaccess(csp) {
+  const before = fs.readFileSync(HTACCESS, 'utf8');
+  if (!HTACCESS_CSP_RE.test(before)) throw new Error('Content-Security-Policy-Zeile in .htaccess nicht gefunden.');
+  const after = before.replace(HTACCESS_CSP_RE, (_, pre, post) => pre + csp + post);
+  if (after !== before) fs.writeFileSync(HTACCESS, after, 'utf8');
 }
 
 const hashes = collectInlineScriptHashes();
 console.log(`Gefundene eindeutige Inline-Script-Hashes: ${hashes.length}`);
-updateVercelJson(hashes);
-console.log('vercel.json aktualisiert.');
+updateHtaccess(updateVercelJson(hashes));
+console.log('vercel.json und .htaccess aktualisiert.');

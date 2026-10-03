@@ -6,16 +6,25 @@
   "scripts": {
     "build:css": "cleancss -o style.min.css style.css",
     "build:js": "terser Home.js -o Home.min.js --compress --mangle --comments false",
-    "build": "npm run build:css && npm run build:js && npm run csp:update",
+    "build": "npm run partials && npm run jsonld && npm run icons && npm run build:css && npm run build:js && npm run csp:update",
+    "icons": "node scripts/build-icons.js",
+    "partials": "node scripts/sync-partials.js",
+    "jsonld": "node scripts/gen-gallery-jsonld.js",
+    "release": "node scripts/bump-version.js && npm run sitemap && npm run build",
+    "version:check": "node scripts/bump-version.js --check",
+    "check:gallery": "node scripts/check-gallery.js",
     "start": "node scripts/serve.js 3000",
-    "test": "node --test --test-concurrency=1 \"tests/*.test.js\"",
+    "test": "node --test --test-concurrency=1 --test-timeout=120000 \"tests/*.test.js\"",
     "images:srcset": "node scripts/gen-srcset.js",
+    "images:og": "node scripts/gen-og-images.js",
+    "sitemap": "node scripts/gen-sitemap.js",
     "csp:update": "node scripts/update-csp-hashes.js"
   },
   "devDependencies": {
     "clean-css-cli": "5.6.3",
     "playwright-core": "1.63.0",
     "sharp": "^0.35.5",
+    "subset-font": "2.9.0",
     "terser": "5.51.2"
   }
 }
