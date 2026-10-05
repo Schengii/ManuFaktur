@@ -40,7 +40,16 @@
       ]
     },
     {
-      "source": "/(style\\.min\\.css|Home\\.min\\.js|assets/(.*)\\.(css|js))",
+      "source": "/(style\\.min\\.css|Home\\.min\\.js)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)\\.(css|js)",
       "headers": [
         {
           "key": "Cache-Control",
