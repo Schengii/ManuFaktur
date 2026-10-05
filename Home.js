@@ -84,10 +84,6 @@ const TOGGLE_BUTTON_LABELS = {
     }
 };
 
-function getTheme() {
-    return currentTheme;
-}
-
 function setTheme(theme) {
     currentTheme = (theme === 'dark') ? 'dark' : 'light';
     try {

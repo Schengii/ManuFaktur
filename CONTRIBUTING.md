@@ -64,7 +64,6 @@ Wir nutzen [Conventional Commits](https://www.conventionalcommits.org/de/v1.0.0/
 
 ## 🤖 Arbeiten mit KI-Assistenten (Claude & Gemini)
 
-Dieses Repository ist für die Zusammenarbeit mit KI-Agenten optimiert:
-- **Claude Code:** Richtlinien sind in [CLAUDE.md](file:///c:/Users/sche-/Desktop/Programmieren%20Projekte/ManuFaktur/CLAUDE.md) und Ignorier-Muster in [.claudeignore](file:///c:/Users/sche-/Desktop/Programmieren%20Projekte/ManuFaktur/.claudeignore) definiert.
-- **Google Gemini & Antigravity:** Richtlinien sind in [GEMINI.md](file:///c:/Users/sche-/Desktop/Programmieren%20Projekte/ManuFaktur/GEMINI.md) dokumentiert.
-- Beide Assistenten sind angewiesen, die Build-Pipeline einzuhalten und keine externen CDNs/Tracker einzuführen.
+Dieses Repository ist für die Zusammenarbeit mit Claude Code optimiert:
+- **Claude Code:** Richtlinien sind in [CLAUDE.md](CLAUDE.md) und Ignorier-Muster in [.claudeignore](.claudeignore) definiert.
+- Der Assistent ist angewiesen, die Build-Pipeline einzuhalten und keine externen CDNs/Tracker einzuführen.

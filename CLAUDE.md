@@ -31,7 +31,6 @@ Code-Kommentare, Commit-Inhalte und UI-Texte sind deutsch; Commits folgen Conven
 - `npm start` (`scripts/serve.js`) sendet die Header aus `vercel.json` mit, sodass CSP-Verstöße lokal sichtbar werden. `npx serve` oder `python -m http.server` tun das nicht.
 - Die Tests laufen mit `node:test` + `playwright-core` gegen ein **installiertes Chrome** (kein Browser-Download). Anderer Browser: `PW_CHANNEL=msedge npm test`.
 - Die Tests laden die Seiten so, wie sie ausgeliefert werden – also `*.min.*`. Nach Änderungen an `style.css`/`Home.js` erst `npm run build`, dann `npm test`.
-- `scripts/apply-srcset.js` war eine einmalige Migration und ist nicht idempotent (ein zweiter Lauf erzeugt `-700w-400w.webp`-Pfade). Nicht erneut auf bereits umgestellte Seiten anwenden.
 
 ## Architektur
 

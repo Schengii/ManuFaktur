@@ -1127,12 +1127,6 @@ cite {
     border-radius: 16px;
 }
 
-.flip-card--postcard {
-    width: 440px;
-    height: 295px;
-    aspect-ratio: 148 / 105;
-}
-
 .flip-card-inner {
     position: relative;
     width: 100%;
@@ -2419,10 +2413,6 @@ footer {
     cursor: pointer;
 }
 
-.margin-top-30 {
-    margin-top: 30px;
-}
-
 .text-align-center {
     text-align: center;
 }
@@ -3511,24 +3501,6 @@ h2 {
 
 .fav-toggle-btn.active i {
     font-weight: 900;
-}
-
-/* Status Badges */
-.gallery-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    z-index: 10;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
 }
 
 /* Configurator Step 1: Favoriten Selection */

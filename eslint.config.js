@@ -38,7 +38,7 @@ module.exports = [
   {
     ignores: [
       'node_modules/**', 'archive_sources/**', 'assets/imgTxt/**', 'assets/vendor/**',
-      '**/*.min.js', 'scripts/apply-srcset.js'
+      '**/*.min.js'
     ]
   },
   js.configs.recommended,
