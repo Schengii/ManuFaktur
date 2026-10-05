@@ -23,6 +23,9 @@ jobs:
       - name: Abhängigkeiten installieren
         run: npm ci
 
+      - name: JavaScript linten (ESLint)
+        run: npm run lint
+
       - name: Produktions-Build & CSP-Hashes generieren
         run: npm run build
 
@@ -38,5 +41,5 @@ jobs:
 
       # Die Tests nutzen das auf dem Runner vorinstallierte Google Chrome (channel: 'chrome'),
       # ein Browser-Download ist nicht nötig.
-      - name: Funktionstests ausführen
+      - name: Funktions- und Barrierefreiheitstests ausführen (inkl. axe-core)
         run: npm test

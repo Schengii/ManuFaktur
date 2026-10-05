@@ -17,7 +17,8 @@ Code-Kommentare, Commit-Inhalte und UI-Texte sind deutsch; Commits folgen Conven
 | Nur CSS / nur JS minifizieren | `npm run build:css` / `npm run build:js` |
 | CSP-Hashes in `vercel.json` und `.htaccess` neu berechnen | `npm run csp:update` |
 | Lokaler Server mit Produktions-CSP (Port 3000) | `npm start` |
-| Alle Browser-Tests | `npm test` |
+| ESLint (auch in der CI) | `npm run lint` |
+| Alle Browser-Tests (inkl. axe-core-a11y-Test in `tests/a11y.test.js`) | `npm test` |
 | Einzelnen Test per Namensmuster | `node --test --test-name-pattern="Konfigurator" tests/funktionen.test.js` |
 | Werkdaten ↔ HTML ↔ Bilddateien prüfen | `npm run check:gallery` |
 | Asset-Versionen auf Gleichstand prüfen | `npm run version:check` |
@@ -52,6 +53,7 @@ Alle Seiten binden CSS/JS mit `?v=N` ein; `sw.js` cacht dieselben URLs (der Cach
 - `assets/js/theme-init.js` läuft im `<head>` und setzt `data-theme`/`lang` aus `localStorage`, bevor gerendert wird (kein Aufblitzen des falschen Themes).
 - `Home.js` ist **ein** globales Skript für alle Seiten (keine Module). Seiten-spezifische Initialisierer prüfen selbst, ob ihre Elemente existieren, und werden am Dateiende gesammelt über `runOnDOMReady` gestartet.
 - `assets/js/auftrag.js` (Konfigurator) wird nur in `Auftrag.html` nach `Home.min.js` geladen, ist nicht minifiziert und teilt sich den globalen Scope mit `Home.js` (`state`, `buildSummary`, `getLanguage` werden gegenseitig benutzt).
+- Seitenübergreifende Globals zwischen `Home.js`, `auftrag.js` und `artworks-data.js` sind in `eslint.config.js` deklariert (`no-undef`); neue gemeinsam genutzte Namen dort eintragen.
 - `index.html` ist die Hero-Einstiegsseite und lädt **nicht** `Home.js`, sondern nur `assets/js/index-page.js` mit einem eigenen Mini-Sprachwechsel über `data-i18n-en`.
 
 ### Geteilte Navigation und Footer

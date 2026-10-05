@@ -314,7 +314,7 @@ test('Service Worker: Seite bleibt offline mit Styles und Skripten nutzbar', asy
   const state = await page.evaluate(() => ({
     hasNav: !!document.querySelector('nav .nav-links'),
     cssApplied: getComputedStyle(document.querySelector('.skip-link')).position === 'absolute',
-    stylesheetRules: [...document.styleSheets].reduce((n, s) => { try { return n + s.cssRules.length; } catch (e) { return n; } }, 0)
+    stylesheetRules: [...document.styleSheets].reduce((n, s) => { try { return n + s.cssRules.length; } catch { return n; } }, 0)
   }));
   await context.close();
   assert.equal(state.hasNav, true, 'Home.min.js wurde offline ausgeführt');

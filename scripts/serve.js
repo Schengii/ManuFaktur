@@ -46,7 +46,7 @@ function createServer() {
     let urlPath;
     try {
       urlPath = decodeURIComponent(req.url.split('?')[0]);
-    } catch (e) {
+    } catch {
       res.writeHead(400);
       res.end('400');
       return;

@@ -599,7 +599,7 @@ const I18N_DICTIONARY = {
         dsgvo_h1_2_text1: '<strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br>Die Datenverarbeitung auf dieser Website erfolgt durch die Websitebetreiberin Manuela Schenk (ManuFAKTUR). Die vollständigen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.',
         dsgvo_h1_2_text2: '<strong>Wie erfassen wir Ihre Daten?</strong><br>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen (z. B. Daten, die Sie in das Kontaktformular eingeben). Andere Daten werden automatisch oder nach Ihrer ausdrücklichen Einwilligung beim Besuch der Website durch IT-Systeme erfasst. Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).',
         dsgvo_h2: '2. Hosting und Server-Log-Files',
-        dsgvo_h2_text: 'Wir hosten die Inhalte unserer Website bei einem Hoster in Deutschland. Der Hoster erhebt automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt (IP-Adresse, Browsertyp, Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage). Diese Daten werden zur Gewährleistung eines sicheren und fehlerfreien Betriebs erhoben (Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO).',
+        dsgvo_h2_text: 'Wir hosten die Inhalte unserer Website bei Vercel. Der Hoster erhebt automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt (IP-Adresse, Browsertyp, Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage). Diese Daten werden zur Gewährleistung eines sicheren und fehlerfreien Betriebs erhoben (Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO).',
         dsgvo_h3: '3. Lokale Einbindung von Schriftarten & Symbolen (DSGVO-konform)',
         dsgvo_h3_intro: 'Um die Privatsphäre unserer Besucher bestmöglich zu schützen, nutzen wir keine externen CDNs (Content Delivery Networks) von Drittanbietern:',
         dsgvo_h3_li1: '<strong>Google Fonts:</strong> Alle verwendeten Schriften (Lato, Playfair Display, Dancing Script) sind lokal auf unserem Webserver gespeichert und werden von dort geladen. Es findet keine Verbindung zu Servern von Google statt.',
@@ -940,7 +940,7 @@ const I18N_DICTIONARY = {
         dsgvo_h1_2_text1: '<strong>Who is responsible for data collection on this website?</strong><br>Data processing on this website is carried out by the website operator Manuela Schenk (ManuFAKTUR), whose full contact details can be found in the legal notice (Impressum) of this website.',
         dsgvo_h1_2_text2: '<strong>How do we collect your data?</strong><br>Your data is collected in part when you provide it to us (e.g. data you enter into the contact form). Other data is collected automatically, or after your consent, by IT systems when you visit the website. This is primarily technical data (e.g. internet browser, operating system, or time of page access).',
         dsgvo_h2: '2. Hosting and Server Log Files',
-        dsgvo_h2_text: 'We host our website content with a provider in Germany. The host automatically collects information in so-called server log files, which your browser automatically transmits to us (IP address, browser type, operating system, referrer URL, host name of accessing machine, time of server request). This data is collected to ensure secure and trouble-free operation (Legal basis: Art. 6 (1)(f) GDPR).',
+        dsgvo_h2_text: 'We host our website content with Vercel. The host automatically collects information in so-called server log files, which your browser automatically transmits to us (IP address, browser type, operating system, referrer URL, host name of accessing machine, time of server request). This data is collected to ensure secure and trouble-free operation (Legal basis: Art. 6 (1)(f) GDPR).',
         dsgvo_h3: '3. Local Integration of Fonts & Icons (GDPR-compliant)',
         dsgvo_h3_intro: 'To best protect the privacy of our visitors, we do not use third-party CDNs (Content Delivery Networks) for fonts or icons:',
         dsgvo_h3_li1: '<strong>Google Fonts:</strong> All fonts used (Lato, Playfair Display, Dancing Script) are stored locally on our web server and loaded from there. There is no connection to Google\'s servers.',
@@ -1232,7 +1232,7 @@ function initFavButtonsUI() {
         if (!itemId) {
             const link = item.querySelector('a');
             if (link) {
-                const match = link.href.match(/([^\/]+)\.webp$/i);
+                const match = link.href.match(/([^/]+)\.webp$/i);
                 if (match) {
                     itemId = match[1];
                     item.setAttribute('id', itemId);
@@ -1257,10 +1257,6 @@ function initFavButtonsUI() {
         btn.innerHTML = isAdded ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
     });
     updateFavBadgeCount();
-}
-
-function initGalleryZoomCircles() {
-    initFavButtonsUI();
 }
 
 function clearGallerySearch() {

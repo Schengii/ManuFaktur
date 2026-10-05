@@ -18,10 +18,15 @@
     "images:srcset": "node scripts/gen-srcset.js",
     "images:og": "node scripts/gen-og-images.js",
     "sitemap": "node scripts/gen-sitemap.js",
-    "csp:update": "node scripts/update-csp-hashes.js"
+    "csp:update": "node scripts/update-csp-hashes.js",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "axe-core": "4.13.0",
     "clean-css-cli": "5.6.3",
+    "eslint": "9.39.5",
+    "globals": "17.13.0",
     "playwright-core": "1.63.0",
     "sharp": "^0.35.5",
     "subset-font": "2.9.0",

@@ -154,7 +154,7 @@ ManuFaktur/
 2. **Prüfen:** `npm test` (Browser-Tests) und `npm run check:gallery` (Werkdaten ↔ HTML ↔ Bilddateien). Die CI prüft zusätzlich, ob alle generierten Dateien zum Quellstand passen.
 3. **Web3Forms-Key (`Kontakt.html`):** Access-Key ist hinterlegt; Spam-Schutz per Honeypot-Feld (`botcheck`) ist aktiv.
 4. **Deploy-Ausschlüsse:** `archive_sources/` und `assets/imgTxt/` (Rohdaten, ca. 560 MB) sind per `.gitignore` ausgeschlossen und dürfen auch beim manuellen Hochladen nicht mitkopiert werden.
-5. **Rechtstexte prüfen:** Kleinunternehmer-Formulierung (§ 19 UStG) im Impressum und die Hoster-Angabe in der Datenschutzerklärung müssen zum tatsächlichen Stand passen.
+5. **Rechtstexte prüfen:** Kleinunternehmer-Formulierung (§ 19 UStG) im Impressum und die Hoster-Angabe (Vercel) in der Datenschutzerklärung müssen zum tatsächlichen Stand passen.
 
 ---
 
