@@ -23,6 +23,9 @@ Code-Kommentare, Commit-Inhalte und UI-Texte sind deutsch; Commits folgen Conven
 | Werkdaten ↔ HTML ↔ Bilddateien prüfen | `npm run check:gallery` |
 | Asset-Versionen auf Gleichstand prüfen | `npm run version:check` |
 | Thumbnails 400/700/1000w aus `lightbox/` erzeugen | `npm run images:srcset` |
+| Lightbox-Bilder verkleinern (max. 1600 px, WebP 80, nur bei ≥ 10 % Ersparnis) | `npm run images:lightbox` |
+| Lighthouse-Prüfung wie in der CI (Schwellen in `lighthouserc.json`) | `npx @lhci/cli@0.15.1 autorun` |
+| Precache-Liste in `sw.js` neu erzeugen (Teil von `npm run build`) | `npm run sw:assets` |
 | Link-Vorschaubilder (1200 × 630) erzeugen | `npm run images:og` |
 
 - `npm start` (`scripts/serve.js`) sendet die Header aus `vercel.json` mit, sodass CSP-Verstöße lokal sichtbar werden. `npx serve` oder `python -m http.server` tun das nicht.
@@ -38,20 +41,22 @@ Bearbeitet werden die Quellen; `npm run build` erzeugt daraus den Rest. Generier
 
 | Quelle | Generiert (nie von Hand ändern) |
 | :--- | :--- |
-| `style.css`, `Home.js` | `style.min.css`, `Home.min.js` |
+| `style.css`, `Home.js`, `assets/js/i18n.js` | `style.min.css`, `Home.min.js`, `assets/js/i18n.min.js` |
 | `partials/lightbox.html` | Block zwischen `<!-- partial:lightbox -->` … `<!-- /partial:lightbox -->` in Home.html und Bildergalerie.html (`scripts/sync-partials.js`) |
 | `assets/js/artworks-data.js` | `VisualArtwork`-JSON-LD zwischen `<!-- generated:gallery-jsonld -->`-Markern in Bildergalerie.html |
-| benutzte `fa-*`-Klassen in HTML/JS, `content: "\fXXX"` in style.css | `assets/vendor/font-awesome/css/icons.min.css`, `webfonts/*-subset.woff2` (+ Hash-URLs in `sw.js`) |
+| benutzte `fa-*`-Klassen in HTML/JS, `content: "\fXXX"` in style.css | `assets/vendor/font-awesome/css/icons.min.css`, `webfonts/*-subset.woff2` |
 | JSON-LD-Blöcke | CSP-Hashes in `vercel.json` und `.htaccess` |
+| eingebundene CSS/JS-Dateien, Seiten, Logos, Schriften | `ASSETS_TO_CACHE` in `sw.js` zwischen `<generated:assets>`-Markern (`scripts/gen-sw-assets.js`; bricht ab, wenn eine Datei fehlt) |
 
 Icon-Namen deshalb nie dynamisch zusammensetzen (`'fa-' + name`) – `scripts/build-icons.js` findet nur ausgeschriebene Klassen und bricht bei unbekannten Namen ab. `all.min.css` und die vollen Webfonts bleiben nur als Quelle für das Subset im Repo.
 
-Alle Seiten binden CSS/JS mit `?v=N` ein; `sw.js` cacht dieselben URLs (der Cache matcht inklusive Query-String) und braucht bei jeder Änderung einen neuen `CACHE_NAME`. `npm run release` (`scripts/bump-version.js`) zählt beides gemeinsam hoch, `npm run version:check` prüft in der CI, dass alle `?v=N` übereinstimmen. Die Version erst hochzählen, wenn der vorige Stand deployt ist.
+Alle Seiten binden CSS/JS mit `?v=N` ein; `sw.js` cacht dieselben URLs (der Cache matcht inklusive Query-String; die Liste wird beim Build erzeugt) und braucht bei jeder Änderung einen neuen `CACHE_NAME`. `vercel.json` liefert `style.min.css`, `Home.min.js` und `assets/**/*.css|js` als `immutable` aus – neue Skripte deshalb immer mit `?v=N` einbinden. `npm run release` (`scripts/bump-version.js`) zählt beides gemeinsam hoch, `npm run version:check` prüft in der CI, dass alle `?v=N` übereinstimmen. Die Version erst hochzählen, wenn der vorige Stand deployt ist.
 
 ### Skript-Aufbau
 
 - `assets/js/theme-init.js` läuft im `<head>` und setzt `data-theme`/`lang` aus `localStorage`, bevor gerendert wird (kein Aufblitzen des falschen Themes).
 - `Home.js` ist **ein** globales Skript für alle Seiten (keine Module). Seiten-spezifische Initialisierer prüfen selbst, ob ihre Elemente existieren, und werden am Dateiende gesammelt über `runOnDOMReady` gestartet.
+- `assets/js/i18n.js` enthält `I18N_DICTIONARY` (de + en) und wird von `Home.js` nur bei Bedarf nachgeladen (`ensureI18n`/`whenI18nReady`): beim Start auf Englisch oder beim ersten Sprachwechsel. Deutsche Besucher laden die Datei nie. Code, der Texte aus dem Wörterbuch braucht, nutzt `getI18nDict()` (liefert `null`, solange es fehlt) und muss einen deutschen Fallback haben (siehe `STATUS_TEXTS_DE`).
 - `assets/js/auftrag.js` (Konfigurator) wird nur in `Auftrag.html` nach `Home.min.js` geladen, ist nicht minifiziert und teilt sich den globalen Scope mit `Home.js` (`state`, `buildSummary`, `getLanguage` werden gegenseitig benutzt).
 - Seitenübergreifende Globals zwischen `Home.js`, `auftrag.js` und `artworks-data.js` sind in `eslint.config.js` deklariert (`no-undef`); neue gemeinsam genutzte Namen dort eintragen.
 - `index.html` ist die Hero-Einstiegsseite und lädt **nicht** `Home.js`, sondern nur `assets/js/index-page.js` mit einem eigenen Mini-Sprachwechsel über `data-i18n-en`.
@@ -71,9 +76,9 @@ Jede Seite enthält nur leere `<header></header>`- und `<footer>`-Platzhalter. `
 
 ### Mehrsprachigkeit
 
-Deutsch steht direkt im HTML; Englisch kommt zur Laufzeit. Übersetzbare Elemente tragen `data-i18n`, `data-i18n-html`, `data-i18n-placeholder`, `data-i18n-aria-label`, `data-i18n-title` oder `data-i18n-alt` mit einem Schlüssel aus `I18N_DICTIONARY` in `Home.js` – keine Übersetzung über CSS-Selektoren oder Indizes. Text mit Icon davor: nur den Text in ein `<span data-i18n>` setzen.
+Deutsch steht direkt im HTML; Englisch kommt zur Laufzeit. Übersetzbare Elemente tragen `data-i18n`, `data-i18n-html`, `data-i18n-placeholder`, `data-i18n-aria-label`, `data-i18n-title` oder `data-i18n-alt` mit einem Schlüssel aus `I18N_DICTIONARY` in `assets/js/i18n.js` – keine Übersetzung über CSS-Selektoren oder Indizes. Text mit Icon davor: nur den Text in ein `<span data-i18n>` setzen.
 
-`applyTranslations()` merkt sich beim ersten Aufruf die deutschen Originale aus dem HTML und stellt beim Zurückschalten genau diese wieder her. Für statische Seiteninhalte ist das HTML damit die einzige deutsche Quelle; `I18N_DICTIONARY.de` wird nur für per JS erzeugte Inhalte (Navigation, Footer, Meldungen) gebraucht, braucht aber weiterhin jeden Schlüssel (`de` und `en` haben dieselben Schlüssel). Galerie-Karten übersetzt `translateGalleryCards()` aus den Werkdaten.
+`applyTranslations()` (läuft erst, wenn das Wörterbuch geladen ist) merkt sich beim ersten Aufruf die deutschen Originale aus dem HTML und stellt beim Zurückschalten genau diese wieder her. Für statische Seiteninhalte ist das HTML damit die einzige deutsche Quelle; `I18N_DICTIONARY.de` wird nur für per JS erzeugte Inhalte (Navigation, Footer, Meldungen) gebraucht, braucht aber weiterhin jeden Schlüssel (`de` und `en` haben dieselben Schlüssel). Galerie-Karten übersetzt `translateGalleryCards()` aus den Werkdaten.
 
 Interne Werte (`data-value`, `data-kategorie`, gespeicherter Konfigurator-Zustand, URL-Parameter) bleiben immer deutsch; für die Anzeige übersetzt `VALUE_LABELS` in `auftrag.js`.
 
@@ -90,7 +95,7 @@ Ein Werk besteht aus vier zusammengehörigen Teilen, verknüpft über die Werk-I
 
 ### Seitenübergreifender Auftragsablauf
 
-Lightbox „Anfragen“ → `Auftrag.html?ref=<deutscher Bildtitel>&kat=<Kategorie>` (Motiv wird vorausgewählt, Referenz in `state.referenz` gemerkt) → Schritt 4 verlinkt auf `Kontakt.html?motiv=…&format=…&technik=…&ref=…` → `prefillContactForm()` füllt Betreff und Nachricht → Versand per `fetch` an Web3Forms (Honeypot-Feld `botcheck`). URL-Parameter sind Nutzereingaben und dürfen nur als Text, nicht als HTML, ins DOM.
+Lightbox „Anfragen“ → `Auftrag.html?ref=<deutscher Bildtitel>&kat=<Kategorie>` (Motiv wird vorausgewählt, Referenz in `state.referenz` gemerkt) → Schritt 4 verlinkt auf `Kontakt.html?motiv=…&format=…&technik=…&ref=…` → `prefillContactForm()` füllt Betreff und Nachricht → Versand per `fetch` an Web3Forms (Honeypot-Feld `botcheck`; Absenden vor 3 s nach dem Laden wird mit Hinweis abgewiesen; bei Fehlern führt der `mailto:`-Link Betreff und getippte Nachricht mit). URL-Parameter sind Nutzereingaben und dürfen nur als Text, nicht als HTML, ins DOM.
 
 `localStorage`-Schlüssel: `manufaktur_theme`, `manufaktur_lang`, `manufaktur_favorites` (Array von Werk-IDs), `manufaktur_konfigurator_state`.
 

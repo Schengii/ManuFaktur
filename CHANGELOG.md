@@ -18,6 +18,9 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 - `.htaccess` enthielt eine veraltete CSP-Kopie; `npm run csp:update` schreibt die Policy jetzt in beide Dateien.
 
 ### Hinzugefügt
+- Qualitätssicherung: ESLint (`npm run lint`, in der CI), axe-core-Test über alle Seiten in Hell und Dunkel, Lighthouse-CI mit Schwellen (`lighthouserc.json`).
+- Kontaktformular: Absenden unter 3 Sekunden nach dem Laden wird abgewiesen, ausgefülltes Honeypot sendet nichts, bei Fehlern enthält der `mailto:`-Link Betreff und Nachricht.
+- Skripte: `images:lightbox`, `sw:assets`, `lint`.
 - Barrierefreiheit: Fokusfalle in Lightbox und Flyer-Modal, echte Buttons für Schließen/Vor/Zurück, Pause-Schalter und Tastaturbedienung im Kundenstimmen-Karussell, `prefers-reduced-motion`, `aria-valuenow`/`aria-valuetext` an der Konfigurator-Fortschrittsanzeige, Toast als `role="status"`.
 - Motiv-Referenz aus der Galerie wird im Konfigurator gemerkt und in die Kontaktanfrage übernommen.
 - Optionales Feld `status` je Werk (verfügbar/reserviert/verkauft) mit Anzeige in der Lightbox.
@@ -26,6 +29,11 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 - Skripte: `release`, `version:check`, `icons`, `partials`, `jsonld`, `check:gallery`, `sitemap`, `images:og`.
 
 ### Geändert
+- Das Übersetzungswörterbuch liegt in `assets/js/i18n.js` und wird nur für Englisch nachgeladen: `Home.min.js` sinkt von 99 auf 52 KB (gzip 32 → 15 KB), Lighthouse-Performance steigt auf Home 92, Auftrag/Leistungen/Kontakt 97–98.
+- Lightbox-Bilder neu kodiert (WebP 80): 31 → 21 MB.
+- Die Precache-Liste in `sw.js` wird beim Build erzeugt (neu darin: `i18n.min.js`, `index-page.js`, alle Schriftschnitte).
+- CSS/JS werden bei Vercel als `immutable` ausgeliefert, `sw.js` mit `no-cache`; der lokale Server komprimiert wie Vercel (gzip).
+- Navigationspunkt „Start“ heißt „Home“ (Lighthouse bewertete „Start“ als nichtssagenden Linktext).
 - Font Awesome: statt `all.min.css` und kompletter Webfonts (≈ 390 KB) nur noch ein automatisch erzeugtes Subset der benutzten Icons (≈ 28 KB).
 - Galerie-Daten (`ARTWORKS_METADATA`) in `assets/js/artworks-data.js` ausgelagert und nur auf Seiten mit Galerie geladen; das veraltete `artworks_data.json` entfällt.
 - Lightbox-Markup existiert nur noch einmal (`partials/lightbox.html`).
