@@ -18,6 +18,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 - `.htaccess` enthielt eine veraltete CSP-Kopie; `npm run csp:update` schreibt die Policy jetzt in beide Dateien.
 
 ### Hinzugefügt
+- Vercel Web Analytics und Speed Insights (cookielos) über `assets/js/insights.js`, nur auf der echten Domain; Abschnitt dazu in der Datenschutzerklärung.
 - Qualitätssicherung: ESLint (`npm run lint`, in der CI), axe-core-Test über alle Seiten in Hell und Dunkel, Lighthouse-CI mit Schwellen (`lighthouserc.json`).
 - Kontaktformular: Absenden unter 3 Sekunden nach dem Laden wird abgewiesen, ausgefülltes Honeypot sendet nichts, bei Fehlern enthält der `mailto:`-Link Betreff und Nachricht.
 - Skripte: `images:lightbox`, `sw:assets`, `lint`.

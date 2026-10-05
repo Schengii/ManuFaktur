@@ -53,6 +53,7 @@ Alle Seiten binden CSS/JS mit `?v=N` ein; `sw.js` cacht dieselben URLs (der Cach
 
 ### Skript-Aufbau
 
+- `assets/js/insights.js` (per `defer` im `<head>`) lädt auf der echten Domain Vercel Web Analytics und Speed Insights von `/_vercel/…`; lokal läuft nichts (sonst 404 in `npm start` und Tests).
 - `assets/js/theme-init.js` läuft im `<head>` und setzt `data-theme`/`lang` aus `localStorage`, bevor gerendert wird (kein Aufblitzen des falschen Themes).
 - `Home.js` ist **ein** globales Skript für alle Seiten (keine Module). Seiten-spezifische Initialisierer prüfen selbst, ob ihre Elemente existieren, und werden am Dateiende gesammelt über `runOnDOMReady` gestartet.
 - `assets/js/i18n.js` enthält `I18N_DICTIONARY` (de + en) und wird von `Home.js` nur bei Bedarf nachgeladen (`ensureI18n`/`whenI18nReady`): beim Start auf Englisch oder beim ersten Sprachwechsel. Deutsche Besucher laden die Datei nie. Code, der Texte aus dem Wörterbuch braucht, nutzt `getI18nDict()` (liefert `null`, solange es fehlt) und muss einen deutschen Fallback haben (siehe `STATUS_TEXTS_DE`).
@@ -105,7 +106,7 @@ Lightbox „Anfragen“ → `Auftrag.html?ref=<deutscher Bildtitel>&kat=<Kategor
 ## Richtlinien
 
 1. **Build synchron halten:** nach Änderungen an `style.css`, `Home.js`, `partials/`, `assets/js/artworks-data.js`, Icons oder JSON-LD `npm run build` ausführen und das Ergebnis committen; `.min`-Dateien nie von Hand ändern.
-2. **DSGVO:** keine externen Fonts, CDNs oder Tracker. Schriften und Font Awesome liegen lokal unter `assets/`; Google Maps im Impressum lädt erst nach Klick (`loadGoogleMap`).
+2. **DSGVO:** keine externen Fonts, CDNs oder Tracker. Einzige Ausnahme ist die cookielose Vercel-Messung (`insights.js`), die in `Datenschutz.html` benannt ist. Schriften und Font Awesome liegen lokal unter `assets/`; Google Maps im Impressum lädt erst nach Klick (`loadGoogleMap`).
 3. **Barrierefreiheit (WCAG):** Tastaturbedienbarkeit (`tabindex`, `Enter`/`Space`), ARIA-Zustände (`aria-pressed`, `aria-expanded`, `aria-label`) und semantische Tags beibehalten; sichtbarer Text und `aria-label` müssen zusammenpassen (siehe `TOGGLE_BUTTON_LABELS`). Klickbare Elemente sind `<button>`, Dialoge nutzen `trapFocus()`, Bewegung respektiert `prefersReducedMotion()` bzw. `@media (prefers-reduced-motion)`.
 4. **Nicht versioniert:** `archive_sources/` und `assets/imgTxt/` (Rohdaten, ca. 560 MB) sind per `.gitignore` ausgeschlossen und gehören nicht ins Deployment.
 5. **Sichtbarkeit:** `.hidden` setzt `display: none !important` und überstimmt damit `el.style.display`. Elemente mit `.hidden` per `classList` ein-/ausblenden, nicht per Inline-Style.
