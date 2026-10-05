@@ -77,19 +77,6 @@ function parseRules(css) {
   return rules;
 }
 
-/** Trägt die gehashten Font-URLs in ASSETS_TO_CACHE von sw.js ein (der Cache matcht inkl. Query). */
-function updateServiceWorker(fontUrls) {
-  const swPath = path.join(ROOT, 'sw.js');
-  const before = fs.readFileSync(swPath, 'utf8');
-  let after = before;
-  for (const [file, url] of Object.entries(fontUrls)) {
-    const re = new RegExp(`(font-awesome/webfonts/)${file.replace(/\./g, '\\.')}(\\?h=[0-9a-f]+)?'`);
-    if (!re.test(after)) throw new Error(`${file} fehlt in ASSETS_TO_CACHE (sw.js).`);
-    after = after.replace(re, `$1${url}'`);
-  }
-  if (after !== before) fs.writeFileSync(swPath, after, 'utf8');
-}
-
 function codepointOf(body) {
   const m = body.match(/content:\s*"\\([0-9a-f]+)"/i);
   return m ? parseInt(m[1], 16) : null;
@@ -148,7 +135,6 @@ async function main() {
     fontFaces.push(`@font-face{font-family:"${font.family}";font-style:normal;font-weight:${font.weight};font-display:block;src:url(../webfonts/${fontUrls[font.out]}) format("woff2")}`);
     console.log(`${font.out}: ${(subset.length / 1024).toFixed(1)} KB`);
   }
-  updateServiceWorker(fontUrls);
 
   const header = `${license}\n/* Generiert von scripts/build-icons.js – nicht von Hand bearbeiten. */\n`;
   fs.writeFileSync(OUT_CSS, header + fontFaces.join('') + out.join('') + '\n', 'utf8');

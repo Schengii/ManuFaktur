@@ -16,7 +16,8 @@ const providedByOtherScripts = {
   updateProgressAria: 'readonly',
   changeSlide: 'readonly', // window.changeSlide, in Home.js selbst gesetzt
   ARTWORKS_METADATA: 'readonly',
-  ARTWORKS_METADATA_EN: 'readonly'
+  ARTWORKS_METADATA_EN: 'readonly',
+  I18N_DICTIONARY: 'readonly' // assets/js/i18n.js, bei Bedarf nachgeladen
 };
 
 // In Home.js definiert, in auftrag.js benutzt.
@@ -73,7 +74,7 @@ module.exports = [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'commonjs',
-      globals: { ...globals.node, ...globals.browser, ARTWORKS_METADATA: 'readonly', axe: 'readonly' }
+      globals: { ...globals.node, ...globals.browser, ARTWORKS_METADATA: 'readonly', I18N_DICTIONARY: 'readonly', STATUS_TEXTS_DE: 'readonly', axe: 'readonly' }
     }
   }
 ];

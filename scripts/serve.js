@@ -8,6 +8,7 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -66,6 +67,16 @@ function createServer() {
 
     headers['Content-Type'] = MIME_TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream';
     headers['Cache-Control'] = 'no-cache';
+
+    // Textdateien komprimieren wie Vercel; so passen Lighthouse-Messungen zur Produktion.
+    const compressible = /^(text\/|application\/(javascript|json|xml))/.test(headers['Content-Type']);
+    if (compressible && /gzip/.test(req.headers['accept-encoding'] || '')) {
+      headers['Content-Encoding'] = 'gzip';
+      headers['Vary'] = 'Accept-Encoding';
+      res.writeHead(200, headers);
+      fs.createReadStream(file).pipe(zlib.createGzip()).pipe(res);
+      return;
+    }
     res.writeHead(200, headers);
     fs.createReadStream(file).pipe(res);
   });

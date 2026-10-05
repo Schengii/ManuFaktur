@@ -1,40 +1,48 @@
 /* Service Worker für ManuFAKTUR Schenk */
 // CACHE_NAME und die ?v=N-Parameter werden von `npm run release` hochgezählt
-// (scripts/bump-version.js) – nicht von Hand ändern.
-const CACHE_NAME = 'manufaktur-v27';
+// (scripts/bump-version.js) – nicht von Hand ändern. Die Precache-Liste erzeugt
+// scripts/gen-sw-assets.js beim Build.
+const CACHE_NAME = 'manufaktur-v28';
 const RUNTIME_CACHE = 'manufaktur-runtime';
 const RUNTIME_MAX_ENTRIES = 80;
+// <generated:assets> (scripts/gen-sw-assets.js – nicht von Hand ändern)
 const ASSETS_TO_CACHE = [
   './',
-  './Home.html',
-  './Bildergalerie.html',
+  './404.html',
   './Auftrag.html',
+  './Bildergalerie.html',
+  './Datenschutz.html',
+  './Home.html',
+  './Impressum.html',
+  './Kontakt.html',
   './Leistungen.html',
   './UeberMich.html',
-  './Kontakt.html',
-  './Impressum.html',
-  './Datenschutz.html',
-  './404.html',
-  './style.min.css?v=21',
-  './Home.min.js?v=21',
-  './assets/js/artworks-data.js?v=21',
-  './assets/js/theme-init.js?v=21',
-  './assets/js/auftrag.js?v=21',
+  './Home.min.js?v=22',
+  './assets/js/artworks-data.js?v=22',
+  './assets/js/auftrag.js?v=22',
+  './assets/js/i18n.min.js?v=22',
+  './assets/js/index-page.js?v=22',
+  './assets/js/theme-init.js?v=22',
+  './assets/vendor/font-awesome/css/icons.min.css?v=22',
+  './style.min.css?v=22',
   './manifest.json',
-  './assets/images/logos/logo-transparent.png',
+  './assets/images/logos/apple-touch-icon.png',
   './assets/images/logos/favicon.png',
   './assets/images/logos/favicon.svg',
-  './assets/images/logos/apple-touch-icon.png',
   './assets/images/logos/icon-192.png',
   './assets/images/logos/icon-512.png',
-  './assets/vendor/font-awesome/css/icons.min.css?v=21',
-  './assets/vendor/font-awesome/webfonts/fa-solid-900-subset.woff2?h=c820cd70bb',
-  './assets/vendor/font-awesome/webfonts/fa-regular-400-subset.woff2?h=70f52b82e6',
-  './assets/vendor/font-awesome/webfonts/fa-brands-400-subset.woff2?h=e348b57609',
+  './assets/images/logos/logo-transparent.png',
+  './assets/images/logos/logo.png',
+  './assets/fonts/dancingscript-700-normal.woff2',
+  './assets/fonts/lato-300-normal.woff2',
   './assets/fonts/lato-400-normal.woff2',
+  './assets/fonts/lato-700-normal.woff2',
   './assets/fonts/playfairdisplay-700-normal.woff2',
-  './assets/fonts/dancingscript-700-normal.woff2'
+  './assets/vendor/font-awesome/webfonts/fa-brands-400-subset.woff2?h=e348b57609',
+  './assets/vendor/font-awesome/webfonts/fa-regular-400-subset.woff2?h=70f52b82e6',
+  './assets/vendor/font-awesome/webfonts/fa-solid-900-subset.woff2?h=c820cd70bb'
 ];
+// </generated:assets>
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

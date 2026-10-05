@@ -5,8 +5,8 @@
   "description": "Build-Skripte für ManuFAKTUR Schenk – minifiziert style.css und Home.js für die Produktion.",
   "scripts": {
     "build:css": "cleancss -o style.min.css style.css",
-    "build:js": "terser Home.js -o Home.min.js --compress --mangle --comments false",
-    "build": "npm run partials && npm run jsonld && npm run icons && npm run build:css && npm run build:js && npm run csp:update",
+    "build:js": "terser Home.js -o Home.min.js --compress --mangle --comments false && terser assets/js/i18n.js -o assets/js/i18n.min.js --compress --mangle --comments false",
+    "build": "npm run partials && npm run jsonld && npm run icons && npm run build:css && npm run build:js && npm run sw:assets && npm run csp:update",
     "icons": "node scripts/build-icons.js",
     "partials": "node scripts/sync-partials.js",
     "jsonld": "node scripts/gen-gallery-jsonld.js",
@@ -19,7 +19,9 @@
     "images:og": "node scripts/gen-og-images.js",
     "sitemap": "node scripts/gen-sitemap.js",
     "csp:update": "node scripts/update-csp-hashes.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "images:lightbox": "node scripts/optimize-lightbox.js",
+    "sw:assets": "node scripts/gen-sw-assets.js"
   },
   "devDependencies": {
     "@eslint/js": "9.39.5",

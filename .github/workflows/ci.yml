@@ -43,3 +43,27 @@ jobs:
       # ein Browser-Download ist nicht nötig.
       - name: Funktions- und Barrierefreiheitstests ausführen (inkl. axe-core)
         run: npm test
+
+  lighthouse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      # Misst Performance, Barrierefreiheit, Best Practices und SEO (Mobile-Profil) gegen den lokalen
+      # Server mit Produktions-CSP. Schwellen stehen in lighthouserc.json; unterschreitet eine Seite
+      # sie im Median von zwei Läufen, schlägt der Job fehl.
+      - name: Lighthouse-Prüfung
+        run: npx --yes @lhci/cli@0.15.1 autorun
+        env:
+          CHROME_PATH: /usr/bin/google-chrome

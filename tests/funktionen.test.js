@@ -3,6 +3,7 @@
  * Ausführen: npm test
  */
 const { test, before, after } = require('node:test');
+const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const { start, stop, open, isDisplayed } = require('./helpers.js');
 
@@ -320,4 +321,106 @@ test('Service Worker: Seite bleibt offline mit Styles und Skripten nutzbar', asy
   assert.equal(state.hasNav, true, 'Home.min.js wurde offline ausgeführt');
   assert.ok(state.stylesheetRules > 100, `Stylesheets offline geladen (Regeln: ${state.stylesheetRules})`);
   assert.equal(state.cssApplied, true);
+});
+
+/* Kontaktformular: Spam-Schutz und Fallback */
+
+async function fillContactForm(page) {
+  await page.fill('#name', 'Erika Muster');
+  await page.fill('#email', 'erika@example.com');
+  await page.fill('#message', 'Ich möchte ein Hundeportrait & mehr.');
+  await page.check('#privacy');
+}
+
+test('Kontaktformular: zu schnelles Absenden wird nicht gesendet und erklärt', async () => {
+  const { page, context } = await open('/Kontakt.html');
+  let requests = 0;
+  await page.route('https://api.web3forms.com/**', route => { requests++; route.abort(); });
+  await fillContactForm(page);
+  await page.click('.submit-btn');
+  await page.waitForSelector('#form-feedback.form-feedback--error');
+  assert.equal(requests, 0);
+  assert.match(await page.textContent('#form-feedback'), /erneut/);
+  await context.close();
+});
+
+test('Kontaktformular: ausgefülltes Honeypot-Feld sendet nichts', async () => {
+  const { page, context } = await open('/Kontakt.html');
+  let requests = 0;
+  await page.route('https://api.web3forms.com/**', route => { requests++; route.abort(); });
+  await fillContactForm(page);
+  await page.waitForTimeout(3200);
+  await page.$eval('input[name="botcheck"]', el => { el.checked = true; });
+  await page.click('.submit-btn');
+  await page.waitForTimeout(300);
+  assert.equal(requests, 0);
+  assert.equal(await page.$('#form-feedback'), null);
+  await context.close();
+});
+
+test('Kontaktformular: bei Verbindungsfehler führt der mailto-Link die Nachricht mit', async () => {
+  const { page, context } = await open('/Kontakt.html');
+  await page.route('https://api.web3forms.com/**', route => route.abort());
+  await fillContactForm(page);
+  await page.waitForTimeout(3200);
+  await page.click('.submit-btn');
+  await page.waitForSelector('#form-feedback.form-feedback--error a[href^="mailto:"]');
+  const href = await page.getAttribute('#form-feedback a', 'href');
+  const params = new URL(href).searchParams;
+  assert.match(href, /^mailto:manufaktur-malerei@web\.de\?/);
+  assert.match(params.get('body'), /Hundeportrait & mehr/);
+  assert.equal(params.get('subject'), 'Allgemeine Anfrage');
+  assert.equal(await page.inputValue('#message'), 'Ich möchte ein Hundeportrait & mehr.');
+  await context.close();
+});
+
+/* Übersetzungswörterbuch (assets/js/i18n.js) wird nur bei Bedarf geladen */
+
+test('i18n: Deutsch und Englisch haben dieselben Schlüssel', () => {
+  const vm = require('node:vm');
+  const source = fs.readFileSync(require('node:path').join(__dirname, '../assets/js/i18n.js'), 'utf8');
+  const dict = vm.runInNewContext(source + '; I18N_DICTIONARY');
+  const de = Object.keys(dict.de).sort();
+  const en = Object.keys(dict.en).sort();
+  assert.deepEqual(de.filter(k => !en.includes(k)), [], 'nur in de');
+  assert.deepEqual(en.filter(k => !de.includes(k)), [], 'nur in en');
+});
+
+test('i18n: deutsche Besucher laden das Wörterbuch nie', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  const requested = [];
+  page.on('request', r => requested.push(r.url()));
+  await page.reload();
+  await page.click('#lang-toggle-btn');
+  await page.click('#lang-toggle-btn');
+  await page.waitForTimeout(300);
+  await context.close();
+  // Der Wechsel zurück auf Deutsch braucht es nicht – geladen wird erst beim Wechsel auf Englisch.
+  assert.equal(requested.filter(u => /i18n\.min\.js/.test(u)).length, 1);
+});
+
+test('i18n: ohne Sprachwechsel wird auf Deutsch nichts nachgeladen', async () => {
+  const { page, context } = await open('/Home.html');
+  const requested = [];
+  page.on('request', r => requested.push(r.url()));
+  await page.reload();
+  await page.waitForTimeout(300);
+  await context.close();
+  assert.equal(requested.filter(u => /i18n/.test(u)).length, 0);
+});
+
+test('i18n: gespeicherte englische Sprache lädt das Wörterbuch und übersetzt die Seite', async () => {
+  const { page, context, errors } = await open('/Home.html', { storage: { manufaktur_lang: 'en' } });
+  await page.waitForFunction(() => document.querySelector('[data-i18n="home_welcome_title"]').textContent === 'Welcome');
+  await context.close();
+  assert.deepEqual(errors, []);
+});
+
+test('i18n: deutsche Verfügbarkeitstexte im Code stimmen mit dem Wörterbuch überein', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  await page.click('#lang-toggle-btn');
+  await page.waitForFunction(() => typeof I18N_DICTIONARY !== 'undefined');
+  const [fallback, dict] = await page.evaluate(() => [STATUS_TEXTS_DE, I18N_DICTIONARY.de]);
+  await context.close();
+  for (const key of Object.keys(fallback)) assert.equal(fallback[key], dict[key], key);
 });
