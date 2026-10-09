@@ -1,5 +1,7 @@
 # 🎨 ManuFAKTUR Schenk – Kunst & Auftragsmalerei Webanwendung
 
+[![CI](https://github.com/Schengii/ManuFaktur/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Schengii/ManuFaktur/actions/workflows/ci.yml) [![Live-Demo](https://img.shields.io/badge/Website-manufaktur--malerei.de-2ea44f)](https://www.manufaktur-malerei.de) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+
 Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **ManuFAKTUR Schenk** (Manuela Schenk aus Bonn). Die Webseite präsentiert handgemalte Kunstwerke (Tierportraits, Landschaften, Stillleben) und bietet Besuchern einen interaktiven 4-Schritte-Auftragskonfigurator, eine hochoptimierte Bildergalerie mit KI-Raumhintergründen, multiperspektivischer "Weitere Ansichten"-Galerie, Live-Suche sowie ein Kundenstimmen-Karussell.
 
 > **In short (EN):** Production website for an art studio in Bonn, built with plain HTML5, CSS3 and vanilla JavaScript (no framework, no tracker). Features a 4-step order configurator, a filterable gallery of 56 artworks with AI room previews, DE/EN i18n, dark/light mode, PWA with service worker, WCAG-minded accessibility, and a strict CSP with auto-generated hashes. Fonts and icons are self-hosted for GDPR compliance.
