@@ -24,7 +24,7 @@
     "sw:assets": "node scripts/gen-sw-assets.js"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.5",
+    "@eslint/js": "10.0.1",
     "axe-core": "4.13.0",
     "clean-css-cli": "5.6.3",
     "eslint": "9.39.5",
