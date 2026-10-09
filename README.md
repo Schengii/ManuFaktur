@@ -8,7 +8,7 @@ Eine moderne, elegante und barrierefreie Webanwendung für das Kunst-Atelier **M
 >
 > 🌐 **Live:** [manufaktur-malerei.de](https://www.manufaktur-malerei.de/)
 
-<!-- Screenshot: ![ManuFaktur](docs/screenshots/home.png) -->
+![ManuFAKTUR Schenk – Startseite](docs/screenshots/home.jpg)
 
 ---
 
