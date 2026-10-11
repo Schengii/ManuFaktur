@@ -27,6 +27,12 @@ ManuFaktur/
 ├── Datenschutz.html            # DSGVO-Datenschutzerklärung
 ├── 404.html                    # Fehlerseite
 │
+├── .env.example                # Vorlage für Umgebungsvariablen (Port, Vercel, Web3Forms)
+├── .claudeignore               # Optimierte Ausschlussliste für Claude Code & KI-Assistenten
+├── CHANGELOG.md                # Dokumentation aller Änderungen (Keep a Changelog)
+├── CLAUDE.md                   # Richtlinien & Architekturführung für Claude Code
+├── SECURITY.md                 # Sicherheitsrichtlinien & CSP-/Datenschutzkonzept
+│
 ├── style.css / style.min.css   # Designsystem (Quelle) / minifizierter Build
 ├── Home.js / Home.min.js       # Zentrale Logik (Quelle) / minifizierter Build
 ├── sw.js                       # Service Worker (Offline-Cache)
@@ -164,6 +170,7 @@ ManuFaktur/
 
 ```bash
 npm install   # einmalig: Build- und Test-Werkzeuge
+cp .env.example .env  # lokale Umgebungsvariablen anlegen (Windows: Copy-Item .env.example .env)
 npm start     # http://localhost:3000 – mit derselben Content-Security-Policy wie live
 ```
 

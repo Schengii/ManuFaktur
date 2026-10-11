@@ -85,7 +85,15 @@ function createServer() {
 module.exports = { createServer };
 
 if (require.main === module) {
-  const port = parseInt(process.argv[2], 10) || 3000;
+  const envPath = path.join(ROOT, '.env');
+  if (typeof process.loadEnvFile === 'function' && fs.existsSync(envPath)) {
+    try {
+      process.loadEnvFile(envPath);
+    } catch (err) {
+      void err;
+    }
+  }
+  const port = parseInt(process.argv[2], 10) || parseInt(process.env.PORT, 10) || 3000;
   createServer().listen(port, () => {
     console.log(`ManuFAKTUR läuft auf http://localhost:${port} (mit Produktions-CSP aus vercel.json)`);
   });

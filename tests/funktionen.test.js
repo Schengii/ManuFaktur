@@ -38,10 +38,12 @@ test('Footer: Sprach-Umschalter wechselt zu Englisch und zurück', async () => {
   const { page, context, errors } = await open('/Home.html');
   await page.click('#lang-toggle-btn');
   assert.equal(await page.getAttribute('html', 'lang'), 'en');
+  await page.waitForFunction(() => /Welcome/.test(document.querySelector('.welcome h1')?.textContent || ''));
   assert.match(await page.textContent('.welcome h1'), /Welcome/);
   // Der Button wird beim Sprachwechsel neu aufgebaut und muss weiter funktionieren.
   await page.click('#lang-toggle-btn');
   assert.equal(await page.getAttribute('html', 'lang'), 'de');
+  await page.waitForFunction(() => /Willkommen/.test(document.querySelector('.welcome h1')?.textContent || ''));
   await context.close();
   assert.deepEqual(errors, []);
 });

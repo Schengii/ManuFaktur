@@ -9,6 +9,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 ## [Unreleased]
 
 ### Behoben
+- Asynchrone Sprachumschaltung in den Playwright-Tests wartet nun per `waitForFunction` explizit auf das DOM-Update (behebt Race-Condition im Footer-Test).
 - Dunkelmodus- und Sprach-Umschalter im Footer funktionierten wegen der CSP nicht (Inline-`onclick`) – jetzt per Event-Delegation.
 - Offline-Modus: Service Worker cachte veraltete Asset-Versionen; `?v=N` und `CACHE_NAME` werden jetzt per `npm run release` gemeinsam hochgezählt, `npm run version:check` prüft das in der CI.
 - `?ref=`-Parameter im Konfigurator wurde als HTML eingefügt (Einschleusen von Markup möglich) – jetzt nur als Text.
@@ -18,6 +19,11 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 - `.htaccess` enthielt eine veraltete CSP-Kopie; `npm run csp:update` schreibt die Policy jetzt in beide Dateien.
 
 ### Hinzugefügt
+- Umgebungskonfiguration & Secrets: `.env.example` und lokale `.env` für konsistente Entwicklung, Playwright- und Vercel-Konfiguration; `.gitignore` schützt Secrets zuverlässig.
+- Claude Code & KI-Tooling: `.claudeignore` (und `claudeignore`) schützt Geheimnisse (`.env*`), schließt minifizierte Builds, Git/Vercel-Metadaten, Binärdateien und Test-Reports aus, um Token-Verbrauch zu minimieren.
+- Node.js-Konsistenz: `.nvmrc` und `.node-version` (Node 22) sowie `engines`-Feld in `package.json` zur strikten Abstimmung zwischen lokalem Server, GitHub Actions CI und Vercel.
+- Server-Erweiterung: `scripts/serve.js` lädt optional `.env` (über natives Node 22 `process.loadEnvFile`) und unterstützt `PORT` aus der Umgebung.
+- Dokumentation: README mit Status-Badges (GitHub Actions CI, Vercel Live-Demo, Lizenz, Vanilla-Stack) und aktuellem Screenshot der Live-Website versehen.
 - Vercel Web Analytics und Speed Insights (cookielos) über `assets/js/insights.js`, nur auf der echten Domain; Abschnitt dazu in der Datenschutzerklärung.
 - Qualitätssicherung: ESLint (`npm run lint`, in der CI), axe-core-Test über alle Seiten in Hell und Dunkel, Lighthouse-CI mit Schwellen (`lighthouserc.json`).
 - Kontaktformular: Absenden unter 3 Sekunden nach dem Laden wird abgewiesen, ausgefülltes Honeypot sendet nichts, bei Fehlern enthält der `mailto:`-Link Betreff und Nachricht.

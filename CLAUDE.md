@@ -110,3 +110,12 @@ Lightbox „Anfragen“ → `Auftrag.html?ref=<deutscher Bildtitel>&kat=<Kategor
 3. **Barrierefreiheit (WCAG):** Tastaturbedienbarkeit (`tabindex`, `Enter`/`Space`), ARIA-Zustände (`aria-pressed`, `aria-expanded`, `aria-label`) und semantische Tags beibehalten; sichtbarer Text und `aria-label` müssen zusammenpassen (siehe `TOGGLE_BUTTON_LABELS`). Klickbare Elemente sind `<button>`, Dialoge nutzen `trapFocus()`, Bewegung respektiert `prefersReducedMotion()` bzw. `@media (prefers-reduced-motion)`.
 4. **Nicht versioniert:** `archive_sources/` und `assets/imgTxt/` (Rohdaten, ca. 560 MB) sind per `.gitignore` ausgeschlossen und gehören nicht ins Deployment.
 5. **Sichtbarkeit:** `.hidden` setzt `display: none !important` und überstimmt damit `el.style.display`. Elemente mit `.hidden` per `classList` ein-/ausblenden, nicht per Inline-Style.
+6. **Umgebung & Secrets:** `.env` und `.env*.local` enthalten vertrauliche Werte oder lokale Overrides und sind strikt in `.gitignore` sowie `.claudeignore` geschützt. Für neue Umgebungsvariablen immer `.env.example` aktualisieren.
+
+## Umgebung & Integration (Claude, GitHub, Vercel)
+
+- **Node.js-Version:** Node 22 ist in `.nvmrc`, `.node-version` und `package.json` (`engines`) definiert und entspricht dem GitHub-Actions-Runner sowie der Vercel-Laufzeit.
+- **Lokale Konfiguration:** `.env.example` enthält alle konfigurierbaren Schlüssel (`PORT`, `NODE_ENV`, `WEB3FORMS_ACCESS_KEY`, `PW_CHANNEL`, `VERCEL_*`). Lokale Werte liegen in `.env`.
+- **Claude Code (.claudeignore):** Schließt schwere Binär- und Mediendateien (`assets/images/`, `archive_sources/`), minifizierte Artefakte, Git/Vercel-Ordner sowie Secrets (`.env*`) aus, um Token-Budget zu schonen und Fehlinterpretationen zu verhindern.
+- **GitHub Actions (`.github/workflows/ci.yml`):** Validiert bei jedem Push und PR: Linting (`npm run lint`), Build-Konsistenz (`git diff --exit-code`), Version-Check (`npm run version:check`), Galerie-Integrität (`npm run check:gallery`), Playwright/a11y-Tests (`npm test`) und Lighthouse Mobile (`lighthouserc.json`).
+- **Vercel:** Automatische Bereitstellung aus dem `main`-Branch; Sicherheitsheader und Caching werden über `vercel.json` gesteuert.

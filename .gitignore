@@ -10,10 +10,22 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Test-Artefakte (Playwright)
+# Test-Artefakte (Playwright & Lighthouse)
 test-results/
 playwright-report/
 .playwright/
+.lighthouseci/
+
+# Umgebungsvariablen & Secrets
+.env
+.env*.local
+.env.production
+.env.development
+.env.test
+!.env.example
+
+# Vercel CLI & Deployment Cache
+.vercel/
 
 # Editor- & OS-Artefakte
 .DS_Store
@@ -25,4 +37,3 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
-.lighthouseci/
