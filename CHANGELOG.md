@@ -36,6 +36,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 - Link-Vorschaubilder 1200 × 630 als JPEG (`assets/images/og/`).
 - Skripte: `release`, `version:check`, `icons`, `partials`, `jsonld`, `check:gallery`, `sitemap`, `images:og`.
 
+### Entfernt
+- 60 veraltete, ungenutzte Vorschaubilder (`*.webp` ohne `-w`-Suffix in `assets/images/img/thumbs/` und `assets/images/artworks/thumbs/`) gelöscht (über 4,1 MB Speicherplatz im Repository eingespart; die responsiven Varianten `-400w`, `-700w`, `-1000w` decken alle Auflösungen ab).
+- Überflüssiges Dateiduplikat `claudeignore` zugunsten des standardisierten `.claudeignore` entfernt.
+
 ### Geändert
 - Das Übersetzungswörterbuch liegt in `assets/js/i18n.js` und wird nur für Englisch nachgeladen: `Home.min.js` sinkt von 99 auf 52 KB (gzip 32 → 15 KB), Lighthouse-Performance steigt auf Home 92, Auftrag/Leistungen/Kontakt 97–98.
 - Lightbox-Bilder neu kodiert (WebP 80): 31 → 21 MB.
