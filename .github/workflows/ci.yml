@@ -26,6 +26,9 @@ jobs:
       - name: JavaScript linten (ESLint)
         run: npm run lint
 
+      - name: Auf sensible Secrets und .env-Dateien prüfen
+        run: node scripts/check-secrets.js --all
+
       - name: Produktions-Build & CSP-Hashes generieren
         run: npm run build
 

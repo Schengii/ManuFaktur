@@ -17,6 +17,7 @@ Die Sicherheit der Website **ManuFAKTUR Schenk** und der Schutz der Daten von Be
 3. **Geheimnisse & Umgebungsvariablen:**
    - Vertrauliche Tokens und Zugangsdaten verbleiben in `.env` / `.env.local` und werden durch `.gitignore` und `.claudeignore` strikt vor Versionsverwaltung geschützt.
    - Das Projekt stellt eine anonymisierte Vorlage `.env.example` bereit.
+   - **Automatisierter Pre-Commit Hook:** Über `.githooks/pre-commit` und `scripts/check-secrets.js` wird vor jedem Commit und in der GitHub Actions CI geprüft, dass keine `.env`-Dateien, Private Keys oder API-Tokens gestagt werden.
 
 4. **Formular- und Eingabesicherheit:**
    - Bot-Schutz über unsichtbare Honeypot-Felder (`botcheck`) und Mindestverweildauer.

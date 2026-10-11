@@ -19,6 +19,7 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 - `.htaccess` enthielt eine veraltete CSP-Kopie; `npm run csp:update` schreibt die Policy jetzt in beide Dateien.
 
 ### Hinzugefügt
+- Git Pre-Commit Hook & Secret-Sperre: `.githooks/pre-commit` und Prüfskript `scripts/check-secrets.js` blockieren das Einchecken von `.env`-Dateien, Vercel-Tokens, API-Keys und Private Keys (aktiviert über `core.hooksPath .githooks`, `npm run check:secrets` und in der GitHub Actions CI).
 - Umgebungskonfiguration & Secrets: `.env.example` und lokale `.env` für konsistente Entwicklung, Playwright- und Vercel-Konfiguration; `.gitignore` schützt Secrets zuverlässig.
 - Claude Code & KI-Tooling: `.claudeignore` (und `claudeignore`) schützt Geheimnisse (`.env*`), schließt minifizierte Builds, Git/Vercel-Metadaten, Binärdateien und Test-Reports aus, um Token-Verbrauch zu minimieren.
 - Node.js-Konsistenz: `.nvmrc` und `.node-version` (Node 22) sowie `engines`-Feld in `package.json` zur strikten Abstimmung zwischen lokalem Server, GitHub Actions CI und Vercel.

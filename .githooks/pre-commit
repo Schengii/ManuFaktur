@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+# Pre-commit hook für ManuFAKTUR Schenk
+# Verhindert das versehentliche Committen von .env-Dateien und sensiblen API-Keys.
+
+node scripts/check-secrets.js --staged

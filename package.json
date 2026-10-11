@@ -24,7 +24,9 @@
     "csp:update": "node scripts/update-csp-hashes.js",
     "lint": "eslint .",
     "images:lightbox": "node scripts/optimize-lightbox.js",
-    "sw:assets": "node scripts/gen-sw-assets.js"
+    "sw:assets": "node scripts/gen-sw-assets.js",
+    "check:secrets": "node scripts/check-secrets.js --staged",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
     "@eslint/js": "9.39.5",

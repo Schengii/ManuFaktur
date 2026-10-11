@@ -27,6 +27,7 @@ Code-Kommentare, Commit-Inhalte und UI-Texte sind deutsch; Commits folgen Conven
 | Lighthouse-Prüfung wie in der CI (Schwellen in `lighthouserc.json`) | `npx @lhci/cli@0.15.1 autorun` |
 | Precache-Liste in `sw.js` neu erzeugen (Teil von `npm run build`) | `npm run sw:assets` |
 | Link-Vorschaubilder (1200 × 630) erzeugen | `npm run images:og` |
+| Gestagte Änderungen auf `.env`-Dateien und API-Keys prüfen | `npm run check:secrets` |
 
 - `npm start` (`scripts/serve.js`) sendet die Header aus `vercel.json` mit, sodass CSP-Verstöße lokal sichtbar werden. `npx serve` oder `python -m http.server` tun das nicht.
 - Die Tests laufen mit `node:test` + `playwright-core` gegen ein **installiertes Chrome** (kein Browser-Download). Anderer Browser: `PW_CHANNEL=msedge npm test`.
@@ -111,11 +112,13 @@ Lightbox „Anfragen“ → `Auftrag.html?ref=<deutscher Bildtitel>&kat=<Kategor
 4. **Nicht versioniert:** `archive_sources/` und `assets/imgTxt/` (Rohdaten, ca. 560 MB) sind per `.gitignore` ausgeschlossen und gehören nicht ins Deployment.
 5. **Sichtbarkeit:** `.hidden` setzt `display: none !important` und überstimmt damit `el.style.display`. Elemente mit `.hidden` per `classList` ein-/ausblenden, nicht per Inline-Style.
 6. **Umgebung & Secrets:** `.env` und `.env*.local` enthalten vertrauliche Werte oder lokale Overrides und sind strikt in `.gitignore` sowie `.claudeignore` geschützt. Für neue Umgebungsvariablen immer `.env.example` aktualisieren.
+7. **Pre-Commit Hook & Secret-Sperre:** Der Pre-Commit Hook in `.githooks/pre-commit` (`scripts/check-secrets.js`) wird bei `git commit` automatisch ausgeführt. Er blockiert das Einchecken von `.env`-Dateien, Vercel-Tokens, API-Keys und Private Keys. Commits niemals mit `--no-verify` erzwingen; geblockte Dateien müssen aus dem Index entfernt bzw. Secrets in `.env` ausgelagert werden.
 
 ## Umgebung & Integration (Claude, GitHub, Vercel)
 
 - **Node.js-Version:** Node 22 ist in `.nvmrc`, `.node-version` und `package.json` (`engines`) definiert und entspricht dem GitHub-Actions-Runner sowie der Vercel-Laufzeit.
+- **Pre-Commit Hook (.githooks):** In Git aktiviert (`git config core.hooksPath .githooks`, automatisch über `npm run prepare`). Scannt vor jedem lokalen Commit gestagte Dateien auf unerlaubte `.env`-Dateien und Secrets.
 - **Lokale Konfiguration:** `.env.example` enthält alle konfigurierbaren Schlüssel (`PORT`, `NODE_ENV`, `WEB3FORMS_ACCESS_KEY`, `PW_CHANNEL`, `VERCEL_*`). Lokale Werte liegen in `.env`.
 - **Claude Code (.claudeignore):** Schließt schwere Binär- und Mediendateien (`assets/images/`, `archive_sources/`), minifizierte Artefakte, Git/Vercel-Ordner sowie Secrets (`.env*`) aus, um Token-Budget zu schonen und Fehlinterpretationen zu verhindern.
-- **GitHub Actions (`.github/workflows/ci.yml`):** Validiert bei jedem Push und PR: Linting (`npm run lint`), Build-Konsistenz (`git diff --exit-code`), Version-Check (`npm run version:check`), Galerie-Integrität (`npm run check:gallery`), Playwright/a11y-Tests (`npm test`) und Lighthouse Mobile (`lighthouserc.json`).
+- **GitHub Actions (`.github/workflows/ci.yml`):** Validiert bei jedem Push und PR: Linting (`npm run lint`), Secret-Scan (`node scripts/check-secrets.js --all`), Build-Konsistenz (`git diff --exit-code`), Version-Check (`npm run version:check`), Galerie-Integrität (`npm run check:gallery`), Playwright/a11y-Tests (`npm test`) und Lighthouse Mobile (`lighthouserc.json`).
 - **Vercel:** Automatische Bereitstellung aus dem `main`-Branch; Sicherheitsheader und Caching werden über `vercel.json` gesteuert.
