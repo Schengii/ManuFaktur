@@ -148,9 +148,21 @@ test('Sprachwechsel: nach Englisch und zurück steht wieder exakt der deutsche H
     });
     const before = await snapshot();
     await page.click('#lang-toggle-btn');
+    // Die Übersetzung wird asynchron angewendet (beim ersten Wechsel erst nach dem Nachladen der
+    // englischen Texte) - auf die Änderung warten statt sofort zu vergleichen (sonst Race/Flake).
+    await page.waitForFunction(
+      (german) => document.querySelector('main').textContent !== german,
+      before.text,
+      { timeout: 10000 }
+    ).catch(() => {});
     const english = await snapshot();
     assert.notEqual(english.text, before.text, `${path}: Englisch unterscheidet sich nicht`);
     await page.click('#lang-toggle-btn');
+    await page.waitForFunction(
+      (german) => document.querySelector('main').textContent === german,
+      before.text,
+      { timeout: 10000 }
+    ).catch(() => {});
     assert.deepEqual(await snapshot(), before, `${path}: deutscher Text hat sich verändert`);
     await context.close();
   }
