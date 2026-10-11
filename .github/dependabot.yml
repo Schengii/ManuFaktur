@@ -1,11 +1,19 @@
 version: 2
 updates:
-  # Aktualisiert npm-Abhängigkeiten (clean-css-cli, terser, sharp, playwright)
+  # Aktualisiert npm-Abhängigkeiten (clean-css-cli, terser, sharp, playwright);
+  # Minor-/Patch-Updates werden zu einem wöchentlichen PR gebündelt.
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   # Aktualisiert GitHub Actions Workflows
   - package-ecosystem: "github-actions"
@@ -13,3 +21,7 @@ updates:
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 3
+    groups:
+      actions:
+        patterns:
+          - "*"
