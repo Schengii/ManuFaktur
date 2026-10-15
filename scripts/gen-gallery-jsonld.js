@@ -14,7 +14,7 @@ const { loadData, galleryItems } = require('./check-gallery.js');
 const ROOT = path.join(__dirname, '..');
 const PAGE = path.join(ROOT, 'Bildergalerie.html');
 const SITE = 'https://www.manufaktur-malerei.de';
-const MARKER_RE = /([ \t]*)<!-- generated:gallery-jsonld -->\n[\s\S]*?<!-- \/generated:gallery-jsonld -->/;
+const MARKER_RE = /([ \t]*)<!-- generated:gallery-jsonld -->\r?\n[\s\S]*?<!-- \/generated:gallery-jsonld -->/;
 
 function build() {
   const { de } = loadData();
@@ -57,7 +57,8 @@ function run() {
   const indent = match[1];
   const json = JSON.stringify(build(), null, 2).split('\n').map(line => indent + '  ' + line).join('\n');
   const block = `${indent}<!-- generated:gallery-jsonld -->\n${indent}<script type="application/ld+json">\n${json}\n${indent}</script>\n${indent}<!-- /generated:gallery-jsonld -->`;
-  const next = html.replace(MARKER_RE, block);
+  const eol = html.includes('\r\n') ? '\r\n' : '\n';
+  const next = html.replace(MARKER_RE, () => block.replace(/\n/g, eol));
   if (next !== html) fs.writeFileSync(PAGE, next, 'utf8');
   console.log(`VisualArtwork-Daten für ${build()['@graph'].length - 1} Werke in Bildergalerie.html.`);
 }
