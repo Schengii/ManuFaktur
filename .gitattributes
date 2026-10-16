@@ -1,0 +1,9 @@
+# Zeilenenden einheitlich LF: generierte Dateien (CSP-Hashes, sw.js, JSON-LD) hängen davon ab.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff2 binary
