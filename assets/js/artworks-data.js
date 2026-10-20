@@ -395,11 +395,18 @@ const ARTWORKS_METADATA = {
         "desc": "Malerischer Spazierweg im herbstlichen Kottenforst bei Bonn, durchflutet von warmem Sonnenlicht und leuchtenden Blattfarben."
     },
     "DSC_6798a": {
+        "title": "Alabasterküste Frankreich",
+        "technik": "Acryl auf Leinwand",
+        "masse": "40 × 50 cm",
+        "kategorie": "landschaften",
+        "desc": "Die markante Steilküste der französischen Alabasterküste in der Normandie mit ihren strahlend weißen Kreidefelsen und türkisblauem Meer."
+    },
+    "DSC_6797": {
         "title": "Weg auf Island",
         "technik": "Öl auf Karton",
         "masse": "40 × 60 cm",
         "kategorie": "landschaften",
-        "desc": "Manche Wege auf Island führen über Holzplanken – ein stimmungsvoller Pfad entlang der dramatischen Steilküste."
+        "desc": "Manche Wege auf Island führen über Holzplanken – ein stimmungsvoller Pfad gesäumt von blühender Natur unter strahlend blauem Himmel."
     },
     "bild18-eulen": {
         "title": "Zwei Eulen",
@@ -492,7 +499,8 @@ const ARTWORKS_METADATA_EN = {
     "DSC_6788a": { title: "Aperol Spritz", technik: "Acrylic on canvas", desc: "A refreshing Aperol Spritz in a wine glass with an orange slice and clear ice cubes." },
     "DSC_6790a": { title: "Cold Beer in a Glass", technik: "Acrylic on canvas", desc: "Freshly poured, sparkling beer with a golden color and a dense white foam crown." },
     "DSC_6793a": { title: "Dream Trail in the Kottenforst", technik: "Acrylic on canvas", desc: "A picturesque sunlit walking trail through Bonn's Kottenforst forest, bathed in warm golden autumn light and vibrant foliage." },
-    "DSC_6798a": { title: "Path in Iceland", technik: "Oil on cardboard", desc: "A scenic trail along Iceland's dramatic coastal cliffs and turquoise waters, capturing the rugged Nordic atmosphere." },
+    "DSC_6798a": { title: "Alabaster Coast France", technik: "Acrylic on canvas", desc: "The striking cliffs of the French Alabaster Coast in Normandy with chalk formations and turquoise waters." },
+    "DSC_6797": { title: "Path in Iceland", technik: "Oil on cardboard", desc: "Some paths in Iceland lead over wooden planks – a scenic trail lined with vibrant nature under a clear blue sky." },
     "bild18-eulen": { title: "Two Little Owls", technik: "Acrylic on canvas", desc: "Lovingly hand-painted acrylic artwork of two little owls perched on a branch against a blue sky." },
     "bild16-godesburg": { title: "Godesburg Cityscape", technik: "Acrylic on canvas", desc: "Atmospheric painting of historic Godesburg fortress in Bonn during evening twilight." },
     "bild8-rheinaue": { title: "Rheinaue Park Bonn", technik: "Acrylic on canvas", desc: "Autumn impression of the scenic Rheinaue lake in Bonn with reflective waters and golden foliage." },
