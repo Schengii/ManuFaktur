@@ -1359,7 +1359,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Share Link Button & Web Share API
         window.shareCurrentArtwork = function() {
-            const shareUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, 'Bildergalerie.html') + (itemId ? '#' + itemId : '');
+            // werk/ID.html liefert die Link-Vorschau (Open Graph) und leitet zur Galerie weiter
+            const shareUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, itemId ? 'werk/' + itemId + '.html' : 'Bildergalerie.html');
             const shareTitle = `${realTitle} – ManuFAKTUR Schenk`;
             const shareText = isEn
                 ? `Check out this hand-painted artwork "${realTitle}" (${displayTechnik}, ${realMasse}) by Manuela Schenk:`

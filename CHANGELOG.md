@@ -19,6 +19,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 - `.htaccess` enthielt eine veraltete CSP-Kopie; `npm run csp:update` schreibt die Policy jetzt in beide Dateien.
 
 ### Hinzugefügt
+- Teilen-Link pro Werk: `werk/ID.html` (generiert, `npm run share-pages`) liefert Titel, Beschreibung und Vorschaubild für Messenger und leitet zur Galerie weiter; die Lightbox verlinkt darauf.
+- AVIF-Vorschaubilder (`npm run images:avif`, ca. 45 % kleiner als WebP) in der Galerie per `<picture>`, WebP bleibt Fallback; `check:gallery` prüft sie mit.
+- Straße in den LocalBusiness-/ArtGallery-Daten (Home, Kontakt, Leistungen, Über mich), `areaServed` auf der Startseite.
+- Galerie: erstes Bild mit `fetchpriority="high"` und Preload, übrige Bilder außer dem zweiten lazy (LCP).
 - Git Pre-Commit Hook & Secret-Sperre: `.githooks/pre-commit` und Prüfskript `scripts/check-secrets.js` blockieren das Einchecken von `.env`-Dateien, Vercel-Tokens, API-Keys und Private Keys (aktiviert über `core.hooksPath .githooks`, `npm run check:secrets` und in der GitHub Actions CI).
 - Umgebungskonfiguration & Secrets: `.env.example` und lokale `.env` für konsistente Entwicklung, Playwright- und Vercel-Konfiguration; `.gitignore` schützt Secrets zuverlässig.
 - Claude Code & KI-Tooling: `.claudeignore` (und `claudeignore`) schützt Geheimnisse (`.env*`), schließt minifizierte Builds, Git/Vercel-Metadaten, Binärdateien und Test-Reports aus, um Token-Verbrauch zu minimieren.

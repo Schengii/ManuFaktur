@@ -20,6 +20,7 @@ const MIME_TYPES = {
   '.xml': 'application/xml; charset=utf-8',
   '.txt': 'text/plain; charset=utf-8',
   '.webp': 'image/webp',
+  '.avif': 'image/avif',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.svg': 'image/svg+xml',

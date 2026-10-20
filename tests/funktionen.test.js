@@ -438,3 +438,30 @@ test('i18n: deutsche Verfügbarkeitstexte im Code stimmen mit dem Wörterbuch ü
   await context.close();
   for (const key of Object.keys(fallback)) assert.equal(fallback[key], dict[key], key);
 });
+
+test('Teilen: Button kopiert den Link auf werk/ID.html, die Seite hat eigene Open-Graph-Tags', async () => {
+  const { page, context, errors } = await open('/Bildergalerie.html');
+  await page.evaluate(() => { navigator.share = undefined; window.__copied = null; navigator.clipboard.writeText = u => { window.__copied = u; return Promise.resolve(); }; });
+  await page.click('#DSC_6622a a');
+  await page.click('#lightbox-share-btn');
+  assert.match(await page.evaluate(() => window.__copied), /\/werk\/DSC_6622a\.html$/);
+  await context.close();
+  assert.deepEqual(errors, []);
+
+  const html = fs.readFileSync('werk/DSC_6622a.html', 'utf8');
+  assert.match(html, /property="og:image" content="https:\/\/www\.manufaktur-malerei\.de\/assets\/images\/img\/thumbs\/DSC_6622a-1000w\.webp"/);
+  assert.match(html, /http-equiv="refresh" content="0; url=\.\.\/Bildergalerie\.html#DSC_6622a"/);
+});
+
+test('Galerie: Vorschaubilder werden als AVIF mit WebP-Fallback ausgeliefert', async () => {
+  const { page, context, errors } = await open('/Bildergalerie.html');
+  const info = await page.evaluate(() => {
+    const img = document.querySelector('#DSC_6622a img');
+    return { avif: !!img.parentElement.querySelector('source[type="image/avif"]'), current: img.currentSrc, loaded: img.complete && img.naturalWidth > 0 };
+  });
+  await context.close();
+  assert.ok(info.avif);
+  assert.match(info.current, /\.avif$/);
+  assert.ok(info.loaded);
+  assert.deepEqual(errors, []);
+});

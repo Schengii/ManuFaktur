@@ -15,7 +15,7 @@ Code-Kommentare, Commit-Inhalte und UI-Texte sind deutsch; Commits folgen Conven
 | Produktions-Build (Partials, JSON-LD, Icons, CSS, JS, CSP) | `npm run build` |
 | Release: `?v=N` + `CACHE_NAME` hochzählen, Sitemap, Build | `npm run release` |
 | Nur CSS / nur JS minifizieren | `npm run build:css` / `npm run build:js` |
-| Einzelne Build-Schritte (Reihenfolge in `npm run build`) | `npm run partials` → `jsonld` → `icons` → `build:css` → `build:js` → `sw:assets` → `csp:update`; separat: `npm run sitemap` |
+| Einzelne Build-Schritte (Reihenfolge in `npm run build`) | `npm run partials` → `jsonld` → `share-pages` → `icons` → `build:css` → `build:js` → `sw:assets` → `csp:update`; separat: `npm run sitemap` |
 | CSP-Hashes in `vercel.json` und `.htaccess` neu berechnen | `npm run csp:update` |
 | Lokaler Server mit Produktions-CSP (Port 3000) | `npm start` |
 | ESLint (auch in der CI) | `npm run lint` |
@@ -28,6 +28,7 @@ Code-Kommentare, Commit-Inhalte und UI-Texte sind deutsch; Commits folgen Conven
 | Lighthouse-Prüfung wie in der CI (Schwellen in `lighthouserc.json`) | `npx @lhci/cli@0.15.1 autorun` |
 | Precache-Liste in `sw.js` neu erzeugen (Teil von `npm run build`) | `npm run sw:assets` |
 | Link-Vorschaubilder (1200 × 630) erzeugen | `npm run images:og` |
+| AVIF-Fassungen der Thumbnails erzeugen (neben den WebP-Dateien) | `npm run images:avif` |
 | Gestagte Änderungen auf `.env`-Dateien und API-Keys prüfen | `npm run check:secrets` |
 
 - `npm start` (`scripts/serve.js`) sendet die Header aus `vercel.json` mit, sodass CSP-Verstöße lokal sichtbar werden. `npx serve` oder `python -m http.server` tun das nicht.
@@ -46,6 +47,7 @@ Bearbeitet werden die Quellen; `npm run build` erzeugt daraus den Rest. Generier
 | `partials/lightbox.html` | Block zwischen `<!-- partial:lightbox -->` … `<!-- /partial:lightbox -->` in Home.html und Bildergalerie.html (`scripts/sync-partials.js`) |
 | `assets/js/artworks-data.js` | `VisualArtwork`-JSON-LD zwischen `<!-- generated:gallery-jsonld -->`-Markern in Bildergalerie.html |
 | benutzte `fa-*`-Klassen in HTML/JS, `content: "\fXXX"` in style.css | `assets/vendor/font-awesome/css/icons.min.css`, `webfonts/*-subset.woff2` |
+| `assets/js/artworks-data.js` + `.gallery-item`-Blöcke | `werk/ID.html`: Weiterleitung zur Galerie mit eigenen Open-Graph-Tags für die Link-Vorschau; der Teilen-Button der Lightbox verlinkt darauf (`scripts/gen-share-pages.js`) |
 | JSON-LD-Blöcke | CSP-Hashes in `vercel.json` und `.htaccess` |
 | eingebundene CSS/JS-Dateien, Seiten, Logos, Schriften | `ASSETS_TO_CACHE` in `sw.js` zwischen `<generated:assets>`-Markern (`scripts/gen-sw-assets.js`; bricht ab, wenn eine Datei fehlt) |
 
@@ -91,7 +93,7 @@ Ein Werk besteht aus vier zusammengehörigen Teilen, verknüpft über die Werk-I
 - `.gallery-item`-Block in `Bildergalerie.html` (bzw. `Home.html` für die vier Highlights) mit `id` und `data-kategorie`; der Link zeigt auf `…/lightbox/ID.webp`, das `<img>` nutzt `…/thumbs/ID-{400,700,1000}w.webp`,
 - Eintrag in `ARTWORKS_METADATA` in `assets/js/artworks-data.js` (Deutsch: Titel, Technik, Maße, Kategorie, Beschreibung, optional `status`: `verfuegbar`/`reserviert`/`verkauft`),
 - Eintrag in `ARTWORKS_METADATA_EN` in derselben Datei (nur Titel, Technik, Beschreibung),
-- Bilddateien unter `assets/images/img/` bzw. `assets/images/artworks/`.
+- Bilddateien unter `assets/images/img/` bzw. `assets/images/artworks/`; zu jedem Thumbnail gibt es neben `.webp` auch `.avif` (`npm run images:avif`), eingebunden als `<picture><source type="image/avif" …><img …></picture>`. Das erste Galeriebild trägt `fetchpriority="high"` und wird in `Bildergalerie.html` vorab geladen; alle weiteren außer dem zweiten laden lazy.
 
 `npm run check:gallery` (auch in der CI) prüft, dass alle vier Teile zusammenpassen. `artworks-data.js` wird nur auf Home, Bildergalerie und Auftrag geladen (vor `Home.min.js`); Code in `Home.js` muss deshalb mit `typeof ARTWORKS_METADATA === 'undefined'` rechnen.
 

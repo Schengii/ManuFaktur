@@ -3,7 +3,7 @@
  *   1. .gallery-item-Block in Bildergalerie.html bzw. Home.html (id, data-kategorie, Link, Thumbnails),
  *   2. Eintrag in ARTWORKS_METADATA (assets/js/artworks-data.js),
  *   3. Eintrag in ARTWORKS_METADATA_EN,
- *   4. Bilddateien: lightbox/ID.webp und thumbs/ID-{400,700,1000}w.webp.
+ *   4. Bilddateien: lightbox/ID.webp und thumbs/ID-{400,700,1000}w.webp und .avif (npm run images:avif).
  *
  * Nutzung: node scripts/check-gallery.js   (oder: npm run check:gallery; läuft auch in der CI)
  */
@@ -73,7 +73,7 @@ function check() {
       }
       const m = (item.href || '').match(/^(.*)\/lightbox\/([^/]+)\.webp$/);
       if (!m || m[2] !== item.id) { errors.push(`${where}: Link „${item.href}“ zeigt nicht auf …/lightbox/${item.id}.webp.`); continue; }
-      const files = [`${m[1]}/lightbox/${item.id}.webp`, ...WIDTHS.map(w => `${m[1]}/thumbs/${item.id}-${w}w.webp`)];
+      const files = [`${m[1]}/lightbox/${item.id}.webp`, ...WIDTHS.flatMap(w => [`${m[1]}/thumbs/${item.id}-${w}w.webp`, `${m[1]}/thumbs/${item.id}-${w}w.avif`])];
       for (const file of files) {
         if (!fs.existsSync(path.join(ROOT, file))) errors.push(`${where}: Bilddatei ${file} fehlt.`);
       }
