@@ -78,14 +78,14 @@
     --footer-border: #7a5a1f;
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --focus-ring: 3px solid var(--secondary-color); /* Dunkelblau für maximalen Kontrast */
+    color-scheme: light; /* native Scrollbars, Formularelemente und Autofill folgen dem Theme */
 }
 
 /* =========================================
    DARK THEME PALETTE (KONTRASTREICH & WCAG AAA)
    ========================================= */
 [data-theme="dark"],
-html[data-theme="dark"],
-body.dark-mode {
+html[data-theme="dark"] {
     --primary-color: #e6bc6a;
     /* Strahlendes Gold für perfekten Kontrast auf dunklen Flächen */
     --secondary-color: #9ac2f8;
@@ -112,6 +112,40 @@ body.dark-mode {
     --footer-bg: #070c18;
     --footer-border: #e6bc6a;
     --focus-ring: 3px solid #9ac2f8;
+    color-scheme: dark;
+}
+
+/* Ohne JavaScript setzt theme-init.js kein data-theme: dann entscheidet die Systemeinstellung */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --primary-color: #e6bc6a;
+        /* Strahlendes Gold für perfekten Kontrast auf dunklen Flächen */
+        --secondary-color: #9ac2f8;
+        /* Helles, klares Kornblumenblau für Titel & Akzente */
+        --nav-bg: rgba(10, 16, 30, 0.98);
+        /* Tiefes Nachtblau */
+        --accent-color: #e5a769;
+        /* Helles Bernstein-Kupfer */
+        --text-color: #f3f6fc;
+        /* Klares, brillantes Off-White für maximale Lesbarkeit */
+        --text-muted: #cbd5e1;
+        /* Helles Slate für barrierefreien Kontrast */
+        --bg-color: #0b1120;
+        /* Elegantes, tiefes Mitternachtsblau */
+        --card-bg: #141f35;
+        /* Kontrastreiches Dunkelblau für Karten & Sektionen */
+        --card-bg-subtle: #192742;
+        --border-color: #263854;
+        /* Subtile, edle Ränder */
+        --input-bg: #0f182a;
+        --input-border: #334768;
+        --tag-bg: #1a2942;
+        --tag-text: #e2e8f0;
+        --footer-bg: #070c18;
+        --footer-border: #e6bc6a;
+        --focus-ring: 3px solid #9ac2f8;
+        color-scheme: dark;
+    }
 }
 
 html {
@@ -126,6 +160,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    min-height: 100dvh; /* dynamische Viewport-Höhe: kein Springen durch die mobile Adressleiste */
     overflow-x: hidden;
     letter-spacing: 0.02em; /* Verbesserte Lesbarkeit für Lese-Rechtschreib-Schwäche */
     word-spacing: 0.04em;   /* Verbesserte Lesbarkeit für Lese-Rechtschreib-Schwäche */
@@ -204,7 +239,7 @@ header {
        Kontrastverhältnis weiße Navlinks auf #0e1f45: ~13.5:1 → WCAG AAA ✓ */
     background-color: var(--nav-bg);
     color: white;
-    padding: 0 2rem; /* Kein vertikales Padding für maximale Logogröße */
+    padding: 0 max(2rem, env(safe-area-inset-right)) 0 max(2rem, env(safe-area-inset-left)); /* Kein vertikales Padding für maximale Logogröße; Notch-sicher im Querformat */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     position: sticky;
     top: 0;
@@ -416,6 +451,7 @@ nav {
 .hero-section {
     position: relative;
     height: 100vh;
+    height: 100svh; /* kleinste Viewport-Höhe: Hero bleibt stabil, wenn die Adressleiste ein-/ausfährt */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -548,6 +584,9 @@ h2 {
     display: flex;
     align-items: center;
     gap: 12px;
+    /* Lange deutsche Komposita dürfen umbrechen (anywhere wirkt auch auf min-content im Flex-Container) */
+    overflow-wrap: anywhere;
+    hyphens: auto;
 }
 
 h2::after {
@@ -1474,7 +1513,7 @@ cite {
 
 .contact-info {
     flex: 1;
-    min-width: 280px;
+    min-width: min(100%, 280px);
 }
 
 .contact-info h3 {
@@ -1531,7 +1570,7 @@ cite {
 /* Formular */
 .contact-form {
     flex: 2;
-    min-width: 320px;
+    min-width: min(100%, 320px);
 }
 
 .form-group {
@@ -1634,7 +1673,7 @@ cite {
 footer {
     background-color: var(--secondary-color);
     color: white;
-    padding: 3rem 2rem;
+    padding: 3rem 2rem calc(3rem + env(safe-area-inset-bottom));
     text-align: center;
     display: flex;
     flex-wrap: wrap;
@@ -1930,8 +1969,8 @@ footer {
 /* Back to top button */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: calc(30px + env(safe-area-inset-bottom));
+    right: calc(30px + env(safe-area-inset-right));
     z-index: 1000;
     width: 50px;
     height: 50px;
@@ -2112,6 +2151,7 @@ footer {
         left: 0;
         width: 100%;
         max-height: calc(100vh - 75px);
+        max-height: calc(100dvh - 75px);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         background-color: #0a1637;
@@ -2292,8 +2332,8 @@ footer {
     }
 
     .back-to-top {
-        bottom: 20px;
-        right: 20px;
+        bottom: calc(20px + env(safe-area-inset-bottom));
+        right: calc(20px + env(safe-area-inset-right));
         width: 44px;
         height: 44px;
         font-size: 1rem;
@@ -2471,8 +2511,7 @@ footer {
     color: var(--secondary-color);
 }
 
-[data-theme="dark"] .text-content h3,
-body.dark-mode .text-content h3 {
+[data-theme="dark"] .text-content h3 {
     color: #9ac2f8;
 }
 
@@ -4421,138 +4460,116 @@ footer {
 /* =========================================
    KOMPONENTEN OVERRIDES FÜR DARK THEME
    ========================================= */
-[data-theme="dark"] .welcome,
-body.dark-mode .welcome {
+[data-theme="dark"] .welcome {
     background: linear-gradient(145deg, #141f35 0%, #0d1525 100%) !important;
     border-color: #24344d !important;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45) !important;
 }
 
-[data-theme="dark"] .welcome::before,
-body.dark-mode .welcome::before {
+[data-theme="dark"] .welcome::before {
     background: linear-gradient(90deg, #9ac2f8, #e6bc6a, #9ac2f8) !important;
 }
 
-[data-theme="dark"] .trust-badge,
-body.dark-mode .trust-badge {
+[data-theme="dark"] .trust-badge {
     background: #192742 !important;
     color: #f1f5f9 !important;
     border-color: #2a3d5e !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
 }
 
-[data-theme="dark"] .trust-badge i,
-body.dark-mode .trust-badge i {
+[data-theme="dark"] .trust-badge i {
     color: var(--primary-color) !important;
 }
 
-[data-theme="dark"] .gallery-item,
-body.dark-mode .gallery-item {
+[data-theme="dark"] .gallery-item {
     background-color: #141f35 !important;
     border-color: #141f35 !important;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
 }
 
-[data-theme="dark"] .testimonial-slide,
-body.dark-mode .testimonial-slide {
+[data-theme="dark"] .testimonial-slide {
     background: #141f35 !important;
     border-color: #24344d !important;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4) !important;
 }
 
-[data-theme="dark"] .testimonial-quote,
-body.dark-mode .testimonial-quote {
+[data-theme="dark"] .testimonial-quote {
     color: #f3f6fc !important;
 }
 
-[data-theme="dark"] .service-card,
-body.dark-mode .service-card {
+[data-theme="dark"] .service-card {
     background: #141f35 !important;
     border-color: #24344d !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
 
-[data-theme="dark"] .service-icon-container,
-body.dark-mode .service-icon-container {
+[data-theme="dark"] .service-icon-container {
     background: #192742 !important;
     border-color: #2a3d5e !important;
 }
 
 [data-theme="dark"] .about-content,
-body.dark-mode .about-content,
-[data-theme="dark"] .info-card,
-body.dark-mode .info-card {
+[data-theme="dark"] .info-card {
     background: #141f35 !important;
     border-color: #24344d !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
 
-[data-theme="dark"] .about-image,
-body.dark-mode .about-image {
+[data-theme="dark"] .about-image {
     border-color: #141f35 !important;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5) !important;
 }
 
-[data-theme="dark"] .faq-section,
-body.dark-mode .faq-section {
+[data-theme="dark"] .faq-section {
     background: #141f35 !important;
     border-color: #24344d !important;
 }
 
-[data-theme="dark"] .accordion-header,
-body.dark-mode .accordion-header {
+[data-theme="dark"] .accordion-header {
     color: #9ac2f8 !important;
 }
 
-[data-theme="dark"] .accordion-content,
-body.dark-mode .accordion-content {
+[data-theme="dark"] .accordion-content {
     background: #10192a !important;
 }
 
-[data-theme="dark"] .filter-btn,
-body.dark-mode .filter-btn {
+[data-theme="dark"] .filter-btn {
     background-color: #141f35 !important;
     color: #f1f5f9 !important;
     border-color: #263854 !important;
 }
 
-[data-theme="dark"] .filter-btn.active,
-body.dark-mode .filter-btn.active {
+[data-theme="dark"] .filter-btn.active {
     background-color: var(--primary-color) !important;
     color: #0b1120 !important;
     border-color: var(--primary-color) !important;
 }
 
-[data-theme="dark"] .search-input-wrapper input,
-body.dark-mode .search-input-wrapper input {
+[data-theme="dark"] .search-input-wrapper input {
     background-color: #10192a !important;
     color: #f1f5f9 !important;
     border-color: #2c3e5c !important;
 }
 
-[data-theme="dark"] .gallery-sort-select,
-body.dark-mode .gallery-sort-select {
+[data-theme="dark"] .gallery-sort-select {
     background: #10192a !important;
     color: #9ac2f8 !important;
     border-color: #2c3e5c !important;
 }
 
-[data-theme="dark"] .gallery-counter,
-body.dark-mode .gallery-counter {
+[data-theme="dark"] .gallery-counter {
     background: #10192a !important;
     color: var(--primary-color) !important;
     border-color: #2c3e5c !important;
 }
 
-[data-theme="dark"] .option-card,
-body.dark-mode .option-card {
+[data-theme="dark"] .option-card {
     background: #141f35 !important;
     border-color: #24344d !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
 
-[data-theme="dark"] .option-card.selected,
-body.dark-mode .option-card.selected {
+[data-theme="dark"] .option-card.selected {
     border-color: var(--primary-color) !important;
     background: #192742 !important;
     box-shadow: 0 0 20px rgba(230, 188, 106, 0.25) !important;
@@ -4562,12 +4579,7 @@ body.dark-mode .option-card.selected {
 [data-theme="dark"] input[type="email"],
 [data-theme="dark"] input[type="tel"],
 [data-theme="dark"] textarea,
-[data-theme="dark"] select,
-body.dark-mode input[type="text"],
-body.dark-mode input[type="email"],
-body.dark-mode input[type="tel"],
-body.dark-mode textarea,
-body.dark-mode select {
+[data-theme="dark"] select {
     background-color: #10192a !important;
     color: #f3f6fc !important;
     border-color: #2d4060 !important;
@@ -4575,78 +4587,63 @@ body.dark-mode select {
 
 [data-theme="dark"] input:focus,
 [data-theme="dark"] textarea:focus,
-[data-theme="dark"] select:focus,
-body.dark-mode input:focus,
-body.dark-mode textarea:focus,
-body.dark-mode select:focus {
+[data-theme="dark"] select:focus {
     border-color: var(--primary-color) !important;
     box-shadow: 0 0 0 3px rgba(230, 188, 106, 0.2) !important;
 }
 
 [data-theme="dark"] .contact-info,
-body.dark-mode .contact-info,
-[data-theme="dark"] .contact-form,
-body.dark-mode .contact-form {
+[data-theme="dark"] .contact-form {
     background: #141f35 !important;
     border-color: #24344d !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
 
-[data-theme="dark"] .lightbox-info-col,
-body.dark-mode .lightbox-info-col {
+[data-theme="dark"] .lightbox-info-col {
     background: #111a2c !important;
     border-color: #263854 !important;
     color: #f3f6fc !important;
 }
 
-[data-theme="dark"] .lightbox-detail-val,
-body.dark-mode .lightbox-detail-val {
+[data-theme="dark"] .lightbox-detail-val {
     color: #f3f6fc !important;
 }
 
-[data-theme="dark"] .lightbox-description-text,
-body.dark-mode .lightbox-description-text {
+[data-theme="dark"] .lightbox-description-text {
     color: #cbd5e1 !important;
 }
 
-[data-theme="dark"] .dropdown-content,
-body.dark-mode .dropdown-content {
+[data-theme="dark"] .dropdown-content {
     background: #111a2c !important;
     border-color: #263854 !important;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6) !important;
 }
 
-[data-theme="dark"] .dropdown-content a,
-body.dark-mode .dropdown-content a {
+[data-theme="dark"] .dropdown-content a {
     color: #f3f6fc !important;
 }
 
-[data-theme="dark"] .dropdown-content a:hover,
-body.dark-mode .dropdown-content a:hover {
+[data-theme="dark"] .dropdown-content a:hover {
     background-color: #1c2a44 !important;
     color: var(--primary-color) !important;
 }
 
-[data-theme="dark"] .map-placeholder-content,
-body.dark-mode .map-placeholder-content {
+[data-theme="dark"] .map-placeholder-content {
     background: #141f35 !important;
     color: #f3f6fc !important;
     border: 1px solid #24344d;
 }
 
-[data-theme="dark"] .map-placeholder-content p,
-body.dark-mode .map-placeholder-content p {
+[data-theme="dark"] .map-placeholder-content p {
     color: #cbd5e1 !important;
 }
 
-[data-theme="dark"] .flyer-section,
-body.dark-mode .flyer-section {
+[data-theme="dark"] .flyer-section {
     background: #141f35 !important;
     border-color: #24344d !important;
 }
 
-[data-theme="dark"] .flyer-image,
-body.dark-mode .flyer-image {
+[data-theme="dark"] .flyer-image {
     border-color: #24344d !important;
 }
 
@@ -4654,74 +4651,50 @@ body.dark-mode .flyer-image {
    wechselt: weißer Text wäre darauf im Dark Mode fast unsichtbar (Kontrast < 2:1). Stattdessen
    dunkler Text aus der Dark-Mode-Hintergrundfarbe (Kontrast > 9:1). */
 [data-theme="dark"] .btn,
-body.dark-mode .btn,
 [data-theme="dark"] .btn:hover,
-body.dark-mode .btn:hover,
 [data-theme="dark"] .btn-next,
-body.dark-mode .btn-next,
 [data-theme="dark"] .btn-submit,
-body.dark-mode .btn-submit,
 [data-theme="dark"] .btn-submit:hover,
-body.dark-mode .btn-submit:hover,
 [data-theme="dark"] .submit-btn,
-body.dark-mode .submit-btn,
 [data-theme="dark"] .submit-btn:hover,
-body.dark-mode .submit-btn:hover,
 [data-theme="dark"] #toast,
-body.dark-mode #toast,
 [data-theme="dark"] .skip-link,
-body.dark-mode .skip-link,
 [data-theme="dark"] .social-links-big a:hover,
-body.dark-mode .social-links-big a:hover,
 [data-theme="dark"] .testimonial-arrow:hover,
-body.dark-mode .testimonial-arrow:hover,
 [data-theme="dark"] .hero-btn:hover,
-body.dark-mode .hero-btn:hover,
 [data-theme="dark"] .back-to-top,
-body.dark-mode .back-to-top,
 [data-theme="dark"] .progress-step.active .step-circle,
-body.dark-mode .progress-step.active .step-circle,
 [data-theme="dark"] .progress-step.completed .step-circle,
-body.dark-mode .progress-step.completed .step-circle,
 [data-theme="dark"] .process-step-num,
-body.dark-mode .process-step-num,
 [data-theme="dark"] .scene-btn.active,
-body.dark-mode .scene-btn.active,
 [data-theme="dark"] .lb-tool-btn:hover,
-body.dark-mode .lb-tool-btn:hover,
 [data-theme="dark"] .lb-tool-btn.active,
-body.dark-mode .lb-tool-btn.active,
-[data-theme="dark"] .btn-subtle-primary,
-body.dark-mode .btn-subtle-primary {
+[data-theme="dark"] .btn-subtle-primary {
     color: #0b1120 !important;
 }
 
 /* Barrierefreiheit, Kontrast & Rot-Grün-Schwäche im Dark Mode */
-[data-theme="dark"] .selection-hint,
-body.dark-mode .selection-hint {
+[data-theme="dark"] .selection-hint {
     color: #ff9999 !important;
     background: rgba(255, 118, 117, 0.12) !important;
     border-left: 3px solid #ff7675 !important;
 }
 
-[data-theme="dark"] .form-feedback--success,
-body.dark-mode .form-feedback--success {
+[data-theme="dark"] .form-feedback--success {
     background: rgba(46, 204, 113, 0.15) !important;
     border-color: rgba(74, 222, 128, 0.3) !important;
     border-left: 4px solid #4ade80 !important;
     color: #4ade80 !important;
 }
 
-[data-theme="dark"] .form-feedback--error,
-body.dark-mode .form-feedback--error {
+[data-theme="dark"] .form-feedback--error {
     background: rgba(255, 118, 117, 0.15) !important;
     border-color: rgba(255, 118, 117, 0.3) !important;
     border-left: 4px solid #ff7675 !important;
     color: #ff9999 !important;
 }
 
-[data-theme="dark"] .color-heart,
-body.dark-mode .color-heart {
+[data-theme="dark"] .color-heart {
     color: #ff7675 !important;
 }
 
@@ -4747,5 +4720,60 @@ body.dark-mode .color-heart {
     .reveal {
         transform: none;
         opacity: 1;
+    }
+}
+
+/* =========================================
+   DRUCKANSICHT (Impressum, Kontakt, Leistungen/Preise)
+   Navigation, Footer und Bedienelemente entfallen; Farben werden auf Papier zurückgesetzt.
+   ========================================= */
+@media print {
+    :root,
+    [data-theme="dark"] {
+        --bg-color: #fff;
+        --card-bg: #fff;
+        --text-color: #000;
+        --text-muted: #333;
+        --secondary-color: #000;
+        --border-color: #999;
+        color-scheme: light;
+    }
+
+    header,
+    footer,
+    .back-to-top,
+    .lightbox,
+    iframe {
+        display: none !important;
+    }
+
+    body {
+        background: #fff !important;
+        color: #000 !important;
+        min-height: 0;
+    }
+
+    main {
+        max-width: none;
+        padding: 0;
+    }
+
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.85em;
+        word-break: break-all;
+    }
+
+    h1,
+    h2,
+    h3,
+    img {
+        break-after: avoid;
+        break-inside: avoid;
     }
 }

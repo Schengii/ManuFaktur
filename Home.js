@@ -91,13 +91,8 @@ function setTheme(theme) {
     } catch (e) {}
     
     document.documentElement.setAttribute('data-theme', currentTheme);
-    if (document.body) {
-        if (currentTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-        }
-    }
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) themeMeta.setAttribute('content', currentTheme === 'dark' ? '#0a101e' : '#7a5a1f');
     updateThemeButtonUI();
 }
 
@@ -344,9 +339,6 @@ function getFooterHTML() {
 
     // Theme & Lang sofort anwenden
     document.documentElement.setAttribute('data-theme', currentTheme);
-    if (document.body && currentTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-    }
     document.documentElement.setAttribute('lang', currentLang);
 
     // Header nur auf Nicht-Hero-Seiten injizieren
