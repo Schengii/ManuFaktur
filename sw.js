@@ -32,6 +32,8 @@ const ASSETS_TO_CACHE = [
   './assets/images/logos/favicon.svg',
   './assets/images/logos/icon-192.png',
   './assets/images/logos/icon-512.png',
+  './assets/images/logos/logo-440.webp',
+  './assets/images/logos/logo-transparent-256.webp',
   './assets/images/logos/logo-transparent.png',
   './assets/images/logos/logo.png',
   './assets/fonts/dancingscript-700-normal.woff2',

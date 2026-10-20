@@ -259,7 +259,7 @@ function getNavHTML(activePage) {
     <nav aria-label="${isEn ? 'Main navigation' : 'Hauptmenü'}">
       <div class="nav-brand">
         <a href="Home.html" class="headline" aria-label="${isEn ? 'ManuFAKTUR Home' : 'ManuFAKTUR Startseite'}" title="${isEn ? 'Home' : 'Startseite'}">
-          <img src="assets/images/logos/logo-transparent.png" alt="ManuFAKTUR Schenk Logo" class="nav-logo">
+          <img width="256" height="152" src="assets/images/logos/logo-transparent-256.webp" alt="ManuFAKTUR Schenk Logo" class="nav-logo">
         </a>
       </div>
       <button class="hamburger" aria-label="${isEn ? 'Open menu' : 'Menü öffnen'}" aria-expanded="false">
