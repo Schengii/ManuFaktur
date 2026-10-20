@@ -15,6 +15,7 @@ Code-Kommentare, Commit-Inhalte und UI-Texte sind deutsch; Commits folgen Conven
 | Produktions-Build (Partials, JSON-LD, Icons, CSS, JS, CSP) | `npm run build` |
 | Release: `?v=N` + `CACHE_NAME` hochzählen, Sitemap, Build | `npm run release` |
 | Nur CSS / nur JS minifizieren | `npm run build:css` / `npm run build:js` |
+| Einzelne Build-Schritte (Reihenfolge in `npm run build`) | `npm run partials` → `jsonld` → `icons` → `build:css` → `build:js` → `sw:assets` → `csp:update`; separat: `npm run sitemap` |
 | CSP-Hashes in `vercel.json` und `.htaccess` neu berechnen | `npm run csp:update` |
 | Lokaler Server mit Produktions-CSP (Port 3000) | `npm start` |
 | ESLint (auch in der CI) | `npm run lint` |
