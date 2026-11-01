@@ -5,9 +5,9 @@ Die Sicherheit der Website **ManuFAKTUR Schenk** und der Schutz der Daten von Be
 ## Sicherheitsarchitektur
 
 1. **Content Security Policy (CSP):**
-   - Strenge CSP mit Nonce- und SHA-256-Hashes für alle Inline-Skripte.
+   - Strenge CSP (`script-src 'self'`): keine ausführbaren Inline-Skripte; JSON-LD-Blöcke sind reine Daten.
    - Verbot von unsicheren Inline-Styles und Inline-Event-Handlern (`unsafe-inline`, `unsafe-eval`).
-   - Automatische Hash-Berechnung über `npm run csp:update` in `vercel.json` und `.htaccess`.
+   - `vercel.json` und `.htaccess` tragen dieselbe Policy; `tests/header-paritaet.test.js` prüft das.
 
 2. **DSGVO & Datenschutz:**
    - Keine externen Google Fonts oder CDNs; alle Webfonts und Icons werden lokal ausgeliefert.

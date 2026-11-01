@@ -19,7 +19,7 @@ Bitte beschreibe kurz, was geändert wurde und welches Problem damit gelöst wir
 ## ✅ Checkliste vor dem Merge
 
 - [ ] **Produktions-Build ausgeführt:** `npm run build` ausgeführt und Änderungen an `style.min.css` und `Home.min.js` mit committet.
-- [ ] **CSP-Hashes aktuell:** Falls Inline-Skripte verändert wurden, ist `npm run csp:update` gelaufen.
+- [ ] **CSP:** Direktiven nur in `vercel.json` geändert und identisch in `.htaccess` übernommen (Paritätstest).
 - [ ] **Tests bestanden:** `npm test` lokal erfolgreich ausgeführt (keine Konsolenfehler / CSP-Verstöße).
 - [ ] **Mehrsprachigkeit geprüft:** Texte in `I18N_DICTIONARY` für Deutsch und Englisch eingepflegt.
 - [ ] **Barrierefreiheit (A11y):** Tastaturbedienung und ARIA-Labels geprüft.

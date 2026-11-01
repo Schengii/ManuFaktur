@@ -38,7 +38,7 @@ jobs:
       - name: Auf sensible Secrets und .env-Dateien prüfen
         run: node scripts/check-secrets.js --all
 
-      - name: Produktions-Build & CSP-Hashes generieren
+      - name: Produktions-Build
         run: npm run build
 
       - name: Prüfen, ob die Asset-Version in HTML und sw.js übereinstimmt

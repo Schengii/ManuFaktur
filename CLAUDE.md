@@ -15,8 +15,7 @@ Code-Kommentare, Commit-Inhalte und UI-Texte sind deutsch; Commits folgen Conven
 | Produktions-Build (Partials, JSON-LD, Icons, CSS, JS, CSP) | `npm run build` |
 | Release: `?v=N` + `CACHE_NAME` hochzählen, Sitemap, Build | `npm run release` |
 | Nur CSS / nur JS minifizieren | `npm run build:css` / `npm run build:js` |
-| Einzelne Build-Schritte (Reihenfolge in `npm run build`) | `npm run partials` → `jsonld` → `share-pages` → `icons` → `build:css` → `build:js` → `sw:assets` → `csp:update`; separat: `npm run sitemap` |
-| CSP-Hashes in `vercel.json` und `.htaccess` neu berechnen | `npm run csp:update` |
+| Einzelne Build-Schritte (Reihenfolge in `npm run build`) | `npm run partials` → `jsonld` → `share-pages` → `icons` → `build:css` → `build:js` → `sw:assets`; separat: `npm run sitemap` |
 | Lokaler Server mit Produktions-CSP (Port 3000) | `npm start` |
 | ESLint (auch in der CI) | `npm run lint` |
 | Alle Browser-Tests (inkl. axe-core-a11y-Test in `tests/a11y.test.js`) | `npm test` |
@@ -48,7 +47,7 @@ Bearbeitet werden die Quellen; `npm run build` erzeugt daraus den Rest. Generier
 | `assets/js/artworks-data.js` | `VisualArtwork`-JSON-LD zwischen `<!-- generated:gallery-jsonld -->`-Markern in Bildergalerie.html |
 | benutzte `fa-*`-Klassen in HTML/JS, `content: "\fXXX"` in style.css | `assets/vendor/font-awesome/css/icons.min.css`, `webfonts/*-subset.woff2` |
 | `assets/js/artworks-data.js` + `.gallery-item`-Blöcke | `werk/ID.html`: Weiterleitung zur Galerie mit eigenen Open-Graph-Tags für die Link-Vorschau; der Teilen-Button der Lightbox verlinkt darauf (`scripts/gen-share-pages.js`) |
-| JSON-LD-Blöcke | CSP-Hashes in `vercel.json` und `.htaccess` |
+| JSON-LD-Blöcke | – |
 | eingebundene CSS/JS-Dateien, Seiten, Logos, Schriften | `ASSETS_TO_CACHE` in `sw.js` zwischen `<generated:assets>`-Markern (`scripts/gen-sw-assets.js`; bricht ab, wenn eine Datei fehlt) |
 
 Icon-Namen deshalb nie dynamisch zusammensetzen (`'fa-' + name`) – `scripts/build-icons.js` findet nur ausgeschriebene Klassen und bricht bei unbekannten Namen ab. `all.min.css` und die vollen Webfonts bleiben nur als Quelle für das Subset im Repo.
@@ -75,7 +74,7 @@ Jede Seite enthält nur leere `<header></header>`- und `<footer>`-Platzhalter. `
 
 - Keine Inline-Handler (`onclick` …). Klicks, `input` und `change` laufen über die Delegations-Blöcke in `Home.js` (Abschnitt „4b. KLICK-DELEGATION“) bzw. am Ende von `auftrag.js`; neue Interaktionen dort ergänzen.
 - Keine `style="…"`-Attribute und keine `<style>`-Blöcke im HTML. Styles gehören in `style.css`; dynamische Werte per JS über `el.style.…`.
-- Die einzigen Inline-Skripte sind die JSON-LD-Blöcke. Jede Änderung daran ändert den Hash – `npm run csp:update` (Teil von `npm run build`) schreibt die Hashes in `vercel.json` und übernimmt die fertige Policy nach `.htaccess`. Andere Direktiven daher nur in `vercel.json` ändern.
+- Die einzigen Inline-Skripte sind die JSON-LD-Blöcke (`type="application/ld+json"`). Das sind Daten, die die CSP nicht betrifft; Hashes sind deshalb nicht nötig. Ein ausführbares Inline-Skript würde blockiert, und `tests/funktionen.test.js` schlägt dann an. Die Policy steht in `vercel.json` und muss in `.htaccess` identisch sein (`tests/header-paritaet.test.js` prüft das).
 - Neue externe Ziele (APIs, Frames) brauchen einen Eintrag in `connect-src`/`frame-src` in beiden Dateien. Erlaubt sind derzeit nur Web3Forms und das Google-Maps-Frame.
 
 ### Mehrsprachigkeit

@@ -191,7 +191,6 @@ Bearbeitet werden nur die Quellen; alles andere erzeugt `npm run build` und wird
 | `npm run jsonld` | erzeugt die VisualArtwork-Strukturdaten in Bildergalerie.html aus `assets/js/artworks-data.js` |
 | `npm run icons` | baut das Font-Awesome-Subset (`icons.min.css` + `*-subset.woff2`) aus den tatsächlich benutzten Icons |
 | `npm run build:css` / `build:js` | minifiziert `style.css` / `Home.js` |
-| `npm run csp:update` | berechnet die CSP-Hashes der JSON-LD-Blöcke und schreibt sie in `vercel.json` **und** `.htaccess` |
 
 Weitere Skripte: `npm run release` (Version hochzählen + Sitemap + Build), `npm run version:check`, `npm run check:gallery`, `npm run check:secrets` (Secrets- & Pre-Commit-Prüfung), `npm run sitemap`, `npm run images:srcset` (Thumbnails), `npm run images:og` (Link-Vorschaubilder).
 

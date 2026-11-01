@@ -647,3 +647,16 @@ test('404: Seite funktioniert auch unter einer verschachtelten URL (Styles laden
   await context.close();
   assert.deepEqual(errors.filter(e => !/404/.test(e)), []);
 });
+
+test('CSP: die einzigen Inline-Skripte sind JSON-LD-Daten, nichts Ausführbares', () => {
+  const pages = fs.readdirSync(__dirname + '/..').filter(f => f.endsWith('.html'));
+  for (const f of pages) {
+    const html = fs.readFileSync(__dirname + '/../' + f, 'utf8');
+    for (const m of html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/gi)) {
+      const attrs = m[1] || '';
+      if (/\ssrc\s*=/.test(attrs) || !m[2].trim()) continue;
+      assert.match(attrs, /type="application\/ld\+json"/, `${f}: ausführbares Inline-Skript (CSP blockiert es)`);
+    }
+  }
+  assert.ok(!/'sha256-/.test(fs.readFileSync(__dirname + '/../vercel.json', 'utf8')));
+});

@@ -16,7 +16,10 @@ Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/) 
 - Mehrere Bedienelemente blieben unsichtbar, weil `.hidden` (`!important`) Inline-Styles überstimmte (Keine-Treffer-Meldung, Wand-Badge, Favoriten im Konfigurator).
 - Nach dem Wechsel Englisch → Deutsch standen teils andere deutsche Texte als im HTML; jetzt werden die HTML-Originale wiederhergestellt.
 - Erfundene Kundenstimmen in der Lightbox entfernt.
-- `.htaccess` enthielt eine veraltete CSP-Kopie; `npm run csp:update` schreibt die Policy jetzt in beide Dateien.
+- `.htaccess` enthielt eine veraltete CSP-Kopie; ein Paritätstest prüft jetzt beide Dateien.
+
+### Geändert
+- CSP ohne SHA-256-Hashes: JSON-LD-Blöcke sind Daten und unterliegen `script-src` nicht (in allen Seiten geprüft). `npm run csp:update` entfällt; `tests/header-paritaet.test.js` hält `vercel.json` und `.htaccess` synchron.
 
 ### Hinzugefügt
 - Teilen-Link pro Werk: `werk/ID.html` (generiert, `npm run share-pages`) liefert Titel, Beschreibung und Vorschaubild für Messenger und leitet zur Galerie weiter; die Lightbox verlinkt darauf.

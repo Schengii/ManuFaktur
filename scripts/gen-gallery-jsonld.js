@@ -4,7 +4,7 @@
  *     <!-- generated:gallery-jsonld --> … <!-- /generated:gallery-jsonld -->
  * in Bildergalerie.html. So gibt es keine dritte, von Hand gepflegte Kopie der Werkdaten.
  *
- * Teil von `npm run build` (vor csp:update, weil sich dabei der Hash des Inline-Skripts ändert).
+ * Teil von `npm run build`.
  * Nutzung: node scripts/gen-gallery-jsonld.js   (oder: npm run jsonld)
  */
 const fs = require('fs');
