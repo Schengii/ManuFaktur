@@ -1218,7 +1218,11 @@ function refreshAccordionHeights() {
         if (content) content.style.maxHeight = content.scrollHeight + 'px';
     });
 }
-window.addEventListener('resize', refreshAccordionHeights);
+let accordionResizeTimer = null;
+window.addEventListener('resize', function () {
+    clearTimeout(accordionResizeTimer);
+    accordionResizeTimer = setTimeout(refreshAccordionHeights, 150);
+});
 
 function updateGalleryLinks() {
     visibleGalleryLinks = Array.from(document.querySelectorAll('.gallery-item'))

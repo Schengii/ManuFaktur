@@ -5,10 +5,10 @@ function topFunction() {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
 }
-window.onscroll = function () {
+window.addEventListener('scroll', function () {
     const btn = document.querySelector('.back-to-top');
     if (btn) btn.style.display = (document.documentElement.scrollTop > 150) ? 'flex' : 'none';
-};
+}, { passive: true });
 document.addEventListener('click', function (e) {
     if (e.target.closest('.back-to-top')) topFunction();
 });

@@ -4,5 +4,5 @@ Allow: /
 # Sitemap
 Sitemap: https://www.manufaktur-malerei.de/sitemap.xml
 
-# Dokumente und Assets ausschließen
-Disallow: /assets/documents/
+# Dokumente (PDF/VCF) bleiben crawlbar, damit Suchmaschinen den Header
+# "X-Robots-Tag: noindex" lesen können; ein Disallow würde das verhindern.
