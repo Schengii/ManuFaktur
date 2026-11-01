@@ -1055,6 +1055,7 @@ let isClosingLightboxFromPopstate = false;
 let isFlyerModalOpen = false;
 let closeLightboxUI = null;
 let closeFlyerModalUI = null;
+let lastFlyerTrigger = null;
 
 function applyFilterUI(category) {
     activeCategory = category || 'alle';
@@ -1688,7 +1689,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // --- G. Rechtsklick-Schutz (Toast) ---
-    document.addEventListener('contextmenu', function (e) {
+    // Skip-Link per Skript: funktioniert auch mit <base href> (404.html), wo '#main-content' sonst auf '/' zeigt
+document.addEventListener('click', function (e) {
+    const skip = e.target.closest && e.target.closest('.skip-link');
+    if (!skip) return;
+    const target = document.getElementById((skip.getAttribute('href') || '').replace('#', ''));
+    if (!target) return;
+    e.preventDefault();
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus();
+    target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+});
+
+document.addEventListener('contextmenu', function (e) {
         if (e.target.tagName === 'IMG') {
             e.preventDefault();
             showToast(currentLang === 'en' ? 'Copyright protected © Manuela Schenk' : 'Urheberrechtlich geschützt © Manuela Schenk');
@@ -1744,6 +1757,10 @@ closeFlyerModalUI = function (triggerHistoryBack = true) {
         isFlyerModalOpen = false;
         document.body.style.overflow = '';
 
+        // Fokus zurück an das auslösende Bild (WCAG 2.4.3)
+        if (lastFlyerTrigger && document.contains(lastFlyerTrigger)) lastFlyerTrigger.focus();
+        lastFlyerTrigger = null;
+
         if (triggerHistoryBack && window.history && window.history.state && window.history.state.modal === 'flyer') {
             isClosingLightboxFromPopstate = true;
             window.history.back();
@@ -1752,6 +1769,7 @@ closeFlyerModalUI = function (triggerHistoryBack = true) {
 };
 
 function openFlyerModal(element) {
+    lastFlyerTrigger = element;
     const modal = document.getElementById('flyerModal');
     const modalImg = document.getElementById('modalImg');
     if (modal && modalImg) {
@@ -1779,6 +1797,13 @@ document.addEventListener('keydown', function (e) {
     if (modal && isFlyerModalOpen) {
         if (e.key === 'Escape') closeFlyerModal();
         else if (e.key === 'Tab') trapFocus(modal, e);
+        return;
+    }
+    // Flyer-Bilder sind per Tastatur bedienbar (role="button")
+    const flyer = e.target.closest && e.target.closest('.flyer-image');
+    if (flyer && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        openFlyerModal(flyer);
     }
 });
 
@@ -2206,19 +2231,19 @@ function initUrlParamPrefill() {
         const optionCards = document.querySelectorAll('.option-card');
         if (optionCards.length > 0 && kat) {
             const katLower = kat.toLowerCase();
-            optionCards.forEach(card => {
-                const val = (card.getAttribute('data-value') || '').toLowerCase();
-                const isMatch = (
-                    (katLower.includes('land') && val.includes('land')) ||
-                    (katLower.includes('tier') && val.includes('tier')) ||
-                    (katLower.includes('pflanz') && (val.includes('still') || val.includes('pflanz'))) ||
-                    (katLower.includes('sonstig') && val.includes('sonstig')) ||
-                    val.includes(katLower) || katLower.includes(val)
-                );
-                if (isMatch) {
-                    card.click();
-                }
-            });
+            // Galerie-Kategorie (URL) -> data-value der Motiv-Karte; exakte Zuordnung statt Teilstring
+            const KAT_TO_MOTIV = {
+                landschaften: 'landschaft', landschaft: 'landschaft',
+                tiere: 'tierportrait', tierportrait: 'tierportrait',
+                pflanzen: 'stillleben', stillleben: 'stillleben',
+                sonstiges: 'sonstiges', sonstige: 'sonstiges'
+            };
+            const motiv = KAT_TO_MOTIV[katLower];
+            if (motiv) {
+                optionCards.forEach(card => {
+                    if ((card.getAttribute('data-value') || '').toLowerCase() === motiv) card.click();
+                });
+            }
         }
         
         if (ref && document.getElementById('hint-1')) {
