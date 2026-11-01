@@ -485,6 +485,30 @@ nav {
     z-index: 1;
 }
 
+/* Rechtliche Links auf der Einstiegsseite (kein Home.js-Footer) */
+.hero-legal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 14px 16px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-legal a {
+    color: #fff;
+    text-decoration: underline;
+    padding: 6px 4px;
+}
+
+.hero-legal a:focus-visible {
+    outline: 3px solid #9ac2f8;
+    outline-offset: 2px;
+}
+
 .hero-section::before {
     content: "";
     position: absolute;
@@ -1413,6 +1437,11 @@ cite {
     font-weight: 700;
     transition: var(--transition-smooth);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.filter-btn:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
 }
 
 @media (hover: hover) {
@@ -4221,6 +4250,11 @@ h2 {
     flex-direction: column;
     align-items: center;
     outline: none;
+}
+
+.view-thumb-btn:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
 }
 
 @media (hover: hover) {

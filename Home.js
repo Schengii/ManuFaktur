@@ -10,8 +10,10 @@ let currentLang = 'de';
 let currentTheme = 'light';
 
 try {
-    currentLang = localStorage.getItem('manufaktur_lang') || 'de';
-    currentTheme = localStorage.getItem('manufaktur_theme') || 
+    const storedLang = localStorage.getItem('manufaktur_lang');
+    const storedTheme = localStorage.getItem('manufaktur_theme');
+    currentLang = storedLang === 'en' ? 'en' : 'de';
+    currentTheme = (storedTheme === 'dark' || storedTheme === 'light') ? storedTheme :
         (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 } catch (e) {
     currentLang = 'de';
@@ -1241,9 +1243,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isLightboxOpen) {
             savedGalleryScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
             isLightboxOpen = true;
+            // Nur beim ersten Öffnen merken, sonst wird beim Blättern der Schließen-Button gespeichert
+            lastFocusedElement = document.activeElement;
         }
 
-        lastFocusedElement = document.activeElement;
         document.body.style.overflow = 'hidden';
         currentIndex = index;
 
@@ -1608,11 +1611,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 trapFocus(lightbox, e);
                 return;
             }
-            const activeTag = document.activeElement ? document.activeElement.tagName : '';
-            if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
             if (e.key === 'Escape') {
                 closeLightboxFn();
-            } else if (e.key === 'ArrowRight') {
+                return;
+            }
+            const activeTag = document.activeElement ? document.activeElement.tagName : '';
+            if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
+            if (e.key === 'ArrowRight') {
                 changeSlide(1);
             } else if (e.key === 'ArrowLeft') {
                 changeSlide(-1);

@@ -43,7 +43,12 @@ jobs:
 
       - name: Prüfen, ob minifizierte Dateien & CSP synchron sind
         run: |
-          git diff --exit-code style.min.css Home.min.js .htaccess vercel.json sw.js assets/vendor/font-awesome '*.html' || (echo "Fehler: Die minifizierten Dateien oder CSP-Hashes sind nicht synchron mit dem Quellcode! Bitte 'npm run build' lokal ausführen und committen." && exit 1)
+          # status statt diff: erkennt auch geänderte, nicht eingecheckte und neue Dateien (z. B. werk/*.html, i18n.min.js)
+          if [ -n "$(git status --porcelain)" ]; then
+            git status --porcelain
+            echo "Fehler: Der Build-Output ist nicht synchron mit dem Quellcode! Bitte 'npm run build' lokal ausführen und committen."
+            exit 1
+          fi
 
       # Die Tests nutzen das auf dem Runner vorinstallierte Google Chrome (channel: 'chrome'),
       # ein Browser-Download ist nicht nötig.

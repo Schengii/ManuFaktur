@@ -96,4 +96,8 @@ ErrorDocument 404 /404.html
     <FilesMatch "\.(html)$">
         Header set Cache-Control "no-cache, must-revalidate"
     </FilesMatch>
+    # Service Worker muss immer revalidiert werden (wie in vercel.json)
+    <FilesMatch "^sw\.js$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
 </IfModule>
