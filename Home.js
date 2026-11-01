@@ -648,6 +648,9 @@ function initFavButtonsUI() {
     updateFavBadgeCount();
 }
 
+const GALLERY_SEARCH_DEBOUNCE_MS = 150;
+let gallerySearchTimer = null;
+
 function clearGallerySearch() {
     const searchInput = document.getElementById('gallery-search');
     if (searchInput) {
@@ -1134,7 +1137,8 @@ function filterGallery() {
         const itemId = item.getAttribute('id') || '';
         const imgEl = item.querySelector('img');
         const captionEl = item.querySelector('.gallery-caption');
-        const itemText = (captionEl ? captionEl.innerText : '') + ' ' + (imgEl ? imgEl.alt : '');
+        // textContent statt innerText: innerText erzwingt pro Item ein Layout (Reflow)
+        const itemText = (captionEl ? captionEl.textContent : '') + ' ' + (imgEl ? imgEl.alt : '');
 
         let matchesCategory = false;
         if (activeCategory === 'alle') {
@@ -1900,7 +1904,11 @@ document.addEventListener('click', function (e) {
 
 document.addEventListener('input', function (e) {
     if (e.target.id === 'lb-scale-slider') updateLbWallScale(e.target.value);
-    if (e.target.id === 'gallery-search') filterGallery();
+    if (e.target.id === 'gallery-search') {
+        // Entprellen: nicht bei jedem Tastendruck neu filtern (und den Live-Zähler ansagen)
+        clearTimeout(gallerySearchTimer);
+        gallerySearchTimer = setTimeout(filterGallery, GALLERY_SEARCH_DEBOUNCE_MS);
+    }
 });
 
 document.addEventListener('change', function (e) {

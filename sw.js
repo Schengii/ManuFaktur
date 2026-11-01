@@ -2,7 +2,7 @@
 // CACHE_NAME und die ?v=N-Parameter werden von `npm run release` hochgezählt
 // (scripts/bump-version.js) – nicht von Hand ändern. Die Precache-Liste erzeugt
 // scripts/gen-sw-assets.js beim Build.
-const CACHE_NAME = 'manufaktur-v33';
+const CACHE_NAME = 'manufaktur-v34';
 const RUNTIME_CACHE = 'manufaktur-runtime';
 const RUNTIME_MAX_ENTRIES = 80;
 // <generated:assets> (scripts/gen-sw-assets.js – nicht von Hand ändern)
@@ -17,15 +17,15 @@ const ASSETS_TO_CACHE = [
   './Kontakt.html',
   './Leistungen.html',
   './UeberMich.html',
-  './Home.min.js?v=27',
-  './assets/js/artworks-data.js?v=27',
-  './assets/js/auftrag.js?v=27',
-  './assets/js/i18n.min.js?v=27',
-  './assets/js/index-page.js?v=27',
-  './assets/js/insights.js?v=27',
-  './assets/js/theme-init.js?v=27',
-  './assets/vendor/font-awesome/css/icons.min.css?v=27',
-  './style.min.css?v=27',
+  './Home.min.js?v=28',
+  './assets/js/artworks-data.js?v=28',
+  './assets/js/auftrag.js?v=28',
+  './assets/js/i18n.min.js?v=28',
+  './assets/js/index-page.js?v=28',
+  './assets/js/insights.js?v=28',
+  './assets/js/theme-init.js?v=28',
+  './assets/vendor/font-awesome/css/icons.min.css?v=28',
+  './style.min.css?v=28',
   './manifest.json',
   './assets/images/logos/apple-touch-icon.png',
   './assets/images/logos/favicon.png',
@@ -95,8 +95,11 @@ self.addEventListener('fetch', (event) => {
       fetch(event.request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
+            // Ohne Query-String ablegen (z. B. Kontakt.html?motiv=…), sonst wächst der Cache
+            // mit jeder Parameter-Variante und der Offline-Fallback liefert fremde Vorbelegungen.
             const copy = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+            const cacheKey = new Request(url.origin + url.pathname);
+            caches.open(CACHE_NAME).then((cache) => cache.put(cacheKey, copy));
           }
           return networkResponse;
         })

@@ -4029,6 +4029,7 @@ h2 {
     cursor: grab;
     -webkit-user-select: none;
     user-select: none;
+    touch-action: none; /* Bild per Touch ziehen, ohne dass die Lightbox mitscrollt */
 }
 
 .wall-frame-container.is-dragging {

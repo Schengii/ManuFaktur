@@ -62,8 +62,10 @@ test('Galerie: Suche ohne Treffer zeigt die „Keine Gemälde gefunden“-Meldun
   const { page, context } = await open('/Bildergalerie.html');
   assert.equal(await isDisplayed(page, '#no-gallery-results'), false);
   await page.fill('#gallery-search', 'xyzxyzxyz');
+  await page.waitForSelector('#no-gallery-results', { state: 'visible' }); // Suche ist entprellt
   assert.equal(await isDisplayed(page, '#no-gallery-results'), true);
   await page.fill('#gallery-search', '');
+  await page.waitForSelector('#no-gallery-results', { state: 'hidden' });
   assert.equal(await isDisplayed(page, '#no-gallery-results'), false);
   await context.close();
 });
