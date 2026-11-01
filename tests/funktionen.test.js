@@ -278,6 +278,29 @@ const SAVED_CONFIG = JSON.stringify({
   step: 4, motiv: 'Tierportrait', format: '30×40 cm', technik: 'Acryl', lieferzeit: 'ca. 2–3 Wochen'
 });
 
+test('Konfigurator: Fokus wandert beim Schrittwechsel auf die neue Überschrift, nicht beim Laden', async () => {
+  const { page, context } = await open('/Auftrag.html');
+  assert.equal(await page.evaluate(() => document.activeElement === document.body), true, 'Fokus beim Laden unverändert');
+  await page.click('#panel-1 .option-card');
+  await page.click('#next-1');
+  await page.waitForFunction(() => document.activeElement && document.activeElement.id === 'step2-title');
+  await page.click('#panel-2 .btn-back');
+  await page.waitForFunction(() => document.activeElement && document.activeElement.id === 'step1-title');
+  await context.close();
+});
+
+test('FAQ-Akkordeon: geschlossene Antworten sind ausgeblendet, geöffnete sichtbar', async () => {
+  const { page, context } = await open('/Leistungen.html');
+  const content = page.locator('.accordion-header').first().locator('xpath=following-sibling::*[1]');
+  assert.equal(await content.evaluate(el => getComputedStyle(el).visibility), 'hidden');
+  await page.locator('.accordion-header').first().click();
+  await page.waitForFunction(() => {
+    const el = document.querySelector('.accordion-header').nextElementSibling;
+    return getComputedStyle(el).visibility === 'visible' && el.getBoundingClientRect().height > 20;
+  });
+  await context.close();
+});
+
 test('Konfigurator: gespeicherte Konfiguration blendet das Wiederherstellen-Banner ein', async () => {
   const { page, context } = await open('/Auftrag.html', { storage: { manufaktur_konfigurator_state: SAVED_CONFIG } });
   assert.equal(await isDisplayed(page, '#restore-banner'), true);

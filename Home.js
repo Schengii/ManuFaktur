@@ -152,6 +152,7 @@ function setLanguage(lang) {
     // Alles Weitere braucht die Texte der Zielsprache (beim ersten Wechsel auf Englisch erst nach dem Nachladen).
     whenI18nReady(currentLang, () => {
         applyTranslations(currentLang);
+        refreshAccordionHeights();
 
         // Galerie Filter & Suche aktualisieren falls vorhanden
         if (typeof filterGallery === 'function') {
@@ -1200,6 +1201,15 @@ function filterGallery() {
     updateFavBadgeCount();
     updateGalleryLinks();
 }
+
+// Höhe geöffneter FAQ-Einträge neu messen (nach Sprachwechsel oder Resize ändert sich die Textlänge)
+function refreshAccordionHeights() {
+    document.querySelectorAll('.accordion-header.active').forEach(header => {
+        const content = header.nextElementSibling;
+        if (content) content.style.maxHeight = content.scrollHeight + 'px';
+    });
+}
+window.addEventListener('resize', refreshAccordionHeights);
 
 function updateGalleryLinks() {
     visibleGalleryLinks = Array.from(document.querySelectorAll('.gallery-item'))

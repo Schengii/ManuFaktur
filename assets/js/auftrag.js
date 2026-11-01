@@ -143,7 +143,7 @@ function nextStep(current) {
   if (current === 3 && !state.technik) { hintEl.classList.add('visible'); return; }
 
   if (current === 3) buildSummary();
-  goToStep(current + 1);
+  goToStep(current + 1, true);
 }
 
 // Kinder einer progressbar sind für Screenreader unsichtbar – der Schritt steht deshalb in aria-valuetext.
@@ -160,10 +160,11 @@ function updateProgressAria() {
 }
 
 function prevStep(current) {
-  goToStep(current - 1);
+  goToStep(current - 1, true);
 }
 
-function goToStep(step) {
+// moveFocus: nur bei Benutzeraktion (Weiter/Zurück), nicht beim Wiederherstellen beim Laden.
+function goToStep(step, moveFocus = false) {
   document.querySelectorAll('.config-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.progress-step').forEach((s, i) => {
     s.classList.remove('active', 'completed');
@@ -175,6 +176,14 @@ function goToStep(step) {
   updateProgressAria();
   saveConfig();
   document.querySelector('.progress-bar-container').scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
+  if (moveFocus) {
+    // Das vorige Panel ist jetzt display:none; Fokus auf die Überschrift des neuen Schritts setzen
+    const heading = document.getElementById('step' + step + '-title');
+    if (heading) {
+      heading.setAttribute('tabindex', '-1');
+      heading.focus({ preventScroll: true });
+    }
+  }
 }
 
 // ── Zusammenfassung ───────────────────────────────────────────────────────
