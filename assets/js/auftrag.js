@@ -153,7 +153,7 @@ function updateProgressAria() {
   const step = state.step || 1;
   const labels = document.querySelectorAll('.progress-step .step-label');
   const label = labels[step - 1] ? labels[step - 1].textContent.trim() : '';
-  const isEn = typeof currentLang !== 'undefined' && currentLang === 'en';
+  const isEn = isEnglish();
   bar.setAttribute('aria-valuenow', String(step));
   bar.setAttribute('aria-valuetext', isEn ? `Step ${step} of 4: ${label}` : `Schritt ${step} von 4: ${label}`);
   bar.setAttribute('aria-label', isEn ? 'Configuration progress' : 'Konfigurationsfortschritt');

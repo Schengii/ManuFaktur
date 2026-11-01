@@ -62,7 +62,7 @@ function getI18nDict() {
 }
 
 // Englisch-Besucher: Laden sofort anstoßen, nicht erst nach DOMContentLoaded.
-if (currentLang === 'en') ensureI18n().catch(() => {});
+if (isEnglish()) ensureI18n().catch(() => {});
 
 /**
  * Zentrale Texte für Theme-/Sprach-Umschalter-Buttons (Footer).
@@ -101,7 +101,7 @@ function setTheme(theme) {
 function toggleTheme() {
     const newTheme = (currentTheme === 'dark') ? 'light' : 'dark';
     setTheme(newTheme);
-    showToast(currentLang === 'en' 
+    showToast(isEnglish() 
         ? (newTheme === 'dark' ? '🌙 Dark mode activated' : '☀️ Light mode activated')
         : (newTheme === 'dark' ? '🌙 Dunkelmodus aktiviert' : '☀️ Hellmodus aktiviert'));
 }
@@ -124,6 +124,10 @@ function updateThemeButtonUI() {
 
 function getLanguage() {
     return currentLang;
+}
+
+function isEnglish() {
+    return currentLang === 'en';
 }
 
 function setLanguage(lang) {
@@ -269,7 +273,7 @@ let navDocListenersBound = false;
  * Der aktive Link wird anhand der aktuellen URL gesetzt.
  */
 function getNavHTML(activePage) {
-    const isEn = currentLang === 'en';
+    const isEn = isEnglish();
     const links = [
         { href: 'Home.html', icon: 'fa fa-home', label: 'Home' },
         { href: 'UeberMich.html', icon: 'fa-solid fa-address-card', label: isEn ? 'About Me' : 'Über mich' },
@@ -318,7 +322,7 @@ function getNavHTML(activePage) {
  * Gibt den HTML-String des gemeinsamen Footers zurück.
  */
 function getFooterHTML() {
-    const isEn = currentLang === 'en';
+    const isEn = isEnglish();
     const isDark = currentTheme === 'dark';
     return `
   <footer>
@@ -470,7 +474,7 @@ function applyTranslations(lang) {
 function getArtMeta(itemId) {
     if (!itemId || typeof ARTWORKS_METADATA === 'undefined' || !ARTWORKS_METADATA[itemId]) return null;
     const base = ARTWORKS_METADATA[itemId];
-    if (currentLang === 'en' && typeof ARTWORKS_METADATA_EN !== 'undefined' && ARTWORKS_METADATA_EN[itemId]) {
+    if (isEnglish() && typeof ARTWORKS_METADATA_EN !== 'undefined' && ARTWORKS_METADATA_EN[itemId]) {
         return Object.assign({}, base, ARTWORKS_METADATA_EN[itemId]);
     }
     return base;
@@ -550,11 +554,11 @@ function toggleFavorite(itemId, event) {
     if (index > -1) {
         favs.splice(index, 1);
         isAdded = false;
-        showToast(currentLang === 'en' ? 'Artwork removed from favorites.' : 'Kunstwerk aus Favoriten entfernt.');
+        showToast(isEnglish() ? 'Artwork removed from favorites.' : 'Kunstwerk aus Favoriten entfernt.');
     } else {
         favs.push(itemId);
         isAdded = true;
-        showToast(currentLang === 'en' ? '❤️ Artwork added to favorites!' : '❤️ Kunstwerk zu Favoriten hinzugefügt!');
+        showToast(isEnglish() ? '❤️ Artwork added to favorites!' : '❤️ Kunstwerk zu Favoriten hinzugefügt!');
     }
 
     saveFavorites(favs);
@@ -692,7 +696,7 @@ function sortGallery(sortOption) {
 
     items.forEach(item => grid.appendChild(item));
     updateGalleryLinks();
-    showToast(currentLang === 'en' ? 'Gallery re-sorted' : 'Galerie neu sortiert');
+    showToast(isEnglish() ? 'Gallery re-sorted' : 'Galerie neu sortiert');
 }
 
 let currentLbScene = 'detail';
@@ -715,7 +719,7 @@ function resetWallFramePosition() {
     wallFramePosX = 0;
     wallFramePosY = 0;
     updateWallFrameTransform();
-    showToast(currentLang === 'en' ? '🎯 Position centered' : '🎯 Position zentriert');
+    showToast(isEnglish() ? '🎯 Position centered' : '🎯 Position zentriert');
 }
 
 function updateWallFrameTransform() {
@@ -829,7 +833,7 @@ function setLightboxScene(scene, btn) {
             stage.style.backgroundColor = 'transparent';
             if (badge) {
                 badge.classList.remove('hidden');
-                const isEn = currentLang === 'en';
+                const isEn = isEnglish();
                 const labelMap = isEn ? {
                     'livingroom': 'Living Room',
                     'bedroom': 'Bedroom',
@@ -926,7 +930,7 @@ function setLightboxViewAngle(angle, btn) {
         img.src = 'assets/images/rooms/canvas_back.webp';
         if (badge) {
             badge.classList.remove('hidden');
-            badge.innerHTML = `<i class="fa-solid fa-square-check" aria-hidden="true"></i> ${currentLang === 'en' ? 'Stretcher frame & back (solid spruce)' : 'Keilrahmen & Rückseite (massives Fichtenholz)'}`;
+            badge.innerHTML = `<i class="fa-solid fa-square-check" aria-hidden="true"></i> ${isEnglish() ? 'Stretcher frame & back (solid spruce)' : 'Keilrahmen & Rückseite (massives Fichtenholz)'}`;
         }
         container.style.maxWidth = '75%';
         container.style.maxHeight = '52vh';
@@ -939,7 +943,7 @@ function setLightboxViewAngle(angle, btn) {
         container.style.boxShadow = '-20px 25px 50px rgba(0, 0, 0, 0.65), -5px 8px 15px rgba(0, 0, 0, 0.4)';
         if (badge) {
             badge.classList.remove('hidden');
-            badge.innerHTML = `<i class="fa-solid fa-cube" aria-hidden="true"></i> ${currentLang === 'en' ? '3D side view (painted edge)' : '3D-Seitenansicht (gemalter Rand)'}`;
+            badge.innerHTML = `<i class="fa-solid fa-cube" aria-hidden="true"></i> ${isEnglish() ? '3D side view (painted edge)' : '3D-Seitenansicht (gemalter Rand)'}`;
         }
     } else if (currentViewAngle === 'artist') {
         if (stage) {
@@ -951,7 +955,7 @@ function setLightboxViewAngle(angle, btn) {
         }
         if (badge) {
             badge.classList.remove('hidden');
-            badge.innerHTML = `<i class="fa-solid fa-palette" aria-hidden="true"></i> ${currentLang === 'en' ? 'Handmade in the Bonn studio' : 'Handgemacht im Atelier Bonn'}`;
+            badge.innerHTML = `<i class="fa-solid fa-palette" aria-hidden="true"></i> ${isEnglish() ? 'Handmade in the Bonn studio' : 'Handgemacht im Atelier Bonn'}`;
         }
     }
 }
@@ -965,7 +969,7 @@ function rotateLightboxImage(deg) {
     if (!img) return;
     currentRotationAngle = (currentRotationAngle + (deg || 90)) % 360;
     img.style.transform = `rotate(${currentRotationAngle}deg)`;
-    showToast(currentLang === 'en' ? `Image rotated ${currentRotationAngle}°` : `Bild um ${currentRotationAngle}° gedreht`);
+    showToast(isEnglish() ? `Image rotated ${currentRotationAngle}°` : `Bild um ${currentRotationAngle}° gedreht`);
 }
 
 function toggleLightboxZoom() {
@@ -974,7 +978,7 @@ function toggleLightboxZoom() {
     const lens = document.getElementById('lightbox-magnifier');
     if (btn) btn.classList.toggle('active', isZoomActive);
     if (!isZoomActive && lens) lens.style.display = 'none';
-    showToast(currentLang === 'en'
+    showToast(isEnglish()
         ? (isZoomActive ? '🔍 Magnifier activated (hover over the image)' : 'Magnifier deactivated')
         : (isZoomActive ? '🔍 Lupe aktiviert (Fahre über das Bild)' : 'Lupe deaktiviert'));
 }
@@ -1188,7 +1192,7 @@ function filterGallery() {
 
     const liveCounterEl = document.getElementById('gallery-counter');
     if (liveCounterEl) {
-        const isEnCounter = currentLang === 'en';
+        const isEnCounter = isEnglish();
         if (visibleCount === items.length) {
             liveCounterEl.textContent = isEnCounter
                 ? `${items.length} paintings`
@@ -1326,7 +1330,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const realMasse = artMeta ? artMeta.masse : 'Unikatmaß';
         const realKat = artMeta ? artMeta.kategorie : (item ? (item.getAttribute('data-kategorie') || 'Kunstwerk') : 'Kunstwerk');
 
-        const isEn = currentLang === 'en';
+        const isEn = isEnglish();
         const techniqueTranslations = {
             'Acryl auf Leinwand': 'Acrylic on Canvas',
             'Öl auf Leinwand': 'Oil on Canvas',
@@ -1435,7 +1439,7 @@ document.addEventListener('DOMContentLoaded', function () {
             lbRoomBtn.onclick = function() {
                 setLightboxViewAngle('room', document.querySelector('.view-thumb-btn[data-view="room"]'));
                 setLightboxScene('livingroom', document.querySelector('.scene-btn[data-scene="livingroom"]'));
-                showToast(currentLang === 'en' ? '✨ AI wall preview activated!' : '✨ KI-Wandvorlage im Raum aktiviert!');
+                showToast(isEnglish() ? '✨ AI wall preview activated!' : '✨ KI-Wandvorlage im Raum aktiviert!');
             };
         }
 
@@ -1704,7 +1708,7 @@ document.addEventListener('click', function (e) {
 document.addEventListener('contextmenu', function (e) {
         if (e.target.tagName === 'IMG') {
             e.preventDefault();
-            showToast(currentLang === 'en' ? 'Copyright protected © Manuela Schenk' : 'Urheberrechtlich geschützt © Manuela Schenk');
+            showToast(isEnglish() ? 'Copyright protected © Manuela Schenk' : 'Urheberrechtlich geschützt © Manuela Schenk');
         }
     });
 
@@ -1986,7 +1990,7 @@ function initContactForm() {
 
     form.addEventListener('submit', async function (e) {
         const action = form.getAttribute('action');
-        const isEn = currentLang === 'en';
+        const isEn = isEnglish();
 
         const accessKey = form.querySelector('input[name="access_key"]');
         if (!action || !accessKey || !accessKey.value || accessKey.value === 'DEIN_WEB3FORMS_KEY') {
@@ -2178,7 +2182,7 @@ function showConfigReference(refTitle, displayTitle) {
     icon.setAttribute('aria-hidden', 'true');
     const strong = document.createElement('strong');
     strong.textContent = displayTitle || refTitle;
-    const label = currentLang === 'en' ? 'Selected reference painting' : 'Ausgewählte Motiv-Referenz';
+    const label = isEnglish() ? 'Selected reference painting' : 'Ausgewählte Motiv-Referenz';
     hintEl.replaceChildren(icon, ` ${label}: `, strong);
 }
 
@@ -2194,7 +2198,7 @@ function initPhotoUploadPreview() {
             const file = this.files[0];
             if (file) {
                 if (file.size > 10 * 1024 * 1024) {
-                    showToast(currentLang === 'en' ? 'Note: File is larger than 10 MB.' : 'Hinweis: Datei ist größer als 10 MB.');
+                    showToast(isEnglish() ? 'Note: File is larger than 10 MB.' : 'Hinweis: Datei ist größer als 10 MB.');
                 }
                 const reader = new FileReader();
                 reader.onload = function(e) {

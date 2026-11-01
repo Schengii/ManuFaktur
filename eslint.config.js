@@ -24,6 +24,7 @@ const providedByOtherScripts = {
 const providedByHomeJs = {
   currentLang: 'readonly',
   getLanguage: 'readonly',
+  isEnglish: 'readonly',
   prefersReducedMotion: 'readonly'
 };
 
