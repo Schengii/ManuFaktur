@@ -24,7 +24,7 @@
     "images:og": "node scripts/gen-og-images.js",
     "sitemap": "node scripts/gen-sitemap.js",
     "csp:update": "node scripts/update-csp-hashes.js",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings 0",
     "images:lightbox": "node scripts/optimize-lightbox.js",
     "sw:assets": "node scripts/gen-sw-assets.js",
     "check:secrets": "node scripts/check-secrets.js --staged",

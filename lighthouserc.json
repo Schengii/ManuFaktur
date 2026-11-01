@@ -8,7 +8,11 @@
         "http://localhost:3000/Bildergalerie.html",
         "http://localhost:3000/Auftrag.html",
         "http://localhost:3000/Leistungen.html",
-        "http://localhost:3000/Kontakt.html"
+        "http://localhost:3000/Kontakt.html",
+        "http://localhost:3000/index.html",
+        "http://localhost:3000/UeberMich.html",
+        "http://localhost:3000/Impressum.html",
+        "http://localhost:3000/Datenschutz.html"
       ],
       "numberOfRuns": 2,
       "settings": {
