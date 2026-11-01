@@ -455,6 +455,7 @@ function applyTranslations(lang) {
 
     // Galerie-Karten (Titel, Technik, Maße aus artworks-data.js)
     translateGalleryCards(lang);
+    if (typeof initFavButtonsUI === 'function') initFavButtonsUI();
 
     // Konfigurator: Fortschrittsanzeige (aria-valuetext) folgt den Schrittnamen
     if (typeof updateProgressAria === 'function') updateProgressAria();
@@ -592,6 +593,7 @@ function updateFavButtonsUI(itemId, isAdded) {
         if (btn) {
             btn.classList.toggle('active', isAdded);
             btn.setAttribute('aria-label', favButtonLabel(isAdded));
+            btn.setAttribute('title', favButtonLabel(isAdded));
             const icon = btn.querySelector('i');
             if (icon) {
                 icon.className = isAdded ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
@@ -649,6 +651,7 @@ function initFavButtonsUI() {
         const isAdded = favs.includes(itemId);
         btn.classList.toggle('active', isAdded);
         btn.setAttribute('aria-label', favButtonLabel(isAdded));
+        btn.setAttribute('title', favButtonLabel(isAdded));
         btn.innerHTML = isAdded ? '<i class="fa-solid fa-heart"></i>' : '<i class="fa-regular fa-heart"></i>';
     });
     updateFavBadgeCount();

@@ -1301,12 +1301,12 @@
     </div>
 
     <section class="flyer-section reveal">
-      <h2><i class="fa-regular fa-file-pdf" aria-hidden="true"></i> Mehr erfahren?</h2>
-      <p>Klicke auf eine Seite für die Großansicht des Informationsflyers oder lade das PDF direkt herunter.</p>
+      <h2><i class="fa-regular fa-file-pdf" aria-hidden="true"></i> <span data-i18n="gal_flyer_h2">Mehr erfahren?</span></h2>
+      <p data-i18n="gal_flyer_text">Klicke auf eine Seite für die Großansicht des Informationsflyers oder lade das PDF direkt herunter.</p>
       <hr class="divider-short">
       <div class="flyer-row">
-        <img loading="lazy" width="1952" height="1384" src="assets/images/flyer/flyer-page1.webp" alt="Informationsflyer Seite 1" class="flyer-image" tabindex="0" role="button">
-        <img loading="lazy" width="1982" height="1402" src="assets/images/flyer/flyer-page2.webp" alt="Informationsflyer Seite 2" class="flyer-image" tabindex="0" role="button">
+        <img loading="lazy" width="1952" height="1384" src="assets/images/flyer/flyer-page1.webp" alt="Informationsflyer Seite 1" data-i18n-alt="flyer_page1_alt" class="flyer-image" tabindex="0" role="button">
+        <img loading="lazy" width="1982" height="1402" src="assets/images/flyer/flyer-page2.webp" alt="Informationsflyer Seite 2" data-i18n-alt="flyer_page2_alt" class="flyer-image" tabindex="0" role="button">
       </div>
       <br>
       <a href="assets/documents/flyer.pdf" class="btn" target="_blank" rel="noopener" download>
@@ -1360,7 +1360,7 @@
         <!-- Wand-Bühne für KI-Hintergrund Vorlage -->
         <div id="lightbox-wall-stage" class="lightbox-wall-stage scene-detail">
           <div class="wall-frame-container" id="wall-frame-container"
-            title="Gemälde auf der Wand verschieben (Drag & Drop)">
+            title="Gemälde auf der Wand verschieben (Drag & Drop)" data-i18n-title="lb_wall_drag_title">
             <img class="lightbox-content" id="lightbox-img" alt="Vergrößertes Gemälde" draggable="false">
             <div class="artwork-watermark" id="lb-watermark" aria-hidden="true">
               <div class="watermark-pattern"></div>
@@ -1489,7 +1489,7 @@
           <button id="lightbox-room-btn" class="btn-subtle" data-i18n-aria-label="lb_btn_room" aria-label="In deinem Raum ansehen">
             <i class="fa-solid fa-house-chimney" aria-hidden="true"></i> <span data-i18n="lb_btn_room">In deinem Raum ansehen</span>
           </button>
-          <button id="lightbox-fav-btn" class="btn-subtle" aria-label="Zu Favoriten hinzufügen">
+          <button id="lightbox-fav-btn" class="btn-subtle">
             <i class="fa-regular fa-heart" aria-hidden="true"></i> <span data-i18n="lb_fav_default">Zu Favoriten</span>
           </button>
           <button id="lightbox-share-btn" class="btn-subtle"
@@ -1504,9 +1504,9 @@
 
   <!-- Modal für Flyer -->
   <div id="flyerModal" class="modal" role="dialog" aria-modal="true"
-    aria-label="Flyer Großansicht">
+    aria-label="Flyer Großansicht" data-i18n-aria-label="flyer_modal_aria">
     <button type="button" class="close" data-i18n-aria-label="ui_close" aria-label="Schließen"><span aria-hidden="true">&times;</span></button>
-    <img class="modal-content" id="modalImg" alt="Vergrößerte Flyer-Seite">
+    <img class="modal-content" id="modalImg" alt="Vergrößerte Ansicht des Flyers" data-i18n-alt="flyer_modal_alt">
   </div>
 
   <button class="back-to-top" title="Nach oben" data-i18n-title="back_to_top" aria-label="Nach oben scrollen" data-i18n-aria-label="back_to_top">

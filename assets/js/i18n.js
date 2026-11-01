@@ -221,6 +221,15 @@ const I18N_DICTIONARY = {
         flyer_front_alt: 'Vorderseite des Informationsflyers von ManuFAKTUR Schenk',
         flyer_back_alt: 'Rückseite des Informationsflyers von ManuFAKTUR Schenk',
         flyer_btn: 'Flyer herunterladen (PDF)',
+        gal_flyer_h2: 'Mehr erfahren?',
+        gal_flyer_text: 'Klicke auf eine Seite für die Großansicht des Informationsflyers oder lade das PDF direkt herunter.',
+        flyer_page1_alt: 'Informationsflyer Seite 1',
+        flyer_page2_alt: 'Informationsflyer Seite 2',
+        flyer_modal_aria: 'Flyer Großansicht',
+        flyer_modal_alt: 'Vergrößerte Ansicht des Flyers',
+        lb_wall_drag_title: 'Gemälde auf der Wand verschieben (Drag & Drop)',
+        about_dog_alt: 'Die Künstlerin Manuela Schenk lächelnd zusammen mit ihrem Hund Balou im Gras',
+        card_back_alt: 'Rückseite der Visitenkarte mit Kontaktdaten von Manuela Schenk',
 
         // Leistungen.html (Ergänzungen)
         faq_3_q_ship: 'Versand',
@@ -565,6 +574,15 @@ const I18N_DICTIONARY = {
         flyer_front_alt: 'Front side of the ManuFAKTUR Schenk information flyer',
         flyer_back_alt: 'Back side of the ManuFAKTUR Schenk information flyer',
         flyer_btn: 'Download Flyer (PDF)',
+        gal_flyer_h2: 'Want to know more?',
+        gal_flyer_text: 'Click on a page for an enlarged view of the information flyer or download the PDF directly.',
+        flyer_page1_alt: 'Information flyer, page 1',
+        flyer_page2_alt: 'Information flyer, page 2',
+        flyer_modal_aria: 'Enlarged flyer view',
+        flyer_modal_alt: 'Enlarged view of the flyer',
+        lb_wall_drag_title: 'Move the painting on the wall (drag & drop)',
+        about_dog_alt: 'The artist Manuela Schenk smiling with her dog Balou in the grass',
+        card_back_alt: 'Back of the business card with contact details of Manuela Schenk',
 
         // Leistungen.html (additions)
         faq_3_q_ship: 'Shipping',

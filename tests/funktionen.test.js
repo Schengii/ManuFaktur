@@ -680,3 +680,22 @@ test('SEO: Atelier und Künstlerin sind in allen JSON-LD-Blöcken dieselbe Entit
     }
   }
 });
+
+test('i18n: auf Englisch bleiben Favoriten-Buttons, Flyer-Dialog und Alt-Texte nicht deutsch', async () => {
+  const check = async (path, selectors) => {
+    const { page, context } = await open(path, { storage: { manufaktur_lang: 'en' } });
+    await page.waitForFunction(() => document.documentElement.lang === 'en');
+    await page.waitForTimeout(400);
+    for (const [sel, attr] of selectors) {
+      const v = await page.$eval(sel, (el, a) => el.getAttribute(a), attr);
+      assert.ok(v && !/[äöüß]|Favoriten hinzu|Großansicht/.test(v), `${path} ${sel}[${attr}] ist noch deutsch: ${v}`);
+    }
+    await context.close();
+  };
+  await check('/Bildergalerie.html', [
+    ['.fav-toggle-btn', 'aria-label'], ['.fav-toggle-btn', 'title'],
+    ['#flyerModal', 'aria-label'], ['#modalImg', 'alt'], ['#wall-frame-container', 'title'], ['.flyer-image', 'alt']
+  ]);
+  await check('/UeberMich.html', [['.about-image img', 'alt'], ['#flyerModal', 'aria-label']]);
+  await check('/Kontakt.html', [['.flip-card-back img', 'alt']]);
+});
