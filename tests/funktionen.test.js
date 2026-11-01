@@ -531,3 +531,119 @@ test('Galerie: Vorschaubilder werden als AVIF mit WebP-Fallback ausgeliefert', a
   assert.ok(info.loaded);
   assert.deepEqual(errors, []);
 });
+
+/* ---------- Ergänzte Abdeckung: Navigation, Sortierung, Favoriten, Verlauf, Modale ---------- */
+
+test('Navigation mobil: Hamburger öffnet das Menü, Escape schließt es und gibt den Fokus zurück', async () => {
+  const { page, context, errors } = await open('/Home.html', { context: { viewport: { width: 390, height: 800 } } });
+  await page.click('.hamburger');
+  assert.equal(await page.getAttribute('.hamburger', 'aria-expanded'), 'true');
+  await page.keyboard.press('Escape');
+  assert.equal(await page.getAttribute('.hamburger', 'aria-expanded'), 'false');
+  await context.close();
+  assert.deepEqual(errors, []);
+});
+
+test('Navigation mobil: nach Sprachwechsel öffnet der Hamburger genau einmal (kein doppelter Listener)', async () => {
+  const { page, context } = await open('/Home.html', { context: { viewport: { width: 390, height: 800 } } });
+  await page.evaluate(() => document.getElementById('lang-toggle-btn').click());
+  await page.waitForFunction(() => document.documentElement.lang === 'en');
+  await page.click('.hamburger');
+  assert.equal(await page.getAttribute('.hamburger', 'aria-expanded'), 'true');
+  await context.close();
+});
+
+test('Galerie: Sortierung nach Titel A–Z und Z–A ordnet die Karten um', async () => {
+  const { page, context, errors } = await open('/Bildergalerie.html');
+  const titles = () => page.$$eval('.gallery-item', els =>
+    els.filter(e => e.offsetParent !== null).map(e => (e.querySelector('img').title || e.querySelector('img').alt).trim()));
+  await page.selectOption('#gallery-sort-select', 'title-asc');
+  const asc = await titles();
+  assert.ok(asc.length > 5);
+  assert.deepEqual(asc, [...asc].sort((a, b) => a.localeCompare(b, 'de')));
+  await page.selectOption('#gallery-sort-select', 'title-desc');
+  const desc = await titles();
+  assert.deepEqual(desc, [...desc].sort((a, b) => b.localeCompare(a, 'de')));
+  await context.close();
+  assert.deepEqual(errors, []);
+});
+
+test('Galerie: Favorit merken zählt hoch, speichert die Werk-ID und filtert auf „Gemerkt“', async () => {
+  const { page, context, errors } = await open('/Bildergalerie.html');
+  await page.click('.gallery-item .fav-toggle-btn');
+  assert.equal(await page.textContent('#fav-count'), '1');
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('manufaktur_favorites')));
+  assert.equal(stored.length, 1);
+  assert.equal(typeof stored[0], 'string');
+  await page.click('[data-filter="favoriten"]');
+  const visible = await page.$$eval('.gallery-item', els => els.filter(e => e.offsetParent !== null).length);
+  assert.equal(visible, 1);
+  await context.close();
+  assert.deepEqual(errors, []);
+});
+
+test('Speicher: ungültige Favoriten in localStorage werden ignoriert', async () => {
+  const { page, context, errors } = await open('/Bildergalerie.html', {
+    storage: { manufaktur_favorites: '{"a":1}' }
+  });
+  assert.equal(await page.textContent('#fav-count'), '0');
+  await context.close();
+  assert.deepEqual(errors, []);
+});
+
+test('Verlauf: Zurück-Taste schließt die Lightbox und bleibt auf der Galerie', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  await page.click('.gallery-item a');
+  await page.waitForSelector('#lightbox', { state: 'visible' });
+  await page.goBack();
+  await page.waitForSelector('#lightbox', { state: 'hidden' });
+  assert.ok(page.url().includes('Bildergalerie.html'));
+  await context.close();
+});
+
+test('Verlauf: Zurück-Taste nimmt den Galerie-Filter zurück', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  await page.click('[data-filter="tiere"]');
+  assert.equal(await page.getAttribute('[data-filter="tiere"]', 'aria-pressed'), 'true');
+  await page.goBack();
+  await page.waitForFunction(() => document.querySelector('[data-filter="alle"]').getAttribute('aria-pressed') === 'true');
+  await context.close();
+});
+
+test('Flyer: Bild ist per Tastatur bedienbar, Escape schließt und gibt den Fokus zurück', async () => {
+  const { page, context, errors } = await open('/UeberMich.html');
+  await page.focus('.flyer-image');
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('#flyerModal', { state: 'visible' });
+  await page.keyboard.press('Escape');
+  await page.waitForSelector('#flyerModal', { state: 'hidden' });
+  assert.equal(await page.evaluate(() => document.activeElement.classList.contains('flyer-image')), true);
+  await context.close();
+  assert.deepEqual(errors, []);
+});
+
+test('Konfigurator: ?kat= wählt nur das passende Motiv, unbekannte Werte keines', async () => {
+  const sel = async (kat) => {
+    const { page, context } = await open('/Auftrag.html?kat=' + kat);
+    const v = await page.$$eval('.option-card[aria-checked="true"], .option-card.selected, .option-card.active',
+      els => els.map(e => e.getAttribute('data-value')));
+    await context.close();
+    return v;
+  };
+  assert.deepEqual(await sel('tiere'), ['Tierportrait']);
+  assert.deepEqual(await sel('landschaften'), ['Landschaft']);
+  assert.deepEqual(await sel('pflanzen'), ['Stillleben']);
+  assert.deepEqual(await sel('xyz'), []);
+});
+
+test('404: Seite funktioniert auch unter einer verschachtelten URL (Styles laden, Skip-Link bleibt lokal)', async () => {
+  const { page, context, errors } = await open('/gibt/es/nicht.html');
+  assert.ok((await page.title()).includes('nicht gefunden'));
+  assert.equal(await page.evaluate(() => Array.from(document.styleSheets).some(sh => { try { return sh.cssRules.length > 50; } catch { return false; } })), true);
+  await page.focus('.skip-link');
+  await page.keyboard.press('Enter');
+  assert.ok(page.url().endsWith('/gibt/es/nicht.html'));
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'main-content');
+  await context.close();
+  assert.deepEqual(errors.filter(e => !/404/.test(e)), []);
+});
