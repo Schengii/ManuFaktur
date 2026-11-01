@@ -88,6 +88,47 @@ test('Lightbox: zeigt keine erfundenen Kundenstimmen zu einzelnen Werken', async
   await context.close();
 });
 
+test('Lightbox: Fokus kehrt nach dem Blättern zum auslösenden Link zurück', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  await page.focus('.gallery-item a');
+  const triggerHref = await page.evaluate(() => document.activeElement.getAttribute('href'));
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('#lightbox', { state: 'visible' });
+  await page.click('#lightbox .next');
+  await page.keyboard.press('Escape');
+  await page.waitForSelector('#lightbox', { state: 'hidden' });
+  assert.equal(await page.evaluate(() => document.activeElement.getAttribute('href')), triggerHref);
+  await context.close();
+});
+
+test('Lightbox: Escape schließt auch bei fokussiertem Eingabefeld', async () => {
+  const { page, context } = await open('/Bildergalerie.html');
+  await page.click('.gallery-item a');
+  await page.waitForSelector('#lightbox', { state: 'visible' });
+  await page.evaluate(() => document.getElementById('lb-scale-slider').focus());
+  await page.keyboard.press('Escape');
+  await page.waitForSelector('#lightbox', { state: 'hidden' });
+  await context.close();
+});
+
+test('Speicher: ungültige Sprache/Theme in localStorage lassen Navigation und Footer intakt', async () => {
+  const { page, context, errors } = await open('/Home.html', {
+    storage: { manufaktur_lang: 'fr', manufaktur_theme: 'x' }
+  });
+  assert.ok(await page.$('header nav'), 'Navigation fehlt');
+  assert.ok(await page.$('footer'), 'Footer fehlt');
+  assert.equal(await page.evaluate(() => document.documentElement.getAttribute('data-theme')).then(t => ['light', 'dark'].includes(t)), true);
+  assert.deepEqual(errors, []);
+  await context.close();
+});
+
+test('Sprachwechsel: Fokus bleibt auf dem Sprach-Button', async () => {
+  const { page, context } = await open('/Home.html');
+  await page.click('#lang-toggle-btn');
+  await page.waitForFunction(() => document.activeElement && document.activeElement.id === 'lang-toggle-btn');
+  await context.close();
+});
+
 test('Lightbox: Schließen und Pfeile sind Buttons, der Tastaturfokus bleibt im Dialog', async () => {
   const { page, context } = await open('/Bildergalerie.html');
   await page.click('.gallery-item a');
@@ -286,8 +327,8 @@ test('Konfigurator: ?ref= wird als reiner Text angezeigt, HTML wird nicht einges
   const payload = '<img src=x id=injected-probe><a href="https://example.com">Klick</a>';
   const { page, context } = await open('/Auftrag.html?kat=tiere&ref=' + encodeURIComponent(payload));
   assert.equal(await page.$('#injected-probe'), null);
-  assert.equal(await page.$('#hint-1 a'), null);
-  assert.ok((await page.textContent('#hint-1')).includes(payload), 'Referenz erscheint als Text');
+  assert.equal(await page.$('#config-reference a'), null);
+  assert.ok((await page.textContent('#config-reference')).includes(payload), 'Referenz erscheint als Text');
   await context.close();
 });
 

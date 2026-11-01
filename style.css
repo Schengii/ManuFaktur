@@ -3198,6 +3198,16 @@ footer {
     display: block;
 }
 
+/* Hinweis auf das Referenz-Werk (Auftrag.html?ref=…) */
+.config-reference {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+    padding: 8px 14px;
+    border-left: 3px solid var(--primary-color);
+    border-radius: 8px;
+}
+
 /* Format visual size variants */
 .format-visual--20x30 {
     width: 40px;

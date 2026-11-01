@@ -172,6 +172,9 @@ function setLanguage(lang) {
 function toggleLanguage() {
     const newLang = (currentLang === 'de') ? 'en' : 'de';
     setLanguage(newLang);
+    // Footer wurde neu aufgebaut: Fokus auf den neuen Sprach-Button zurücksetzen
+    const newLangBtn = document.getElementById('lang-toggle-btn');
+    if (newLangBtn) newLangBtn.focus();
     showToast(newLang === 'en' ? '🇬🇧 Switched to English' : '🇩🇪 Auf Deutsch gewechselt');
 }
 
@@ -227,13 +230,38 @@ function initHamburgerMenu() {
         });
     });
 
+    // Document-Listener nur einmal registrieren (initHamburgerMenu läuft bei jedem Sprachwechsel erneut)
+    if (navDocListenersBound) return;
+    navDocListenersBound = true;
+
     // Click-Outside schließt offene Dropdowns
     document.addEventListener('click', function (e) {
         if (!e.target.closest('.dropdown')) {
             document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
         }
     });
+
+    // Escape schließt Dropdowns und das mobile Menü; Fokus geht zurück auf den Hamburger
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        const menu = document.querySelector('.nav-links.active');
+        const openDropdowns = document.querySelectorAll('.dropdown.open');
+        if (!menu && openDropdowns.length === 0) return;
+        openDropdowns.forEach(d => d.classList.remove('open'));
+        if (menu) {
+            const burger = document.querySelector('.hamburger');
+            menu.classList.remove('active');
+            if (burger) {
+                burger.setAttribute('aria-expanded', 'false');
+                const icon = burger.querySelector('i');
+                if (icon) icon.className = 'fa fa-bars';
+                burger.focus();
+            }
+        }
+    });
 }
+
+let navDocListenersBound = false;
 
 /**
  * Gibt den HTML-String der gemeinsamen Navigation zurück.
@@ -1989,11 +2017,20 @@ function initContactForm() {
 
         try {
             const data = new FormData(form);
-            const response = await fetch(action, {
-                method: 'POST',
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            });
+            // Timeout, damit der Button bei hängender Verbindung nicht ewig auf „Sende...“ bleibt
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), FORM_SUBMIT_TIMEOUT_MS);
+            let response;
+            try {
+                response = await fetch(action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' },
+                    signal: controller.signal
+                });
+            } finally {
+                clearTimeout(timeoutId);
+            }
 
             const result = await response.json().catch(() => null);
 
@@ -2004,7 +2041,8 @@ function initContactForm() {
                     : '<i class="fa fa-check-circle" aria-hidden="true"></i> Vielen Dank! Deine Nachricht wurde gesendet. Ich melde mich bald bei dir.';
                 showFormFeedback('success', successMsg);
             } else {
-                const errorDetail = result && result.message ? ` (${result.message})` : '';
+                // Antworttext der API ist fremder Inhalt: nur escaped einfügen
+                const errorDetail = result && result.message ? ` (${escapeHtml(result.message)})` : '';
                 const errorMsg = isEn
                     ? `<i class="fa fa-exclamation-circle" aria-hidden="true"></i> An error occurred while sending${errorDetail}. Please try again or contact me directly at <a href="${buildContactMailtoHref(form)}">manufaktur-malerei@web.de</a>`
                     : `<i class="fa fa-exclamation-circle" aria-hidden="true"></i> Es ist ein Fehler aufgetreten${errorDetail}. Bitte versuche es erneut oder schreibe direkt an <a href="${buildContactMailtoHref(form)}">manufaktur-malerei@web.de</a>`;
@@ -2024,13 +2062,23 @@ function initContactForm() {
     });
 }
 
+const FORM_SUBMIT_TIMEOUT_MS = 15000;
+
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 function showFormFeedback(type, message) {
     let feedback = document.getElementById('form-feedback');
     if (!feedback) {
         feedback = document.createElement('div');
         feedback.id = 'form-feedback';
-        feedback.setAttribute('role', 'alert');
-        feedback.setAttribute('aria-live', 'polite');
+        feedback.setAttribute('role', 'alert'); // role=alert ist bereits assertive Live-Region
         const form = document.querySelector('.contact-form');
         if (form) form.insertAdjacentElement('afterend', feedback);
     }
@@ -2112,8 +2160,16 @@ function showConfigReference(refTitle, displayTitle) {
         state.referenz = refTitle;
         if (typeof saveConfig === 'function') saveConfig();
     }
-    const hintEl = document.getElementById('hint-1');
-    if (!hintEl) return;
+    const validationHint = document.getElementById('hint-1');
+    if (!validationHint) return;
+    // Eigenes Element: das Validierungs-Hint (#hint-1) bleibt für „Bitte wähle ein Motiv“ erhalten
+    let hintEl = document.getElementById('config-reference');
+    if (!hintEl) {
+        hintEl = document.createElement('p');
+        hintEl.id = 'config-reference';
+        hintEl.className = 'config-reference';
+        validationHint.insertAdjacentElement('beforebegin', hintEl);
+    }
     const icon = document.createElement('i');
     icon.className = 'fa fa-circle-info';
     icon.setAttribute('aria-hidden', 'true');
@@ -2121,8 +2177,6 @@ function showConfigReference(refTitle, displayTitle) {
     strong.textContent = displayTitle || refTitle;
     const label = currentLang === 'en' ? 'Selected reference painting' : 'Ausgewählte Motiv-Referenz';
     hintEl.replaceChildren(icon, ` ${label}: `, strong);
-    hintEl.style.display = 'block';
-    hintEl.style.color = 'var(--primary-color)';
 }
 
 // Client Foto Upload Vorschau in Step 4 des Konfigurators
