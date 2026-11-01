@@ -660,3 +660,23 @@ test('CSP: die einzigen Inline-Skripte sind JSON-LD-Daten, nichts Ausführbares'
   }
   assert.ok(!/'sha256-/.test(fs.readFileSync(__dirname + '/../vercel.json', 'utf8')));
 });
+
+test('SEO: Atelier und Künstlerin sind in allen JSON-LD-Blöcken dieselbe Entität (@id, ArtGallery)', () => {
+  const walk = (node, out) => {
+    if (Array.isArray(node)) node.forEach(n => walk(n, out));
+    else if (node && typeof node === 'object') {
+      const t = [].concat(node['@type'] || []);
+      if (t.includes('LocalBusiness')) out.push(['LocalBusiness-Rest', node]);
+      if (node.name === 'ManuFAKTUR Schenk' && !node['@id'] && node['@type'] !== 'WebSite') out.push(['ohne @id', node]);
+      Object.values(node).forEach(v => walk(v, out));
+    }
+  };
+  for (const f of fs.readdirSync(__dirname + '/..').filter(x => x.endsWith('.html'))) {
+    const html = fs.readFileSync(__dirname + '/../' + f, 'utf8');
+    for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      const problems = [];
+      walk(JSON.parse(m[1]), problems);
+      assert.deepEqual(problems.map(([k]) => f + ': ' + k), []);
+    }
+  }
+});
