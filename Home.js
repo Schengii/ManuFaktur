@@ -371,7 +371,7 @@ function getFooterHTML() {
     document.documentElement.setAttribute('data-theme', currentTheme);
     document.documentElement.setAttribute('lang', currentLang);
 
-    // Header nur auf Nicht-Hero-Seiten injizieren
+    // Header-Platzhalter durch die gemeinsame Navigation ersetzen
     const headerEl = document.querySelector('header');
     if (headerEl) {
         headerEl.outerHTML = getNavHTML(filename);
@@ -1183,30 +1183,6 @@ function filterGallery() {
         clearBtn.style.display = searchTerm ? 'block' : 'none';
     }
 
-    const countBadge = document.getElementById('search-count-badge');
-    if (countBadge) {
-        const isEnCount = currentLang === 'en';
-        const catMap = isEnCount ? {
-            'alle': 'all categories',
-            'tiere': 'Animals',
-            'landschaften': 'Landscapes',
-            'pflanzen': 'Botanicals',
-            'sonstiges': 'Still Life & More',
-            'favoriten': '❤️ Saved Favorites'
-        } : {
-            'alle': 'alle Kategorien',
-            'tiere': 'Tiere',
-            'landschaften': 'Landschaften',
-            'pflanzen': 'Pflanzen',
-            'sonstiges': 'Sonstiges',
-            'favoriten': '❤️ Gemerkte Kunstwerke'
-        };
-        const catLabel = catMap[activeCategory] || activeCategory;
-        countBadge.innerHTML = isEnCount
-            ? `<i class="fa-solid fa-images" aria-hidden="true"></i> Showing ${visibleCount} of ${items.length} artworks (${catLabel})`
-            : `<i class="fa-solid fa-images" aria-hidden="true"></i> Zeige ${visibleCount} von ${items.length} Kunstwerken (${catLabel})`;
-    }
-
     const liveCounterEl = document.getElementById('gallery-counter');
     if (liveCounterEl) {
         const isEnCounter = currentLang === 'en';
@@ -1243,15 +1219,10 @@ document.addEventListener('DOMContentLoaded', function () {
     initFavButtonsUI();
     updateGalleryLinks();
 
-    // --- B. Hamburger Menü (Mobil) ---
-    // Wird bereits vollständig von initHamburgerMenu() (oben) behandelt.
-
     // --- C. Lightbox & Slideshow & Gesten ---
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const captionText = document.getElementById('caption');
     const lbCounter = document.getElementById('lightbox-counter');
-    const lbWhatsappBtn = document.getElementById('lightbox-whatsapp-btn');
     const lbShareBtn = document.getElementById('lightbox-share-btn');
     const lbFavBtn = document.getElementById('lightbox-fav-btn');
     let lastFocusedElement = null;
@@ -1375,21 +1346,9 @@ document.addEventListener('DOMContentLoaded', function () {
             statusRow.classList.toggle('hidden', !statusText);
         }
 
-        if (captionText) {
-            captionText.innerHTML = `${realTitle} <span class="caption-meta font-size-085rem color-text-muted">(${displayTechnik}, ${realMasse})</span>`;
-        }
-
         // Bildzähler
         if (lbCounter) {
             lbCounter.innerText = isEn ? `Image ${currentIndex + 1} of ${visibleGalleryLinks.length}` : `Bild ${currentIndex + 1} von ${visibleGalleryLinks.length}`;
-        }
-
-        // WhatsApp Link
-        if (lbWhatsappBtn) {
-            const waMsg = isEn 
-                ? `Hello Manuela, I am interested in your artwork "${realTitle}" (${displayTechnik}, ${realMasse}) [#${itemId || 'Gallery'}] from your gallery.`
-                : `Hallo Manuela, ich habe Interesse am Kunstwerk "${realTitle}" (${realTechnik}, ${realMasse}) [#${itemId || 'Galerie'}] aus deiner Bildergalerie.`;
-            lbWhatsappBtn.href = `https://wa.me/491632662435?text=${encodeURIComponent(waMsg)}`;
         }
 
         // Share Link Button & Web Share API
@@ -2005,7 +1964,7 @@ function initContactForm() {
 
         e.preventDefault();
 
-        // Honeypot: ein Mensch sieht das Feld nicht. Bots bekommen scheinbar Erfolg, es wird aber nichts gesendet.
+        // Honeypot: ein Mensch sieht das Feld nicht. Ist es angekreuzt, wird stillschweigend nichts gesendet.
         const honeypot = form.querySelector('input[name="botcheck"]');
         if (honeypot && honeypot.checked) return;
 

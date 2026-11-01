@@ -94,7 +94,7 @@ function findCardByValue(selector, value) {
 
 // ── Karten-Auswahl ────────────────────────────────────────────────────────
 
-function selectOption(card, group) {
+function selectOption(card) {
   document.querySelectorAll('#panel-1 .option-card').forEach(c => {
     c.classList.remove('selected');
     c.setAttribute('aria-pressed', 'false');
@@ -229,7 +229,6 @@ function buildSummary() {
   if (state.referenz) params.set('ref', state.referenz);
   document.getElementById('anfrage-link').href = `Kontakt.html?${params.toString()}`;
 }
-window.buildSummary = buildSummary;
 
 // ── Tastaturunterstützung für Karten ─────────────────────────────────────
 document.addEventListener('keydown', function (e) {
@@ -244,7 +243,7 @@ document.addEventListener('keydown', function (e) {
 // ── Klick-Delegation (ersetzt vormalige inline onclick-Attribute für CSP) ──
 document.addEventListener('click', function (e) {
   const optionCard = e.target.closest('#panel-1 .option-card');
-  if (optionCard) { selectOption(optionCard, 'motiv'); return; }
+  if (optionCard) { selectOption(optionCard); return; }
 
   const formatCard = e.target.closest('#panel-2 .format-card');
   if (formatCard) { selectFormat(formatCard); return; }
