@@ -2,7 +2,7 @@
 // CACHE_NAME und die ?v=N-Parameter werden von `npm run release` hochgezählt
 // (scripts/bump-version.js) – nicht von Hand ändern. Die Precache-Liste erzeugt
 // scripts/gen-sw-assets.js beim Build.
-const CACHE_NAME = 'manufaktur-v35';
+const CACHE_NAME = 'manufaktur-v36';
 const RUNTIME_CACHE = 'manufaktur-runtime';
 const RUNTIME_MAX_ENTRIES = 80;
 // <generated:assets> (scripts/gen-sw-assets.js – nicht von Hand ändern)
@@ -17,15 +17,15 @@ const ASSETS_TO_CACHE = [
   './Kontakt.html',
   './Leistungen.html',
   './UeberMich.html',
-  './Home.min.js?v=29',
-  './assets/js/artworks-data.js?v=29',
-  './assets/js/auftrag.js?v=29',
-  './assets/js/i18n.min.js?v=29',
-  './assets/js/index-page.js?v=29',
-  './assets/js/insights.js?v=29',
-  './assets/js/theme-init.js?v=29',
-  './assets/vendor/font-awesome/css/icons.min.css?v=29',
-  './style.min.css?v=29',
+  './Home.min.js?v=30',
+  './assets/js/artworks-data.js?v=30',
+  './assets/js/auftrag.js?v=30',
+  './assets/js/i18n.min.js?v=30',
+  './assets/js/index-page.js?v=30',
+  './assets/js/insights.js?v=30',
+  './assets/js/theme-init.js?v=30',
+  './assets/vendor/font-awesome/css/icons.min.css?v=30',
+  './style.min.css?v=30',
   './manifest.json',
   './assets/images/logos/apple-touch-icon.png',
   './assets/images/logos/favicon.png',

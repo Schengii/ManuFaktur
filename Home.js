@@ -521,7 +521,8 @@ let activeCategory = 'alle';
 function getFavorites() {
     try {
         const favs = localStorage.getItem('manufaktur_favorites');
-        return favs ? JSON.parse(favs) : [];
+        const parsed = favs ? JSON.parse(favs) : [];
+        return Array.isArray(parsed) ? parsed.filter(id => typeof id === 'string') : [];
     } catch {
         return [];
     }
